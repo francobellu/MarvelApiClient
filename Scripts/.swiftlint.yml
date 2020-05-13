@@ -1,0 +1,69 @@
+line_length:
+  warning: 250
+  error: 250
+  ignores_comments: true
+
+file_length: 
+  warning: 600 
+  error: 700
+
+function_parameter_count:
+  warning: 8
+  error: 12
+
+colon:
+  apply_to_dictionaries: false
+
+identifier_name:
+  min_length:
+    error: 1
+  min_length:
+    warning: 1
+  max_length:
+    warning: 80
+  excluded: 	# excluded via string array
+    - qa  	
+    - QA
+    - id
+    - i
+    - iD
+    - ok
+    - db
+  allowed_symbols:
+    - _
+
+vertical_whitespace:
+    max_empty_lines: 5
+
+function_body_length:
+    warning: 15
+    error: 20
+
+disabled_rules:
+    - redundant_optional_initialization
+    - unused_setter_value
+    - opening_brace
+    - force_cast
+
+opt_in_rules:
+#    - vertical_parameter_alignment_on_call
+    - force_unwrapping
+    - implicitly_unwrapped_optional
+
+type_name:
+    max_length: 100
+
+excluded: # paths to ignore during linting. overridden by `included`.
+    - Carthage
+    - Tests
+    - ./R.generated.swift
+    - Pods
+
+large_tuple:
+    warning: 3
+    error: 5
+
+cyclomatic_complexity:
+    warning: 25
+    error: 30
+

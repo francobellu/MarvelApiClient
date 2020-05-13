@@ -1,0 +1,183 @@
+import Foundation
+
+protocol MarvelAPIProtocol {
+  func getCharactersList(completion: @escaping ([CharacterResult]) -> Void)
+  func getCharacter(with id: Int, completion: @escaping (CharacterResult) -> Void)
+  func getNextCharactersList(completion: @escaping ([CharacterResult]) -> Void)
+  func getComicsAvengers(completion: @escaping ([ComicResult]) -> Void)
+  func getComic(with id: Int, completion: @escaping (ComicResult) -> Void)
+}
+
+
+/// Implementation of a generic-based Marvel API client
+internal class MarvelAPIClient {
+
+  // Singleton
+  //static internal let shared: MarvelAPIProtocol = MarvelAPIClient(httpClient: <#HttpClient#>)
+
+  // number of items to be fetched each time (i.e., database LIMIT)
+  private let limit = 50
+
+  // Where to start fetching items (database OFFSET). This is to support packets fetch
+  private var offset = 0
+
+  // a flag for when all database items have already been loaded
+  private var reachedEndOfItems = false
+
+  private let httpClient: HttpClient!
+
+  init(httpClient: HttpClient) {
+    self.httpClient = httpClient
+
+  }
+
+  private func handleGetCharacters(_ weakself: MarvelAPIClient,
+                                   _ response: (Result<DataContainer<GetCharacters.Response>, Error>),
+                                   _ completion: @escaping ([CharacterResult]) -> Void  ) {
+    print("\nGetCharacters list finished, limit: \(weakself.limit), offset: \(weakself.offset)")
+
+    switch response {
+    case .success(let dataContainer):
+
+      // 3) append the new results into the data source for the tems table view
+      //weakself.characters += dataContainer.results
+      //guard let results = dataContainer.results else { return}
+      completion(dataContainer.results)
+      for character in dataContainer.results {
+        guard let thumbnail = character.thumbnail else {return}
+        print("FB:  Title: \(character.name ?? "Unnamed character")")
+        print("  Thumbnail: \(thumbnail.url.absoluteString)")
+      }
+
+      // 4) Reset the offset for the next data query
+      weakself.offset += weakself.limit
+
+      // 5) check if this was the last of the data
+      if dataContainer.results.count < weakself.limit {
+        weakself.reachedEndOfItems = true
+        print("reached end of data. Batch count: \(dataContainer.results.count)")
+      }
+    case .failure(let error):
+      print(error)
+    }
+  }
+
+  private func handleGetCharacter( _ weakself: MarvelAPIClient,
+                                   _ response: (Result<DataContainer<GetCharacter.Response>, Error>),
+                                   _ completion: @escaping (CharacterResult) -> Void  ) {
+    print("\nGetCharacters list finished, limit: \(weakself.limit), offset: \(weakself.offset)")
+
+    switch response {
+    case .success(let dataContainer):
+
+      // 3) append the new results into the data source for the tems table view
+      //weakself.characters += dataContainer.results
+      guard let character = dataContainer.results.first,
+        let thumbnail = character.thumbnail
+        else{return}
+      print("FB:  Title: \(character.name ?? "Unnamed character")")
+      print("  Thumbnail: \(thumbnail.url.absoluteString)")
+
+      completion(character)
+    case .failure(let error):
+      print(error)
+    }
+  }
+}
+// Exposed API
+extension MarvelAPIClient: MarvelAPIProtocol {
+  func getCharacter(with id: Int, completion: @escaping (CharacterResult) -> Void ) {
+    httpClient.send(GetCharacter(id: id) ) { [weak self] response in
+      guard let weakself = self else { return}
+      self?.handleGetCharacter(weakself, response, completion)
+    }
+  }
+
+  func getCharactersList(completion: @escaping ([CharacterResult]) -> Void ) {
+
+    // Get the first <limit> characters
+    httpClient.send(GetCharacters(limit: limit, offset: 0) ) { [weak self] response in
+      guard let weakself = self else { return}
+      self?.handleGetCharacters(weakself, response, completion)
+    }
+  }
+
+  func getNextCharactersList(completion: @escaping ([CharacterResult]) -> Void ) {
+    // 1) Don't bother doing another db query if already have everything
+    guard !reachedEndOfItems else {
+      return
+    }
+
+    // 2) Get the following 20 characters starting from offset
+    httpClient.send(GetCharacters(limit: limit, offset: offset) ) { [weak self] response in
+      guard let weakself = self else { return}
+      self?.handleGetCharacters(weakself, response, completion)
+    }
+  }
+
+  func getComics(completion: @escaping ([ComicResult]) -> Void) {
+    // Another request filling interesting optional parameters, a string and an enum
+    httpClient.send(GetComics(format: .digital) ) { response in
+      print("\nGetComics finished:")
+      switch response {
+      case .success(let dataContainer):
+        for comic in dataContainer.results {
+
+          let title = comic.title
+          if let thumbnail = comic.thumbnail{
+
+          print("  Title: \(String(describing: title))")
+            print("  Thumbnail: \(thumbnail.url.absoluteString )")
+          }
+        }
+        completion(dataContainer.results)
+
+      case .failure(let error):
+        print(error)
+      }
+    }
+  }
+
+  func getComicsAvengers(completion: @escaping ([ComicResult]) -> Void) {
+    // Another request filling interesting optional parameters, a string and an enum
+    httpClient.send(GetComics(titleStartsWith: "Avengers", format: .digital) ) { response in
+      print("\nGetComics starting with  \"Avengers\" finished:")
+
+      switch response {
+      case .success(let dataContainer):
+        for comic in dataContainer.results {
+
+          if let title = comic.title,
+            let thumbnail = comic.thumbnail{
+            print("  Title: \(title)")
+            print("  Thumbnail: \(thumbnail.url.absoluteString)")
+          }
+        }
+        completion(dataContainer.results)
+
+      case .failure(let error):
+        print(error)
+      }
+    }
+  }
+
+  func getComic(with id: Int, completion: @escaping (ComicResult) -> Void) {
+    // Yet another request with a mandatory parameter
+    httpClient.send(GetComic(comicId: id)) { response in
+      print("\nGetComic 61537 finished:")
+
+      switch response {
+      case .success(let dataContainer):
+        guard let comic = dataContainer.results.first else {return}
+        if let title = comic.title,
+          let thumbnail = comic.thumbnail{
+          print("  Title: \(title)")
+          print("  Thumbnail: \(thumbnail.url.absoluteString)")
+        }
+        completion(comic)
+      case .failure(let error):
+        print(error)
+      }
+    }
+  }
+}
