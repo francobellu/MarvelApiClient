@@ -2,8 +2,8 @@
 //  AppCoordinator.swift
 //  ApiLayer
 //
-//  Created by BELLU Franco on 25/10/2018.
-//  Copyright © 2018 BELLU Franco. All rights reserved.
+//  Created by BELLU Franco on 14/05/2020.
+//  Copyright © 2020 BELLU Franco. All rights reserved.
 //
 
 import SwiftUI
@@ -118,7 +118,7 @@ extension AppCoordinator: Coordinator {
   }
 
   // MARK: - HELPER METHODS
-  fileprivate func present( viewController: UIViewController) {
+  private func present( viewController: UIViewController) {
     // Present the ViewController
     //presenter.rootViewController = UIHostingController(rootView: OnboardingView())
     (presenter as! UIWindow).rootViewController = viewController // swiftlint:disable:this force_cast

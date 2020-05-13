@@ -2,8 +2,8 @@
 //  HttpClient.swift
 //  ApiLayer
 //
-//  Created by BELLU Franco on 05/11/2018.
-//  Copyright © 2018 BELLU Franco. All rights reserved.
+//  Created by BELLU Franco on 14/05/2020.
+//  Copyright © 2020 BELLU Franco. All rights reserved.
 //
 
 import Foundation

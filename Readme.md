@@ -1,3 +1,11 @@
+Overview
+This project is pretty simple to really need arquitecture overheads like Coordinators, Dependency containers etc. Nevertheless I am including them to demostrate the method
+
+
+Frameworks used:
+RSwift:
+Siterep
+SwiftLint
 
 Coordinators:
   - One AppCoordinator to encapsulate the display of the initial screen
@@ -8,11 +16,9 @@ Coordinators:
 
 Principles: 
   - The VC are instantiated instantiated programmaticvally without segues by the coordinator
-  - This means that each VC doens't need to know about about the following VC ( prepare for segue) AND doens't need to tell its owner the navigator, to push a new VC.
+  - This means that each VC doens't need to know about about the following VC ( prepare for segue) AND doens't need to tell its owner, the navigator, to push a new VC.
   - So we take the flow control out of the VC so that the VC can be also reused in other flows and can be more easily tested
 
-Problems:
-  1.  Use of custom BackButton make the swipe right gesture to go back not working and also we'd need to recreate the left arrow image
 
 Wish List:
   1.  Spinner for async list view
