@@ -15,9 +15,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "287C9A05217F39CB00D63092"
-               BuildableName = "ApiLayer.app"
-               BlueprintName = "ApiLayer"
-               ReferencedContainer = "container:ApiLayer.xcodeproj">
+               BuildableName = "MarvelApiClient.app"
+               BlueprintName = "MarvelApiClient"
+               ReferencedContainer = "container:MarvelApiClient.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -33,9 +33,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "C76B29A2243A5F1B00793179"
-               BuildableName = "ApiLayerTests.xctest"
-               BlueprintName = "ApiLayerTests"
-               ReferencedContainer = "container:ApiLayer.xcodeproj">
+               BuildableName = "MarvelApiClientTests.xctest"
+               BlueprintName = "MarvelApiClientTests"
+               ReferencedContainer = "container:MarvelApiClient.xcodeproj">
             </BuildableReference>
          </TestableReference>
       </Testables>
@@ -55,9 +55,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "287C9A05217F39CB00D63092"
-            BuildableName = "ApiLayer.app"
-            BlueprintName = "ApiLayer"
-            ReferencedContainer = "container:ApiLayer.xcodeproj">
+            BuildableName = "MarvelApiClient.app"
+            BlueprintName = "MarvelApiClient"
+            ReferencedContainer = "container:MarvelApiClient.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </LaunchAction>
@@ -72,9 +72,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "287C9A05217F39CB00D63092"
-            BuildableName = "ApiLayer.app"
-            BlueprintName = "ApiLayer"
-            ReferencedContainer = "container:ApiLayer.xcodeproj">
+            BuildableName = "MarvelApiClient.app"
+            BlueprintName = "MarvelApiClient"
+            ReferencedContainer = "container:MarvelApiClient.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </ProfileAction>
