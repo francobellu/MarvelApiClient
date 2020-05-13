@@ -7,18 +7,6 @@
 //
 
 import UIKit
-import SwiftUI
-
-struct OnboardingView: UIViewControllerRepresentable {
-  func makeUIViewController(context: Context) -> OnboardingViewController {
-    let onboardingVC = OnboardingViewController.instantiateViewController()
-    return onboardingVC
-  }
-
-  func updateUIViewController(_ uiViewController: OnboardingViewController, context: Context) {
-
-  }
-}
 
 class OnboardingViewController: UIViewController, StoryboardInstantiable, AppDependencyInjectable {
   var dependencies: AppDependencies! // swiftlint:disable:this implicitly_unwrapped_optional

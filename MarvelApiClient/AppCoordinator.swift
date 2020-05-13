@@ -6,7 +6,7 @@
 //  Copyright © 2020 BELLU Franco. All rights reserved.
 //
 
-import SwiftUI
+import UIKit
 
 // TODO initial state
 struct AppConfig {

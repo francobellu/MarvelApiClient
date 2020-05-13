@@ -2,7 +2,6 @@
 //  SceneDelegate.swift
 //
 import UIKit
-import SwiftUI
 @available(iOS 13.0, *)
 
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {

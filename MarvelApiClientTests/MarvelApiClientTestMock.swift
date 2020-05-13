@@ -8,9 +8,9 @@
 
 import XCTest
 
-@testable import ApiLayer
+@testable import MarvelApiClient
 
-class ApiLayerTestMock: XCTestCase {
+class MarvelApiClientTestMock: XCTestCase {
 
   var sut: MarvelAPIClient!
 

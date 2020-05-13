@@ -5,7 +5,7 @@ target 'MarvelApiClient' do
   # Comment the next line if you don't want to use dynamic frameworks
   use_frameworks!
 
-  # Pods for ApiLayer
+  # Pods for MarvelApiClient
   pod 'R.swift'
 
   target 'MarvelApiClientTests' do

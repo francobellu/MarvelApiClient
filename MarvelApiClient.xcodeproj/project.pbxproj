@@ -40,7 +40,7 @@
 		C7096D752448F5E000DEE7D3 /* OnboardingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7096D742448F5E000DEE7D3 /* OnboardingViewController.swift */; };
 		C7096D772449C7C500DEE7D3 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7096D762449C7C500DEE7D3 /* SceneDelegate.swift */; };
 		C7169219244C99A5005BF4AB /* MockURLSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7169218244C99A5005BF4AB /* MockURLSession.swift */; };
-		C716921B244CD083005BF4AB /* ApiLayerTestMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = C716921A244CD083005BF4AB /* ApiLayerTestMock.swift */; };
+		C716921B244CD083005BF4AB /* MarvelApiClientTestMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = C716921A244CD083005BF4AB /* MarvelApiClientTestMock.swift */; };
 		C7169221244D9D5A005BF4AB /* HttpClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7169220244D9D5A005BF4AB /* HttpClient.swift */; };
 		C7169232244DE062005BF4AB /* MarvelDTOs.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7169228244DE062005BF4AB /* MarvelDTOs.swift */; };
 		C7169240244F0385005BF4AB /* MarvelError.swift in Sources */ = {isa = PBXBuildFile; fileRef = C716923F244F0385005BF4AB /* MarvelError.swift */; };
@@ -48,7 +48,7 @@
 		C728C2AB246C375300F60806 /* AppDependencies.swift in Sources */ = {isa = PBXBuildFile; fileRef = C728C2AA246C375200F60806 /* AppDependencies.swift */; };
 		C74142D3243FDB76004E1202 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C74142D2243FDB76004E1202 /* Default-568h@2x.png */; };
 		C74142D724409FC8004E1202 /* superheros.png in Resources */ = {isa = PBXBuildFile; fileRef = C74142D624409FC8004E1202 /* superheros.png */; };
-		C76B29A6243A5F1B00793179 /* ApiLayerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C76B29A5243A5F1B00793179 /* ApiLayerTests.swift */; };
+		C76B29A6243A5F1B00793179 /* MarvelApiClientTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C76B29A5243A5F1B00793179 /* MarvelApiClientTests.swift */; };
 		C78A83EC244B42BB004DE930 /* ComicViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C78A83EB244B42BB004DE930 /* ComicViewController.swift */; };
 		C78A83F3244B6DBA004DE930 /* CharacterDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C78A83F2244B6DBA004DE930 /* CharacterDetailViewModel.swift */; };
 		C78A83F5244B8AD6004DE930 /* GetCharacter.swift in Sources */ = {isa = PBXBuildFile; fileRef = C78A83F4244B8AD6004DE930 /* GetCharacter.swift */; };
@@ -113,7 +113,7 @@
 		C7096D742448F5E000DEE7D3 /* OnboardingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OnboardingViewController.swift; sourceTree = "<group>"; };
 		C7096D762449C7C500DEE7D3 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		C7169218244C99A5005BF4AB /* MockURLSession.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockURLSession.swift; sourceTree = "<group>"; };
-		C716921A244CD083005BF4AB /* ApiLayerTestMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiLayerTestMock.swift; sourceTree = "<group>"; };
+		C716921A244CD083005BF4AB /* MarvelApiClientTestMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MarvelApiClientTestMock.swift; sourceTree = "<group>"; };
 		C7169220244D9D5A005BF4AB /* HttpClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HttpClient.swift; sourceTree = "<group>"; };
 		C7169228244DE062005BF4AB /* MarvelDTOs.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MarvelDTOs.swift; sourceTree = "<group>"; };
 		C716923F244F0385005BF4AB /* MarvelError.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MarvelError.swift; sourceTree = "<group>"; };
@@ -122,7 +122,7 @@
 		C74142D2243FDB76004E1202 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
 		C74142D624409FC8004E1202 /* superheros.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = superheros.png; path = ../../../Downloads/superheros.png; sourceTree = "<group>"; };
 		C76B29A3243A5F1B00793179 /* MarvelApiClientTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MarvelApiClientTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		C76B29A5243A5F1B00793179 /* ApiLayerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiLayerTests.swift; sourceTree = "<group>"; };
+		C76B29A5243A5F1B00793179 /* MarvelApiClientTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MarvelApiClientTests.swift; sourceTree = "<group>"; };
 		C76B29A7243A5F1B00793179 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		C76B29AD243A639F00793179 /* .travis.yml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.yaml; path = .travis.yml; sourceTree = "<group>"; };
 		C76B29AE243A639F00793179 /* sitrep.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = sitrep.txt; sourceTree = "<group>"; };
@@ -358,8 +358,8 @@
 		C76B29A4243A5F1B00793179 /* MarvelApiClientTests */ = {
 			isa = PBXGroup;
 			children = (
-				C76B29A5243A5F1B00793179 /* ApiLayerTests.swift */,
-				C716921A244CD083005BF4AB /* ApiLayerTestMock.swift */,
+				C76B29A5243A5F1B00793179 /* MarvelApiClientTests.swift */,
+				C716921A244CD083005BF4AB /* MarvelApiClientTestMock.swift */,
 				C76B29A7243A5F1B00793179 /* Info.plist */,
 				C7169218244C99A5005BF4AB /* MockURLSession.swift */,
 				C7BB2DB5245638DB00EEA9C8 /* MockResponseGetCharacters.json */,
@@ -717,9 +717,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				C716921B244CD083005BF4AB /* ApiLayerTestMock.swift in Sources */,
+				C716921B244CD083005BF4AB /* MarvelApiClientTestMock.swift in Sources */,
 				C7169219244C99A5005BF4AB /* MockURLSession.swift in Sources */,
-				C76B29A6243A5F1B00793179 /* ApiLayerTests.swift in Sources */,
+				C76B29A6243A5F1B00793179 /* MarvelApiClientTests.swift in Sources */,
 				C7BB2DB6245638DB00EEA9C8 /* MockResponseGetCharacters.json in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -877,6 +877,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 0;
 				DEVELOPMENT_TEAM = 3VPL75LCE8;
 				INFOPLIST_FILE = MarvelApiClient/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
@@ -899,6 +900,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 0;
 				DEVELOPMENT_TEAM = 3VPL75LCE8;
 				INFOPLIST_FILE = MarvelApiClient/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
@@ -921,14 +923,14 @@
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 3VPL75LCE8;
-				INFOPLIST_FILE = ApiLayerTests/Info.plist;
+				INFOPLIST_FILE = MarvelApiClientTests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 13.4;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = francobellu.com.ApiLayerTests;
+				PRODUCT_BUNDLE_IDENTIFIER = francobellu.com.marvelapiclient;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -943,14 +945,14 @@
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 3VPL75LCE8;
-				INFOPLIST_FILE = ApiLayerTests/Info.plist;
+				INFOPLIST_FILE = MarvelApiClientTests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 13.4;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = francobellu.com.ApiLayerTests;
+				PRODUCT_BUNDLE_IDENTIFIER = francobellu.com.marvelapiclient;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";

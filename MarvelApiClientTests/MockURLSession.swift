@@ -9,7 +9,7 @@
 import UIKit
 import XCTest
 
-@testable import ApiLayer
+@testable import MarvelApiClient
 
 // MARK: MOCK
 class MockURLSession: URLSessionProtocol {
