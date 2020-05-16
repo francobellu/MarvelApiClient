@@ -21,8 +21,7 @@ struct AppConfig {
 
 // MARK: - Onboarding transitions handling
 
-// Handle the transitions of the child coordinators/viewcontrokllers
-protocol OnboardingTransitionsProtocol: class {
+protocol OnboardingCoordinatorDelegate: class {
   func childCoordinatorDidFinish()
 }
 
@@ -129,7 +128,9 @@ extension AppCoordinator: Coordinator {
   }
 }
 
-extension AppCoordinator: OnboardingTransitionsProtocol {
+// MARK: - VC transitions handling
+
+extension AppCoordinator: OnboardingCoordinatorDelegate {
   func childCoordinatorDidFinish() {
     // Free coordinator if existing
     if self.coordinator != nil { self.coordinator = nil }

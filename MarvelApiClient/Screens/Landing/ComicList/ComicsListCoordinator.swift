@@ -68,6 +68,7 @@ extension ComicsListCoordinator: Coordinator {
   }
 }
 
+// MARK: - VC transitions handling
 extension ComicsListCoordinator: ComicsListCoordinatorDelegate {
   func didGoBack() {
     print("FB: ComicsListCoordinator:goBack()")

@@ -69,7 +69,7 @@ extension CharactersListCoordinator: Coordinator, DeepLinkable {
   }
 }
 
-// MARK: - VC transitions
+// MARK: - VC transitions handling
 extension CharactersListCoordinator: CharactersListCoordinatorDelegate {
   func didGoBack() {
     print("FB: CharactersListCoordinator:goBack()")

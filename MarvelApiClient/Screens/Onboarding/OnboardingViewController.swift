@@ -13,7 +13,7 @@ class OnboardingViewController: UIViewController, StoryboardInstantiable {
 
   var viewModel: OnboardingViewModel! // swiftlint:disable:this implicitly_unwrapped_optional
 
-  weak var coordinatorDelegate: OnboardingTransitionsProtocol! // swiftlint:disable:this implicitly_unwrapped_optional
+  weak var coordinatorDelegate: OnboardingCoordinatorDelegate! // swiftlint:disable:this implicitly_unwrapped_optional
 
   override func viewDidLoad() {
     super.viewDidLoad()

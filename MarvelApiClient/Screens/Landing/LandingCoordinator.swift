@@ -8,11 +8,10 @@
 
 import UIKit
 
-protocol LandingTransitionProtocol: class {
+protocol LandingCoordinatorDelegate: class {
   func charactersFlowActionSelected()
   func comicsFlowActionSelected()
   func avengersComicsFlowActionSelected()
-  func didGoBack()
 }
 
 //protocol ComicsListCoordinatorDelegate: class {
@@ -62,12 +61,13 @@ extension LandingCoordinator: Coordinator {
     present(viewController: viewController)
   }
 
+  // MARK: - VC transitions handling
   private func present(viewController: UIViewController) {
     (presenter as? UINavigationController)?.pushViewController(viewController, animated: true)
   }
 }
 
-extension LandingCoordinator: LandingTransitionProtocol {
+extension LandingCoordinator: LandingCoordinatorDelegate {
 
   func charactersFlowActionSelected() {
     self.showAllCharacters()
@@ -79,14 +79,6 @@ extension LandingCoordinator: LandingTransitionProtocol {
 
   func avengersComicsFlowActionSelected() {
     self.showAverngersComics()
-  }
-
-  func didGoBack() {
-    print("FB:LandingCoordinator:goBack()")
-    print("FB:  popVC")
-    guard let navigationController = presenter as? UINavigationController else { return }
-    navigationController.popViewController(animated: true)
-    parentCoordinator?.childCoordinatorDidFinish()
   }
 
   // MARK: - UTILITY FUNCTIONS
