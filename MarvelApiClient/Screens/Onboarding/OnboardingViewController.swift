@@ -8,11 +8,11 @@
 
 import UIKit
 
-class OnboardingViewController: UIViewController, StoryboardInstantiable, AppDependencyInjectable {
-  var dependencies: AppDependencies! // swiftlint:disable:this implicitly_unwrapped_optional
-  var onboardingWasShown: Bool = true
-  @IBOutlet weak var dontShowAgainBtn: UIButton!
-  var dontShowAgain = false
+class OnboardingViewController: UIViewController, StoryboardInstantiable {
+  @IBOutlet weak var dontShowAgainBtnAction: UIButton!
+
+  var viewModel: OnboardingViewModel! // swiftlint:disable:this implicitly_unwrapped_optional
+
   weak var coordinatorDelegate: OnboardingTransitionsProtocol! // swiftlint:disable:this implicitly_unwrapped_optional
 
   override func viewDidLoad() {
@@ -24,15 +24,8 @@ class OnboardingViewController: UIViewController, StoryboardInstantiable, AppDep
   }
 
   @IBAction func dontShowAgain(_ sender: Any) {
-    dontShowAgain.toggle()
-    changeButtonImage()
-    dependencies.dataStore.setBool(key: "dontShowOnboarding", value: dontShowAgain)
     print("OnboardingViewController:dontShowAgain()")
-  }
-
-  private func changeButtonImage() {
-    let btnImageName = dontShowAgain == false ? "rectangle" : "checkmark.rectangle.fill"
-    let btnImage = UIImage(systemName: btnImageName)
-    dontShowAgainBtn.setImage(btnImage, for: .normal)
+    let btnImageName = viewModel.didPressDontShowAgain()
+    dontShowAgainBtnAction.setImage(UIImage(systemName: btnImageName), for: .normal)
   }
 }

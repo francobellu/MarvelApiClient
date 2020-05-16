@@ -42,7 +42,7 @@
                                     <fragment content="Don 't show this again">
                                         <attributes>
                                             <color key="NSColor" white="0.55238655820000004" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                            <font key="NSFont" metaFont="system" size="10"/>
+                                            <font key="NSFont" metaFont="menu" size="10"/>
                                         </attributes>
                                     </fragment>
                                 </attributedString>
@@ -94,7 +94,7 @@
                         <viewLayoutGuide key="safeArea" id="pbv-D7-yP0"/>
                     </view>
                     <connections>
-                        <outlet property="dontShowAgainBtn" destination="ufk-Ek-Shr" id="iKe-r9-gwV"/>
+                        <outlet property="dontShowAgainBtnAction" destination="ufk-Ek-Shr" id="iKe-r9-gwV"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="9HG-UH-3qX" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>

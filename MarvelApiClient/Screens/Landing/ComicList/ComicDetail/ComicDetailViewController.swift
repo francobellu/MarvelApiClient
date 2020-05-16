@@ -7,16 +7,12 @@
 //
 import UIKit
 
-class ComicDetailViewController: UIViewController, StoryboardInstantiable, AppDependencyInjectable {
+class ComicDetailViewController: UIViewController, StoryboardInstantiable {
   @IBOutlet weak var titleLabel: UILabel!
   @IBOutlet weak var thumbnailView: UIImageView!
   @IBOutlet weak var details: UILabel!
   @IBOutlet weak var idLabel: UILabel!
 
-  var dependencies: AppDependencies! // swiftlint:disable:this implicitly_unwrapped_optional
-  var apiClient: MarvelAPIProtocol {
-    dependencies.marvelApiClient
-  }
   var viewModel: ComicDetailViewModel! // swiftlint:disable:this implicitly_unwrapped_optional
 
   weak var coordinatorDelegate: ComicsListCoordinatorDelegate! //swiftlint:disable:this implicitly_unwrapped_optional

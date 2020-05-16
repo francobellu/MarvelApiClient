@@ -8,8 +8,7 @@
 
 import Foundation
 
-class CharacterDetailViewModel: AppDependencyInjectable {
-  var dependencies: AppDependencies! // swiftlint:disable:this implicitly_unwrapped_optional
+class CharacterDetailViewModel {
 
   private(set) var title = "Character Detail"
 
@@ -18,12 +17,10 @@ class CharacterDetailViewModel: AppDependencyInjectable {
   var characterId: String?
 
   init(dependencies: AppDependencies, character: CharacterResult) {
-    self.dependencies = dependencies
     self.character = character
   }
 
   init(dependencies: AppDependencies, characterId: String) {
-    self.dependencies = dependencies
     self.characterId = characterId
   }
 

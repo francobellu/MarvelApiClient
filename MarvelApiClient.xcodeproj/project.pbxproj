@@ -50,6 +50,8 @@
 		C72CF2A924703BBA0048B0A2 /* ComicCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C72CF2A724703BBA0048B0A2 /* ComicCell.swift */; };
 		C72CF2AA24703BBA0048B0A2 /* ComicCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = C72CF2A824703BBA0048B0A2 /* ComicCell.xib */; };
 		C72CF2AC24703F070048B0A2 /* ComicsListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C72CF2AB24703F070048B0A2 /* ComicsListViewModel.swift */; };
+		C72CF2AE24707CBF0048B0A2 /* OnboardingViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C72CF2AD24707CBF0048B0A2 /* OnboardingViewModel.swift */; };
+		C72CF2B024707EB30048B0A2 /* LandingViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C72CF2AF24707EB30048B0A2 /* LandingViewModel.swift */; };
 		C74142D3243FDB76004E1202 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C74142D2243FDB76004E1202 /* Default-568h@2x.png */; };
 		C74142D724409FC8004E1202 /* superheros.png in Resources */ = {isa = PBXBuildFile; fileRef = C74142D624409FC8004E1202 /* superheros.png */; };
 		C76B29A6243A5F1B00793179 /* MarvelApiClientTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C76B29A5243A5F1B00793179 /* MarvelApiClientTests.swift */; };
@@ -126,6 +128,8 @@
 		C72CF2A724703BBA0048B0A2 /* ComicCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ComicCell.swift; sourceTree = "<group>"; };
 		C72CF2A824703BBA0048B0A2 /* ComicCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ComicCell.xib; sourceTree = "<group>"; };
 		C72CF2AB24703F070048B0A2 /* ComicsListViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ComicsListViewModel.swift; sourceTree = "<group>"; };
+		C72CF2AD24707CBF0048B0A2 /* OnboardingViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingViewModel.swift; sourceTree = "<group>"; };
+		C72CF2AF24707EB30048B0A2 /* LandingViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LandingViewModel.swift; sourceTree = "<group>"; };
 		C74142D2243FDB76004E1202 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
 		C74142D624409FC8004E1202 /* superheros.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = superheros.png; path = ../../../Downloads/superheros.png; sourceTree = "<group>"; };
 		C76B29A3243A5F1B00793179 /* MarvelApiClientTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MarvelApiClientTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -177,6 +181,7 @@
 		2851228921821C56009D4AB0 /* Landing */ = {
 			isa = PBXGroup;
 			children = (
+				C72CF2AF24707EB30048B0A2 /* LandingViewModel.swift */,
 				285122852182005C009D4AB0 /* LandingCoordinator.swift */,
 				2851227C2181E26B009D4AB0 /* LandingViewController.swift */,
 			);
@@ -411,6 +416,7 @@
 		C7EC66FD2440B55B00F88FDE /* Onboarding */ = {
 			isa = PBXGroup;
 			children = (
+				C72CF2AD24707CBF0048B0A2 /* OnboardingViewModel.swift */,
 				C7096D742448F5E000DEE7D3 /* OnboardingViewController.swift */,
 				C7EC66FE2440B6B400F88FDE /* OnboardingCoordinator.swift */,
 			);
@@ -715,6 +721,7 @@
 				287C9A0A217F39CB00D63092 /* AppDelegate.swift in Sources */,
 				285122772181D1F2009D4AB0 /* CharactersListViewController.swift in Sources */,
 				C78A83F5244B8AD6004DE930 /* GetCharacter.swift in Sources */,
+				C72CF2AE24707CBF0048B0A2 /* OnboardingViewModel.swift in Sources */,
 				C7169221244D9D5A005BF4AB /* HttpClient.swift in Sources */,
 				C7EC670D24435E3C00F88FDE /* DataStore.swift in Sources */,
 				2869F82A2191E6080044BABA /* CharactersListViewModel.swift in Sources */,
@@ -733,6 +740,7 @@
 				285122812181E3E5009D4AB0 /* Extensions.swift in Sources */,
 				28998ECE217F636A0037039B /* URLQueryItemEncoder.swift in Sources */,
 				C7096D772449C7C500DEE7D3 /* SceneDelegate.swift in Sources */,
+				C72CF2B024707EB30048B0A2 /* LandingViewModel.swift in Sources */,
 				28998ECB217F636A0037039B /* HTTPParameter.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

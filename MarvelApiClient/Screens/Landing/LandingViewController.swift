@@ -10,9 +10,11 @@ import UIKit
 
 class LandingViewController: UIViewController, StoryboardInstantiable {
   weak var coordinatorDelegate: LandingTransitionProtocol! //swiftlint:disable:this implicitly_unwrapped_optional
+
+  var viewModel: LandingViewModel! // swiftlint:disable:this implicitly_unwrapped_optional
   override func viewDidLoad() {
     super.viewDidLoad()
-    title = "Marvel Api Client"
+    title = viewModel.title
   }
 
   @IBAction func charactersFlowAction(_ sender: Any) {
@@ -27,7 +29,7 @@ class LandingViewController: UIViewController, StoryboardInstantiable {
     coordinatorDelegate.avengersComicsFlowActionSelected()
   }
 
-  /// this technics loses the swipe right gesture to go back!!!
+  // this technics loses the swipe right gesture to go back!!!
   func setBackBtnInterceptMechanism() {
 
     // Disable the swipe to make sure you get your chance to save

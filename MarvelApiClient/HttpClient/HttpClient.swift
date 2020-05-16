@@ -71,6 +71,4 @@ internal class HttpClient {
     }
     task.resume()
   }
-
-  
 }

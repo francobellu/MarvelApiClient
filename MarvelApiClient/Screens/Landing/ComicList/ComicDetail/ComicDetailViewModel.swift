@@ -9,7 +9,7 @@
 import Foundation
 
 class ComicDetailViewModel: AppDependencyInjectable {
-  var dependencies: AppDependencies! // swiftlint:disable:this implicitly_unwrapped_optional  // THE API
+  var dependencies: AppDependencies! // swiftlint:disable:this implicitly_unwrapped_optional  
   private(set) var title = "Comic Detail"
 
   // THE STORAGE

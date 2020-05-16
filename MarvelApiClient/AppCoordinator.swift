@@ -11,7 +11,6 @@ import UIKit
 // TODO initial state
 struct AppConfig {
   var dontShowOnboarding = false
-  var isAutorized = true
   var isSkipped = false
 
   init() {
@@ -29,14 +28,12 @@ protocol OnboardingTransitionsProtocol: class {
 
 private enum AppCoordinatorState {
   case onboarding
-  case auth
   case landing
 
-  static func next(dontShowOnboarding: Bool, isAutorized: Bool) -> AppCoordinatorState {
-    switch (dontShowOnboarding, isAutorized) {
-    case (true, false): return .auth
-    case (false, true), (false, false): return .onboarding
-    case (true, true): return .landing
+  static func next(dontShowOnboarding: Bool) -> AppCoordinatorState {
+    switch dontShowOnboarding {
+    case false: return .onboarding
+    case true: return .landing
     }
   }
 }
@@ -55,7 +52,7 @@ class AppCoordinator: AppDependencyInjectable {
 
     self.presenter = presenter
     self.dependencies = dependencies
-    self.state = AppCoordinatorState.next(dontShowOnboarding: dependencies.appConfig.dontShowOnboarding, isAutorized: dependencies.appConfig.isAutorized)
+    self.state = AppCoordinatorState.next(dontShowOnboarding: dependencies.appConfig.dontShowOnboarding)
   }
 }
 
@@ -68,8 +65,7 @@ extension AppCoordinator: Coordinator {
     private func doStart() {
       print("FB:AppCoordinator:doStart()")
       let appConfig = dependencies.appConfig
-      let nextState = AppCoordinatorState.next(dontShowOnboarding: appConfig.dontShowOnboarding,
-                                               isAutorized: appConfig.isAutorized)
+      let nextState = AppCoordinatorState.next(dontShowOnboarding: appConfig.dontShowOnboarding)
       runFlowfor(state: nextState)
     }
 
@@ -117,9 +113,6 @@ extension AppCoordinator: Coordinator {
     present(viewController: presenter as! UIViewController) // swiftlint:disable:this force_cast
   }
 
-  private func runAuthFlow() {
-  }
-
   // MARK: - HELPER METHODS
   private func present( viewController: UIViewController) {
     // Present the ViewController
@@ -131,7 +124,6 @@ extension AppCoordinator: Coordinator {
   private func runFlowfor(state: AppCoordinatorState) {
     switch state {
     case .onboarding: runOnboardingFlow()
-    case .auth: runAuthFlow()
     case .landing: runLandingFlow()
     }
   }
