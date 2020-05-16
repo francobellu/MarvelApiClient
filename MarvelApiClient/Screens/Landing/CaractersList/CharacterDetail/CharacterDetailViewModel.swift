@@ -9,9 +9,9 @@
 import Foundation
 
 class CharacterDetailViewModel: AppDependencyInjectable {
-  var dependencies: AppDependencies!
-  // THE API
-  private var title = "Character Detail"
+  var dependencies: AppDependencies! // swiftlint:disable:this implicitly_unwrapped_optional
+
+  private(set) var title = "Character Detail"
 
   // THE STORAGE
   var character: CharacterResult?

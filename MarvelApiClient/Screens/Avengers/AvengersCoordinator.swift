@@ -9,9 +9,6 @@
 import UIKit
 
 protocol AvengersListTransitionsProtocol: class {
-  func btn1Selected()
-  func btn2Selected()
-  func btn3Selected()
   func didGoBack()
 }
 
@@ -29,21 +26,10 @@ class AvengersCoordinator: Coordinator, AvengersListTransitionsProtocol {
     print("FB:AvengersCoordinator:start()")
     let viewController = AvengersViewController.instantiateViewController()
     viewController.title = "Avengers Detail"
+    viewController.comics = []
 
     print("FB:  Created VC: \(viewController) ")
     (presenter as? UINavigationController)?.pushViewController(viewController, animated: true)
-  }
-
-  func btn1Selected() {
-
-  }
-
-  func btn2Selected() {
-
-  }
-
-  func btn3Selected() {
-
   }
 
   func didGoBack() {

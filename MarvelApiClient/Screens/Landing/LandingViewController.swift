@@ -15,16 +15,16 @@ class LandingViewController: UIViewController, StoryboardInstantiable {
     title = "Marvel Api Client"
   }
 
-  @IBAction func flow1Action(_ sender: Any) {
-    coordinatorDelegate.btn1Selected()
+  @IBAction func charactersFlowAction(_ sender: Any) {
+    coordinatorDelegate.charactersFlowActionSelected()
   }
 
-  @IBAction func flow2Action(_ sender: Any) {
-    coordinatorDelegate.btn2Selected()
+  @IBAction func comicsFlowAction(_ sender: Any) {
+    coordinatorDelegate.comicsFlowActionSelected()
   }
 
-  @IBAction func flow3Action(_ sender: Any) {
-    coordinatorDelegate.btn3Selected()
+  @IBAction func avengersComicsFlowAction(_ sender: Any) {
+    coordinatorDelegate.avengersComicsFlowActionSelected()
   }
 
   /// this technics loses the swipe right gesture to go back!!!
@@ -51,7 +51,7 @@ class LandingViewController: UIViewController, StoryboardInstantiable {
     if allowGoBack {
       // Don't forget to re-enable the interactive gesture
       self.navigationController?.interactivePopGestureRecognizer?.isEnabled = true
-      coordinatorDelegate.goBack()
+      coordinatorDelegate.didGoBack()
     } else {
       //self.navigationItem.leftBarButtonItem = backButton
       // Handle the error

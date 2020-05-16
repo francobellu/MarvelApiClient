@@ -25,8 +25,6 @@ struct DataContainer<Results: Decodable>: Decodable {
 
 ///////////////
 
-// Result.swift
-
 // MARK: - Result
 struct CharacterResult: Codable {
   let id: Int?

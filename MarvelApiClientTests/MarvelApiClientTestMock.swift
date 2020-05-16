@@ -12,7 +12,7 @@ import XCTest
 
 class MarvelApiClientTestMock: XCTestCase {
 
-  var sut: MarvelAPIClient!
+  var sut: MarvelAPIClient! // swiftlint:disable:this implicitly_unwrapped_optional
 
   override func setUpWithError() throws {
     let session = MockURLSession()

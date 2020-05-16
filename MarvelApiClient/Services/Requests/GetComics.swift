@@ -15,12 +15,11 @@ struct GetComics: APIRequest {
     return "comics"
   }
 
-  // When encountered with this kind of enums, it will spit out the raw value
-	 enum ComicFormat: String, Encodable {
-		case comic = "comic"
-		case digital = "digital comic"
-		case hardcover = "hardcover"
-	}
+  enum ComicFormat: String, Encodable {
+    case comic = "comic"
+    case digital = "digital comic"
+    case hardcover = "hardcover"
+  }
 
   // Note that nil parameters will not be used
   init(title: String? = nil,

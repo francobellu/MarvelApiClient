@@ -36,7 +36,7 @@ class CharactersListViewModel {
 
   // MARK: - API FUNCTIONS
   func getCharactersList(completion: @escaping ( () -> Void) ) {
-    apiClient.getCharactersList { ( characters: [CharacterResult])  in
+    apiClient.getCharactersList{ ( characters: [CharacterResult])  in
       self.characters = characters
       completion()
     }

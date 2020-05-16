@@ -12,7 +12,7 @@ class AvengersViewController: UIViewController, StoryboardInstantiable {
 
   let apiClient = MarvelAPIClient(httpClient: HttpClient())
   weak var coordinatorDelegate: AvengersListTransitionsProtocol! //swiftlint:disable:this implicitly_unwrapped_optional
-  var comics: [ComicResult]!
+  var comics: [ComicResult]! // swiftlint:disable:this implicitly_unwrapped_optional
 
   override func viewDidLoad() {
     super.viewDidLoad()
@@ -23,18 +23,6 @@ class AvengersViewController: UIViewController, StoryboardInstantiable {
       // Reload Data
       //DispatchQueue.main.sync { self.tableView.reloadData() }
     }
-  }
-
-  @IBAction func flow1Action(_ sender: Any) {
-    coordinatorDelegate.btn1Selected()
-  }
-
-  @IBAction func flow2Action(_ sender: Any) {
-    coordinatorDelegate.btn2Selected()
-  }
-
-  @IBAction func flow3Action(_ sender: Any) {
-    coordinatorDelegate.btn3Selected()
   }
 
   func didGoBack() {

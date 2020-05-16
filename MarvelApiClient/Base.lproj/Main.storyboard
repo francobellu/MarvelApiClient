@@ -10,7 +10,7 @@
         <!--Onboarding View Controller-->
         <scene sceneID="kSa-rt-eFT">
             <objects>
-                <viewController storyboardIdentifier="OnboardingViewController" id="AIs-Z6-h6v" customClass="OnboardingViewController" customModule="ApiLayer" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="OnboardingViewController" id="AIs-Z6-h6v" customClass="OnboardingViewController" customModule="MarvelApiClient" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="2J0-Qe-siT">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -99,12 +99,12 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="9HG-UH-3qX" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1084" y="98.50074962518741"/>
+            <point key="canvasLocation" x="-857" y="-297"/>
         </scene>
         <!--Landing View Controller-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController storyboardIdentifier="LandingViewController" modalPresentationStyle="fullScreen" id="BYZ-38-t0r" customClass="LandingViewController" customModule="ApiLayer" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="LandingViewController" modalPresentationStyle="fullScreen" id="BYZ-38-t0r" customClass="LandingViewController" customModule="MarvelApiClient" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -116,21 +116,21 @@
                                         <rect key="frame" x="0.0" y="0.0" width="184" height="30"/>
                                         <state key="normal" title="All Marvel Characters"/>
                                         <connections>
-                                            <action selector="flow1Action:" destination="BYZ-38-t0r" eventType="touchUpInside" id="wqZ-Ip-kZ7"/>
+                                            <action selector="charactersFlowAction:" destination="BYZ-38-t0r" eventType="touchUpInside" id="wqZ-Ip-kZ7"/>
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="izB-te-PR0">
                                         <rect key="frame" x="0.0" y="64" width="184" height="30"/>
                                         <state key="normal" title="All Marvel Comics"/>
                                         <connections>
-                                            <action selector="flow2Action:" destination="BYZ-38-t0r" eventType="touchUpInside" id="E0J-t3-icF"/>
+                                            <action selector="comicsFlowAction:" destination="BYZ-38-t0r" eventType="touchUpInside" id="E0J-t3-icF"/>
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tuB-nx-OUT">
                                         <rect key="frame" x="0.0" y="128" width="184" height="30"/>
                                         <state key="normal" title="Marvel 's Avengers Comics"/>
                                         <connections>
-                                            <action selector="flow3Action:" destination="BYZ-38-t0r" eventType="touchUpInside" id="C1L-X0-b4i"/>
+                                            <action selector="avengersComicsFlowAction:" destination="BYZ-38-t0r" eventType="touchUpInside" id="C1L-X0-b4i"/>
                                         </connections>
                                     </button>
                                 </subviews>
@@ -146,12 +146,12 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-150" y="112"/>
+            <point key="canvasLocation" x="-74" y="-297"/>
         </scene>
-        <!--Characters VC-->
+        <!--Characters-->
         <scene sceneID="fO7-N3-SAF">
             <objects>
-                <viewController storyboardIdentifier="CharactersListViewController" title="Characters VC" id="9YH-XH-9Wj" customClass="CharactersListViewController" customModule="ApiLayer" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="CharactersListViewController" title="Characters" id="9YH-XH-9Wj" customClass="CharactersListViewController" customModule="MarvelApiClient" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="HLZ-3O-Z8y">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -160,7 +160,7 @@
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="vc1CellId" id="gUJ-nH-7kK" customClass="CharacterCell" customModule="ApiLayer" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="characterCellId" id="gUJ-nH-7kK" customClass="CharacterCell" customModule="MarvelApiClient" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="28" width="375" height="50"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="gUJ-nH-7kK" id="561-Af-kTu">
@@ -188,110 +188,50 @@
             </objects>
             <point key="canvasLocation" x="656.79999999999995" y="-555.47226386806597"/>
         </scene>
-        <!--Avengers VC-->
-        <scene sceneID="SKi-st-zd6">
-            <objects>
-                <viewController storyboardIdentifier="AvengersViewController" title="Avengers VC" id="4gy-2X-cC3" customClass="AvengersViewController" customModule="ApiLayer" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="0yj-SD-m85">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="34" translatesAutoresizingMaskIntoConstraints="NO" id="OEG-pP-v3F">
-                                <rect key="frame" x="158.5" y="254.5" width="58" height="158"/>
-                                <subviews>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8Ow-BO-FT3">
-                                        <rect key="frame" x="0.0" y="0.0" width="58" height="30"/>
-                                        <state key="normal" title="Flow 3.1"/>
-                                    </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tyc-zh-loU">
-                                        <rect key="frame" x="0.0" y="64" width="58" height="30"/>
-                                        <state key="normal" title="Flow 3.2"/>
-                                    </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Uzr-0C-kIa">
-                                        <rect key="frame" x="0.0" y="128" width="58" height="30"/>
-                                        <state key="normal" title="Flow 3.3"/>
-                                    </button>
-                                </subviews>
-                            </stackView>
-                        </subviews>
-                        <color key="backgroundColor" red="0.16078431369999999" green="0.71372549019999998" blue="0.96470588239999999" alpha="1" colorSpace="calibratedRGB"/>
-                        <constraints>
-                            <constraint firstItem="OEG-pP-v3F" firstAttribute="centerX" secondItem="0yj-SD-m85" secondAttribute="centerX" id="8Ws-oL-tvw"/>
-                            <constraint firstItem="OEG-pP-v3F" firstAttribute="centerY" secondItem="0yj-SD-m85" secondAttribute="centerY" id="Op5-6l-fV3"/>
-                        </constraints>
-                        <viewLayoutGuide key="safeArea" id="T0O-KK-h0f"/>
-                    </view>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="ER8-ge-OH4" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="657" y="789"/>
-        </scene>
-        <!--Comics VC-->
+        <!--Comics-->
         <scene sceneID="Lbk-ae-cT6">
             <objects>
-                <viewController storyboardIdentifier="ComicsListViewController" title="Comics VC" id="FO6-2e-QDh" customClass="ComicsListViewController" customModule="ApiLayer" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="ComicsListViewController" title="Comics" id="FO6-2e-QDh" customClass="ComicsListViewController" customModule="MarvelApiClient" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="l1Q-dJ-epq">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="34" translatesAutoresizingMaskIntoConstraints="NO" id="i34-CE-lMi">
-                                <rect key="frame" x="155.5" y="254.5" width="64" height="158"/>
-                                <subviews>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jFi-0A-4rl">
-                                        <rect key="frame" x="0.0" y="0.0" width="64" height="30"/>
-                                        <state key="normal" title="Nº 61537"/>
-                                        <connections>
-                                            <action selector="n61537:" destination="FO6-2e-QDh" eventType="touchUpInside" id="69E-pY-QV6"/>
-                                        </connections>
-                                    </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="np6-rQ-8BI">
-                                        <rect key="frame" x="0.0" y="64" width="64" height="30"/>
-                                        <state key="normal" title="Flow 2.2"/>
-                                        <connections>
-                                            <action selector="flow2Action:" destination="FO6-2e-QDh" eventType="touchUpInside" id="7uH-fZ-RSC"/>
-                                        </connections>
-                                    </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RGu-wl-MQ8">
-                                        <rect key="frame" x="0.0" y="128" width="64" height="30"/>
-                                        <state key="normal" title="Flow2. 3"/>
-                                        <connections>
-                                            <action selector="flow3Action:" destination="FO6-2e-QDh" eventType="touchUpInside" id="FVq-6m-Kgt"/>
-                                        </connections>
-                                    </button>
-                                </subviews>
-                            </stackView>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="BKg-He-lYE">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                <prototypes>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="comicsCellid" id="CY2-17-2XN">
+                                        <rect key="frame" x="0.0" y="28" width="375" height="43.5"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="CY2-17-2XN" id="kgw-xA-xeV">
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                </prototypes>
+                            </tableView>
                         </subviews>
                         <color key="backgroundColor" red="0.073801551770000001" green="1" blue="0.60781826019999996" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
-                            <constraint firstItem="i34-CE-lMi" firstAttribute="centerY" secondItem="l1Q-dJ-epq" secondAttribute="centerY" id="Vkd-uR-KSA"/>
-                            <constraint firstItem="i34-CE-lMi" firstAttribute="centerX" secondItem="l1Q-dJ-epq" secondAttribute="centerX" id="nca-hL-WF1"/>
+                            <constraint firstItem="vE6-ab-JvK" firstAttribute="bottom" secondItem="BKg-He-lYE" secondAttribute="bottom" id="Mwe-Ec-YW3"/>
+                            <constraint firstItem="vE6-ab-JvK" firstAttribute="trailing" secondItem="BKg-He-lYE" secondAttribute="trailing" id="Yxh-Ui-WEN"/>
+                            <constraint firstItem="BKg-He-lYE" firstAttribute="top" secondItem="vE6-ab-JvK" secondAttribute="top" id="ZYp-ie-HNH"/>
+                            <constraint firstItem="BKg-He-lYE" firstAttribute="leading" secondItem="vE6-ab-JvK" secondAttribute="leading" id="uQR-oo-Wde"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="vE6-ab-JvK"/>
                     </view>
+                    <connections>
+                        <outlet property="tableView" destination="BKg-He-lYE" id="Ufy-Ve-pIE"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="zPo-Jy-tca" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="656.79999999999995" y="111.99400299850076"/>
         </scene>
-        <!--Comic View Controller-->
-        <scene sceneID="y1b-EH-Ex8">
-            <objects>
-                <viewController storyboardIdentifier="ComicViewController" id="9xZ-Xu-JYR" customClass="ComicViewController" customModule="ApiLayer" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="XtD-80-whG">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
-                        <viewLayoutGuide key="safeArea" id="8bB-4X-Z4Y"/>
-                    </view>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="vOE-ov-mEC" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="1460" y="112"/>
-        </scene>
         <!--Character Detail View Controller-->
         <scene sceneID="1Sa-Re-a2e">
             <objects>
-                <viewController storyboardIdentifier="CharacterDetailViewController" id="j1O-Bd-Gpc" customClass="CharacterDetailViewController" customModule="ApiLayer" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="CharacterDetailViewController" id="j1O-Bd-Gpc" customClass="CharacterDetailViewController" customModule="MarvelApiClient" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="bm3-II-4fp">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -352,6 +292,71 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="M59-yk-7E7" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1477.5999999999999" y="-555.47226386806597"/>
+        </scene>
+        <!--Comic Detail View Controller-->
+        <scene sceneID="RBX-yt-5Gv">
+            <objects>
+                <viewController storyboardIdentifier="ComicDetailViewController" id="unA-vH-Ew8" customClass="ComicDetailViewController" customModule="MarvelApiClient" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="Eam-b3-utX">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" text="Title" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Lgl-uY-47j">
+                                <rect key="frame" x="16" y="0.0" width="343" height="90"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="90" id="3j3-ds-cWb"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Details" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gga-nz-Joa">
+                                <rect key="frame" x="16" y="406" width="343" height="245"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="245" id="2jh-wq-5hh"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="r2G-ga-ir7">
+                                <rect key="frame" x="16" y="98" width="343" height="300"/>
+                            </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wLb-SW-xLz">
+                                <rect key="frame" x="16" y="35" width="42" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" red="1" green="0.14913141730000001" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstItem="r2G-ga-ir7" firstAttribute="leading" secondItem="gga-nz-Joa" secondAttribute="leading" id="5f5-0a-6bf"/>
+                            <constraint firstItem="Lgl-uY-47j" firstAttribute="leading" secondItem="wLb-SW-xLz" secondAttribute="leading" id="960-9T-mgX"/>
+                            <constraint firstItem="Lgl-uY-47j" firstAttribute="leading" secondItem="Eam-b3-utX" secondAttribute="leadingMargin" id="CVY-MC-nua"/>
+                            <constraint firstItem="Lgl-uY-47j" firstAttribute="centerY" secondItem="wLb-SW-xLz" secondAttribute="centerY" id="DoW-PJ-GCP"/>
+                            <constraint firstItem="r2G-ga-ir7" firstAttribute="trailing" secondItem="gga-nz-Joa" secondAttribute="trailing" id="N7D-nA-qH5"/>
+                            <constraint firstItem="GXj-HF-mtp" firstAttribute="bottom" secondItem="gga-nz-Joa" secondAttribute="bottom" constant="16" id="PgN-vf-wJZ"/>
+                            <constraint firstItem="wLb-SW-xLz" firstAttribute="top" secondItem="GXj-HF-mtp" secondAttribute="top" constant="35" id="WeW-31-bPQ"/>
+                            <constraint firstItem="Lgl-uY-47j" firstAttribute="trailing" secondItem="Eam-b3-utX" secondAttribute="trailingMargin" id="eab-jy-3OY"/>
+                            <constraint firstItem="wLb-SW-xLz" firstAttribute="leading" secondItem="r2G-ga-ir7" secondAttribute="leading" id="fTU-ji-g1H"/>
+                            <constraint firstItem="Lgl-uY-47j" firstAttribute="top" secondItem="GXj-HF-mtp" secondAttribute="top" id="hKs-q0-Xrf"/>
+                            <constraint firstItem="Lgl-uY-47j" firstAttribute="trailing" secondItem="r2G-ga-ir7" secondAttribute="trailing" id="jFZ-2R-mVo"/>
+                            <constraint firstItem="r2G-ga-ir7" firstAttribute="top" secondItem="Lgl-uY-47j" secondAttribute="bottom" constant="8" symbolic="YES" id="mmw-iq-KGb"/>
+                            <constraint firstItem="gga-nz-Joa" firstAttribute="top" secondItem="r2G-ga-ir7" secondAttribute="bottom" constant="8" symbolic="YES" id="oEN-Mc-THx"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="GXj-HF-mtp"/>
+                    </view>
+                    <connections>
+                        <outlet property="details" destination="gga-nz-Joa" id="qdA-jX-6Je"/>
+                        <outlet property="idLabel" destination="wLb-SW-xLz" id="LLa-6s-iFr"/>
+                        <outlet property="thumbnailView" destination="r2G-ga-ir7" id="DXx-ty-fNs"/>
+                        <outlet property="titleLabel" destination="Lgl-uY-47j" id="nLb-QI-xfP"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="j3Q-Iz-ncR" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1478" y="112"/>
         </scene>
     </scenes>
     <resources>

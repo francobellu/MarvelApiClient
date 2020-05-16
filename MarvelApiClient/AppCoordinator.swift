@@ -73,20 +73,23 @@ extension AppCoordinator: Coordinator {
       runFlowfor(state: nextState)
     }
 
-    func start(with option: DeepLinkOption?) {
-       print("FB:AppCoordinator:start(with:)")
+    func start(with option: DeepLinkOption?) { // swiftlint:disable:this function_body_length
+       print("FB:AppCoordinator:start(with: \(String(describing: option))")
         //start with deepLink
         if let option = option {
             switch option {
             case .onboarding: runOnboardingFlow()
             case .landing: runLandingFlow()
-  //          default: childCoordinators.forEach { coordinator in
-              //              coordinator.start(with: option)
-              //              }
             case .character:
               let navController = UINavigationController()
               present(viewController: navController)
               coordinator = CharactersListCoordinator(parentCoordinator: self, presenter: navController, dependencies: dependencies)
+              let deeplinkableCoord = coordinator as? DeepLinkable
+              deeplinkableCoord?.start(with: option)
+            case .comic:
+              let navController = UINavigationController()
+              present(viewController: navController)
+              coordinator = ComicsListCoordinator(parentCoordinator: self, presenter: navController, dependencies: dependencies)
               let deeplinkableCoord = coordinator as? DeepLinkable
               deeplinkableCoord?.start(with: option)
           }

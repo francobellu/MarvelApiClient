@@ -11,10 +11,8 @@ import UIKit
 class CharactersListViewController: UIViewController, StoryboardInstantiable {
   @IBOutlet weak var tableView: UITableView!
 
-  // VIEWMODEL
   var viewModel: CharactersListViewModel! // swiftlint:disable:this implicitly_unwrapped_optional
-
-  weak var coordinatorDelegate: CharactersListViewcoordinatorDelegate!  //swiftlint:disable:this implicitly_unwrapped_optional
+  weak var coordinatorDelegate: CharactersListCoordinatorDelegate!  //swiftlint:disable:this implicitly_unwrapped_optional
 
   override func viewDidLoad() {
     super.viewDidLoad()
@@ -23,7 +21,7 @@ class CharactersListViewController: UIViewController, StoryboardInstantiable {
     tableView.dataSource = self
     tableView.delegate = self
     setBackBtnInterceptMechanism()
-    tableView.register(UINib(nibName: "CharacterCell", bundle: nil), forCellReuseIdentifier: R.reuseIdentifier.vc1CellId.identifier)
+    tableView.register(UINib(nibName: R.nib.characterCell.name, bundle: nil), forCellReuseIdentifier: R.reuseIdentifier.characterCellId.identifier)
     viewModel.getCharactersList {
       // Reload Data
       DispatchQueue.main.async {
@@ -56,13 +54,12 @@ class CharactersListViewController: UIViewController, StoryboardInstantiable {
     if allowGoBack {
       // Don't forget to re-enable the interactive gesture
       self.navigationController?.interactivePopGestureRecognizer?.isEnabled = true
-      coordinatorDelegate.goBack()
+      coordinatorDelegate.didGoBack()
     }
   }
 }
 
 extension CharactersListViewController: UITableViewDataSource {
-
   func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
     return viewModel.charactersCount()
   }
@@ -70,7 +67,7 @@ extension CharactersListViewController: UITableViewDataSource {
   func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
 
     let newCharacter = viewModel.getCharacter(at: indexPath.row)
-    guard let cell = tableView.dequeueReusableCell(withIdentifier: R.reuseIdentifier.vc1CellId.identifier) as?
+    guard let cell = tableView.dequeueReusableCell(withIdentifier: R.reuseIdentifier.characterCellId.identifier) as?
       CharacterCell else { return UITableViewCell() }
 
     cell.config(with: newCharacter)

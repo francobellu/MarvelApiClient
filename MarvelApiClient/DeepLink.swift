@@ -20,6 +20,7 @@ enum DeepLinkOption {
   case landing
 //  case characters
   case character(String?)
+  case comic(String?)
 
   static func build(with id: String, params: [String: AnyObject]?) -> DeepLinkOption? {
     let character = params?["character"] as? String

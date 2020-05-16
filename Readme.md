@@ -3,9 +3,15 @@ This project is pretty simple to really need arquitecture overheads like Coordin
 
 
 Frameworks used:
-RSwift:
-Siterep
-SwiftLint
+
+RSwift ( cocoaPods)
+ALamofireImage ( swiftPakage)
+
+Siterep ( script with installed program)
+SwiftLint ( script with installed program)
+
+
+UI Architecture: MVP + Coordinator 
 
 Coordinators:
   - One AppCoordinator to encapsulate the display of the initial screen
@@ -27,10 +33,14 @@ Wish List:
 
 TODO:
 
-ApiCLient: 
+Architecture: Interactor with tests?
 
+
+HTTP:
+  - URLQueryItemEncoder is not used??
+  
+MarvelApiCLient: 
 - unit tests con Mock data
-
 - 1 Coordinator for all with deeplinks and no  
 - httpCLient in framework? swiftPM, github?
 
@@ -41,33 +51,16 @@ ApiCLient:
 - remove Characterlist coordinator, Comics coord, AvengerCoors( already not used); move al the delegates to the LandingCoord
 - unit test deep links
 - Refactor: Dep Injection for  ViewModels and services
-- Usare SwiftUI : read swiftUI new articles by john sundell ( 3x)
-- Usare Combine for a real MVVM
-- https://alisoftware.github.io/swift/protocols/2018/09/02/protocols-private-properties/
-- Project setup: - xconfig files
-- use networking framework/ swift package? 
-- controllare memory leaks etc
-- Add tests
 
+- https://alisoftware.github.io/swift/protocols/2018/09/02/protocols-private-properties/
+
+Optional
+- Create Swift package for networking? 
+- controllare memory leaks etc
 - the top level json structure is different if server returns an error. { code: int, message = String}
 
 DONE
-- move func endpoint to request class
-- separate httpclient from marvelApi
-- creare marvelApi for get Comics
-     - fare unit tests con real session and con mock
-  - use scenes!!! test - Deep Linking
-  -  swiftlint warnings
-  - Project setup:  - add R library? 
-  - Refactor: Usare Dep Injection + factory + coordinator
-  - Mettere prog in GitHub   
-  - take off result from code ( use system one)
-  - Usare SPM instead of pods
-  - convert to swift 5.
-  - Project setup:
-  - swift lint
-  - siteRep, 
-  - build version increment script 
+
 
 
 OLD TODO

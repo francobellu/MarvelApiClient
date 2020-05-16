@@ -22,8 +22,8 @@ struct GetCharacters: APIRequest {
        offset: Int? = nil) {
 
     var params = [String: String]()
-    params["name"] = name
-    params["nameStartsWith"] = nameStartsWith
+    if let name = name {params["name"] = name}
+    if let nameStartsWith = nameStartsWith {params["nameStartsWith"] = nameStartsWith}
     if let limit = limit { params["limit"] = String(limit) }
     if let offset = offset { params["offset"] = String(offset)}
     self.parameters = params

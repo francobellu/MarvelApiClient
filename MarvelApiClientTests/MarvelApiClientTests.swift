@@ -12,7 +12,7 @@ import XCTest
 
 class MarvelApiClientTests: XCTestCase {
 
-  var sut: MarvelAPIClient!
+  var sut: MarvelAPIClient! // swiftlint:disable:this implicitly_unwrapped_optional
 
   override func setUpWithError() throws {
     let session = URLSession(configuration: .default)
@@ -49,7 +49,7 @@ class MarvelApiClientTests: XCTestCase {
   // MARK: - Comics
   func testGetComicsList() throws {
     let promise = expectation(description: "Comics array not empty")
-    sut.getComics { ( comics: [ComicResult])  in
+    sut.getComicsList { ( comics: [ComicResult])  in
       print("FB: comics: \(comics)")
       promise.fulfill()
       XCTAssert(comics.isEmpty == false)

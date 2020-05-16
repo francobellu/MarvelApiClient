@@ -1,30 +1,40 @@
 //
-//  ComicViewController.swift
+//  ComicDetailViewController.swift
 //  MarvelApiClient
 //
-//  Created by BELLU Franco on 14/05/2010.
+//  Created by BELLU Franco on 14/05/2020.
 //  Copyright © 2020 BELLU Franco. All rights reserved.
 //
-
 import UIKit
 
-class ComicsListViewController: UIViewController, StoryboardInstantiable, AppDependencyInjectable {
+class ComicDetailViewController: UIViewController, StoryboardInstantiable, AppDependencyInjectable {
+  @IBOutlet weak var titleLabel: UILabel!
+  @IBOutlet weak var thumbnailView: UIImageView!
+  @IBOutlet weak var details: UILabel!
+  @IBOutlet weak var idLabel: UILabel!
 
   var dependencies: AppDependencies! // swiftlint:disable:this implicitly_unwrapped_optional
   var apiClient: MarvelAPIProtocol {
     dependencies.marvelApiClient
   }
-  var comic: ComicResult?
-  weak var coordinatorDelegate: ComicsCoordinatorDelegate! //swiftlint:disable:this implicitly_unwrapped_optional
+  var viewModel: ComicDetailViewModel! // swiftlint:disable:this implicitly_unwrapped_optional
+
+  weak var coordinatorDelegate: ComicsListCoordinatorDelegate! //swiftlint:disable:this implicitly_unwrapped_optional
 
   override func viewDidLoad() {
+    guard let comic = viewModel.comic else { return }
+    title = viewModel.title
+    set(comic: comic)
     super.viewDidLoad()
-    apiClient.getComic(with: 61537) { ( comic: ComicResult)  in
-      // Update dataSOurce comics
-      self.comic = comic
-      print(comic)
     }
-  }
+
+    func set(comic: ComicResult) {
+      self.titleLabel.text = comic.title
+      guard let thumbnail = comic.thumbnail else { return  }
+      self.thumbnailView.af.setImage(withURL: thumbnail.url)
+      self.details.text = comic.resultDescription
+      self.idLabel.text = String(describing: comic.id)
+    }
 
 //  func navigationController(_ navigationController: UINavigationController, didShow viewController: UIViewController, animated: Bool) {
 //      // Read the view controller we’re moving from.
@@ -44,15 +54,4 @@ class ComicsListViewController: UIViewController, StoryboardInstantiable, AppDep
 //      }
 //  }
 
- @IBAction func n61537(_ sender: Any) {
-    coordinatorDelegate.n61537()
-  }
-
-  @IBAction func flow2Action(_ sender: Any) {
-    //coordinatorDelegate.btn2Selected()
-  }
-
-  @IBAction func flow3Action(_ sender: Any) {
-   // coordinatorDelegate.btn3Selected()
-  }
 }

@@ -15,7 +15,14 @@ class CharacterDetailViewController: UIViewController, StoryboardInstantiable {
   @IBOutlet weak var details: UILabel!
   @IBOutlet weak var idLabel: UILabel!
 
-  var viewModel: CharacterDetailViewModel!
+  var viewModel: CharacterDetailViewModel! // swiftlint:disable:this implicitly_unwrapped_optional
+
+  override func viewDidLoad() {
+    guard let character = viewModel.character else { return }
+    set(character: character)
+    title = viewModel.title
+    super.viewDidLoad()
+  }
 
   func set(character: CharacterResult) {
     self.name.text = character.name
@@ -23,11 +30,5 @@ class CharacterDetailViewController: UIViewController, StoryboardInstantiable {
     self.thumbnailView.af.setImage(withURL: thumbnail.url)
     self.details.text = character.resultDescription
     self.idLabel.text = String(describing: character.id)
-  }
-
-  override func viewDidLoad() {
-    guard let character = viewModel.character else { return }
-    set(character: character)
-    super.viewDidLoad()
   }
 }

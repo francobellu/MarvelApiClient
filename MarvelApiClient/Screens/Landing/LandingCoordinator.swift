@@ -9,18 +9,18 @@
 import UIKit
 
 protocol LandingTransitionProtocol: class {
-  func btn1Selected()
-  func btn2Selected()
-  func btn3Selected()
-  func goBack()
-}
-
-protocol ComicsListCoordinatorDelegate: class {
-  func btn1Selected()
-  func btn2Selected()
-  func btn3Selected()
+  func charactersFlowActionSelected()
+  func comicsFlowActionSelected()
+  func avengersComicsFlowActionSelected()
   func didGoBack()
 }
+
+//protocol ComicsListCoordinatorDelegate: class {
+//  func btn1Selected()
+//  func btn2Selected()
+//  func btn3Selected()
+//  func didGoBack()
+//}
 class LandingCoordinator: NSObject, AppDependencyInjectable {
 
   // MARK: - Internal Dependencies
@@ -64,29 +64,21 @@ extension LandingCoordinator: Coordinator {
   }
 }
 
-extension LandingCoordinator: ComicsListCoordinatorDelegate {
+extension LandingCoordinator: LandingTransitionProtocol {
 
-  func btn1Selected() {
+  func charactersFlowActionSelected() {
     self.showAllCharacters()
   }
 
-  func btn2Selected() {
+  func comicsFlowActionSelected() {
     self.showAllComics()
   }
 
-  func btn3Selected() {
+  func avengersComicsFlowActionSelected() {
     self.showAverngersComics()
   }
-  func didGoBack() {
-    print("FB:LandingCoordinator:didGoBack()")
-    print("FB:  popVC")
-    guard let navigationController = presenter as? UINavigationController else { return }
-    navigationController.popViewController(animated: true)
-  }
-}
 
-extension LandingCoordinator: LandingTransitionProtocol {
-  func goBack() {
+  func didGoBack() {
     print("FB:LandingCoordinator:goBack()")
     print("FB:  popVC")
     guard let navigationController = presenter as? UINavigationController else { return }
@@ -107,7 +99,7 @@ extension LandingCoordinator: LandingTransitionProtocol {
 
   private func showAllComics() {
     // Create new coordinator...
-    let comicsCoordinator = ComicsCoordinator(parentCoordinator: self, presenter: presenter as! UINavigationController, dependencies: dependencies)
+    let comicsCoordinator = ComicsListCoordinator(parentCoordinator: self, presenter: presenter as! UINavigationController, dependencies: dependencies)
     comicsCoordinator.parentCoordinator = self
     // ...start it...
     comicsCoordinator.start()

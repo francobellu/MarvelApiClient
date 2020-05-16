@@ -8,8 +8,8 @@
 
 import UIKit
 
-protocol CharactersListViewcoordinatorDelegate: class {
-  func goBack()
+protocol CharactersListCoordinatorDelegate: class {
+  func didGoBack()
   func didSelect(character: CharacterResult)
 }
 
@@ -27,10 +27,6 @@ class CharactersListCoordinator: NSObject, AppDependencyInjectable {
     self.presenter = presenter
     super.init()
   }
-
-  deinit {
-    print("FB:CharactersListCoordinator:deinit()")
-  }
 }
 
 extension CharactersListCoordinator: Coordinator, DeepLinkable {
@@ -41,7 +37,7 @@ extension CharactersListCoordinator: Coordinator, DeepLinkable {
   }
 
   func start(with option: DeepLinkOption?) {
-       print("FB:CharactersListCoordinator:start(with: \(option)")
+    print("FB:CharactersListCoordinator:start(with: \(String(describing: option))")
         //start with deepLink
     if case .character(let id) = option {
       guard let id = id else { fatalError()}
@@ -71,22 +67,12 @@ extension CharactersListCoordinator: Coordinator, DeepLinkable {
     print("FB:  Presenting VC: \(viewController) ")
     (presenter as? UINavigationController)?.pushViewController(viewController, animated: true)
   }
-
-  private func presentCharacterDetailViewController(with character: CharacterResult ) {
-    let viewModel = CharacterDetailViewModel(dependencies: dependencies, character: character)
-    let viewController = CharacterDetailViewController.instantiateViewController()
-    viewController.viewModel = viewModel
-    //viewController.coordinatorDelegate = self
-    print("FB:  Created VC: \(viewController) ")
-    print("FB:  Presenting VC: \(viewController) ")
-    (presenter as? UINavigationController)?.pushViewController(viewController, animated: true)
-  }
 }
 
 // MARK: - VC transitions
-extension CharactersListCoordinator: CharactersListViewcoordinatorDelegate {
-  func goBack() {
-    print("FB:CharactersListCoordinator:goBack()")
+extension CharactersListCoordinator: CharactersListCoordinatorDelegate {
+  func didGoBack() {
+    print("FB: CharactersListCoordinator:goBack()")
     print("FB:  popVC")
     guard let navigationController = presenter as? UINavigationController else { return }
     navigationController.popViewController(animated: true)
@@ -96,8 +82,15 @@ extension CharactersListCoordinator: CharactersListViewcoordinatorDelegate {
   func didSelect(character: CharacterResult) {
     // Destination doesn't need coordination, just present the VC
     presentCharacterDetailViewController(with: character)
-//    let characterDetailVc = CharacterDetailViewController.instantiateViewController()
-//    characterDetailVc.character = character
-//    (presenter as? UINavigationController)?.pushViewController(characterDetailVc, animated: true)
+  }
+
+  private func presentCharacterDetailViewController(with character: CharacterResult ) {
+    let viewModel = CharacterDetailViewModel(dependencies: dependencies, character: character)
+    let viewController = CharacterDetailViewController.instantiateViewController()
+    viewController.viewModel = viewModel
+    //viewController.coordinatorDelegate = self
+    print("FB:  Created VC: \(viewController) ")
+    print("FB:  Presenting VC: \(viewController) ")
+    (presenter as? UINavigationController)?.pushViewController(viewController, animated: true)
   }
 }
