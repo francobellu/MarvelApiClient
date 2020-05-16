@@ -11,7 +11,6 @@ import UIKit
 // TODO initial state
 struct AppConfig {
   var dontShowOnboarding = false
-  var isSkipped = false
 
   init() {
     let dataStore = UserDefaultsDataStore()
@@ -43,7 +42,7 @@ class AppCoordinator: AppDependencyInjectable {
 
   var coordinators = [Coordinator]()
   var dependencies: AppDependencies! // swiftlint:disable:this implicitly_unwrapped_optional
-  private var coordinator: (Coordinator)?
+//  private var coordinator: (Coordinator)?
   private var state: AppCoordinatorState
 
   init(presenter: UIWindow =  UIWindow(frame: UIScreen.main.bounds),
@@ -78,13 +77,15 @@ extension AppCoordinator: Coordinator {
             case .character:
               let navController = UINavigationController()
               present(viewController: navController)
-              coordinator = CharactersListCoordinator(parentCoordinator: self, presenter: navController, dependencies: dependencies)
-              let deeplinkableCoord = coordinator as? DeepLinkable
-              deeplinkableCoord?.start(with: option)
+              let coordinator = CharactersListCoordinator(parentCoordinator: self, presenter: navController, dependencies: dependencies)
+              add(coordinator)
+              let deeplinkableCoord = coordinator
+              deeplinkableCoord.start(with: option)
             case .comic:
               let navController = UINavigationController()
               present(viewController: navController)
-              coordinator = ComicsListCoordinator(parentCoordinator: self, presenter: navController, dependencies: dependencies)
+              let coordinator = ComicsListCoordinator(parentCoordinator: self, presenter: navController, dependencies: dependencies)
+              add(coordinator)
               let deeplinkableCoord = coordinator as? DeepLinkable
               deeplinkableCoord?.start(with: option)
           }
@@ -107,9 +108,10 @@ extension AppCoordinator: Coordinator {
   }
 
   private func runLandingFlow() {
-    coordinator = LandingCoordinator(parentCoordinator: self, presenter: UINavigationController(), dependencies: dependencies)
-    coordinator?.start() // TODO: can it be inside constructor?
-    guard let presenter = coordinator?.presenter else { return }
+    let coordinator = LandingCoordinator(parentCoordinator: self, presenter: UINavigationController(), dependencies: dependencies)
+    add(coordinator)
+    coordinator.start() // TODO: can it be inside constructor?
+    guard let presenter = coordinator.presenter else { return }
     present(viewController: presenter as! UIViewController) // swiftlint:disable:this force_cast
   }
 
@@ -131,10 +133,6 @@ extension AppCoordinator: Coordinator {
 
 extension AppCoordinator: OnboardingCoordinatorDelegate {
   func childCoordinatorDidFinish() {
-    // Free coordinator if existing
-    if self.coordinator != nil { self.coordinator = nil }
-    // Start next coordinator
-    dependencies.appConfig.isSkipped = true
-    start()
+    runFlowfor(state: .landing)
   }
 }
