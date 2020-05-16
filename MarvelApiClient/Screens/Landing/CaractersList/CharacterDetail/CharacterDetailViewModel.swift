@@ -23,13 +23,4 @@ class CharacterDetailViewModel {
   init(dependencies: AppDependencies, characterId: String) {
     self.characterId = characterId
   }
-
-  // MARK: - API FUNCTIONS
-
-//  private func getCharacter(for id: Int)  {
-//    dependencies.marvelApiClient.getCharactersList { ( character: ComicCharacter)  in
-//      self.character = character
-//      completion()
-//    }
-//  }
 }

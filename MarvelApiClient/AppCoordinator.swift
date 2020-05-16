@@ -97,11 +97,12 @@ extension AppCoordinator: Coordinator {
   // MARK: - FLOWS
   private func runOnboardingFlow() {
     // No child coordinator. Just set the rootViewController directly injecting the finishFlow
+    let viewModel = OnboardingViewModel()
+    viewModel.coordinatorDelegate = self
 
     let viewController = OnboardingViewController.instantiateViewController()
-    dependencies.inject(into: viewController)
+    viewController.viewModel = viewModel
 
-    viewController.coordinatorDelegate = self
     present(viewController: viewController)
   }
 
@@ -114,8 +115,6 @@ extension AppCoordinator: Coordinator {
 
   // MARK: - HELPER METHODS
   private func present( viewController: UIViewController) {
-    // Present the ViewController
-    //presenter.rootViewController = UIHostingController(rootView: OnboardingView())
     (presenter as! UIWindow).rootViewController = viewController // swiftlint:disable:this force_cast
     presenter?.makeKeyAndVisible()
   }

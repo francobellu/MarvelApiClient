@@ -10,13 +10,15 @@ import Foundation
 
 class ComicsListViewModel {
 
+  weak var coordinatorDelegate: ComicsListCoordinatorDelegate! //swiftlint:disable:this implicitly_unwrapped_optional
+
   // THE STORAGE
   private var comics: [ComicResult] = []
 
   // THE SERVICE API
   private let apiClient: MarvelAPIProtocol
 
-  private(set) var title = "All Characters List..."
+  private(set) var title = "Marvel Comics"
 
   init(dependencies: AppDependencies) {
     self.apiClient = dependencies.marvelApiClient
@@ -43,10 +45,20 @@ class ComicsListViewModel {
   }
 
   func getNextComicsList(completion: @escaping () -> Void) {
-    apiClient.getNextComicsList { ( comics: [ComicResult])  in
+    apiClient.getComicsList { ( comics: [ComicResult])  in
       // Update dataSOurce array
       self.comics += comics
       completion()
     }
+  }
+}
+
+extension ComicsListViewModel{
+  func didGoBack(){
+    coordinatorDelegate.didGoBack()
+  }
+
+  func didSelect(comic: ComicResult){
+    coordinatorDelegate.didSelect(comic: comic)
   }
 }

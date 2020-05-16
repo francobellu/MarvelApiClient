@@ -9,6 +9,7 @@
 import Foundation
 
 class OnboardingViewModel {
+  weak var coordinatorDelegate: OnboardingCoordinatorDelegate! // swiftlint:disable:this implicitly_unwrapped_optional
 
   private(set) var title = "Character Detail"
 
@@ -19,5 +20,9 @@ class OnboardingViewModel {
   func didPressDontShowAgain() -> String{
     dontShowAgain.toggle()
     return dontShowAgain == false ? "rectangle" : "checkmark.rectangle.fill"
+  }
+
+  func didPressSkipAction() {
+    coordinatorDelegate.childCoordinatorDidFinish()
   }
 }

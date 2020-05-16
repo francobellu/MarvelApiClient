@@ -10,7 +10,22 @@ import Foundation
 
 class LandingViewModel {
 
+  weak var coordinatorDelegate: LandingCoordinatorDelegate! //swiftlint:disable:this implicitly_unwrapped_optional
+
   private(set) var title = "Marvel Api Client"
   // STATE
   var dontShowAgain = false
+
+  func didPressCharactersFlowAction() {
+    coordinatorDelegate.charactersFlowActionSelected()
+  }
+
+  func didPressComicsFlowAction() {
+    coordinatorDelegate.comicsFlowActionSelected()
+  }
+
+  func didPressAvengersComicsFlowAction() {
+    coordinatorDelegate.avengersComicsFlowActionSelected()
+  }
+
 }

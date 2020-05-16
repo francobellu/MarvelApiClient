@@ -25,13 +25,4 @@ class ComicDetailViewModel: AppDependencyInjectable {
     self.dependencies = dependencies
     self.comicId = comicId
   }
-
-  // MARK: - API FUNCTIONS
-
-//  private func getCharacter(for id: Int)  {
-//    dependencies.marvelApiClient.getCharactersList { ( character: ComicCharacter)  in
-//      self.character = character
-//      completion()
-//    }
-//  }
 }

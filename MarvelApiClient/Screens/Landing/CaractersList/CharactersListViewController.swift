@@ -9,10 +9,9 @@
 import UIKit
 
 class CharactersListViewController: UIViewController, StoryboardInstantiable {
-  @IBOutlet weak var tableView: UITableView!
-
   var viewModel: CharactersListViewModel! // swiftlint:disable:this implicitly_unwrapped_optional
-  weak var coordinatorDelegate: CharactersListCoordinatorDelegate!  //swiftlint:disable:this implicitly_unwrapped_optional
+
+  @IBOutlet weak var tableView: UITableView!
 
   override func viewDidLoad() {
     super.viewDidLoad()
@@ -22,7 +21,7 @@ class CharactersListViewController: UIViewController, StoryboardInstantiable {
     tableView.delegate = self
     setBackBtnInterceptMechanism()
     tableView.register(UINib(nibName: R.nib.characterCell.name, bundle: nil), forCellReuseIdentifier: R.reuseIdentifier.characterCellId.identifier)
-    viewModel.getCharactersList {
+    viewModel.getNextCharactersList{
       // Reload Data
       DispatchQueue.main.async {
         self.tableView.reloadData()
@@ -54,7 +53,7 @@ class CharactersListViewController: UIViewController, StoryboardInstantiable {
     if allowGoBack {
       // Don't forget to re-enable the interactive gesture
       self.navigationController?.interactivePopGestureRecognizer?.isEnabled = true
-      coordinatorDelegate.didGoBack()
+      viewModel.didGoBack()
     }
   }
 }
@@ -74,9 +73,6 @@ extension CharactersListViewController: UITableViewDataSource {
     // Check if the last row number is the same as the last current data element
     if indexPath.row == viewModel.charactersCount() - 1 {
       viewModel.getNextCharactersList {
-//        self.viewModel.add(characters: characters)
-//        self.viewModel.getNextCharactersList {
-          // Reload Data
           DispatchQueue.main.async {
             tableView.reloadData()
           }
@@ -93,6 +89,6 @@ extension CharactersListViewController: UITableViewDataSource {
 extension CharactersListViewController: UITableViewDelegate {
   func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
     let character = viewModel.getCharacter(at: indexPath.row)
-    coordinatorDelegate.didSelect(character: character)
+    viewModel.didSelect(character: character)
   }
 }

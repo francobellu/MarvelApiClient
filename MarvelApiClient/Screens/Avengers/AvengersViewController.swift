@@ -20,8 +20,6 @@ class AvengersViewController: UIViewController, StoryboardInstantiable {
       // Update dataSOurce comics
       self.comics += comics
       print(comics)
-      // Reload Data
-      //DispatchQueue.main.sync { self.tableView.reloadData() }
     }
   }
 

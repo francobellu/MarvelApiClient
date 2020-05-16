@@ -7,11 +7,11 @@ Overview
    Classes: 34
    Enums: 7
    Protocols: 31
-   Extensions: 40
+   Extensions: 42
 
 Sizes
-   Total lines of code: 4735
-   Source lines of code: 3866
+   Total lines of code: 4727
+   Source lines of code: 3849
    Longest file: GetComic.swift (462 source lines)
    Longest type: R (230 source lines)
 

@@ -9,10 +9,9 @@
 import UIKit
 
 class ComicsListViewController: UIViewController, StoryboardInstantiable {
-  @IBOutlet weak var tableView: UITableView!
-
   var viewModel: ComicsListViewModel! // swiftlint:disable:this implicitly_unwrapped_optional
-  weak var coordinatorDelegate: ComicsListCoordinatorDelegate! //swiftlint:disable:this implicitly_unwrapped_optional
+
+  @IBOutlet weak var tableView: UITableView!
 
   override func viewDidLoad() {
     super.viewDidLoad()
@@ -53,7 +52,7 @@ class ComicsListViewController: UIViewController, StoryboardInstantiable {
     if allowGoBack {
       // Don't forget to re-enable the interactive gesture
       self.navigationController?.interactivePopGestureRecognizer?.isEnabled = true
-      coordinatorDelegate.didGoBack()
+      viewModel.didGoBack()
     }
   }
 }
@@ -74,9 +73,6 @@ extension ComicsListViewController: UITableViewDataSource {
     // Check if the last row number is the same as the last current data element
     if indexPath.row == viewModel.comicsCount() - 1 {
       viewModel.getNextComicsList  {
-        //        self.viewModel.add(characters: characters)
-        //        self.viewModel.getNextCharactersList {
-        // Reload Data
         DispatchQueue.main.async {
           tableView.reloadData()
         }
@@ -93,7 +89,7 @@ extension ComicsListViewController: UITableViewDataSource {
 extension ComicsListViewController: UITableViewDelegate {
   func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
     let comic = viewModel.getComic(at: indexPath.row)
-    coordinatorDelegate.didSelect(comic: comic)
+    viewModel.didSelect(comic: comic)
   }
 
   //  func navigationController(_ navigationController: UINavigationController, didShow viewController: UIViewController, animated: Bool) {

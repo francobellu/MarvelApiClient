@@ -15,8 +15,6 @@ class ComicDetailViewController: UIViewController, StoryboardInstantiable {
 
   var viewModel: ComicDetailViewModel! // swiftlint:disable:this implicitly_unwrapped_optional
 
-  weak var coordinatorDelegate: ComicsListCoordinatorDelegate! //swiftlint:disable:this implicitly_unwrapped_optional
-
   override func viewDidLoad() {
     guard let comic = viewModel.comic else { return }
     title = viewModel.title

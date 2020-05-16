@@ -52,11 +52,12 @@ extension LandingCoordinator: Coordinator {
   func showLanding() {
     print("FB:LandingCoordinator:start()")
     let viewModel = LandingViewModel()
+    viewModel.coordinatorDelegate = self
 
     let viewController = LandingViewController.instantiateViewController()
     viewController.viewModel = viewModel
     print("FB:  Created VC: \(viewController) ")
-    viewController.coordinatorDelegate = self
+
     print("FB:  Presenting VC: \(viewController) ")
     present(viewController: viewController)
   }

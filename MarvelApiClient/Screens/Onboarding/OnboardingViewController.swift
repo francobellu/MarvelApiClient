@@ -9,18 +9,16 @@
 import UIKit
 
 class OnboardingViewController: UIViewController, StoryboardInstantiable {
-  @IBOutlet weak var dontShowAgainBtnAction: UIButton!
-
   var viewModel: OnboardingViewModel! // swiftlint:disable:this implicitly_unwrapped_optional
 
-  weak var coordinatorDelegate: OnboardingCoordinatorDelegate! // swiftlint:disable:this implicitly_unwrapped_optional
+  @IBOutlet weak var dontShowAgainBtnAction: UIButton!
 
   override func viewDidLoad() {
     super.viewDidLoad()
   }
 
   @IBAction func skipAction(_ sender: Any) {
-    coordinatorDelegate.childCoordinatorDidFinish()
+    viewModel.didPressSkipAction()
   }
 
   @IBAction func dontShowAgain(_ sender: Any) {

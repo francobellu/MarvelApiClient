@@ -46,25 +46,22 @@ extension CharactersListCoordinator: Coordinator, DeepLinkable {
   }
 
   private func presentCharactersListViewController() {
-    let viewController = CharactersListViewController.instantiateViewController()
-    viewController.coordinatorDelegate = self
-    print("FB:  Created VC: \(viewController) ")
-
-    // Inject the ViewModel
     let viewModel = CharactersListViewModel(dependencies: dependencies)
+    viewModel.coordinatorDelegate = self
+
+    let viewController = CharactersListViewController.instantiateViewController()
     viewController.viewModel = viewModel
-    print("FB:  Presenting VC: \(viewController) ")
 
     (presenter as? UINavigationController)?.pushViewController(viewController, animated: true)
   }
 
   private func presentCharacterDetailViewController(with characterId: String ) {
     let viewModel = CharacterDetailViewModel(dependencies: dependencies, characterId: characterId)
+//    viewModel.coordinatorDelegate = self
+
     let viewController = CharacterDetailViewController.instantiateViewController()
     viewController.viewModel = viewModel
-    //viewController.coordinatorDelegate = self
-    print("FB:  Created VC: \(viewController) ")
-    print("FB:  Presenting VC: \(viewController) ")
+
     (presenter as? UINavigationController)?.pushViewController(viewController, animated: true)
   }
 }
@@ -72,8 +69,6 @@ extension CharactersListCoordinator: Coordinator, DeepLinkable {
 // MARK: - VC transitions handling
 extension CharactersListCoordinator: CharactersListCoordinatorDelegate {
   func didGoBack() {
-    print("FB: CharactersListCoordinator:goBack()")
-    print("FB:  popVC")
     guard let navigationController = presenter as? UINavigationController else { return }
     navigationController.popViewController(animated: true)
     parentCoordinator?.disposeChild(coordinator: self)
@@ -86,11 +81,11 @@ extension CharactersListCoordinator: CharactersListCoordinatorDelegate {
 
   private func presentCharacterDetailViewController(with character: CharacterResult ) {
     let viewModel = CharacterDetailViewModel(dependencies: dependencies, character: character)
+//    viewModel.coordinatorDelegate = self
+
     let viewController = CharacterDetailViewController.instantiateViewController()
     viewController.viewModel = viewModel
-    //viewController.coordinatorDelegate = self
-    print("FB:  Created VC: \(viewController) ")
-    print("FB:  Presenting VC: \(viewController) ")
+
     (presenter as? UINavigationController)?.pushViewController(viewController, animated: true)
   }
 }

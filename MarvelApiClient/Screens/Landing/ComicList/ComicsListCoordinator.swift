@@ -45,25 +45,23 @@ extension ComicsListCoordinator: Coordinator {
 
   private func presentComicsListViewController() {
     print("FB:ComicsListCoordinator:startComicsListViewController()")
-    let viewController = ComicsListViewController.instantiateViewController()
-    viewController.coordinatorDelegate = self
-    print("FB:  Created VC: \(viewController) ")
 
-    // Inject the ViewModel
     let viewModel = ComicsListViewModel(dependencies: dependencies)
+    viewModel.coordinatorDelegate = self
+
+    let viewController = ComicsListViewController.instantiateViewController()
     viewController.viewModel = viewModel
-    print("FB:  Presenting VC: \(viewController) ")
 
     (presenter as? UINavigationController)?.pushViewController(viewController, animated: true)
   }
 
   private func presentComicDetailViewController(with comicId: String ) {
     print("FB:ComicsListCoordinator:startComicViewCOntroller()")
+    let viewModel = ComicDetailViewModel(dependencies: dependencies, comicId: comicId)
+
     let viewController = ComicDetailViewController.instantiateViewController()
-    dependencies.inject(into: viewController)
-    print("FB:  Created VC: \(viewController) ")
-    print("FB:  Presenting VC: \(viewController) ")
-    viewController.coordinatorDelegate = self
+    viewController.viewModel = viewModel
+
     (presenter as? UINavigationController)?.pushViewController(viewController, animated: true)
   }
 }

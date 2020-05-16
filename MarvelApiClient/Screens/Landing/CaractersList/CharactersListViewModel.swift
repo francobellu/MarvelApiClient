@@ -10,10 +10,12 @@ import Foundation
 
 class CharactersListViewModel {
 
+  weak var coordinatorDelegate: CharactersListCoordinatorDelegate!  //swiftlint:disable:this implicitly_unwrapped_optional
+
   // THE API
   private let apiClient: MarvelAPIProtocol
 
-  var title = "All Characters List..."
+  var title = "Marvel Characters"
 
   // THE STORAGE
   private var characters: [CharacterResult] = []
@@ -35,18 +37,24 @@ class CharactersListViewModel {
   }
 
   // MARK: - API FUNCTIONS
-  func getCharactersList(completion: @escaping ( () -> Void) ) {
-    apiClient.getCharactersList{ ( characters: [CharacterResult])  in
-      self.characters = characters
-      completion()
-    }
-  }
 
   func getNextCharactersList(completion: @escaping () -> Void) {
-    apiClient.getNextCharactersList { ( characters: [CharacterResult])  in
+    apiClient.getCharactersList { ( characters: [CharacterResult])  in
       // Update dataSOurce array
       self.characters += characters
       completion()
     }
   }
+}
+
+extension CharactersListViewModel{
+
+  func didSelect(character: CharacterResult) {
+    coordinatorDelegate.didSelect(character: character)
+  }
+
+  func didGoBack() {
+    coordinatorDelegate.didGoBack()
+  }
+
 }
