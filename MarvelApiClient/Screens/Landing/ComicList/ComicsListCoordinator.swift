@@ -46,8 +46,7 @@ extension ComicsListCoordinator: Coordinator {
   private func presentComicsListViewController() {
     print("FB:ComicsListCoordinator:startComicsListViewController()")
 
-    let viewModel = ComicsListViewModel(dependencies: dependencies)
-    viewModel.coordinatorDelegate = self
+    let viewModel = ComicsListViewModel(dependencies: dependencies, coordinatorDelegate: self)
 
     let viewController = ComicsListViewController.instantiateViewController()
     viewController.viewModel = viewModel

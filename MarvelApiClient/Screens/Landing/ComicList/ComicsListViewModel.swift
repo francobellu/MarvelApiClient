@@ -10,18 +10,21 @@ import Foundation
 
 class ComicsListViewModel {
 
-  weak var coordinatorDelegate: ComicsListCoordinatorDelegate! //swiftlint:disable:this implicitly_unwrapped_optional
+  private weak var coordinatorDelegate: ComicsListCoordinatorDelegate! //swiftlint:disable:this implicitly_unwrapped_optional
 
-  // THE STORAGE
+  private var dependencies: AppDependencies! // swiftlint:disable:this implicitly_unwrapped_optional
+
+  private var apiClient: MarvelAPIProtocol{
+    dependencies.marvelApiClient
+  }
+
   private var comics: [ComicResult] = []
-
-  // THE SERVICE API
-  private let apiClient: MarvelAPIProtocol
 
   private(set) var title = "Marvel Comics"
 
-  init(dependencies: AppDependencies) {
-    self.apiClient = dependencies.marvelApiClient
+  init(dependencies: AppDependencies, coordinatorDelegate: ComicsListCoordinatorDelegate) {
+    self.dependencies = dependencies
+    self.coordinatorDelegate = coordinatorDelegate
   }
 
   func add(comics: [ComicResult]) {

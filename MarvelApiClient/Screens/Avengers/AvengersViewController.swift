@@ -11,7 +11,7 @@ import UIKit
 class AvengersViewController: UIViewController, StoryboardInstantiable {
 
   let apiClient = MarvelAPIClient(httpClient: HttpClient())
-  weak var coordinatorDelegate: AvengersListTransitionsProtocol! //swiftlint:disable:this implicitly_unwrapped_optional
+  private weak var coordinatorDelegate: AvengersListTransitionsProtocol! //swiftlint:disable:this implicitly_unwrapped_optional
   var comics: [ComicResult]! // swiftlint:disable:this implicitly_unwrapped_optional
 
   override func viewDidLoad() {

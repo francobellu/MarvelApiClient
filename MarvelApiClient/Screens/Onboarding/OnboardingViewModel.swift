@@ -10,18 +10,16 @@ import Foundation
 
 class OnboardingViewModel {
 
-  private var dependencies: AppDependencies! // swiftlint:disable:this implicitly_unwrapped_optional
-
-  weak var coordinatorDelegate: OnboardingCoordinatorDelegate! // swiftlint:disable:this implicitly_unwrapped_optional
-
   private(set) var title = "Character Detail"
 
-  // STATE
-  private var dontShowAgain = false
+  private var dependencies: AppDependencies! // swiftlint:disable:this implicitly_unwrapped_optional
 
-  init(dependencies: AppDependencies ){
+  private weak var coordinatorDelegate: OnboardingCoordinatorDelegate! // swiftlint:disable:this implicitly_unwrapped_optional
+
+  init(dependencies: AppDependencies, coordinatorDelegate: OnboardingCoordinatorDelegate){
     print("FB:OnboardingViewModel:init()")
     self.dependencies = dependencies
+    self.coordinatorDelegate = coordinatorDelegate
   }
 
   /// - Returns: The image name corresponding to the new State

@@ -13,12 +13,12 @@ protocol CharactersListCoordinatorDelegate: class {
   func didSelect(character: CharacterResult)
 }
 
-class CharactersListCoordinator: NSObject, AppDependencyInjectable {
+class CharactersListCoordinator: NSObject {
 
   var presenter: AnyObject?
   weak var parentCoordinator: Coordinator?
   var coordinators = [Coordinator]()
-  var dependencies: AppDependencies! // swiftlint:disable:this implicitly_unwrapped_optional
+  private var dependencies: AppDependencies! // swiftlint:disable:this implicitly_unwrapped_optional
 
   init(parentCoordinator: Coordinator, presenter: UINavigationController, dependencies: AppDependencies) {
     print("FB:CharactersListCoordinator:init()")
@@ -46,8 +46,7 @@ extension CharactersListCoordinator: Coordinator, DeepLinkable {
   }
 
   private func presentCharactersListViewController() {
-    let viewModel = CharactersListViewModel(dependencies: dependencies)
-    viewModel.coordinatorDelegate = self
+    let viewModel = CharactersListViewModel(dependencies: dependencies, coordinatorDelegate: self)
 
     let viewController = CharactersListViewController.instantiateViewController()
     viewController.viewModel = viewModel
@@ -57,7 +56,6 @@ extension CharactersListCoordinator: Coordinator, DeepLinkable {
 
   private func presentCharacterDetailViewController(with characterId: String ) {
     let viewModel = CharacterDetailViewModel(dependencies: dependencies, characterId: characterId)
-//    viewModel.coordinatorDelegate = self
 
     let viewController = CharacterDetailViewController.instantiateViewController()
     viewController.viewModel = viewModel
@@ -81,7 +79,6 @@ extension CharactersListCoordinator: CharactersListCoordinatorDelegate {
 
   private func presentCharacterDetailViewController(with character: CharacterResult ) {
     let viewModel = CharacterDetailViewModel(dependencies: dependencies, character: character)
-//    viewModel.coordinatorDelegate = self
 
     let viewController = CharacterDetailViewController.instantiateViewController()
     viewController.viewModel = viewModel

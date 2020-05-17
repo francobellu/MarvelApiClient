@@ -88,8 +88,7 @@ extension AppCoordinator: Coordinator {
   // MARK: - FLOWS
   private func runOnboardingFlow() {
     // No child coordinator. Just set the rootViewController directly injecting the finishFlow
-    let viewModel = OnboardingViewModel(dependencies: dependencies)
-    viewModel.coordinatorDelegate = self
+    let viewModel = OnboardingViewModel(dependencies: dependencies, coordinatorDelegate: self)
 
     let viewController = OnboardingViewController.instantiateViewController()
     viewController.viewModel = viewModel

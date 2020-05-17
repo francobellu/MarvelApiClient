@@ -20,10 +20,10 @@ protocol LandingCoordinatorDelegate: class {
 //  func btn3Selected()
 //  func didGoBack()
 //}
-class LandingCoordinator: NSObject, AppDependencyInjectable {
+class LandingCoordinator: NSObject {
 
   // MARK: - Internal Dependencies
-  var dependencies: AppDependencies! // swiftlint:disable:this implicitly_unwrapped_optional
+  private var dependencies: AppDependencies! // swiftlint:disable:this implicitly_unwrapped_optional
   //private var landingViewController: LandingViewController
 
   var presenter: AnyObject?
@@ -51,8 +51,7 @@ extension LandingCoordinator: Coordinator {
 
   func showLanding() {
     print("FB:LandingCoordinator:start()")
-    let viewModel = LandingViewModel()
-    viewModel.coordinatorDelegate = self
+    let viewModel = LandingViewModel(dependencies: dependencies, coordinatorDelegate: self)
 
     let viewController = LandingViewController.instantiateViewController()
     viewController.viewModel = viewModel
