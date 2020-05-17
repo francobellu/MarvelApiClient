@@ -61,9 +61,8 @@ internal class HttpClient {
             completion(.failure(MarvelError.decoding))
           }
         } catch {
-          // TODO: What to do whith this?
-          let errorData = try? JSONDecoder().decode(ErrorResponse.self, from: data)
-          completion(.failure(error))
+          _ = try? JSONDecoder().decode(ErrorResponse.self, from: data)
+          completion(.failure(MarvelError.decoding))
         }
       } else if let error = error {
         completion(.failure(error))

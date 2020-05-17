@@ -1,41 +1,29 @@
-import CommonCrypto
+import CryptoKit
+private protocol ByteCountable {
+  static var byteCount: Int { get }
+}
 
-/**
- * Example MD5 Has using CommonCrypto
- * CC_MD5 API exposed from CommonCrypto-60118.50.1:
- * https://opensource.apple.com/source/CommonCrypto/CommonCrypto-60118.50.1/include/CommonDigest.h.auto.html
- **/
-func md5Hash (str: String) -> String {
-    if let strData = str.data(using: String.Encoding.utf8) {
-        /// #define CC_MD5_DIGEST_LENGTH    16          /* digest length in bytes */
-        /// Creates an array of unsigned 8 bit integers that contains 16 zeros
-        var digest = [UInt8](repeating: 0, count: Int(CC_MD5_DIGEST_LENGTH))
+extension Insecure.MD5: ByteCountable { }
+extension Insecure.SHA1: ByteCountable { }
 
-        /// CC_MD5 performs digest calculation and places the result in the caller-supplied buffer for digest (md)
-        /// Calls the given closure with a pointer to the underlying unsafe bytes of the strData’s contiguous storage.
-        _ = strData.withUnsafeBytes {
-            // CommonCrypto
-            // extern unsigned char *CC_MD5(const void *data, CC_LONG len, unsigned char *md) --|
-            // OpenSSL                                                                          |
-            // unsigned char *MD5(const unsigned char *d, size_t n, unsigned char *md)        <-|
-            CC_MD5($0.baseAddress, UInt32(strData.count), &digest)
-            //CC_SHA1($0.baseAddress, UInt32(strData.count), &digest)
-        }
+public extension String {
 
-        var md5String = ""
-        /// Unpack each byte in the digest array and add them to the md5String
-        for byte in digest {
-            md5String += String(format: "%02x", UInt8(byte))
-        }
+  func insecureMD5Hash(using encoding: String.Encoding = .utf8) -> String? {
+    return self.hash(algo: Insecure.MD5.self, using: encoding)
+  }
 
-        // MD5 hash check (This is just done for example)
-//        if md5String.uppercased() == "8D84E6C45CE9044CAE90C064997ACFF1" {
-//            print("Matching MD5 hash: 8D84E6C45CE9044CAE90C064997ACFF1")
-//        } else {
-//            print("MD5 hash does not match: \(md5String)")
-//        }
-        return md5String
+  func insecureSHA1Hash(using encoding: String.Encoding = .utf8) -> String? {
+    return self.hash(algo: Insecure.SHA1.self, using: encoding)
+  }
 
+  private func hash<Hash: HashFunction & ByteCountable>(algo: Hash.Type, using encoding: String.Encoding = .utf8) -> String? {
+    guard let data = self.data(using: encoding) else {
+      return nil
     }
-    return ""
+
+    return algo.hash(data: data).prefix(algo.byteCount).map {
+      String(format: "%02hhx", $0)
+    }.joined()
+  }
+
 }

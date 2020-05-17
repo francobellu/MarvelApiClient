@@ -99,15 +99,16 @@ extension AppCoordinator: Coordinator {
   private func runLandingFlow() {
     let coordinator = LandingCoordinator(parentCoordinator: self, presenter: UINavigationController(), dependencies: dependencies)
     add(coordinator)
-    coordinator.start() // TODO: can it be inside constructor?
-    guard let presenter = coordinator.presenter else { return }
-    present(viewController: presenter as! UIViewController) // swiftlint:disable:this force_cast
+    coordinator.start()
+    guard let presenter = coordinator.presenter as? UIViewController else { return }
+    present(viewController: presenter )
   }
 
   // MARK: - HELPER METHODS
   private func present( viewController: UIViewController) {
-    (presenter as! UIWindow).rootViewController = viewController // swiftlint:disable:this force_cast
-    presenter?.makeKeyAndVisible()
+    guard let presenter = presenter as? UIWindow  else { return }
+    presenter.rootViewController = viewController
+    presenter.makeKeyAndVisible()
   }
 
   private func runFlowfor(state: AppCoordinatorState) {

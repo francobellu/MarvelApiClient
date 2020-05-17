@@ -1,6 +1,5 @@
 import Foundation
 
-
 protocol ApiRequestConfigProtocol{
   var baseEndpointString: String { get }
   var publicKey: String { get }
@@ -41,7 +40,7 @@ extension APIRequest {
   // 1) baseUrl = baseEndpointUrl +  request.resourceName
   // 2) commonQueryItems
   // 3) customQueryItems a partir de request object
-  func endpoint() -> URL? {
+  func endpoint() -> URL? { //swiftlint:disable:this function_body_length
     guard let baseUrl = URL(string: resourceName, relativeTo: URL(string: apiRequestConfig.baseEndpointString) ) else {
       fatalError("Bad resourceName: \(resourceName)")
     }
@@ -49,10 +48,13 @@ extension APIRequest {
 
     // Common query items needed for all Marvel requests
     let timestamp = "\(Date().timeIntervalSince1970)"
-    let hash = md5Hash(str: "\(timestamp)\(apiRequestConfig.privateKey)\(apiRequestConfig.publicKey)")
+
+    let str = "\(timestamp)\(apiRequestConfig.privateKey)\(apiRequestConfig.publicKey)"
+
+    guard let digest =  str.insecureMD5Hash() else { return nil }
     let commonQueryItems = [
       URLQueryItem(name: "ts", value: timestamp),
-      URLQueryItem(name: "hash", value: hash),
+      URLQueryItem(name: "hash", value: digest),
       URLQueryItem(name: "apikey", value: apiRequestConfig.publicKey)
     ]
 

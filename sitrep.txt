@@ -6,17 +6,17 @@ Overview
    Structs: 53
    Classes: 35
    Enums: 7
-   Protocols: 31
-   Extensions: 42
+   Protocols: 32
+   Extensions: 45
 
 Sizes
-   Total lines of code: 4675
-   Source lines of code: 3782
+   Total lines of code: 4647
+   Source lines of code: 3753
    Longest file: GetComic.swift (462 source lines)
    Longest type: R (230 source lines)
 
 Structure
-   Imports: Foundation (61), UIKit (37), XCTest (3), MarvelApiClient (3), AlamofireImage (2), Rswift (1), CommonCrypto (1)
+   Imports: Foundation (61), UIKit (37), XCTest (3), MarvelApiClient (3), AlamofireImage (2), Rswift (1), CryptoKit (1)
    UIKit View Controllers: 8
    UIKit Views: 0
    SwiftUI Views: 0
