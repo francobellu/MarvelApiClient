@@ -29,7 +29,7 @@ struct DataContainer<Results: Decodable>: Decodable {
 struct CharacterResult: Codable {
   let id: Int?
   let name: String?
-  let resultDescription: String?
+  let description: String?
   let modified: String?
   let resourceURI: String?
   let urls: [URLElement]?

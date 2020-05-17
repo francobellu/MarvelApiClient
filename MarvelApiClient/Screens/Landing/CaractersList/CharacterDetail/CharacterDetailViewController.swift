@@ -11,11 +11,10 @@ import AlamofireImage
 
 class CharacterDetailViewController: UIViewController, StoryboardInstantiable {
   @IBOutlet weak var thumbnailView: UIImageView!
-  @IBOutlet weak var idLabel: UILabel!
+  @IBOutlet weak var descriptionLabel: UILabel!
   @IBOutlet weak var comicsLabel: UILabel!
   @IBOutlet weak var seriesLabel: UILabel!
   @IBOutlet weak var storiesLabel: UILabel!
-
 
   var viewModel: CharacterDetailViewModel! // swiftlint:disable:this implicitly_unwrapped_optional
 
@@ -30,11 +29,11 @@ class CharacterDetailViewController: UIViewController, StoryboardInstantiable {
 
     guard let thumbnail = character.thumbnail else { return  }
     thumbnailView.af.setImage(withURL: thumbnail.url)
-    let width = UIScreen.main.bounds.size.width
-    let size = CGSize(width: width, height: width * 0.80)
-    thumbnailView.sizeThatFits(size)
 
-    idLabel.text = viewModel.getId()
+    descriptionLabel.text = viewModel.getDescription()
+    descriptionLabel.numberOfLines = 0
+    descriptionLabel.lineBreakMode = .byWordWrapping
+
     comicsLabel.text = viewModel.getComicsCount()
     seriesLabel.text = viewModel.getSeriesCount()
     storiesLabel.text = viewModel.getStoriesCount()

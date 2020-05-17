@@ -25,6 +25,8 @@ class ComicCell: UITableViewCell {
   }
   func config(with comic: ComicResult) {
     title.text = comic.title
+    title.numberOfLines = 0
+    title.lineBreakMode = .byWordWrapping
     guard let thumbnail = comic.thumbnail else { return }
     let placeholderImage = UIImage(named: "amour-0.jpg")
     imgView.af.setImage(withURL: thumbnail.url, placeholderImage: placeholderImage, filter: nil)

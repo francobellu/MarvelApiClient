@@ -21,7 +21,7 @@ class MockURLSession: URLSessionProtocol {
     private (set) var lastURL: URL?
 
     func successHttpURLResponse(request: URLRequest) -> URLResponse {
-        return HTTPURLResponse(url: request.url!, statusCode: 200, httpVersion: "HTTP/1.1", headerFields: nil)!
+        return HTTPURLResponse(url: request.url!, statusCode: 200, httpVersion: "HTTP/1.1", headerFields: nil)! // swiftlint:disable:this implicitly_unwrapped_optional
     }
 
     func dataTask(with request: URLRequest, completionHandler: @escaping DataTaskResult) -> URLSessionDataTaskProtocol {

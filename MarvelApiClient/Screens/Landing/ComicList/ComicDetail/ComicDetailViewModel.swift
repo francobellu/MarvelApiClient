@@ -9,9 +9,9 @@
 import Foundation
 
 class ComicDetailViewModel: AppDependencyInjectable {
-  var dependencies: AppDependencies!
-  var comic: ComicResult!
-  var comicId: String!
+  var dependencies: AppDependencies! // swiftlint:disable:this implicitly_unwrapped_optional
+  var comic: ComicResult! // swiftlint:disable:this implicitly_unwrapped_optional
+  var comicId: String! // swiftlint:disable:this implicitly_unwrapped_optional
 
   init(dependencies: AppDependencies, comic: ComicResult) {
     self.comic = comic
@@ -23,22 +23,13 @@ class ComicDetailViewModel: AppDependencyInjectable {
   }
 
   func getName() -> String {
-    return "Comics Detail: \(String(describing: comic.title))"
+    guard let description = comic.title else { return "Comic Detail"}
+    return description
   }
 
   func getDescription() -> String {
-    guard let description = comic.textObjects?.first?.text else { return ""}
-    return "\(String(description))"
-  }
-
-  func getIssueNumber() -> String {
-    guard let issueNumber = comic.issueNumber else { return ""}
-    return "Issue Number: \(String(issueNumber))"
-  }
-
-  func getPageCount() -> String {
-    guard let pageCount = comic.pageCount else { return ""}
-    return "Page Number: \(String(pageCount))"
+    guard let description = comic.textObjects?.first?.text else { return "No Description Available"}
+    return description
   }
 
   func getSeries() -> String {

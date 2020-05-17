@@ -10,13 +10,15 @@ import AlamofireImage
 
 class ComicDetailViewController: UIViewController, StoryboardInstantiable {
   @IBOutlet weak var thumbnailView: UIImageView!
-  @IBOutlet weak var issueNumberLabel: UILabel!
-  @IBOutlet weak var pageCountLabel: UILabel!
+  @IBOutlet weak var descriptionLabel: UILabel!
   @IBOutlet weak var seriesLabel: UILabel!
 
+//  @IBOutlet weak var scrollView: UIScrollView!
   var viewModel: ComicDetailViewModel! // swiftlint:disable:this implicitly_unwrapped_optional
 
   override func viewDidLoad() {
+//    scrollView.contentSize = CGSize(width: self.view.frame.width, height: self.view.frame.height + 200)
+
     configureView()
     super.viewDidLoad()
   }
@@ -27,12 +29,11 @@ class ComicDetailViewController: UIViewController, StoryboardInstantiable {
 
     guard let thumbnail = comic.thumbnail else { return  }
     thumbnailView.af.setImage(withURL: thumbnail.url)
-    let width = UIScreen.main.bounds.size.width
-    let size = CGSize(width: width, height: width * 0.80)
-    thumbnailView.sizeThatFits(size)
 
-    issueNumberLabel.text = viewModel.getDescription()
-    pageCountLabel.text = viewModel.getPageCount()
+    descriptionLabel.text = viewModel.getDescription()
+    descriptionLabel.numberOfLines = 0
+    descriptionLabel.lineBreakMode = .byWordWrapping
+
     seriesLabel.text = viewModel.getSeries()
   }
 

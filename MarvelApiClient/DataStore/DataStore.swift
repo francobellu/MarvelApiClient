@@ -76,4 +76,3 @@ class UserDefaultsDataStore: DataStoreProtocol {
     }
   }
 }
-

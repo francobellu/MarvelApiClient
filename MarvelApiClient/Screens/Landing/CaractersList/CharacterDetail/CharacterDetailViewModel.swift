@@ -9,8 +9,8 @@
 import Foundation
 
 class CharacterDetailViewModel {
-  var character: CharacterResult!
-  var characterId: String!
+  var character: CharacterResult! // swiftlint:disable:this implicitly_unwrapped_optional
+  var characterId: String! // swiftlint:disable:this implicitly_unwrapped_optional
 
   init(dependencies: AppDependencies, character: CharacterResult) {
     self.character = character
@@ -20,16 +20,19 @@ class CharacterDetailViewModel {
     self.characterId = characterId
   }
 
-  func getId() -> String {
-    return "Id: \(String(describing: character.id))"
-  }
-
   func getName() -> String {
     return character?.name ?? "character Detail"
   }
 
+  func getDescription() -> String {
+    guard let description = character.description,
+              !description.isEmpty else { return "No Description Available"}
+    return description
+  }
+
   func getComicsCount() -> String {
-    guard let comicsCount = character.comics?.items?.count else { return "0" }
+    guard let comicsCount = character.comics?.items?.count,
+              comicsCount != 0 else { return "" }
     return "Comics available: \(comicsCount)"
   }
 
