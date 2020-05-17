@@ -24,11 +24,10 @@ class ComicCell: UITableViewCell {
     super.setSelected(selected, animated: animated)
   }
   func config(with comic: ComicResult) {
-//    title.text = comic.name
-//    guard let thumbnail = comic.thumbnail else { return }
-//    let placeholderImage = UIImage(named: "amour-0.jpg")
-//    //print ("Cell.imageView: url: \(imageUrl.absoluteString)")
-//    imgView.af.setImage(withURL: thumbnail.url, placeholderImage: placeholderImage, filter: nil)
-//    imgView.contentMode = .scaleToFill
+    title.text = comic.title
+    guard let thumbnail = comic.thumbnail else { return }
+    let placeholderImage = UIImage(named: "amour-0.jpg")
+    imgView.af.setImage(withURL: thumbnail.url, placeholderImage: placeholderImage, filter: nil)
+    imgView.contentMode = .scaleToFill
   }
 }

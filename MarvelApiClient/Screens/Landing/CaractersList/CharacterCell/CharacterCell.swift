@@ -27,7 +27,6 @@ class CharacterCell: UITableViewCell {
     title.text = characther.name
     guard let thumbnail = characther.thumbnail else { return }
     let placeholderImage = UIImage(named: "amour-0.jpg")
-    //print ("Cell.imageView: url: \(imageUrl.absoluteString)")
     imgView.af.setImage(withURL: thumbnail.url, placeholderImage: placeholderImage, filter: nil)
     imgView.contentMode = .scaleToFill
   }

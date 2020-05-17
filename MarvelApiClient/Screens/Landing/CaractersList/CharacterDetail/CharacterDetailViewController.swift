@@ -10,10 +10,8 @@ import UIKit
 import AlamofireImage
 
 class CharacterDetailViewController: UIViewController, StoryboardInstantiable {
-  @IBOutlet weak var name: UILabel!
-  @IBOutlet weak var idLabel: UILabel!
   @IBOutlet weak var thumbnailView: UIImageView!
-
+  @IBOutlet weak var idLabel: UILabel!
   @IBOutlet weak var comicsLabel: UILabel!
   @IBOutlet weak var seriesLabel: UILabel!
   @IBOutlet weak var storiesLabel: UILabel!
@@ -23,13 +21,11 @@ class CharacterDetailViewController: UIViewController, StoryboardInstantiable {
 
   override func viewDidLoad() {
     configureView()
-    title = viewModel.title
     super.viewDidLoad()
   }
 
   func configureView() {
-    guard let character = viewModel.character,
-          let id = character.id  else { return }
+    guard let character = viewModel.character else { return }
     title = viewModel.getName()
 
     guard let thumbnail = character.thumbnail else { return  }
@@ -38,9 +34,10 @@ class CharacterDetailViewController: UIViewController, StoryboardInstantiable {
     let size = CGSize(width: width, height: width * 0.80)
     thumbnailView.sizeThatFits(size)
 
+    idLabel.text = viewModel.getId()
     comicsLabel.text = viewModel.getComicsCount()
     seriesLabel.text = viewModel.getSeriesCount()
     storiesLabel.text = viewModel.getStoriesCount()
-    idLabel.text = "Id: \(id)"
+
   }
 }

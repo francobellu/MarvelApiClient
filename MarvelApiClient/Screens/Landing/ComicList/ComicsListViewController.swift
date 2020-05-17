@@ -62,7 +62,6 @@ class ComicsListViewController: UIViewController, StoryboardInstantiable {
 }
 
 extension ComicsListViewController: UITableViewDataSource {
-
   func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
     return viewModel.comicsCount()
   }
