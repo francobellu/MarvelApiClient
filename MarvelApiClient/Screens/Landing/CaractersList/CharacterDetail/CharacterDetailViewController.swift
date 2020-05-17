@@ -11,24 +11,33 @@ import AlamofireImage
 
 class CharacterDetailViewController: UIViewController, StoryboardInstantiable {
   @IBOutlet weak var name: UILabel!
-  @IBOutlet weak var thumbnailView: UIImageView!
-  @IBOutlet weak var details: UILabel!
   @IBOutlet weak var idLabel: UILabel!
+  @IBOutlet weak var thumbnailView: UIImageView!
+
+  @IBOutlet weak var comicsLabel: UILabel!
+  @IBOutlet weak var seriesLabel: UILabel!
+  @IBOutlet weak var storiesLabel: UILabel!
+
 
   var viewModel: CharacterDetailViewModel! // swiftlint:disable:this implicitly_unwrapped_optional
 
   override func viewDidLoad() {
-    guard let character = viewModel.character else { return }
-    set(character: character)
+    configureView()
     title = viewModel.title
     super.viewDidLoad()
   }
 
-  func set(character: CharacterResult) {
+  func configureView() {
+    guard let character = viewModel.character,
+          let id = character.id  else { return }
     self.name.text = character.name
     guard let thumbnail = character.thumbnail else { return  }
     self.thumbnailView.af.setImage(withURL: thumbnail.url)
-    self.details.text = character.resultDescription
-    self.idLabel.text = String(describing: character.id)
+    let pictureFrame = UIScreen.main.bounds.size
+    self.thumbnailView.sizeThatFits(pictureFrame)
+    self.comicsLabel.text = viewModel.getComicsCount()
+    self.seriesLabel.text = viewModel.getSeriesCount()
+    self.storiesLabel.text = viewModel.getStoriesCount()
+    self.idLabel.text = "Id: \(id)"
   }
 }

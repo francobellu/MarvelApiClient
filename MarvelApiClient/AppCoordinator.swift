@@ -8,16 +8,6 @@
 
 import UIKit
 
-// TODO initial state
-struct AppConfig {
-  var dontShowOnboarding = false
-
-  init() {
-    let dataStore = UserDefaultsDataStore()
-    dontShowOnboarding = dataStore.getBool("dontShowOnboarding")
-  }
-}
-
 // MARK: - Onboarding transitions handling
 
 protocol OnboardingCoordinatorDelegate: class {
@@ -50,7 +40,7 @@ class AppCoordinator: AppDependencyInjectable {
 
     self.presenter = presenter
     self.dependencies = dependencies
-    self.state = AppCoordinatorState.next(dontShowOnboarding: dependencies.appConfig.dontShowOnboarding)
+    self.state = AppCoordinatorState.next(dontShowOnboarding: dependencies.appConfig.dontShowOnboardingValue)
   }
 }
 
@@ -63,7 +53,7 @@ extension AppCoordinator: Coordinator {
     private func doStart() {
       print("FB:AppCoordinator:doStart()")
       let appConfig = dependencies.appConfig
-      let nextState = AppCoordinatorState.next(dontShowOnboarding: appConfig.dontShowOnboarding)
+      let nextState = AppCoordinatorState.next(dontShowOnboarding: appConfig.dontShowOnboardingValue)
       runFlowfor(state: nextState)
     }
 
@@ -98,7 +88,7 @@ extension AppCoordinator: Coordinator {
   // MARK: - FLOWS
   private func runOnboardingFlow() {
     // No child coordinator. Just set the rootViewController directly injecting the finishFlow
-    let viewModel = OnboardingViewModel()
+    let viewModel = OnboardingViewModel(dependencies: dependencies)
     viewModel.coordinatorDelegate = self
 
     let viewController = OnboardingViewController.instantiateViewController()

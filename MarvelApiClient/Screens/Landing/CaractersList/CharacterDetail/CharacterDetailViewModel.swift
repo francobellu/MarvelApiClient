@@ -23,4 +23,19 @@ class CharacterDetailViewModel {
   init(dependencies: AppDependencies, characterId: String) {
     self.characterId = characterId
   }
+
+  func getComicsCount() -> String {
+    guard let comicsCount = character?.comics?.items?.count else { return "0" }
+    return "Comics available: \(comicsCount)"
+  }
+
+  func getSeriesCount() -> String {
+    guard let comicsCount = character?.series?.items?.count else { return "0" }
+    return "Comics available: \(comicsCount)"
+  }
+
+  func getStoriesCount() -> String {
+    guard let comicsCount = character?.stories?.items?.count else { return "0" }
+    return "Comics available: \(comicsCount)"
+  }
 }
