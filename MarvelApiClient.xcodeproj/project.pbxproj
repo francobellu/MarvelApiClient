@@ -62,7 +62,6 @@
 		C7D3F040243B770F004E4C0E /* Coordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7D3F03F243B770F004E4C0E /* Coordinator.swift */; };
 		C7E02812243FD4DB00888249 /* AppCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7E02811243FD4DB00888249 /* AppCoordinator.swift */; };
 		C7E37BE52438F0360096F2E9 /* AlamofireImage in Frameworks */ = {isa = PBXBuildFile; productRef = C7E37BE42438F0360096F2E9 /* AlamofireImage */; };
-		C7EC66FF2440B6B400F88FDE /* OnboardingCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7EC66FE2440B6B400F88FDE /* OnboardingCoordinator.swift */; };
 		C7EC67012440C5A900F88FDE /* icons8-unchecked-checkbox-50.png in Resources */ = {isa = PBXBuildFile; fileRef = C7EC67002440C5A900F88FDE /* icons8-unchecked-checkbox-50.png */; };
 		C7EC67032440C5B400F88FDE /* icons8-checked-checkbox-50.png in Resources */ = {isa = PBXBuildFile; fileRef = C7EC67022440C5B400F88FDE /* icons8-checked-checkbox-50.png */; };
 		C7EC670A2440DFDB00F88FDE /* R.generated.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7EC67082440DFDB00F88FDE /* R.generated.swift */; };
@@ -149,7 +148,6 @@
 		C7E37BEF243918CD0096F2E9 /* sitrep.sh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.sh; path = sitrep.sh; sourceTree = "<group>"; };
 		C7E37BF0243918CD0096F2E9 /* swiftlint.sh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.sh; path = swiftlint.sh; sourceTree = "<group>"; };
 		C7E37BF324391CD90096F2E9 /* build_increment2.sh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.sh; path = build_increment2.sh; sourceTree = "<group>"; };
-		C7EC66FE2440B6B400F88FDE /* OnboardingCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingCoordinator.swift; sourceTree = "<group>"; };
 		C7EC67002440C5A900F88FDE /* icons8-unchecked-checkbox-50.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icons8-unchecked-checkbox-50.png"; sourceTree = "<group>"; };
 		C7EC67022440C5B400F88FDE /* icons8-checked-checkbox-50.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icons8-checked-checkbox-50.png"; sourceTree = "<group>"; };
 		C7EC67042440D7CE00F88FDE /* Podfile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Podfile; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
@@ -420,7 +418,6 @@
 			children = (
 				C72CF2AD24707CBF0048B0A2 /* OnboardingViewModel.swift */,
 				C7096D742448F5E000DEE7D3 /* OnboardingViewController.swift */,
-				C7EC66FE2440B6B400F88FDE /* OnboardingCoordinator.swift */,
 			);
 			path = Onboarding;
 			sourceTree = "<group>";
@@ -736,7 +733,6 @@
 				2851228821820CF8009D4AB0 /* CharactersListCoordinator.swift in Sources */,
 				C72CF2A924703BBA0048B0A2 /* ComicCell.swift in Sources */,
 				28998ED7217F636A0037039B /* GetCharacters.swift in Sources */,
-				C7EC66FF2440B6B400F88FDE /* OnboardingCoordinator.swift in Sources */,
 				28998ED6217F636A0037039B /* GetComics.swift in Sources */,
 				28998ECC217F636A0037039B /* Result.swift in Sources */,
 				C7D3F040243B770F004E4C0E /* Coordinator.swift in Sources */,

@@ -30,14 +30,17 @@ class CharacterDetailViewController: UIViewController, StoryboardInstantiable {
   func configureView() {
     guard let character = viewModel.character,
           let id = character.id  else { return }
-    self.name.text = character.name
+    title = viewModel.getName()
+
     guard let thumbnail = character.thumbnail else { return  }
-    self.thumbnailView.af.setImage(withURL: thumbnail.url)
-    let pictureFrame = UIScreen.main.bounds.size
-    self.thumbnailView.sizeThatFits(pictureFrame)
-    self.comicsLabel.text = viewModel.getComicsCount()
-    self.seriesLabel.text = viewModel.getSeriesCount()
-    self.storiesLabel.text = viewModel.getStoriesCount()
-    self.idLabel.text = "Id: \(id)"
+    thumbnailView.af.setImage(withURL: thumbnail.url)
+    let width = UIScreen.main.bounds.size.width
+    let size = CGSize(width: width, height: width * 0.80)
+    thumbnailView.sizeThatFits(size)
+
+    comicsLabel.text = viewModel.getComicsCount()
+    seriesLabel.text = viewModel.getSeriesCount()
+    storiesLabel.text = viewModel.getStoriesCount()
+    idLabel.text = "Id: \(id)"
   }
 }

@@ -24,6 +24,10 @@ class CharacterDetailViewModel {
     self.characterId = characterId
   }
 
+  func getName() -> String {
+    return character?.name ?? "character Detail"
+  }
+
   func getComicsCount() -> String {
     guard let comicsCount = character?.comics?.items?.count else { return "0" }
     return "Comics available: \(comicsCount)"
@@ -31,11 +35,11 @@ class CharacterDetailViewModel {
 
   func getSeriesCount() -> String {
     guard let comicsCount = character?.series?.items?.count else { return "0" }
-    return "Comics available: \(comicsCount)"
+    return "Series available: \(comicsCount)"
   }
 
   func getStoriesCount() -> String {
     guard let comicsCount = character?.stories?.items?.count else { return "0" }
-    return "Comics available: \(comicsCount)"
+    return "Stories available: \(comicsCount)"
   }
 }
