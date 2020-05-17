@@ -1,3 +1,3 @@
 #!/bin/sh
 
-sitrep  > sitrep.txt
+"${PROJECT_DIR}/Scripts/sitrep" > sitrep.txt

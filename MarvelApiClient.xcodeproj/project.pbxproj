@@ -28,7 +28,6 @@
 		28998ECA217F636A0037039B /* MarvelAPIClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28998EB8217F636A0037039B /* MarvelAPIClient.swift */; };
 		28998ECB217F636A0037039B /* HTTPParameter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28998EBA217F636A0037039B /* HTTPParameter.swift */; };
 		28998ECC217F636A0037039B /* Result.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28998EBB217F636A0037039B /* Result.swift */; };
-		28998ECD217F636A0037039B /* md5.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28998EBC217F636A0037039B /* md5.swift */; };
 		28998ECE217F636A0037039B /* URLQueryItemEncoder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28998EBD217F636A0037039B /* URLQueryItemEncoder.swift */; };
 		28998ED5217F636A0037039B /* APIRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28998EC5217F636A0037039B /* APIRequest.swift */; };
 		28998ED6217F636A0037039B /* GetComics.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28998EC7217F636A0037039B /* GetComics.swift */; };
@@ -53,6 +52,13 @@
 		C72CF2AE24707CBF0048B0A2 /* OnboardingViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C72CF2AD24707CBF0048B0A2 /* OnboardingViewModel.swift */; };
 		C72CF2B024707EB30048B0A2 /* LandingViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C72CF2AF24707EB30048B0A2 /* LandingViewModel.swift */; };
 		C72CF2B2247163B80048B0A2 /* AppConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = C72CF2B1247163B80048B0A2 /* AppConfig.swift */; };
+		C72CF2B92471ED860048B0A2 /* .swiftlint.yml in Resources */ = {isa = PBXBuildFile; fileRef = C72CF2B42471ED860048B0A2 /* .swiftlint.yml */; };
+		C72CF2BA2471ED860048B0A2 /* swiftlint.sh in Resources */ = {isa = PBXBuildFile; fileRef = C72CF2B52471ED860048B0A2 /* swiftlint.sh */; };
+		C72CF2BB2471ED860048B0A2 /* build_increment2.sh in Resources */ = {isa = PBXBuildFile; fileRef = C72CF2B62471ED860048B0A2 /* build_increment2.sh */; };
+		C72CF2BC2471ED860048B0A2 /* build_increment.sh in Resources */ = {isa = PBXBuildFile; fileRef = C72CF2B72471ED860048B0A2 /* build_increment.sh */; };
+		C72CF2BD2471ED860048B0A2 /* sitrep.sh in Resources */ = {isa = PBXBuildFile; fileRef = C72CF2B82471ED860048B0A2 /* sitrep.sh */; };
+		C72CF3682471F1B40048B0A2 /* sitrep in Resources */ = {isa = PBXBuildFile; fileRef = C72CF3672471F1B40048B0A2 /* sitrep */; };
+		C72CF36A2471F2170048B0A2 /* swiftlint in Resources */ = {isa = PBXBuildFile; fileRef = C72CF3692471F2160048B0A2 /* swiftlint */; };
 		C74142D3243FDB76004E1202 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = C74142D2243FDB76004E1202 /* Default-568h@2x.png */; };
 		C74142D724409FC8004E1202 /* superheros.png in Resources */ = {isa = PBXBuildFile; fileRef = C74142D624409FC8004E1202 /* superheros.png */; };
 		C76B29A6243A5F1B00793179 /* MarvelApiClientTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C76B29A5243A5F1B00793179 /* MarvelApiClientTests.swift */; };
@@ -102,7 +108,6 @@
 		28998EB8217F636A0037039B /* MarvelAPIClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MarvelAPIClient.swift; sourceTree = "<group>"; };
 		28998EBA217F636A0037039B /* HTTPParameter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HTTPParameter.swift; sourceTree = "<group>"; };
 		28998EBB217F636A0037039B /* Result.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Result.swift; sourceTree = "<group>"; };
-		28998EBC217F636A0037039B /* md5.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = md5.swift; sourceTree = "<group>"; };
 		28998EBD217F636A0037039B /* URLQueryItemEncoder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = URLQueryItemEncoder.swift; sourceTree = "<group>"; };
 		28998EC5217F636A0037039B /* APIRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = APIRequest.swift; sourceTree = "<group>"; };
 		28998EC7217F636A0037039B /* GetComics.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GetComics.swift; sourceTree = "<group>"; };
@@ -131,12 +136,18 @@
 		C72CF2AD24707CBF0048B0A2 /* OnboardingViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingViewModel.swift; sourceTree = "<group>"; };
 		C72CF2AF24707EB30048B0A2 /* LandingViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LandingViewModel.swift; sourceTree = "<group>"; };
 		C72CF2B1247163B80048B0A2 /* AppConfig.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppConfig.swift; sourceTree = "<group>"; };
+		C72CF2B42471ED860048B0A2 /* .swiftlint.yml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.yaml; path = .swiftlint.yml; sourceTree = "<group>"; };
+		C72CF2B52471ED860048B0A2 /* swiftlint.sh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.sh; path = swiftlint.sh; sourceTree = "<group>"; };
+		C72CF2B62471ED860048B0A2 /* build_increment2.sh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.sh; path = build_increment2.sh; sourceTree = "<group>"; };
+		C72CF2B72471ED860048B0A2 /* build_increment.sh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.sh; path = build_increment.sh; sourceTree = "<group>"; };
+		C72CF2B82471ED860048B0A2 /* sitrep.sh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.sh; path = sitrep.sh; sourceTree = "<group>"; };
+		C72CF3672471F1B40048B0A2 /* sitrep */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.executable"; path = sitrep; sourceTree = "<group>"; };
+		C72CF3692471F2160048B0A2 /* swiftlint */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.executable"; path = swiftlint; sourceTree = "<group>"; };
 		C74142D2243FDB76004E1202 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
 		C74142D624409FC8004E1202 /* superheros.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = superheros.png; path = ../../../Downloads/superheros.png; sourceTree = "<group>"; };
 		C76B29A3243A5F1B00793179 /* MarvelApiClientTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MarvelApiClientTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		C76B29A5243A5F1B00793179 /* MarvelApiClientTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MarvelApiClientTests.swift; sourceTree = "<group>"; };
 		C76B29A7243A5F1B00793179 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		C76B29AD243A639F00793179 /* .travis.yml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.yaml; path = .travis.yml; sourceTree = "<group>"; };
 		C76B29AE243A639F00793179 /* sitrep.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = sitrep.txt; sourceTree = "<group>"; };
 		C78A83F2244B6DBA004DE930 /* CharacterDetailViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CharacterDetailViewModel.swift; sourceTree = "<group>"; };
 		C78A83F4244B8AD6004DE930 /* GetCharacter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GetCharacter.swift; sourceTree = "<group>"; };
@@ -247,12 +258,12 @@
 		287C99FD217F39CB00D63092 = {
 			isa = PBXGroup;
 			children = (
+				C72CF2B32471ED860048B0A2 /* Scripts */,
 				2851229221832BB9009D4AB0 /* Readme.md */,
 				C7EC67072440DFDB00F88FDE /* Podfile.lock */,
 				C7EC67082440DFDB00F88FDE /* R.generated.swift */,
 				C7EC67042440D7CE00F88FDE /* Podfile */,
 				C74142D2243FDB76004E1202 /* Default-568h@2x.png */,
-				C76B29AD243A639F00793179 /* .travis.yml */,
 				C76B29AE243A639F00793179 /* sitrep.txt */,
 				287C9A08217F39CB00D63092 /* MarvelApiClient */,
 				C76B29A4243A5F1B00793179 /* MarvelApiClientTests */,
@@ -322,7 +333,6 @@
 			children = (
 				285122802181E3E5009D4AB0 /* Extensions.swift */,
 				28998EBB217F636A0037039B /* Result.swift */,
-				28998EBC217F636A0037039B /* md5.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -388,6 +398,20 @@
 			name = ComicCell;
 			path = MarvelApiClient/Screens/Landing/ComicList/ComicCell;
 			sourceTree = SOURCE_ROOT;
+		};
+		C72CF2B32471ED860048B0A2 /* Scripts */ = {
+			isa = PBXGroup;
+			children = (
+				C72CF2B42471ED860048B0A2 /* .swiftlint.yml */,
+				C72CF2B52471ED860048B0A2 /* swiftlint.sh */,
+				C72CF2B62471ED860048B0A2 /* build_increment2.sh */,
+				C72CF2B72471ED860048B0A2 /* build_increment.sh */,
+				C72CF2B82471ED860048B0A2 /* sitrep.sh */,
+				C72CF3672471F1B40048B0A2 /* sitrep */,
+				C72CF3692471F2160048B0A2 /* swiftlint */,
+			);
+			path = Scripts;
+			sourceTree = "<group>";
 		};
 		C76B29A4243A5F1B00793179 /* MarvelApiClientTests */ = {
 			isa = PBXGroup;
@@ -519,6 +543,7 @@
 			mainGroup = 287C99FD217F39CB00D63092;
 			packageReferences = (
 				C7E37BE32438F0360096F2E9 /* XCRemoteSwiftPackageReference "AlamofireImage" */,
+				C72CF3662471EEAA0048B0A2 /* XCRemoteSwiftPackageReference "Sitrep" */,
 			);
 			productRefGroup = 287C9A07217F39CB00D63092 /* Products */;
 			projectDirPath = "";
@@ -536,15 +561,22 @@
 			buildActionMask = 2147483647;
 			files = (
 				C72CF2AA24703BBA0048B0A2 /* ComicCell.xib in Resources */,
+				C72CF2BA2471ED860048B0A2 /* swiftlint.sh in Resources */,
 				C74142D724409FC8004E1202 /* superheros.png in Resources */,
 				287473192187B7F30062F3F5 /* CharacterCell.xib in Resources */,
 				287C9A14217F39CC00D63092 /* LaunchScreen.storyboard in Resources */,
 				287C9A11217F39CC00D63092 /* Assets.xcassets in Resources */,
 				C74142D3243FDB76004E1202 /* Default-568h@2x.png in Resources */,
+				C72CF2BD2471ED860048B0A2 /* sitrep.sh in Resources */,
 				C7EC67032440C5B400F88FDE /* icons8-checked-checkbox-50.png in Resources */,
+				C72CF2BB2471ED860048B0A2 /* build_increment2.sh in Resources */,
 				28512297218337E2009D4AB0 /* amour-1.jpg in Resources */,
+				C72CF36A2471F2170048B0A2 /* swiftlint in Resources */,
 				C7EC67012440C5A900F88FDE /* icons8-unchecked-checkbox-50.png in Resources */,
+				C72CF2BC2471ED860048B0A2 /* build_increment.sh in Resources */,
 				287C9A0F217F39CB00D63092 /* Main.storyboard in Resources */,
+				C72CF2B92471ED860048B0A2 /* .swiftlint.yml in Resources */,
+				C72CF3682471F1B40048B0A2 /* sitrep in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -701,7 +733,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				C7E02812243FD4DB00888249 /* AppCoordinator.swift in Sources */,
-				28998ECD217F636A0037039B /* md5.swift in Sources */,
 				28998ECA217F636A0037039B /* MarvelAPIClient.swift in Sources */,
 				2851227D2181E26B009D4AB0 /* LandingViewController.swift in Sources */,
 				C72CF2B2247163B80048B0A2 /* AppConfig.swift in Sources */,
@@ -1023,6 +1054,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		C72CF3662471EEAA0048B0A2 /* XCRemoteSwiftPackageReference "Sitrep" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/twostraws/Sitrep";
+			requirement = {
+				branch = master;
+				kind = branch;
+			};
+		};
 		C7E37BE32438F0360096F2E9 /* XCRemoteSwiftPackageReference "AlamofireImage" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/Alamofire/AlamofireImage.git";
