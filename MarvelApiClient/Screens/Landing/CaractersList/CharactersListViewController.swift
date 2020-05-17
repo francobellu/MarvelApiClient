@@ -13,6 +13,8 @@ class CharactersListViewController: UIViewController, StoryboardInstantiable {
 
   @IBOutlet weak var tableView: UITableView!
 
+  @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
+
   override func viewDidLoad() {
     super.viewDidLoad()
 
@@ -21,10 +23,12 @@ class CharactersListViewController: UIViewController, StoryboardInstantiable {
     tableView.delegate = self
     setBackBtnInterceptMechanism()
     tableView.register(UINib(nibName: R.nib.characterCell.name, bundle: nil), forCellReuseIdentifier: R.reuseIdentifier.characterCellId.identifier)
+    activityIndicator.startAnimating()
     viewModel.getNextCharactersList{
       // Reload Data
       DispatchQueue.main.async {
         self.tableView.reloadData()
+        self.activityIndicator.stopAnimating()
       }
     }
   }

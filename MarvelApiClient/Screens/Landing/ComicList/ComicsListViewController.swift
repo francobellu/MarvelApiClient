@@ -13,6 +13,8 @@ class ComicsListViewController: UIViewController, StoryboardInstantiable {
 
   @IBOutlet weak var tableView: UITableView!
 
+  @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
+
   override func viewDidLoad() {
     super.viewDidLoad()
     title = viewModel.title
@@ -20,10 +22,12 @@ class ComicsListViewController: UIViewController, StoryboardInstantiable {
     tableView.delegate = self
     setBackBtnInterceptMechanism()
     tableView.register(UINib(nibName: R.nib.comicCell.name, bundle: nil), forCellReuseIdentifier: R.reuseIdentifier.comicCellId.identifier)
+    activityIndicator.startAnimating()
     viewModel.getComicsList {
       // Reload Data
       DispatchQueue.main.async {
         self.tableView.reloadData()
+        self.activityIndicator.stopAnimating()
       }
     }
   }

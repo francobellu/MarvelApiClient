@@ -171,9 +171,18 @@
                                     </tableViewCell>
                                 </prototypes>
                             </tableView>
+                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" animating="YES" style="large" translatesAutoresizingMaskIntoConstraints="NO" id="N1g-W8-rgQ">
+                                <rect key="frame" x="167.5" y="313.5" width="40" height="40"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="40" id="4hk-PR-VcH"/>
+                                    <constraint firstAttribute="height" constant="40" id="Wsc-NP-BxO"/>
+                                </constraints>
+                            </activityIndicatorView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
+                            <constraint firstItem="N1g-W8-rgQ" firstAttribute="centerX" secondItem="HLZ-3O-Z8y" secondAttribute="centerX" id="0Sa-CE-S7u"/>
+                            <constraint firstItem="N1g-W8-rgQ" firstAttribute="centerY" secondItem="HLZ-3O-Z8y" secondAttribute="centerY" id="8qQ-mA-6RR"/>
                             <constraint firstItem="CtM-kq-aFh" firstAttribute="top" secondItem="Osc-AM-mMk" secondAttribute="top" id="MNy-8V-lng"/>
                             <constraint firstItem="Osc-AM-mMk" firstAttribute="bottom" secondItem="CtM-kq-aFh" secondAttribute="bottom" id="NSo-z5-l4u"/>
                             <constraint firstItem="CtM-kq-aFh" firstAttribute="leading" secondItem="Osc-AM-mMk" secondAttribute="leading" id="oFr-3j-iw6"/>
@@ -182,6 +191,7 @@
                         <viewLayoutGuide key="safeArea" id="Osc-AM-mMk"/>
                     </view>
                     <connections>
+                        <outlet property="activityIndicator" destination="N1g-W8-rgQ" id="Br5-m0-0lw"/>
                         <outlet property="tableView" destination="CtM-kq-aFh" id="ejs-2I-am9"/>
                     </connections>
                 </viewController>
@@ -211,17 +221,29 @@
                                     </tableViewCell>
                                 </prototypes>
                             </tableView>
+                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="large" translatesAutoresizingMaskIntoConstraints="NO" id="T97-hS-wOc">
+                                <rect key="frame" x="167.5" y="313.5" width="40" height="40"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="40" id="bia-mp-x1E"/>
+                                    <constraint firstAttribute="width" constant="40" id="iS5-ck-aIr"/>
+                                </constraints>
+                            </activityIndicatorView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
+                            <constraint firstItem="BKg-He-lYE" firstAttribute="centerY" secondItem="l1Q-dJ-epq" secondAttribute="centerY" id="2dY-Li-P0c"/>
+                            <constraint firstItem="T97-hS-wOc" firstAttribute="centerX" secondItem="l1Q-dJ-epq" secondAttribute="centerX" id="G4k-Mp-9xT"/>
                             <constraint firstItem="vE6-ab-JvK" firstAttribute="bottom" secondItem="BKg-He-lYE" secondAttribute="bottom" id="Mwe-Ec-YW3"/>
                             <constraint firstItem="vE6-ab-JvK" firstAttribute="trailing" secondItem="BKg-He-lYE" secondAttribute="trailing" id="Yxh-Ui-WEN"/>
                             <constraint firstItem="BKg-He-lYE" firstAttribute="top" secondItem="vE6-ab-JvK" secondAttribute="top" id="ZYp-ie-HNH"/>
+                            <constraint firstItem="BKg-He-lYE" firstAttribute="centerX" secondItem="l1Q-dJ-epq" secondAttribute="centerX" id="kL8-w0-ZNV"/>
                             <constraint firstItem="BKg-He-lYE" firstAttribute="leading" secondItem="vE6-ab-JvK" secondAttribute="leading" id="uQR-oo-Wde"/>
+                            <constraint firstItem="T97-hS-wOc" firstAttribute="centerY" secondItem="l1Q-dJ-epq" secondAttribute="centerY" id="x5w-wD-yJT"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="vE6-ab-JvK"/>
                     </view>
                     <connections>
+                        <outlet property="activityIndicator" destination="T97-hS-wOc" id="pzK-gL-qgH"/>
                         <outlet property="tableView" destination="BKg-He-lYE" id="Ufy-Ve-pIE"/>
                     </connections>
                 </viewController>
