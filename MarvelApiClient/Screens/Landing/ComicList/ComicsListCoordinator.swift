@@ -36,7 +36,7 @@ extension ComicsListCoordinator: Coordinator {
 
   func start(with option: DeepLinkOption?) {
     print("FB:ComicsListCoordinator:start(with: \(String(describing: option))")
-        //start with deepLink
+    //start with deepLink
     switch option {
     case .comic(let id):
       guard let id = id else { fatalError()}
@@ -45,13 +45,6 @@ extension ComicsListCoordinator: Coordinator {
       presentComicsListViewController()
     default:
       return
-    }
-    if case .comic(let id) = option {
-      guard let id = id else { fatalError()}
-      presentComicDetailViewController(with: id)
-    }
-    if case .comics = option {
-      presentComicsListViewController()
     }
   }
 
