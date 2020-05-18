@@ -10,14 +10,31 @@ import Foundation
 
 class CharacterDetailViewModel {
   var character: CharacterResult! // swiftlint:disable:this implicitly_unwrapped_optional
-  var characterId: String! // swiftlint:disable:this implicitly_unwrapped_optional
+
+  private var dependencies: AppDependencies! // swiftlint:disable:this implicitly_unwrapped_optional
+
+//  var characterId: String! // swiftlint:disable:this implicitly_unwrapped_optional
+
+  private var apiClient: MarvelAPIProtocol{
+    dependencies.marvelApiClient
+  }
 
   init(dependencies: AppDependencies, character: CharacterResult) {
     self.character = character
   }
 
+  /// Initializer used for deep linking
   init(dependencies: AppDependencies, characterId: String) {
-    self.characterId = characterId
+    self.dependencies = dependencies
+  }
+
+  // MARK: - API FUNCTIONS
+  func getCharacter(with characterId: Int, completion: @escaping () -> Void) {
+    apiClient.getCharacter(with: characterId) { character in
+      self.character = character
+      print("FB: character: \(character)")
+      completion()
+    }
   }
 
   func getName() -> String {

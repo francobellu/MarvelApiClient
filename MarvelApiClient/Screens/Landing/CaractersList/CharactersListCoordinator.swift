@@ -55,12 +55,20 @@ extension CharactersListCoordinator: Coordinator, DeepLinkable {
   }
 
   private func presentCharacterDetailViewController(with characterId: String ) {
-    let viewModel = CharacterDetailViewModel(dependencies: dependencies, characterId: characterId)
-
-    let viewController = CharacterDetailViewController.instantiateViewController()
-    viewController.viewModel = viewModel
-
-    (presenter as? UINavigationController)?.pushViewController(viewController, animated: true)
+    let viewModel = CharacterDetailViewModel(dependencies: self.dependencies, characterId: characterId)
+    DispatchQueue.global(qos: .background).async{
+      guard let id = Int(characterId)  else {
+        print("Invalid deepLink url")
+        return
+      }
+      viewModel.getCharacter(with: id){
+        DispatchQueue.main.sync{
+          let viewController = CharacterDetailViewController.instantiateViewController()
+          viewController.viewModel = viewModel
+          (self.presenter as? UINavigationController)?.pushViewController(viewController, animated: true)
+        }
+      }
+    }
   }
 }
 
