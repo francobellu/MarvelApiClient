@@ -8,18 +8,31 @@
 
 import Foundation
 
-class ComicDetailViewModel: AppDependencyInjectable {
-  var dependencies: AppDependencies! // swiftlint:disable:this implicitly_unwrapped_optional
+class ComicDetailViewModel{
   var comic: ComicResult! // swiftlint:disable:this implicitly_unwrapped_optional
-  var comicId: String! // swiftlint:disable:this implicitly_unwrapped_optional
+
+  private var dependencies: AppDependencies! // swiftlint:disable:this implicitly_unwrapped_optional
+
+  private var apiClient: MarvelAPIProtocol{
+    dependencies.marvelApiClient
+  }
 
   init(dependencies: AppDependencies, comic: ComicResult) {
     self.comic = comic
   }
 
+  /// Initializer used for deep linking
   init(dependencies: AppDependencies, comicId: String) {
     self.dependencies = dependencies
-    self.comicId = comicId
+  }
+
+  // MARK: - API FUNCTIONS
+  func getComic(with comicId: Int, completion: @escaping () -> Void) {
+    apiClient.getComic(with: comicId) { comic in
+      self.comic = comic
+      print("FB: comic: \(comic)")
+      completion()
+    }
   }
 
   func getName() -> String {

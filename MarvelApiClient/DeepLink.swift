@@ -10,9 +10,11 @@ import Foundation
 
 struct DeepLinkURLConstants {
   static let onboarding = "onboarding"
+  static let landing = "landing"
   static let characters = "characters"
   static let character = "character"
-  static let landing = "landing"
+  static let comics = "comic"
+  static let comic = "comics"
 }
 
 enum DeepLinkOption {
@@ -20,15 +22,17 @@ enum DeepLinkOption {
   case landing
 //  case characters
   case character(String?)
+  case characters
   case comic(String?)
+  case comics
 
   static func build(with id: String, params: [String: AnyObject]?) -> DeepLinkOption? {
-    let character = params?["character"] as? String
+    let id = params?["id"] as? String
     switch id {
     case DeepLinkURLConstants.onboarding: return .onboarding
     case DeepLinkURLConstants.landing: return .landing
-//      case DeepLinkURLConstants.characters: return .characters
-    case DeepLinkURLConstants.character: return .character(character)
+    case DeepLinkURLConstants.comic: return .comic(id)
+    case DeepLinkURLConstants.character: return .character(id)
     default: return nil
     }
   }
@@ -39,25 +43,30 @@ class DeeplinkParser {
    private init() { }
 
   func parseDeepLink(_ url: URL) -> DeepLinkOption? {
-     guard let components = URLComponents(url: url, resolvingAgainstBaseURL: true), let host = components.host else {
+    guard let components = URLComponents(url: url, resolvingAgainstBaseURL: true),
+      let host = components.host else {
         return nil
-     }
-     var pathComponents = components.path.components(separatedBy: "/")
-     // the first component is empty
+    }
+    var pathComponents = components.path.components(separatedBy: "/")
+    // the first component is empty
     pathComponents.removeFirst()
     switch host {
-    case "onboarding":
-      return DeepLinkOption.onboarding
-    case "landing":
-      return DeepLinkOption.landing
+    case "onboarding": return DeepLinkOption.onboarding
+    case "landing": return DeepLinkOption.landing
     case "character":
-      if let name = pathComponents.first {
-        return DeepLinkOption.character(name)
+      if let id = pathComponents.first {
+        return DeepLinkOption.character(id)
+      }
+    case "characters": return DeepLinkOption.characters
+    case "comics": return DeepLinkOption.comics
+    case "comic":
+      if let id = pathComponents.first {
+        return DeepLinkOption.comic(id)
       }
     default:
       break
-     }
-     return nil
+    }
+    return nil
   }
 
   @discardableResult

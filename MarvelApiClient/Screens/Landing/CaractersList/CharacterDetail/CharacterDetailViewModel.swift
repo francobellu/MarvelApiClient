@@ -13,8 +13,6 @@ class CharacterDetailViewModel {
 
   private var dependencies: AppDependencies! // swiftlint:disable:this implicitly_unwrapped_optional
 
-//  var characterId: String! // swiftlint:disable:this implicitly_unwrapped_optional
-
   private var apiClient: MarvelAPIProtocol{
     dependencies.marvelApiClient
   }

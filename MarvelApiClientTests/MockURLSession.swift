@@ -21,9 +21,14 @@ class MockURLSession: URLSessionProtocol {
     private (set) var lastURL: URL?
 
     func successHttpURLResponse(request: URLRequest) -> URLResponse {
-      guard let url = request.url else {fatalError() }
+      guard let url = request.url,
+            let httpResponse = HTTPURLResponse(url: url,
+                                               statusCode: 200,
+                                               httpVersion: "HTTP/1.1",
+                                               headerFields: nil)
+      else {fatalError() }
 
-      return HTTPURLResponse(url: url, statusCode: 200, httpVersion: "HTTP/1.1", headerFields: nil)!
+      return httpResponse
     }
 
     func dataTask(with request: URLRequest, completionHandler: @escaping DataTaskResult) -> URLSessionDataTaskProtocol {

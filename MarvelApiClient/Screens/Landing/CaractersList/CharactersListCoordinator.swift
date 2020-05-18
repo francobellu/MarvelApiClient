@@ -43,6 +43,9 @@ extension CharactersListCoordinator: Coordinator, DeepLinkable {
       guard let id = id else { fatalError()}
       presentCharacterDetailViewController(with: id)
     }
+    if case .characters = option {
+      presentCharactersListViewController()
+    }
   }
 
   private func presentCharactersListViewController() {
@@ -76,8 +79,10 @@ extension CharactersListCoordinator: Coordinator, DeepLinkable {
 extension CharactersListCoordinator: CharactersListCoordinatorDelegate {
   func didGoBack() {
     guard let navigationController = presenter as? UINavigationController else { return }
-    navigationController.popViewController(animated: true)
-    parentCoordinator?.disposeChild(coordinator: self)
+    if navigationController.viewControllers.count > 1{
+      navigationController.popViewController(animated: true)
+      parentCoordinator?.disposeChild(coordinator: self)
+    }
   }
 
   func didSelect(character: CharacterResult) {

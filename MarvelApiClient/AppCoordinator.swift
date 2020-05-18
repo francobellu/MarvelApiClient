@@ -64,20 +64,20 @@ extension AppCoordinator: Coordinator {
             switch option {
             case .onboarding: runOnboardingFlow()
             case .landing: runLandingFlow()
-            case .character:
+            case .character, .characters:
               let navController = UINavigationController()
               present(viewController: navController)
               let coordinator = CharactersListCoordinator(parentCoordinator: self, presenter: navController, dependencies: dependencies)
               add(coordinator)
               let deeplinkableCoord = coordinator
               deeplinkableCoord.start(with: option)
-            case .comic:
+            case .comics, .comic:
               let navController = UINavigationController()
               present(viewController: navController)
               let coordinator = ComicsListCoordinator(parentCoordinator: self, presenter: navController, dependencies: dependencies)
               add(coordinator)
-              let deeplinkableCoord = coordinator as? DeepLinkable
-              deeplinkableCoord?.start(with: option)
+              let deeplinkableCoord = coordinator
+              deeplinkableCoord.start(with: option)
           }
           //default start
         } else {

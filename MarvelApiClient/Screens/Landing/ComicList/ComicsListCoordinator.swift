@@ -37,9 +37,21 @@ extension ComicsListCoordinator: Coordinator {
   func start(with option: DeepLinkOption?) {
     print("FB:ComicsListCoordinator:start(with: \(String(describing: option))")
         //start with deepLink
+    switch option {
+    case .comic(let id):
+      guard let id = id else { fatalError()}
+      presentComicDetailViewController(with: id)
+    case .comics:
+      presentComicsListViewController()
+    default:
+      return
+    }
     if case .comic(let id) = option {
       guard let id = id else { fatalError()}
       presentComicDetailViewController(with: id)
+    }
+    if case .comics = option {
+      presentComicsListViewController()
     }
   }
 
@@ -55,13 +67,20 @@ extension ComicsListCoordinator: Coordinator {
   }
 
   private func presentComicDetailViewController(with comicId: String ) {
-    print("FB:ComicsListCoordinator:startComicViewCOntroller()")
-    let viewModel = ComicDetailViewModel(dependencies: dependencies, comicId: comicId)
-
-    let viewController = ComicDetailViewController.instantiateViewController()
-    viewController.viewModel = viewModel
-
-    (presenter as? UINavigationController)?.pushViewController(viewController, animated: true)
+    let viewModel = ComicDetailViewModel(dependencies: self.dependencies, comicId: comicId)
+    DispatchQueue.global(qos: .background).async{
+      guard let id = Int(comicId)  else {
+        print("Invalid deepLink url")
+        return
+      }
+      viewModel.getComic(with: id){
+        DispatchQueue.main.sync{
+          let viewController = ComicDetailViewController.instantiateViewController()
+          viewController.viewModel = viewModel
+          (self.presenter as? UINavigationController)?.pushViewController(viewController, animated: true)
+        }
+      }
+    }
   }
 }
 
@@ -71,8 +90,10 @@ extension ComicsListCoordinator: ComicsListCoordinatorDelegate {
     print("FB: ComicsListCoordinator:goBack()")
     print("FB:  popVC")
     guard let navigationController = presenter as? UINavigationController else { return }
-    navigationController.popViewController(animated: true)
-    parentCoordinator?.disposeChild(coordinator: self)
+    if navigationController.viewControllers.count > 1{
+      navigationController.popViewController(animated: true)
+      parentCoordinator?.disposeChild(coordinator: self)
+    }
   }
 
   func didSelect(comic: ComicResult) {
