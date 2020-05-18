@@ -35,7 +35,6 @@ class MarvelApiClientTests: XCTestCase {
   }
 
   func testGetCharacter() throws {
-
     let promise = expectation(description: "Character")
     let characterId = 1011334
     sut.getCharacter(with: characterId) { character in
@@ -58,7 +57,6 @@ class MarvelApiClientTests: XCTestCase {
   }
 
   func testGetComic() throws {
-
     let promise = expectation(description: "Comic")
     let comicId = 61537
     sut.getComic(with: comicId) { comic in

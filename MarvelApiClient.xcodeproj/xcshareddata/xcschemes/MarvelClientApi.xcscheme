@@ -38,6 +38,16 @@
                ReferencedContainer = "container:MarvelApiClient.xcodeproj">
             </BuildableReference>
          </TestableReference>
+         <TestableReference
+            skipped = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "C74963932472DCBD001B9A5E"
+               BuildableName = "xxxx.xctest"
+               BlueprintName = "xxxx"
+               ReferencedContainer = "container:MarvelApiClient.xcodeproj">
+            </BuildableReference>
+         </TestableReference>
       </Testables>
    </TestAction>
    <LaunchAction

@@ -14,35 +14,35 @@ import XCTest
 // MARK: MOCK
 class MockURLSession: URLSessionProtocol {
 
-    var nextDataTask = MockURLSessionDataTask()
-    var nextData: Data?
-    var nextError: Error?
+  var nextDataTask = MockURLSessionDataTask()
+  var nextData: Data?
+  var nextError: Error?
 
-    private (set) var lastURL: URL?
+  private (set) var lastURL: URL?
 
-    func successHttpURLResponse(request: URLRequest) -> URLResponse {
-      guard let url = request.url,
-            let httpResponse = HTTPURLResponse(url: url,
-                                               statusCode: 200,
-                                               httpVersion: "HTTP/1.1",
-                                               headerFields: nil)
+  func dataTask(with request: URLRequest, completionHandler: @escaping DataTaskResult) -> URLSessionDataTaskProtocol {
+    lastURL = request.url
+
+    completionHandler(nextData, successHttpURLResponse(request: request), nextError)
+    return nextDataTask
+  }
+
+  func successHttpURLResponse(request: URLRequest) -> URLResponse {
+    guard let url = request.url,
+      let httpResponse = HTTPURLResponse(url: url,
+                                         statusCode: 200,
+                                         httpVersion: "HTTP/1.1",
+                                         headerFields: nil)
       else {fatalError() }
 
-      return httpResponse
-    }
-
-    func dataTask(with request: URLRequest, completionHandler: @escaping DataTaskResult) -> URLSessionDataTaskProtocol {
-        lastURL = request.url
-
-        completionHandler(nextData, successHttpURLResponse(request: request), nextError)
-        return nextDataTask
-    }
+    return httpResponse
+  }
 }
 
 class MockURLSessionDataTask: URLSessionDataTaskProtocol {
-    private (set) var resumeWasCalled = false
+  private (set) var resumeWasCalled = false
 
-    func resume() {
-        resumeWasCalled = true
-    }
+  func resume() {
+    resumeWasCalled = true
+  }
 }

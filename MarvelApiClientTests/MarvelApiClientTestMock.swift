@@ -10,12 +10,13 @@ import XCTest
 
 @testable import MarvelApiClient
 
-class MarvelApiClientTestMock: XCTestCase {
+class MarvelApiClientCharactersTestMock: XCTestCase {
 
   var sut: MarvelAPIClient! // swiftlint:disable:this implicitly_unwrapped_optional
 
   override func setUpWithError() throws {
     let session = MockURLSession()
+    session.nextData = mockContentData(for: "MockResponseGetCharacters")
     let httpCLient = HttpClient(session: session)
     sut = MarvelAPIClient(httpClient: httpCLient)
   }
@@ -23,16 +24,38 @@ class MarvelApiClientTestMock: XCTestCase {
   override func tearDownWithError() throws {
   }
 
-  func testgetCharactersList() throws {
-    guard let url = URL(string: "https://mockurl") else {
-      fatalError("URL can't be empty")
-    }
-
+  func testGetCharactersList() throws {
     sut.getCharactersList { ( characters: [CharacterResult])  in
       print("FB: characters: \(characters)")
-      //promise.fulfill()
       XCTAssert(characters.isEmpty == false)
-    }
-
+      let mockedCharacters: [CharacterResult] = self.getObjec(from: self.mockContentData(for: "MockResponseGetCharacters"))
+      XCTAssert(characters.count == mockedCharacters.count )
+      }
   }
+}
+
+class MarvelApiClientCharacterTestMock: XCTestCase {
+
+  var sut: MarvelAPIClient! // swiftlint:disable:this implicitly_unwrapped_optional
+
+  override func setUpWithError() throws {
+    let session = MockURLSession()
+    session.nextData = mockContentData(for: "MockResponseGetCharacter")
+    let httpCLient = HttpClient(session: session)
+    sut = MarvelAPIClient(httpClient: httpCLient)
+  }
+
+  override func tearDownWithError() throws {
+  }
+
+  let characterId_1011334 = 1011334
+  func testGetCharacter() throws {
+    sut.getCharacter(with: characterId_1011334){ ( character: CharacterResult)  in
+      let mockedCharacter: CharacterResult = self.getObjec(from: self.mockContentData(for: "MockResponseGetCharacter"))
+      XCTAssert(character.name == mockedCharacter.name )
+      XCTAssert(character.description == mockedCharacter.description )
+      XCTAssert(character.id == mockedCharacter.id)
+      }
+  }
+
 }

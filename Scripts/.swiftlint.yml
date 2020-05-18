@@ -58,6 +58,7 @@ excluded: # paths to ignore during linting. overridden by `included`.
     - Tests
     - ./R.generated.swift
     - Pods
+    - MarvelApiClientTests
 
 large_tuple:
     warning: 3

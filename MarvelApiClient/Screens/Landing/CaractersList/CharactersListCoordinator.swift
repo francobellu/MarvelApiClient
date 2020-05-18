@@ -35,7 +35,7 @@ extension CharactersListCoordinator: Coordinator, DeepLinkable {
     print("FB:CharactersListCoordinator:start()")
     presentCharactersListViewController()
   }
-  
+
   func start(with option: DeepLinkOption?) {
     print("FB:CharactersListCoordinator:start(with: \(String(describing: option))")
     //start with deepLink
@@ -49,7 +49,7 @@ extension CharactersListCoordinator: Coordinator, DeepLinkable {
       return
     }
   }
-  
+
   private func presentCharactersListViewController() {
     let viewModel = CharactersListViewModel(dependencies: dependencies, coordinatorDelegate: self)
 
