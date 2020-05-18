@@ -30,6 +30,18 @@ class OnboardingViewModel {
     return newValue == false ? "rectangle" : "checkmark.rectangle.fill"
   }
 
+  func getImageStrDontShowAgainBtnToogle() -> String{
+    let value = dependencies.appConfig.dontShowOnboardingValue
+    let newValue = !value
+    dependencies.appConfig.dontShowOnboardingValue = newValue
+    return newValue == false ? "rectangle" : "checkmark.rectangle.fill"
+  }
+
+  func getImageStrDontShowAgainBtn() -> String{
+    let value = dependencies.appConfig.dontShowOnboardingValue
+    return value == false ? "rectangle" : "checkmark.rectangle.fill"
+  }
+
   func didPressSkipAction() {
     coordinatorDelegate.childCoordinatorDidFinish()
   }

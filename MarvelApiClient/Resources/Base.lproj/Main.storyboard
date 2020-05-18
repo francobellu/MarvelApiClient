@@ -15,7 +15,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="superheros" translatesAutoresizingMaskIntoConstraints="NO" id="4pk-w2-iTI">
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="superheros.png" translatesAutoresizingMaskIntoConstraints="NO" id="4pk-w2-iTI">
                                 <rect key="frame" x="20" y="0.0" width="335" height="195"/>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cls-E1-pWF">
@@ -62,7 +62,7 @@
                                     <color key="titleColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </state>
                                 <connections>
-                                    <action selector="dontShowAgain:" destination="AIs-Z6-h6v" eventType="touchUpInside" id="3jK-H6-Atw"/>
+                                    <action selector="getImageStrDontShowAgainBtnToogle:" destination="AIs-Z6-h6v" eventType="touchUpInside" id="YWw-l0-dze"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="IuY-fe-c9I">
@@ -95,7 +95,7 @@
                         <viewLayoutGuide key="safeArea" id="pbv-D7-yP0"/>
                     </view>
                     <connections>
-                        <outlet property="dontShowAgainBtnAction" destination="ufk-Ek-Shr" id="iKe-r9-gwV"/>
+                        <outlet property="dontShowAgainBtn" destination="ufk-Ek-Shr" id="iKe-r9-gwV"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="9HG-UH-3qX" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -390,6 +390,6 @@
     <resources>
         <image name="checkmark.rectangle.fill" catalog="system" width="128" height="93"/>
         <image name="rectangle" catalog="system" width="128" height="93"/>
-        <image name="superheros" width="811" height="356"/>
+        <image name="superheros.png" width="811" height="356"/>
     </resources>
 </document>

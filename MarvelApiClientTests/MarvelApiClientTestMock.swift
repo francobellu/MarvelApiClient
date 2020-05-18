@@ -16,7 +16,7 @@ class MarvelApiClientTestMock: XCTestCase {
 
   override func setUpWithError() throws {
     let session = MockURLSession()
-    let httpCLient = HttpClient(session: session, httpConfigProtocol: MarvelHttpConfig())
+    let httpCLient = HttpClient(session: session)
     sut = MarvelAPIClient(httpClient: httpCLient)
   }
 
