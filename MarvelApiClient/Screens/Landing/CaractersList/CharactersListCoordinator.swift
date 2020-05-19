@@ -51,7 +51,9 @@ extension CharactersListCoordinator: Coordinator, DeepLinkable {
   }
 
   private func presentCharactersListViewController() {
-    let viewModel = CharactersListViewModel(dependencies: dependencies, coordinatorDelegate: self)
+    let viewModel = CharactersListViewModel(coordinatorDelegate: self)
+    let interactor = CharactersListInteractor(presenter: viewModel, dependencies: dependencies)
+    viewModel.interactor = interactor
 
     let viewController = CharactersListViewController.instantiateViewController()
     viewController.viewModel = viewModel

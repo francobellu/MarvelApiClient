@@ -24,11 +24,10 @@ class CharacterDetailViewController: UIViewController, StoryboardInstantiable {
   }
 
   func configureView() {
-    guard let character = viewModel.character else { return }
     title = viewModel.getName()
 
-    guard let thumbnail = character.thumbnail else { return  }
-    thumbnailView.af.setImage(withURL: thumbnail.url)
+    guard let thumbnail = viewModel.getThumbnailUrl() else { return  }
+    thumbnailView.af.setImage(withURL: thumbnail)
 
     descriptionLabel.text = viewModel.getDescription()
     descriptionLabel.numberOfLines = 0

@@ -12,23 +12,16 @@ class CharactersListViewModel {
 
   private weak var coordinatorDelegate: CharactersListCoordinatorDelegate!  //swiftlint:disable:this implicitly_unwrapped_optional
 
-  private var dependencies: AppDependenciesProtocol! // swiftlint:disable:this implicitly_unwrapped_optional
-
-  private var apiClient: MarvelAPIProtocol{
-    dependencies.marvelApiClient
-  }
-
-  private var characters: [CharacterResult] = []
+  var interactor: CharactersListInteractor?
 
   private(set) var title = "Marvel Comics"
 
-  init(dependencies: AppDependenciesProtocol, coordinatorDelegate: CharactersListCoordinatorDelegate) {
-    self.dependencies = dependencies
+  init(coordinatorDelegate: CharactersListCoordinatorDelegate) {
     self.coordinatorDelegate = coordinatorDelegate
   }
 
   func getCharacter(at index: Int) -> CharacterResult {
-    return characters[index]
+    return interactor.
   }
 
   func charactersCount() -> Int {
@@ -37,11 +30,9 @@ class CharactersListViewModel {
 
   // MARK: - API FUNCTIONS
 
-  func getNextCharactersList(completion: @escaping () -> Void) {
-    apiClient.getCharactersList { ( characters: [CharacterResult])  in
-      // Update dataSource array
-      self.characters += characters
-      completion()
+  func getNextCharactersList() {
+    interactor?.getNextCharactersList{
+      
     }
   }
 }

@@ -9,7 +9,7 @@
 import Foundation
 
 class CharacterDetailViewModel {
-  var character: CharacterResult! // swiftlint:disable:this implicitly_unwrapped_optional
+  private var character: CharacterResult? // swiftlint:disable:this implicitly_unwrapped_optional
 
   private var dependencies: AppDependenciesProtocol! // swiftlint:disable:this implicitly_unwrapped_optional
 
@@ -19,11 +19,44 @@ class CharacterDetailViewModel {
 
   init(dependencies: AppDependenciesProtocol, character: CharacterResult) {
     self.character = character
+    self.dependencies = dependencies
   }
 
   /// Initializer used for deep linking
   init(dependencies: AppDependenciesProtocol, characterId: String) {
     self.dependencies = dependencies
+  }
+
+  func getThumbnailUrl() -> URL? {
+    return character?.thumbnail?.url
+  }
+
+  func getName() -> String {
+    guard let name = character?.name,
+              !name.isEmpty  else { return "Character Detail" }
+    return name
+  }
+
+  func getDescription() -> String {
+    guard let description = character?.description,
+              !description.isEmpty else { return "No Description Available"}
+    return description
+  }
+
+  func getComicsCount() -> String {
+    guard let comicsCount = character?.comics?.items?.count,
+              comicsCount != 0 else { return "" }
+    return "Comics available: \(comicsCount)"
+  }
+
+  func getSeriesCount() -> String {
+    guard let comicsCount = character?.series?.items?.count else { return "" }
+    return "Series available: \(comicsCount)"
+  }
+
+  func getStoriesCount() -> String {
+    guard let comicsCount = character?.stories?.items?.count else { return "" }
+    return "Stories available: \(comicsCount)"
   }
 
   // MARK: - API FUNCTIONS
@@ -35,29 +68,4 @@ class CharacterDetailViewModel {
     }
   }
 
-  func getName() -> String {
-    return character?.name ?? "character Detail"
-  }
-
-  func getDescription() -> String {
-    guard let description = character.description,
-              !description.isEmpty else { return "No Description Available"}
-    return description
-  }
-
-  func getComicsCount() -> String {
-    guard let comicsCount = character.comics?.items?.count,
-              comicsCount != 0 else { return "" }
-    return "Comics available: \(comicsCount)"
-  }
-
-  func getSeriesCount() -> String {
-    guard let comicsCount = character.series?.items?.count else { return "" }
-    return "Series available: \(comicsCount)"
-  }
-
-  func getStoriesCount() -> String {
-    guard let comicsCount = character.stories?.items?.count else { return "" }
-    return "Stories available: \(comicsCount)"
-  }
 }

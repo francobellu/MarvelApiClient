@@ -185,139 +185,65 @@ class CharactersListViewModelTest: XCTestCase {
 }
 
 class CharacterDetailViewModelTest: XCTestCase {
-
   var sut: CharacterDetailViewModel! // swiftlint:disable:this implicitly_unwrapped_optional
-
   let mockAppDependencies = MockAppDependencies()
-
-  var testCharacterResultId1011334: CharacterResult! = nil
-  var testCharacterResultId1009144: CharacterResult! = nil
+  var testCharacterResultId1011334: CharacterResult!
+  var testCharacterResultId1009144: CharacterResult!
 
   override func setUpWithError() throws {
+
+    // CONFIGURE THE MOCK DATA
+    let results: [CharacterResult]  = getObjec(from: mockContentData(for: "MockedResponseCharacterResultId1011334"))
+    testCharacterResultId1011334 = results.first!
+
     let mockApiClient = mockAppDependencies.marvelApiClient as! MockApiClient
-
-//    testCharacterResultId1011334 = getObjec(from: mockContentData(for: "MockedResponseCharacterResultId1011334"))
-    mockApiClient.mockApiClientData.mockCharacterData = getObjec(from: mockContentData(for: "MockedResponseCharacterResultId1011334"))
-
-    let testCharacterResultId1009144: [CharacterResult]  =  getObjec(from: mockContentData(for: "MockedResponseCharacterResultId1009144"))
-    sut = CharacterDetailViewModel(dependencies: mockAppDependencies, character: testCharacterResultId1009144.first!)
-
-//    let testCharacterResultId1011334: CharacterResult =  getObjec(from: mockContentData(for: "MockedResponseCharacterResultId1011334"))
+    mockApiClient.mockApiClientData.mockCharacterData = testCharacterResultId1011334
 
   }
 
   // MARK: - TEST API FUNCTIONS
-  func testGetCharacter() throws {
 
-    XCTAssert(self.sut.getName() == testCharacterResultId1011334.name )
-    XCTAssert(self.sut.getDescription() == testCharacterResultId1011334.name )
-    let comicsCount = (testCharacterResultId1011334.comics!.items?.count)!
-    XCTAssert(self.sut.getComicsCount() == String(comicsCount) )
-    let seriesCount = (testCharacterResultId1011334.comics!.items?.count)!
-    XCTAssert(self.sut.getSeriesCount() == String(seriesCount) )
-    let storiesCount = (testCharacterResultId1011334.comics!.items?.count)!
-    XCTAssert(self.sut.getStoriesCount() == String(storiesCount) )
+  /// TEST  sut creation using init(dependencies: AppDependenciesProtocol, character: CharacterResult)
+  func testInit1() throws {
+    sut = CharacterDetailViewModel(dependencies: mockAppDependencies, character: testCharacterResultId1011334)
 
-    let characterId = testCharacterResultId1009144.id!
+    // TEST current character corresponds to testCharacterResultId1011334
+    let name = !testCharacterResultId1011334.name!.isEmpty ? testCharacterResultId1011334.name : "Character Detail"
+    XCTAssert(sut.getName() == name )
+    let descr = !testCharacterResultId1011334.description!.isEmpty ? testCharacterResultId1011334.description! : "No Description Available"
+    XCTAssert(sut.getDescription() == descr)
+    XCTAssert(sut.getThumbnailUrl() == URL(string: "http://i.annihil.us/u/prod/marvel/i/mg/c/e0/535fecbbb9784.jpg") )
+    let comicsCount = "Comics available: \((testCharacterResultId1011334.comics!.items?.count)!)"
+    XCTAssert(sut.getComicsCount() == String(comicsCount) )
+    let seriesCount = "Series available: \((testCharacterResultId1011334.series!.items?.count)!)"
+    XCTAssert(sut.getSeriesCount() == String(seriesCount) )
+    let storiesCount = "Stories available: \((testCharacterResultId1011334.stories!.items?.count)!)"
+    XCTAssert(sut.getStoriesCount() == String(storiesCount) )
+  }
 
-    // TEST getNextCharactersList(at:)
-    sut.getCharacter(with: characterId){
-      XCTAssert(self.sut.getName() == self.testCharacterResultId1009144.name )
-      XCTAssert(self.sut.getDescription() == self.testCharacterResultId1009144.name )
-      let comicsCount = (self.testCharacterResultId1009144.comics!.items?.count)!
+  /// TEST  sut creation using  init(dependencies: AppDependenciesProtocol, characterId: String)
+  func testInit2() throws {
+    sut = CharacterDetailViewModel(dependencies: mockAppDependencies, characterId: String(testCharacterResultId1011334.id!))
+    XCTAssert(self.sut.getName() == "Character Detail" )
+    XCTAssert(self.sut.getDescription() == "No Description Available")
+    XCTAssert(self.sut.getThumbnailUrl() == URL(string: "") )
+    XCTAssert(self.sut.getComicsCount() == "" )
+    XCTAssert(self.sut.getSeriesCount() == "" )
+    XCTAssert(self.sut.getStoriesCount() == "" )
+
+    sut.getCharacter(with: testCharacterResultId1011334.id!){
+     // TEST current character corresponds to testCharacterResultId1011334
+      let name = !self.testCharacterResultId1011334.name!.isEmpty ? self.testCharacterResultId1011334.name : "Character Detail"
+      XCTAssert(self.sut.getName() == name )
+      let descr = !self.testCharacterResultId1011334.description!.isEmpty ? self.testCharacterResultId1011334.description! : "No Description Available"
+      XCTAssert(self.sut.getDescription() == descr)
+      XCTAssert(self.sut.getThumbnailUrl() == URL(string: "http://i.annihil.us/u/prod/marvel/i/mg/c/e0/535fecbbb9784.jpg") )
+      let comicsCount = "Comics available: \((self.testCharacterResultId1011334.comics!.items?.count)!)"
       XCTAssert(self.sut.getComicsCount() == String(comicsCount) )
-      let seriesCount = (self.testCharacterResultId1009144.comics!.items?.count)!
+      let seriesCount = "Series available: \((self.testCharacterResultId1011334.series!.items?.count)!)"
       XCTAssert(self.sut.getSeriesCount() == String(seriesCount) )
-      let storiesCount = (self.testCharacterResultId1009144.comics!.items?.count)!
+      let storiesCount = "Stories available: \((self.testCharacterResultId1011334.stories!.items?.count)!)"
       XCTAssert(self.sut.getStoriesCount() == String(storiesCount) )
     }
   }
-
-  func testFromDeepLink() throws {
-
-    let characterIdAt0 = 1011334
-    // TEST getNextCharactersList(at:)
-    sut.getCharacter(with: characterIdAt0){
-
-      // TEST
-      XCTAssert(self.sut.getName() == "3-D Man" )
-      XCTAssert(self.sut.getDescription() == "" )
-      XCTAssert(self.sut.getComicsCount() == "12" )
-      XCTAssert(self.sut.getSeriesCount() == "3" )
-      XCTAssert(self.sut.getStoriesCount() == "21" )
-    }
-  }
-
 }
-
-//
-//class CharacterDetailViewModelTest: XCTestCase {
-//
-//  var sut: CharacterDetailViewModel! // swiftlint:disable:this implicitly_unwrapped_optional
-//  override func setUpWithError() throws {
-//
-//  }
-//  override func tearDownWithError() throws {
-//    // Put teardown code here. This method is called after the invocation of each test method in the class.
-//  }
-//
-//  func testExample() throws {
-//    // This is an example of a functional test case.
-//    // Use XCTAssert and related functions to verify your tests produce the correct results.
-//  }
-//
-//  func testPerformanceExample() throws {
-//    // This is an example of a performance test case.
-//    self.measure {
-//      // Put the code you want to measure the time of here.
-//    }
-//  }
-//}
-//
-//class ComicsListViewModelTest: XCTestCase {
-//
-//  var sut: ComicsListViewModel! // swiftlint:disable:this implicitly_unwrapped_optional
-//  override func setUpWithError() throws {
-//
-//  }
-//  override func tearDownWithError() throws {
-//    // Put teardown code here. This method is called after the invocation of each test method in the class.
-//  }
-//
-//  func testExample() throws {
-//    // This is an example of a functional test case.
-//    // Use XCTAssert and related functions to verify your tests produce the correct results.
-//  }
-//
-//  func testPerformanceExample() throws {
-//    // This is an example of a performance test case.
-//    self.measure {
-//      // Put the code you want to measure the time of here.
-//    }
-//  }
-//}
-//
-//
-//class ComicDetailViewModelTest: XCTestCase {
-//
-//  var sut: ComicDetailViewModel! // swiftlint:disable:this implicitly_unwrapped_optional
-//  override func setUpWithError() throws {
-//
-//  }
-//  override func tearDownWithError() throws {
-//    // Put teardown code here. This method is called after the invocation of each test method in the class.
-//  }
-//
-//  func testExample() throws {
-//    // This is an example of a functional test case.
-//    // Use XCTAssert and related functions to verify your tests produce the correct results.
-//  }
-//
-//  func testPerformanceExample() throws {
-//    // This is an example of a performance test case.
-//    self.measure {
-//      // Put the code you want to measure the time of here.
-//    }
-//  }
-//}
-//
