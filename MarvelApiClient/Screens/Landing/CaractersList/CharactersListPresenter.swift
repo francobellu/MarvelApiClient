@@ -8,20 +8,29 @@
 
 import Foundation
 
-class CharactersListViewModel {
+class CharactersListPresenter {
 
   private weak var coordinatorDelegate: CharactersListCoordinatorDelegate!  //swiftlint:disable:this implicitly_unwrapped_optional
 
-  var interactor: CharactersListInteractor?
+  private var dependencies: AppDependenciesProtocol! // swiftlint:disable:this implicitly_unwrapped_optional
+
+  private var apiClient: MarvelAPIProtocol{
+    dependencies.marvelApiClient
+  }
+
+  private var characters: [CharacterResult] = []
+
 
   private(set) var title = "Marvel Comics"
 
-  init(coordinatorDelegate: CharactersListCoordinatorDelegate) {
+  init(dependencies: AppDependenciesProtocol, coordinatorDelegate: CharactersListCoordinatorDelegate) {
+    self.dependencies = dependencies
     self.coordinatorDelegate = coordinatorDelegate
   }
 
   func getCharacter(at index: Int) -> CharacterResult {
-    return interactor.
+    return characters[index]
+
   }
 
   func charactersCount() -> Int {
@@ -30,14 +39,16 @@ class CharactersListViewModel {
 
   // MARK: - API FUNCTIONS
 
-  func getNextCharactersList() {
-    interactor?.getNextCharactersList{
-      
+  func getNextCharactersList(completion: @escaping () -> Void) {
+    apiClient.getCharactersList { ( characters: [CharacterResult])  in
+      // Update dataSource array
+      self.characters += characters
+      completion()
     }
   }
 }
 
-extension CharactersListViewModel{
+extension CharactersListPresenter{
 
   func didSelect(character: CharacterResult) {
     coordinatorDelegate.didSelect(character: character)
@@ -46,5 +57,4 @@ extension CharactersListViewModel{
   func didGoBack() {
     coordinatorDelegate.didGoBack()
   }
-
 }

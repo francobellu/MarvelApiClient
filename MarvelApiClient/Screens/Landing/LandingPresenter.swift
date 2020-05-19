@@ -8,7 +8,7 @@
 
 import Foundation
 
-class LandingViewModel {
+class LandingPresenter {
 
   private weak var coordinatorDelegate: LandingCoordinatorDelegate! //swiftlint:disable:this implicitly_unwrapped_optional
 
@@ -28,9 +28,4 @@ class LandingViewModel {
   func didPressComicsFlowAction() {
     coordinatorDelegate.comicsFlowActionSelected()
   }
-
-  func didPressAvengersComicsFlowAction() {
-    coordinatorDelegate.avengersComicsFlowActionSelected()
-  }
-
 }

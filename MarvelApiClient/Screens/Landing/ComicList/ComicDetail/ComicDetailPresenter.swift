@@ -8,7 +8,7 @@
 
 import Foundation
 
-class ComicDetailViewModel{
+class ComicDetailPresenter{
   var comic: ComicResult! // swiftlint:disable:this implicitly_unwrapped_optional
 
   private var dependencies: AppDependenciesProtocol! // swiftlint:disable:this implicitly_unwrapped_optional

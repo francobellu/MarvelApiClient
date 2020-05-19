@@ -16,7 +16,7 @@ class CharacterDetailViewController: UIViewController, StoryboardInstantiable {
   @IBOutlet weak var seriesLabel: UILabel!
   @IBOutlet weak var storiesLabel: UILabel!
 
-  var viewModel: CharacterDetailViewModel! // swiftlint:disable:this implicitly_unwrapped_optional
+  var presenter: CharacterDetailPresenter! // swiftlint:disable:this implicitly_unwrapped_optional
 
   override func viewDidLoad() {
     configureView()
@@ -24,18 +24,18 @@ class CharacterDetailViewController: UIViewController, StoryboardInstantiable {
   }
 
   func configureView() {
-    title = viewModel.getName()
+    title = presenter.getName()
 
-    guard let thumbnail = viewModel.getThumbnailUrl() else { return  }
+    guard let thumbnail = presenter.getThumbnailUrl() else { return  }
     thumbnailView.af.setImage(withURL: thumbnail)
 
-    descriptionLabel.text = viewModel.getDescription()
+    descriptionLabel.text = presenter.getDescription()
     descriptionLabel.numberOfLines = 0
     descriptionLabel.lineBreakMode = .byWordWrapping
 
-    comicsLabel.text = viewModel.getComicsCount()
-    seriesLabel.text = viewModel.getSeriesCount()
-    storiesLabel.text = viewModel.getStoriesCount()
+    comicsLabel.text = presenter.getComicsCount()
+    seriesLabel.text = presenter.getSeriesCount()
+    storiesLabel.text = presenter.getStoriesCount()
 
   }
 }

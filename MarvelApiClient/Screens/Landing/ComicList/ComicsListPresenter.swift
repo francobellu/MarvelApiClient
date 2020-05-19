@@ -8,7 +8,7 @@
 
 import Foundation
 
-class ComicsListViewModel {
+class ComicsListPresenter {
 
   private weak var coordinatorDelegate: ComicsListCoordinatorDelegate! //swiftlint:disable:this implicitly_unwrapped_optional
 
@@ -56,7 +56,7 @@ class ComicsListViewModel {
   }
 }
 
-extension ComicsListViewModel{
+extension ComicsListPresenter{
   func didGoBack(){
     coordinatorDelegate.didGoBack()
   }

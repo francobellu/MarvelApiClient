@@ -9,7 +9,7 @@
 import UIKit
 
 class CharactersListViewController: UIViewController, StoryboardInstantiable {
-  var viewModel: CharactersListViewModel! // swiftlint:disable:this implicitly_unwrapped_optional
+  var presenter: CharactersListPresenter! // swiftlint:disable:this implicitly_unwrapped_optional
 
   @IBOutlet weak var tableView: UITableView!
 
@@ -18,13 +18,13 @@ class CharactersListViewController: UIViewController, StoryboardInstantiable {
   override func viewDidLoad() {
     super.viewDidLoad()
 
-    title = viewModel.title
+    title = presenter.title
     tableView.dataSource = self
     tableView.delegate = self
     setBackBtnInterceptMechanism()
     tableView.register(UINib(nibName: R.nib.characterCell.name, bundle: nil), forCellReuseIdentifier: R.reuseIdentifier.characterCellId.identifier)
     activityIndicator.startAnimating()
-    viewModel.getNextCharactersList{
+    presenter.getNextCharactersList{
       // Reload Data
       DispatchQueue.main.async {
         self.tableView.reloadData()
@@ -57,26 +57,26 @@ class CharactersListViewController: UIViewController, StoryboardInstantiable {
     if allowGoBack {
       // Don't forget to re-enable the interactive gesture
       self.navigationController?.interactivePopGestureRecognizer?.isEnabled = true
-      viewModel.didGoBack()
+      presenter.didGoBack()
     }
   }
 }
 
 extension CharactersListViewController: UITableViewDataSource {
   func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-    return viewModel.charactersCount()
+    return presenter.charactersCount()
   }
 
   func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
 
-    let newCharacter = viewModel.getCharacter(at: indexPath.row)
+    let newCharacter = presenter.getCharacter(at: indexPath.row)
     guard let cell = tableView.dequeueReusableCell(withIdentifier: R.reuseIdentifier.characterCellId.identifier) as?
       CharacterCell else { return UITableViewCell() }
 
     cell.config(with: newCharacter)
     // Check if the last row number is the same as the last current data element
-    if indexPath.row == viewModel.charactersCount() - 1 {
-      viewModel.getNextCharactersList {
+    if indexPath.row == presenter.charactersCount() - 1 {
+      presenter.getNextCharactersList {
         DispatchQueue.main.async {
           tableView.reloadData()
         }
@@ -92,7 +92,7 @@ extension CharactersListViewController: UITableViewDataSource {
 
 extension CharactersListViewController: UITableViewDelegate {
   func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-    let character = viewModel.getCharacter(at: indexPath.row)
-    viewModel.didSelect(character: character)
+    let character = presenter.getCharacter(at: indexPath.row)
+    presenter.didSelect(character: character)
   }
 }

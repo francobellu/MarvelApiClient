@@ -111,27 +111,20 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="34" translatesAutoresizingMaskIntoConstraints="NO" id="KfG-Wi-G7x">
-                                <rect key="frame" x="95.5" y="254.5" width="184" height="158"/>
+                                <rect key="frame" x="114" y="286.5" width="147" height="94"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="S6a-9B-Ldc">
-                                        <rect key="frame" x="0.0" y="0.0" width="184" height="30"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="147" height="30"/>
                                         <state key="normal" title="All Marvel Characters"/>
                                         <connections>
                                             <action selector="charactersFlowAction:" destination="BYZ-38-t0r" eventType="touchUpInside" id="wqZ-Ip-kZ7"/>
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="izB-te-PR0">
-                                        <rect key="frame" x="0.0" y="64" width="184" height="30"/>
+                                        <rect key="frame" x="0.0" y="64" width="147" height="30"/>
                                         <state key="normal" title="All Marvel Comics"/>
                                         <connections>
                                             <action selector="comicsFlowAction:" destination="BYZ-38-t0r" eventType="touchUpInside" id="E0J-t3-icF"/>
-                                        </connections>
-                                    </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tuB-nx-OUT">
-                                        <rect key="frame" x="0.0" y="128" width="184" height="30"/>
-                                        <state key="normal" title="Marvel 's Avengers Comics"/>
-                                        <connections>
-                                            <action selector="avengersComicsFlowAction:" destination="BYZ-38-t0r" eventType="touchUpInside" id="C1L-X0-b4i"/>
                                         </connections>
                                     </button>
                                 </subviews>

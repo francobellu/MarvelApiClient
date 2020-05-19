@@ -8,8 +8,8 @@
 
 import Foundation
 
-class CharacterDetailViewModel {
-  private var character: CharacterResult? // swiftlint:disable:this implicitly_unwrapped_optional
+class CharacterDetailPresenter {
+  private var character: CharacterResult?
 
   private var dependencies: AppDependenciesProtocol! // swiftlint:disable:this implicitly_unwrapped_optional
 

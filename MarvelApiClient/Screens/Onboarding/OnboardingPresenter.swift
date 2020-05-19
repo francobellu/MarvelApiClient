@@ -1,5 +1,5 @@
 //
-//  OnboardingViewMovel.swift
+//  OnboardingPresenter.swift
 //  MarvelApiClient
 //
 //  Created by franco bellu on 16/05/2020.
@@ -8,7 +8,7 @@
 
 import Foundation
 
-class OnboardingViewModel {
+class OnboardingPresenter {
 
   private(set) var title = "Character Detail"
 

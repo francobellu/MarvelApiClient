@@ -9,22 +9,18 @@
 import UIKit
 
 class LandingViewController: UIViewController, StoryboardInstantiable {
-  var viewModel: LandingViewModel! // swiftlint:disable:this implicitly_unwrapped_optional
+  var presenter: LandingPresenter! // swiftlint:disable:this implicitly_unwrapped_optional
 
   override func viewDidLoad() {
     super.viewDidLoad()
-    title = viewModel.title
+    title = presenter.title
   }
 
   @IBAction func charactersFlowAction(_ sender: Any) {
-    viewModel.didPressCharactersFlowAction()
+    presenter.didPressCharactersFlowAction()
   }
 
   @IBAction func comicsFlowAction(_ sender: Any) {
-    viewModel.didPressComicsFlowAction()
-  }
-
-  @IBAction func avengersComicsFlowAction(_ sender: Any) {
-    viewModel.didPressAvengersComicsFlowAction()
+    presenter.didPressComicsFlowAction()
   }
 }

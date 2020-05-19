@@ -11,7 +11,6 @@ import UIKit
 protocol LandingCoordinatorDelegate: class {
   func charactersFlowActionSelected()
   func comicsFlowActionSelected()
-  func avengersComicsFlowActionSelected()
 }
 
 //protocol ComicsListCoordinatorDelegate: class {
@@ -51,10 +50,10 @@ extension LandingCoordinator: Coordinator {
 
   func showLanding() {
     print("FB:LandingCoordinator:start()")
-    let viewModel = LandingViewModel(dependencies: dependencies, coordinatorDelegate: self)
+    let presenter = LandingPresenter(dependencies: dependencies, coordinatorDelegate: self)
 
     let viewController = LandingViewController.instantiateViewController()
-    viewController.viewModel = viewModel
+    viewController.presenter = presenter
     print("FB:  Created VC: \(viewController) ")
 
     print("FB:  Presenting VC: \(viewController) ")
@@ -77,10 +76,6 @@ extension LandingCoordinator: LandingCoordinatorDelegate {
     self.showAllComics()
   }
 
-  func avengersComicsFlowActionSelected() {
-    self.showAverngersComics()
-  }
-
   // MARK: - UTILITY FUNCTIONS
   private func  showAllCharacters() {
     // Create new coordinator...
@@ -100,14 +95,5 @@ extension LandingCoordinator: LandingCoordinatorDelegate {
     comicsCoordinator.start()
     // ...and add it
     add(comicsCoordinator)
-  }
-
-  private func showAverngersComics() {
-    // Create new coordinator...
-    let avengersCoordinator = AvengersCoordinator(parentCoordinator: self, presenter: presenter as! UINavigationController, dependencies: dependencies)
-    // ...start it...
-    avengersCoordinator.start()
-    // ...and add it
-    add(avengersCoordinator)
   }
 }

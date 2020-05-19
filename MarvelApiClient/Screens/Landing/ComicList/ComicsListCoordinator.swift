@@ -51,25 +51,25 @@ extension ComicsListCoordinator: Coordinator {
   private func presentComicsListViewController() {
     print("FB:ComicsListCoordinator:startComicsListViewController()")
 
-    let viewModel = ComicsListViewModel(dependencies: dependencies, coordinatorDelegate: self)
+    let viewPresenter = ComicsListPresenter(dependencies: dependencies, coordinatorDelegate: self)
 
     let viewController = ComicsListViewController.instantiateViewController()
-    viewController.viewModel = viewModel
+    viewController.presenter = viewPresenter
 
     (presenter as? UINavigationController)?.pushViewController(viewController, animated: true)
   }
 
   private func presentComicDetailViewController(with comicId: String ) {
-    let viewModel = ComicDetailViewModel(dependencies: self.dependencies, comicId: comicId)
+    let presenter = ComicDetailPresenter(dependencies: self.dependencies, comicId: comicId)
     DispatchQueue.global(qos: .background).async{
       guard let id = Int(comicId)  else {
         print("Invalid deepLink url")
         return
       }
-      viewModel.getComic(with: id){
+      presenter.getComic(with: id){
         DispatchQueue.main.sync{
           let viewController = ComicDetailViewController.instantiateViewController()
-          viewController.viewModel = viewModel
+          viewController.presenter = presenter
           (self.presenter as? UINavigationController)?.pushViewController(viewController, animated: true)
         }
       }
@@ -95,9 +95,9 @@ extension ComicsListCoordinator: ComicsListCoordinatorDelegate {
   }
 
   private func presentComicDetailViewController(with comic: ComicResult ) {
-    let viewModel = ComicDetailViewModel(dependencies: dependencies, comic: comic)
+    let viewPresenter = ComicDetailPresenter(dependencies: dependencies, comic: comic)
     let viewController = ComicDetailViewController.instantiateViewController()
-    viewController.viewModel = viewModel
+    viewController.presenter = viewPresenter
     //viewController.coordinatorDelegate = self
     print("FB:  Created VC: \(viewController) ")
     print("FB:  Presenting VC: \(viewController) ")

@@ -11,7 +11,7 @@ import XCTest
 
 class OnboardingViewModelTest: XCTestCase {
 
-  var sut: OnboardingViewModel! // swiftlint:disable:this implicitly_unwrapped_optional
+  var sut: OnboardingPresenter! // swiftlint:disable:this implicitly_unwrapped_optional
   override func setUpWithError() throws {
 
   }
@@ -34,7 +34,7 @@ class OnboardingViewModelTest: XCTestCase {
 
 class LandingViewModelTest: XCTestCase {
 
-  var sut: LandingViewModel! // swiftlint:disable:this implicitly_unwrapped_optional
+  var sut: LandingPresenter! // swiftlint:disable:this implicitly_unwrapped_optional
   override func setUpWithError() throws {
 
   }
@@ -147,7 +147,7 @@ class MockApiClient:  MarvelAPIProtocol{
 
 class CharactersListViewModelTest: XCTestCase {
 
-  var sut: CharactersListViewModel! // swiftlint:disable:this implicitly_unwrapped_optional
+  var sut: CharactersListPresenter! // swiftlint:disable:this implicitly_unwrapped_optional
 
   let mockAppDependencies = MockAppDependencies()
   let mockCoordinator =  MockCharactersListCoordinatorDelegate()
@@ -157,7 +157,7 @@ class CharactersListViewModelTest: XCTestCase {
 
     let testCharacterResultId1009144: [CharacterResult] =  getObjec(from: mockContentData(for: "MockedResponseCharacterResultId1011334"))
     mockApiClient.mockApiClientData.mockCharactersData = testCharacterResultId1009144
-    sut = CharactersListViewModel(dependencies: mockAppDependencies, coordinatorDelegate: mockCoordinator)
+    sut = CharactersListPresenter(dependencies: mockAppDependencies, coordinatorDelegate: mockCoordinator)
   }
 
   // MARK: - TEST API FUNCTIONS
@@ -185,7 +185,7 @@ class CharactersListViewModelTest: XCTestCase {
 }
 
 class CharacterDetailViewModelTest: XCTestCase {
-  var sut: CharacterDetailViewModel! // swiftlint:disable:this implicitly_unwrapped_optional
+  var sut: CharacterDetailPresenter! // swiftlint:disable:this implicitly_unwrapped_optional
   let mockAppDependencies = MockAppDependencies()
   var testCharacterResultId1011334: CharacterResult!
   var testCharacterResultId1009144: CharacterResult!
@@ -205,7 +205,7 @@ class CharacterDetailViewModelTest: XCTestCase {
 
   /// TEST  sut creation using init(dependencies: AppDependenciesProtocol, character: CharacterResult)
   func testInit1() throws {
-    sut = CharacterDetailViewModel(dependencies: mockAppDependencies, character: testCharacterResultId1011334)
+    sut = CharacterDetailPresenter(dependencies: mockAppDependencies, character: testCharacterResultId1011334)
 
     // TEST current character corresponds to testCharacterResultId1011334
     let name = !testCharacterResultId1011334.name!.isEmpty ? testCharacterResultId1011334.name : "Character Detail"
@@ -223,7 +223,7 @@ class CharacterDetailViewModelTest: XCTestCase {
 
   /// TEST  sut creation using  init(dependencies: AppDependenciesProtocol, characterId: String)
   func testInit2() throws {
-    sut = CharacterDetailViewModel(dependencies: mockAppDependencies, characterId: String(testCharacterResultId1011334.id!))
+    sut = CharacterDetailPresenter(dependencies: mockAppDependencies, characterId: String(testCharacterResultId1011334.id!))
     XCTAssert(self.sut.getName() == "Character Detail" )
     XCTAssert(self.sut.getDescription() == "No Description Available")
     XCTAssert(self.sut.getThumbnailUrl() == URL(string: "") )

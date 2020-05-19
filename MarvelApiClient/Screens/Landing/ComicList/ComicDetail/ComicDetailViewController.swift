@@ -14,7 +14,7 @@ class ComicDetailViewController: UIViewController, StoryboardInstantiable {
   @IBOutlet weak var seriesLabel: UILabel!
 
 //  @IBOutlet weak var scrollView: UIScrollView!
-  var viewModel: ComicDetailViewModel! // swiftlint:disable:this implicitly_unwrapped_optional
+  var presenter: ComicDetailPresenter! // swiftlint:disable:this implicitly_unwrapped_optional
 
   override func viewDidLoad() {
 //    scrollView.contentSize = CGSize(width: self.view.frame.width, height: self.view.frame.height + 200)
@@ -24,17 +24,17 @@ class ComicDetailViewController: UIViewController, StoryboardInstantiable {
   }
 
   func configureView() {
-    guard let comic = viewModel.comic else { return }
-    title = viewModel.getName()
+    guard let comic = presenter.comic else { return }
+    title = presenter.getName()
 
     guard let thumbnail = comic.thumbnail else { return  }
     thumbnailView.af.setImage(withURL: thumbnail.url)
 
-    descriptionLabel.text = viewModel.getDescription()
+    descriptionLabel.text = presenter.getDescription()
     descriptionLabel.numberOfLines = 0
     descriptionLabel.lineBreakMode = .byWordWrapping
 
-    seriesLabel.text = viewModel.getSeries()
+    seriesLabel.text = presenter.getSeries()
   }
 
   //  func navigationController(_ navigationController: UINavigationController, didShow viewController: UIViewController, animated: Bool) {

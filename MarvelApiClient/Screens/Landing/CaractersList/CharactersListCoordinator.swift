@@ -51,27 +51,25 @@ extension CharactersListCoordinator: Coordinator, DeepLinkable {
   }
 
   private func presentCharactersListViewController() {
-    let viewModel = CharactersListViewModel(coordinatorDelegate: self)
-    let interactor = CharactersListInteractor(presenter: viewModel, dependencies: dependencies)
-    viewModel.interactor = interactor
+    let viewPresenter = CharactersListPresenter(dependencies: dependencies, coordinatorDelegate: self)
 
     let viewController = CharactersListViewController.instantiateViewController()
-    viewController.viewModel = viewModel
+    viewController.presenter = viewPresenter
 
     (presenter as? UINavigationController)?.pushViewController(viewController, animated: true)
   }
 
   private func presentCharacterDetailViewController(with characterId: String ) {
-    let viewModel = CharacterDetailViewModel(dependencies: self.dependencies, characterId: characterId)
+    let presenter = CharacterDetailPresenter(dependencies: self.dependencies, characterId: characterId)
     DispatchQueue.global(qos: .background).async{
       guard let id = Int(characterId)  else {
         print("Invalid deepLink url")
         return
       }
-      viewModel.getCharacter(with: id){
+      presenter.getCharacter(with: id){
         DispatchQueue.main.sync{
           let viewController = CharacterDetailViewController.instantiateViewController()
-          viewController.viewModel = viewModel
+          viewController.presenter = presenter
           (self.presenter as? UINavigationController)?.pushViewController(viewController, animated: true)
         }
       }
@@ -95,10 +93,10 @@ extension CharactersListCoordinator: CharactersListCoordinatorDelegate {
   }
 
   private func presentCharacterDetailViewController(with character: CharacterResult ) {
-    let viewModel = CharacterDetailViewModel(dependencies: dependencies, character: character)
+    let viewPresenter = CharacterDetailPresenter(dependencies: dependencies, character: character)
 
     let viewController = CharacterDetailViewController.instantiateViewController()
-    viewController.viewModel = viewModel
+    viewController.presenter = viewPresenter
 
     (presenter as? UINavigationController)?.pushViewController(viewController, animated: true)
   }

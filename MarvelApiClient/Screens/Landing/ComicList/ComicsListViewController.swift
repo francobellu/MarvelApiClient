@@ -9,7 +9,7 @@
 import UIKit
 
 class ComicsListViewController: UIViewController, StoryboardInstantiable {
-  var viewModel: ComicsListViewModel! // swiftlint:disable:this implicitly_unwrapped_optional
+  var presenter: ComicsListPresenter! // swiftlint:disable:this implicitly_unwrapped_optional
 
   @IBOutlet weak var tableView: UITableView!
 
@@ -17,13 +17,13 @@ class ComicsListViewController: UIViewController, StoryboardInstantiable {
 
   override func viewDidLoad() {
     super.viewDidLoad()
-    title = viewModel.title
+    title = presenter.title
     tableView.dataSource = self
     tableView.delegate = self
     setBackBtnInterceptMechanism()
     tableView.register(UINib(nibName: R.nib.comicCell.name, bundle: nil), forCellReuseIdentifier: R.reuseIdentifier.comicCellId.identifier)
     activityIndicator.startAnimating()
-    viewModel.getComicsList {
+    presenter.getComicsList {
       // Reload Data
       DispatchQueue.main.async {
         self.tableView.reloadData()
@@ -56,26 +56,26 @@ class ComicsListViewController: UIViewController, StoryboardInstantiable {
     if allowGoBack {
       // Don't forget to re-enable the interactive gesture
       self.navigationController?.interactivePopGestureRecognizer?.isEnabled = true
-      viewModel.didGoBack()
+      presenter.didGoBack()
     }
   }
 }
 
 extension ComicsListViewController: UITableViewDataSource {
   func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-    return viewModel.comicsCount()
+    return presenter.comicsCount()
   }
 
   func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
 
-    let newComic = viewModel.getComic(at: indexPath.row)
+    let newComic = presenter.getComic(at: indexPath.row)
     guard let cell = tableView.dequeueReusableCell(withIdentifier: R.reuseIdentifier.comicCellId.identifier) as?
       ComicCell else { return UITableViewCell() }
 
     cell.config(with: newComic)
     // Check if the last row number is the same as the last current data element
-    if indexPath.row == viewModel.comicsCount() - 1 {
-      viewModel.getNextComicsList  {
+    if indexPath.row == presenter.comicsCount() - 1 {
+      presenter.getNextComicsList  {
         DispatchQueue.main.async {
           tableView.reloadData()
         }
@@ -91,8 +91,8 @@ extension ComicsListViewController: UITableViewDataSource {
 
 extension ComicsListViewController: UITableViewDelegate {
   func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-    let comic = viewModel.getComic(at: indexPath.row)
-    viewModel.didSelect(comic: comic)
+    let comic = presenter.getComic(at: indexPath.row)
+    presenter.didSelect(comic: comic)
   }
 
   //  func navigationController(_ navigationController: UINavigationController, didShow viewController: UIViewController, animated: Bool) {

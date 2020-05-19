@@ -9,23 +9,23 @@
 import UIKit
 
 class OnboardingViewController: UIViewController, StoryboardInstantiable {
-  var viewModel: OnboardingViewModel! // swiftlint:disable:this implicitly_unwrapped_optional
+  var presenter: OnboardingPresenter! // swiftlint:disable:this implicitly_unwrapped_optional
 
   @IBOutlet weak var dontShowAgainBtn: UIButton!
 
   override func viewDidLoad() {
     super.viewDidLoad()
-    let btnImageName = viewModel.getImageStrDontShowAgainBtn()
+    let btnImageName = presenter.getImageStrDontShowAgainBtn()
     dontShowAgainBtn.setImage(UIImage(systemName: btnImageName), for: .normal)
   }
 
   @IBAction func skipAction(_ sender: Any) {
-    viewModel.didPressSkipAction()
+    presenter.didPressSkipAction()
   }
 
   @IBAction func getImageStrDontShowAgainBtnToogle(_ sender: Any) {
     print("OnboardingViewController:dontShowAgain()")
-       let btnImageName = viewModel.didPressDontShowAgain()
+       let btnImageName = presenter.didPressDontShowAgain()
        dontShowAgainBtn.setImage(UIImage(systemName: btnImageName), for: .normal)
   }
 }
