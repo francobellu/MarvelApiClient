@@ -109,7 +109,7 @@ class MockAppDependencies: AppDependenciesProtocol {
 }
 
 struct MockApiCLientData {
-  let mockCharacterData: CharacterResult?
+  var mockCharacterData: CharacterResult?
   var mockCharactersData: [CharacterResult]?
   let mockComicData: ComicResult?
   let mockComicsData: [ComicResult]?
@@ -154,7 +154,9 @@ class CharactersListViewModelTest: XCTestCase {
   
   override func setUpWithError() throws {
     let mockApiClient = mockAppDependencies.marvelApiClient as! MockApiClient
-    mockApiClient.mockApiClientData.mockCharactersData =  self.getObjec(from: self.mockContentData(for: "MockedResponseGetCharacters"))
+
+    let testCharacterResultId1009144: [CharacterResult] =  getObjec(from: mockContentData(for: "MockedResponseCharacterResultId1011334"))
+    mockApiClient.mockApiClientData.mockCharactersData = testCharacterResultId1009144
     sut = CharactersListViewModel(dependencies: mockAppDependencies, coordinatorDelegate: mockCoordinator)
   }
 
@@ -182,41 +184,71 @@ class CharactersListViewModelTest: XCTestCase {
   }
 }
 
-//class CharacterDetailViewModelTest: XCTestCase {
-//
-//  var sut: CharacterDetailViewModel! // swiftlint:disable:this implicitly_unwrapped_optional
-//
-//  let mockAppDependencies = MockAppDependencies()
-//  let mockCoordinator =  MockCharactersListCoordinatorDelegate()
-//
-//  override func setUpWithError() throws {
-//    let mockApiClient = mockAppDependencies.marvelApiClient as! MockApiClient
-//    mockApiClient.mockApiClientData.mockCharactersData =  self.getObjec(from: self.mockContentData(for: "MockedResponseGetCharacter"))
-//    sut = CharacterDetailViewModel(dependencies: mockAppDependencies, coordinatorDelegate: mockCoordinator)
-//  }
-//
-//  // MARK: - TEST API FUNCTIONS
-//  func test() throws {
-//
-//    let characterIdAt0 = 1011334
-//    // TEST getNextCharactersList(at:)
-//    sut.getCharacter(with: <#Int#>){
-//
-//      // TEST count now is > zero - charactersCount()
-//      let charactercount = self.sut.charactersCount()
-//      XCTAssert(charactercount > 0 )
-//
-//      // TEST character at index 0 has expected id - getCharacter(at:)
-//      let character = self.sut.getCharacter(at: 0)
-//
-//      XCTAssert(character.id == characterIdAt0)
-//
-//      XCTAssert(self.mockCoordinator.coordinatorState == .none)
-//      self.sut.didGoBack()
-//      self.mockCoordinator.coordinatorState = .didSelect(character: character)
-//    }
-//  }
-//}
+class CharacterDetailViewModelTest: XCTestCase {
+
+  var sut: CharacterDetailViewModel! // swiftlint:disable:this implicitly_unwrapped_optional
+
+  let mockAppDependencies = MockAppDependencies()
+
+  var testCharacterResultId1011334: CharacterResult! = nil
+  var testCharacterResultId1009144: CharacterResult! = nil
+
+  override func setUpWithError() throws {
+    let mockApiClient = mockAppDependencies.marvelApiClient as! MockApiClient
+
+//    testCharacterResultId1011334 = getObjec(from: mockContentData(for: "MockedResponseCharacterResultId1011334"))
+    mockApiClient.mockApiClientData.mockCharacterData = getObjec(from: mockContentData(for: "MockedResponseCharacterResultId1011334"))
+
+    let testCharacterResultId1009144: [CharacterResult]  =  getObjec(from: mockContentData(for: "MockedResponseCharacterResultId1009144"))
+    sut = CharacterDetailViewModel(dependencies: mockAppDependencies, character: testCharacterResultId1009144.first!)
+
+//    let testCharacterResultId1011334: CharacterResult =  getObjec(from: mockContentData(for: "MockedResponseCharacterResultId1011334"))
+
+  }
+
+  // MARK: - TEST API FUNCTIONS
+  func testGetCharacter() throws {
+
+    XCTAssert(self.sut.getName() == testCharacterResultId1011334.name )
+    XCTAssert(self.sut.getDescription() == testCharacterResultId1011334.name )
+    let comicsCount = (testCharacterResultId1011334.comics!.items?.count)!
+    XCTAssert(self.sut.getComicsCount() == String(comicsCount) )
+    let seriesCount = (testCharacterResultId1011334.comics!.items?.count)!
+    XCTAssert(self.sut.getSeriesCount() == String(seriesCount) )
+    let storiesCount = (testCharacterResultId1011334.comics!.items?.count)!
+    XCTAssert(self.sut.getStoriesCount() == String(storiesCount) )
+
+    let characterId = testCharacterResultId1009144.id!
+
+    // TEST getNextCharactersList(at:)
+    sut.getCharacter(with: characterId){
+      XCTAssert(self.sut.getName() == self.testCharacterResultId1009144.name )
+      XCTAssert(self.sut.getDescription() == self.testCharacterResultId1009144.name )
+      let comicsCount = (self.testCharacterResultId1009144.comics!.items?.count)!
+      XCTAssert(self.sut.getComicsCount() == String(comicsCount) )
+      let seriesCount = (self.testCharacterResultId1009144.comics!.items?.count)!
+      XCTAssert(self.sut.getSeriesCount() == String(seriesCount) )
+      let storiesCount = (self.testCharacterResultId1009144.comics!.items?.count)!
+      XCTAssert(self.sut.getStoriesCount() == String(storiesCount) )
+    }
+  }
+
+  func testFromDeepLink() throws {
+
+    let characterIdAt0 = 1011334
+    // TEST getNextCharactersList(at:)
+    sut.getCharacter(with: characterIdAt0){
+
+      // TEST
+      XCTAssert(self.sut.getName() == "3-D Man" )
+      XCTAssert(self.sut.getDescription() == "" )
+      XCTAssert(self.sut.getComicsCount() == "12" )
+      XCTAssert(self.sut.getSeriesCount() == "3" )
+      XCTAssert(self.sut.getStoriesCount() == "21" )
+    }
+  }
+
+}
 
 //
 //class CharacterDetailViewModelTest: XCTestCase {

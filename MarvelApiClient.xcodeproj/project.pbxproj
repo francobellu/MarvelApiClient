@@ -61,9 +61,10 @@
 		C72CF36A2471F2170048B0A2 /* swiftlint in Resources */ = {isa = PBXBuildFile; fileRef = C72CF3692471F2160048B0A2 /* swiftlint */; };
 		C74963A12472DD53001B9A5E /* MockedResponseGetCharacters.json in Resources */ = {isa = PBXBuildFile; fileRef = C74963A02472DD53001B9A5E /* MockedResponseGetCharacters.json */; };
 		C74963A32472F731001B9A5E /* TestUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = C74963A22472F731001B9A5E /* TestUtils.swift */; };
-		C74963A52472F941001B9A5E /* MockedResponseGetCharacter.json in Resources */ = {isa = PBXBuildFile; fileRef = C74963A42472F941001B9A5E /* MockedResponseGetCharacter.json */; };
 		C74963A92473C886001B9A5E /* PresentationLayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = C74963A82473C886001B9A5E /* PresentationLayer.swift */; };
 		C74963AB2473C89A001B9A5E /* DataLayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = C74963AA2473C89A001B9A5E /* DataLayer.swift */; };
+		C74963B12473FF87001B9A5E /* MockedResponseCharacterResultId1009144.json in Resources */ = {isa = PBXBuildFile; fileRef = C74963B02473FF87001B9A5E /* MockedResponseCharacterResultId1009144.json */; };
+		C74963B324740277001B9A5E /* MockedResponseCharacterResultId1011334.json in Resources */ = {isa = PBXBuildFile; fileRef = C74963B224740277001B9A5E /* MockedResponseCharacterResultId1011334.json */; };
 		C76B29A6243A5F1B00793179 /* MarvelApiClientTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C76B29A5243A5F1B00793179 /* MarvelApiClientTests.swift */; };
 		C78A83F3244B6DBA004DE930 /* CharacterDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C78A83F2244B6DBA004DE930 /* CharacterDetailViewModel.swift */; };
 		C78A83F5244B8AD6004DE930 /* GetCharacter.swift in Sources */ = {isa = PBXBuildFile; fileRef = C78A83F4244B8AD6004DE930 /* GetCharacter.swift */; };
@@ -146,9 +147,10 @@
 		C72CF3692471F2160048B0A2 /* swiftlint */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.executable"; path = swiftlint; sourceTree = "<group>"; };
 		C74963A02472DD53001B9A5E /* MockedResponseGetCharacters.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = MockedResponseGetCharacters.json; sourceTree = "<group>"; };
 		C74963A22472F731001B9A5E /* TestUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestUtils.swift; sourceTree = "<group>"; };
-		C74963A42472F941001B9A5E /* MockedResponseGetCharacter.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = MockedResponseGetCharacter.json; sourceTree = "<group>"; };
 		C74963A82473C886001B9A5E /* PresentationLayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PresentationLayer.swift; sourceTree = "<group>"; };
 		C74963AA2473C89A001B9A5E /* DataLayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataLayer.swift; sourceTree = "<group>"; };
+		C74963B02473FF87001B9A5E /* MockedResponseCharacterResultId1009144.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = MockedResponseCharacterResultId1009144.json; sourceTree = "<group>"; };
+		C74963B224740277001B9A5E /* MockedResponseCharacterResultId1011334.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = MockedResponseCharacterResultId1011334.json; sourceTree = "<group>"; };
 		C76B29A3243A5F1B00793179 /* MarvelApiClientTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MarvelApiClientTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		C76B29A5243A5F1B00793179 /* MarvelApiClientTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MarvelApiClientTests.swift; sourceTree = "<group>"; };
 		C76B29A7243A5F1B00793179 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -429,8 +431,9 @@
 		C74963AC2473D0E2001B9A5E /* MockData */ = {
 			isa = PBXGroup;
 			children = (
+				C74963B224740277001B9A5E /* MockedResponseCharacterResultId1011334.json */,
+				C74963B02473FF87001B9A5E /* MockedResponseCharacterResultId1009144.json */,
 				C74963A02472DD53001B9A5E /* MockedResponseGetCharacters.json */,
-				C74963A42472F941001B9A5E /* MockedResponseGetCharacter.json */,
 			);
 			path = MockData;
 			sourceTree = "<group>";
@@ -613,7 +616,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				C74963A12472DD53001B9A5E /* MockedResponseGetCharacters.json in Resources */,
-				C74963A52472F941001B9A5E /* MockedResponseGetCharacter.json in Resources */,
+				C74963B12473FF87001B9A5E /* MockedResponseCharacterResultId1009144.json in Resources */,
+				C74963B324740277001B9A5E /* MockedResponseCharacterResultId1011334.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
