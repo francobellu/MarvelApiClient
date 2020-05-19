@@ -59,9 +59,11 @@
 		C72CF2BD2471ED860048B0A2 /* sitrep.sh in Resources */ = {isa = PBXBuildFile; fileRef = C72CF2B82471ED860048B0A2 /* sitrep.sh */; };
 		C72CF3682471F1B40048B0A2 /* sitrep in Resources */ = {isa = PBXBuildFile; fileRef = C72CF3672471F1B40048B0A2 /* sitrep */; };
 		C72CF36A2471F2170048B0A2 /* swiftlint in Resources */ = {isa = PBXBuildFile; fileRef = C72CF3692471F2160048B0A2 /* swiftlint */; };
-		C74963A12472DD53001B9A5E /* MockResponseGetCharacters.json in Resources */ = {isa = PBXBuildFile; fileRef = C74963A02472DD53001B9A5E /* MockResponseGetCharacters.json */; };
+		C74963A12472DD53001B9A5E /* MockedResponseGetCharacters.json in Resources */ = {isa = PBXBuildFile; fileRef = C74963A02472DD53001B9A5E /* MockedResponseGetCharacters.json */; };
 		C74963A32472F731001B9A5E /* TestUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = C74963A22472F731001B9A5E /* TestUtils.swift */; };
-		C74963A52472F941001B9A5E /* MockResponseGetCharacter.json in Resources */ = {isa = PBXBuildFile; fileRef = C74963A42472F941001B9A5E /* MockResponseGetCharacter.json */; };
+		C74963A52472F941001B9A5E /* MockedResponseGetCharacter.json in Resources */ = {isa = PBXBuildFile; fileRef = C74963A42472F941001B9A5E /* MockedResponseGetCharacter.json */; };
+		C74963A92473C886001B9A5E /* PresentationLayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = C74963A82473C886001B9A5E /* PresentationLayer.swift */; };
+		C74963AB2473C89A001B9A5E /* DataLayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = C74963AA2473C89A001B9A5E /* DataLayer.swift */; };
 		C76B29A6243A5F1B00793179 /* MarvelApiClientTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C76B29A5243A5F1B00793179 /* MarvelApiClientTests.swift */; };
 		C78A83F3244B6DBA004DE930 /* CharacterDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C78A83F2244B6DBA004DE930 /* CharacterDetailViewModel.swift */; };
 		C78A83F5244B8AD6004DE930 /* GetCharacter.swift in Sources */ = {isa = PBXBuildFile; fileRef = C78A83F4244B8AD6004DE930 /* GetCharacter.swift */; };
@@ -142,9 +144,11 @@
 		C72CF2B82471ED860048B0A2 /* sitrep.sh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.sh; path = sitrep.sh; sourceTree = "<group>"; };
 		C72CF3672471F1B40048B0A2 /* sitrep */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.executable"; path = sitrep; sourceTree = "<group>"; };
 		C72CF3692471F2160048B0A2 /* swiftlint */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.executable"; path = swiftlint; sourceTree = "<group>"; };
-		C74963A02472DD53001B9A5E /* MockResponseGetCharacters.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = MockResponseGetCharacters.json; sourceTree = "<group>"; };
+		C74963A02472DD53001B9A5E /* MockedResponseGetCharacters.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = MockedResponseGetCharacters.json; sourceTree = "<group>"; };
 		C74963A22472F731001B9A5E /* TestUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestUtils.swift; sourceTree = "<group>"; };
-		C74963A42472F941001B9A5E /* MockResponseGetCharacter.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = MockResponseGetCharacter.json; sourceTree = "<group>"; };
+		C74963A42472F941001B9A5E /* MockedResponseGetCharacter.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = MockedResponseGetCharacter.json; sourceTree = "<group>"; };
+		C74963A82473C886001B9A5E /* PresentationLayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PresentationLayer.swift; sourceTree = "<group>"; };
+		C74963AA2473C89A001B9A5E /* DataLayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataLayer.swift; sourceTree = "<group>"; };
 		C76B29A3243A5F1B00793179 /* MarvelApiClientTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MarvelApiClientTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		C76B29A5243A5F1B00793179 /* MarvelApiClientTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MarvelApiClientTests.swift; sourceTree = "<group>"; };
 		C76B29A7243A5F1B00793179 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -278,7 +282,7 @@
 			children = (
 				C7169222244DB5A4005BF4AB /* NetworkingLayer */,
 				C7EC670E2443688400F88FDE /* DataLayer */,
-				287EBEEF2190ADE400BCCEE1 /* Services */,
+				287EBEEF2190ADE400BCCEE1 /* ServiceLayer */,
 				2851228E21831784009D4AB0 /* Screens */,
 				28998EB9217F636A0037039B /* Utils */,
 				28998EBE217F636A0037039B /* Models */,
@@ -304,13 +308,13 @@
 			path = CharacterDetail;
 			sourceTree = "<group>";
 		};
-		287EBEEF2190ADE400BCCEE1 /* Services */ = {
+		287EBEEF2190ADE400BCCEE1 /* ServiceLayer */ = {
 			isa = PBXGroup;
 			children = (
 				28998EC6217F636A0037039B /* Requests */,
 				28998EB8217F636A0037039B /* MarvelAPIClient.swift */,
 			);
-			path = Services;
+			path = ServiceLayer;
 			sourceTree = "<group>";
 		};
 		28998EB9217F636A0037039B /* Utils */ = {
@@ -409,24 +413,58 @@
 			path = Scripts;
 			sourceTree = "<group>";
 		};
-		C74963A62472FB0F001B9A5E /* TestMocks */ = {
+		C74963A72473C82E001B9A5E /* UnitTests */ = {
 			isa = PBXGroup;
 			children = (
-				C74963A02472DD53001B9A5E /* MockResponseGetCharacters.json */,
-				C74963A42472F941001B9A5E /* MockResponseGetCharacter.json */,
+				C74963AE2473D196001B9A5E /* NetworkingLayerTests */,
+				C74963A82473C886001B9A5E /* PresentationLayer.swift */,
+				C74963AA2473C89A001B9A5E /* DataLayer.swift */,
+				C74963AD2473D124001B9A5E /* ServicesLayerTests */,
+				C74963AF2473D2E4001B9A5E /* UnitTestUtils */,
 			);
-			path = TestMocks;
+			path = UnitTests;
+			sourceTree = "<group>";
+		};
+		C74963AC2473D0E2001B9A5E /* MockData */ = {
+			isa = PBXGroup;
+			children = (
+				C74963A02472DD53001B9A5E /* MockedResponseGetCharacters.json */,
+				C74963A42472F941001B9A5E /* MockedResponseGetCharacter.json */,
+			);
+			path = MockData;
+			sourceTree = "<group>";
+		};
+		C74963AD2473D124001B9A5E /* ServicesLayerTests */ = {
+			isa = PBXGroup;
+			children = (
+				C76B29A5243A5F1B00793179 /* MarvelApiClientTests.swift */,
+				C716921A244CD083005BF4AB /* MarvelApiClientTestMock.swift */,
+				C74963AC2473D0E2001B9A5E /* MockData */,
+			);
+			path = ServicesLayerTests;
+			sourceTree = "<group>";
+		};
+		C74963AE2473D196001B9A5E /* NetworkingLayerTests */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = NetworkingLayerTests;
+			sourceTree = "<group>";
+		};
+		C74963AF2473D2E4001B9A5E /* UnitTestUtils */ = {
+			isa = PBXGroup;
+			children = (
+				C7169218244C99A5005BF4AB /* MockURLSession.swift */,
+				C74963A22472F731001B9A5E /* TestUtils.swift */,
+			);
+			path = UnitTestUtils;
 			sourceTree = "<group>";
 		};
 		C76B29A4243A5F1B00793179 /* MarvelApiClientTests */ = {
 			isa = PBXGroup;
 			children = (
-				C74963A62472FB0F001B9A5E /* TestMocks */,
-				C76B29A5243A5F1B00793179 /* MarvelApiClientTests.swift */,
-				C716921A244CD083005BF4AB /* MarvelApiClientTestMock.swift */,
+				C74963A72473C82E001B9A5E /* UnitTests */,
 				C76B29A7243A5F1B00793179 /* Info.plist */,
-				C7169218244C99A5005BF4AB /* MockURLSession.swift */,
-				C74963A22472F731001B9A5E /* TestUtils.swift */,
 			);
 			path = MarvelApiClientTests;
 			sourceTree = "<group>";
@@ -574,8 +612,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				C74963A12472DD53001B9A5E /* MockResponseGetCharacters.json in Resources */,
-				C74963A52472F941001B9A5E /* MockResponseGetCharacter.json in Resources */,
+				C74963A12472DD53001B9A5E /* MockedResponseGetCharacters.json in Resources */,
+				C74963A52472F941001B9A5E /* MockedResponseGetCharacter.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -773,8 +811,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				C716921B244CD083005BF4AB /* MarvelApiClientTestMock.swift in Sources */,
+				C74963AB2473C89A001B9A5E /* DataLayer.swift in Sources */,
 				C74963A32472F731001B9A5E /* TestUtils.swift in Sources */,
 				C7169219244C99A5005BF4AB /* MockURLSession.swift in Sources */,
+				C74963A92473C886001B9A5E /* PresentationLayer.swift in Sources */,
 				C76B29A6243A5F1B00793179 /* MarvelApiClientTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

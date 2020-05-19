@@ -16,7 +16,7 @@ class MarvelApiClientCharactersTestMock: XCTestCase {
 
   override func setUpWithError() throws {
     let session = MockURLSession()
-    session.nextData = mockContentData(for: "MockResponseGetCharacters")
+    session.nextData = mockContentData(for: "MockedResponseGetCharacters")
     let httpCLient = HttpClient(session: session)
     sut = MarvelAPIClient(httpClient: httpCLient)
   }
@@ -28,7 +28,7 @@ class MarvelApiClientCharactersTestMock: XCTestCase {
     sut.getCharactersList { ( characters: [CharacterResult])  in
       print("FB: characters: \(characters)")
       XCTAssert(characters.isEmpty == false)
-      let mockedCharacters: [CharacterResult] = self.getObjec(from: self.mockContentData(for: "MockResponseGetCharacters"))
+      let mockedCharacters: [CharacterResult] = self.getObjec(from: self.mockContentData(for: "MockedResponseGetCharacters"))
       XCTAssert(characters.count == mockedCharacters.count )
       }
   }
@@ -40,7 +40,7 @@ class MarvelApiClientCharacterTestMock: XCTestCase {
 
   override func setUpWithError() throws {
     let session = MockURLSession()
-    session.nextData = mockContentData(for: "MockResponseGetCharacter")
+    session.nextData = mockContentData(for: "MockedResponseGetCharacter")
     let httpCLient = HttpClient(session: session)
     sut = MarvelAPIClient(httpClient: httpCLient)
   }
@@ -51,7 +51,7 @@ class MarvelApiClientCharacterTestMock: XCTestCase {
   let characterId_1011334 = 1011334
   func testGetCharacter() throws {
     sut.getCharacter(with: characterId_1011334){ ( character: CharacterResult)  in
-      let mockedCharacter: CharacterResult = self.getObjec(from: self.mockContentData(for: "MockResponseGetCharacter"))
+      let mockedCharacter: CharacterResult = self.getObjec(from: self.mockContentData(for: "MockedResponseGetCharacter"))
       XCTAssert(character.name == mockedCharacter.name )
       XCTAssert(character.description == mockedCharacter.description )
       XCTAssert(character.id == mockedCharacter.id)

@@ -38,10 +38,12 @@ enum DeepLinkOption {
   }
 }
 
+
 class DeeplinkParser {
    static let shared = DeeplinkParser()
    private init() { }
 
+  // swiftlint:disable:next function_body_length
   func parseDeepLink(_ url: URL) -> DeepLinkOption? {
     guard let components = URLComponents(url: url, resolvingAgainstBaseURL: true),
       let host = components.host else {
