@@ -11,18 +11,18 @@ import Foundation
 class ComicDetailViewModel{
   var comic: ComicResult! // swiftlint:disable:this implicitly_unwrapped_optional
 
-  private var dependencies: AppDependencies! // swiftlint:disable:this implicitly_unwrapped_optional
+  private var dependencies: AppDependenciesProtocol! // swiftlint:disable:this implicitly_unwrapped_optional
 
   private var apiClient: MarvelAPIProtocol{
     dependencies.marvelApiClient
   }
 
-  init(dependencies: AppDependencies, comic: ComicResult) {
+  init(dependencies: AppDependenciesProtocol, comic: ComicResult) {
     self.comic = comic
   }
 
   /// Initializer used for deep linking
-  init(dependencies: AppDependencies, comicId: String) {
+  init(dependencies: AppDependenciesProtocol, comicId: String) {
     self.dependencies = dependencies
   }
 

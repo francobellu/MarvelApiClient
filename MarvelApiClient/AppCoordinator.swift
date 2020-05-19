@@ -31,12 +31,12 @@ class AppCoordinator: AppDependencyInjectable {
   var presenter: AnyObject?
 
   var coordinators = [Coordinator]()
-  var dependencies: AppDependencies! // swiftlint:disable:this implicitly_unwrapped_optional
+  var dependencies: AppDependenciesProtocol! // swiftlint:disable:this implicitly_unwrapped_optional
 //  private var coordinator: (Coordinator)?
   private var state: AppCoordinatorState
 
   init(presenter: UIWindow =  UIWindow(frame: UIScreen.main.bounds),
-       dependencies: AppDependencies) {
+       dependencies: AppDependenciesProtocol) {
 
     self.presenter = presenter
     self.dependencies = dependencies

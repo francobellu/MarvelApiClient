@@ -3,15 +3,15 @@ SITREP
 
 Overview
    Files scanned: 78
-   Structs: 53
+   Structs: 54
    Classes: 42
-   Enums: 7
-   Protocols: 32
+   Enums: 8
+   Protocols: 33
    Extensions: 46
 
 Sizes
-   Total lines of code: 4961
-   Source lines of code: 4015
+   Total lines of code: 5108
+   Source lines of code: 4152
    Longest file: GetComic.swift (462 source lines)
    Longest type: R (219 source lines)
 

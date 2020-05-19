@@ -8,8 +8,18 @@
 
 import UIKit
 
+protocol AppDependenciesProtocol: class {
+  var httpClient: HttpClient { get }
+
+  var marvelApiClient: MarvelAPIProtocol { get }
+
+  var dataStore: DataStoreProtocol { get }
+
+  var appConfig: AppConfig { get }
+}
+
 /// Encapsulate all the app dependencies and act as a factory for them
-class AppDependencies {
+class AppDependencies: AppDependenciesProtocol {
   // MARK: - All the app dependencies
 
   lazy var httpClient: HttpClient = {
@@ -37,5 +47,5 @@ class AppDependencies {
 }
 
 protocol AppDependencyInjectable: class {
-    var dependencies: AppDependencies! { get set } // swiftlint:disable:this implicitly_unwrapped_optional
+    var dependencies: AppDependenciesProtocol! { get set } // swiftlint:disable:this implicitly_unwrapped_optional
 }

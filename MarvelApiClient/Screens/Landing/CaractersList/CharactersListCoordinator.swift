@@ -18,9 +18,9 @@ class CharactersListCoordinator: NSObject {
   var presenter: AnyObject?
   weak var parentCoordinator: Coordinator?
   var coordinators = [Coordinator]()
-  private var dependencies: AppDependencies! // swiftlint:disable:this implicitly_unwrapped_optional
+  private var dependencies: AppDependenciesProtocol! // swiftlint:disable:this implicitly_unwrapped_optional
 
-  init(parentCoordinator: Coordinator, presenter: UINavigationController, dependencies: AppDependencies) {
+  init(parentCoordinator: Coordinator, presenter: UINavigationController, dependencies: AppDependenciesProtocol) {
     print("FB:CharactersListCoordinator:init()")
     self.dependencies = dependencies
     self.parentCoordinator = parentCoordinator

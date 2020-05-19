@@ -420,6 +420,7 @@
 				C74963A82473C886001B9A5E /* PresentationLayer.swift */,
 				C74963AA2473C89A001B9A5E /* DataLayer.swift */,
 				C74963AD2473D124001B9A5E /* ServicesLayerTests */,
+				C74963AC2473D0E2001B9A5E /* MockData */,
 				C74963AF2473D2E4001B9A5E /* UnitTestUtils */,
 			);
 			path = UnitTests;
@@ -439,7 +440,6 @@
 			children = (
 				C76B29A5243A5F1B00793179 /* MarvelApiClientTests.swift */,
 				C716921A244CD083005BF4AB /* MarvelApiClientTestMock.swift */,
-				C74963AC2473D0E2001B9A5E /* MockData */,
 			);
 			path = ServicesLayerTests;
 			sourceTree = "<group>";

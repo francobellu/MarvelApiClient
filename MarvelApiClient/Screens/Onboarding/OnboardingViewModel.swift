@@ -12,11 +12,11 @@ class OnboardingViewModel {
 
   private(set) var title = "Character Detail"
 
-  private var dependencies: AppDependencies! // swiftlint:disable:this implicitly_unwrapped_optional
+  private var dependencies: AppDependenciesProtocol! // swiftlint:disable:this implicitly_unwrapped_optional
 
   private weak var coordinatorDelegate: OnboardingCoordinatorDelegate! // swiftlint:disable:this implicitly_unwrapped_optional
 
-  init(dependencies: AppDependencies, coordinatorDelegate: OnboardingCoordinatorDelegate){
+  init(dependencies: AppDependenciesProtocol, coordinatorDelegate: OnboardingCoordinatorDelegate){
     print("FB:OnboardingViewModel:init()")
     self.dependencies = dependencies
     self.coordinatorDelegate = coordinatorDelegate

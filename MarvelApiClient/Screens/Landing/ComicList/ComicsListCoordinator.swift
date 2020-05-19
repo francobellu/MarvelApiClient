@@ -13,14 +13,14 @@ protocol ComicsListCoordinatorDelegate: class {
   func didSelect(comic: ComicResult)
 }
 
-class ComicsListCoordinator: AppDependencyInjectable {
+class ComicsListCoordinator {
 
   var presenter: AnyObject?
   weak var parentCoordinator: Coordinator?
   var coordinators = [Coordinator]()
-  weak var dependencies: AppDependencies! // swiftlint:disable:this implicitly_unwrapped_optional
+  weak var dependencies: AppDependenciesProtocol! // swiftlint:disable:this implicitly_unwrapped_optional
 
-  init(parentCoordinator: Coordinator, presenter: UINavigationController, dependencies: AppDependencies) {
+  init(parentCoordinator: Coordinator, presenter: UINavigationController, dependencies: AppDependenciesProtocol) {
     print("FB:ComicsListCoordinator:init()")
     self.dependencies = dependencies
     self.presenter = presenter

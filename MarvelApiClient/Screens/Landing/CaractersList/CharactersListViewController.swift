@@ -77,11 +77,11 @@ extension CharactersListViewController: UITableViewDataSource {
     // Check if the last row number is the same as the last current data element
     if indexPath.row == viewModel.charactersCount() - 1 {
       viewModel.getNextCharactersList {
-          DispatchQueue.main.async {
-            tableView.reloadData()
-          }
+        DispatchQueue.main.async {
+          tableView.reloadData()
         }
       }
+    }
     return cell
   }
 

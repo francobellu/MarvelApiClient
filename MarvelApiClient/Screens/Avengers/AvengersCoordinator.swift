@@ -17,7 +17,7 @@ class AvengersCoordinator: Coordinator, AvengersListTransitionsProtocol {
   var coordinators = [Coordinator]()
   var presenter: AnyObject?
 
-  init(parentCoordinator: Coordinator, presenter: UINavigationController, dependencies: AppDependencies) {
+  init(parentCoordinator: Coordinator, presenter: UINavigationController, dependencies: AppDependenciesProtocol) {
     self.parentCoordinator = parentCoordinator
     self.presenter = presenter
   }

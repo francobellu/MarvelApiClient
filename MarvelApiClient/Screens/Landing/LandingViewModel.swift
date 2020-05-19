@@ -12,11 +12,11 @@ class LandingViewModel {
 
   private weak var coordinatorDelegate: LandingCoordinatorDelegate! //swiftlint:disable:this implicitly_unwrapped_optional
 
-  private var dependencies: AppDependencies! // swiftlint:disable:this implicitly_unwrapped_optional
+  private var dependencies: AppDependenciesProtocol! // swiftlint:disable:this implicitly_unwrapped_optional
 
   private(set) var title = "Marvel Api Client"
 
-  init(dependencies: AppDependencies, coordinatorDelegate: LandingCoordinatorDelegate) {
+  init(dependencies: AppDependenciesProtocol, coordinatorDelegate: LandingCoordinatorDelegate) {
     self.dependencies = dependencies
     self.coordinatorDelegate = coordinatorDelegate
   }
