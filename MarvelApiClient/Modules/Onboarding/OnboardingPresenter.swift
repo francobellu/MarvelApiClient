@@ -17,7 +17,7 @@ class OnboardingPresenter {
   private weak var coordinatorDelegate: OnboardingCoordinatorDelegate! // swiftlint:disable:this implicitly_unwrapped_optional
 
   init(dependencies: AppDependenciesProtocol, coordinatorDelegate: OnboardingCoordinatorDelegate){
-    print("FB:OnboardingViewModel:init()")
+    print("FB:OnboardingPresenter:init()")
     self.dependencies = dependencies
     self.coordinatorDelegate = coordinatorDelegate
   }

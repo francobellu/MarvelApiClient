@@ -1,5 +1,5 @@
 //
-//  ComicsListViewModel.swift
+//  ComicsListPresenter.swift
 //  
 //
 //  Created by BELLU Franco on 14/05/2020.

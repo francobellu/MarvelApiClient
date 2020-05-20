@@ -44,7 +44,7 @@ MarvelApiCLient:
 
 - remove Characterlist coordinator, Comics coord, AvengerCoors( already not used); move al the delegates to the LandingCoord
 - unit test deep links
-- Refactor: Dep Injection for  ViewModels and services
+
 
 - https://alisoftware.github.io/swift/protocols/2018/09/02/protocols-private-properties/
 

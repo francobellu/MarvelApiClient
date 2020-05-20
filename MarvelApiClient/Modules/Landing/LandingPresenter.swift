@@ -1,5 +1,5 @@
 //
-//  LandingViewModel.swift
+//  LandingPresenter.swift
 //  MarvelApiClient
 //
 //  Created by franco bellu on 16/05/2020.

@@ -1,5 +1,5 @@
 //
-//  CharacterDetailViewModel.swift
+//  CharacterDetailPresenter.swift
 //  
 //
 //  Created by BELLU Franco on 14/05/2020.

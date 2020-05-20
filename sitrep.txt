@@ -2,21 +2,21 @@ SITREP
 ------
 
 Overview
-   Files scanned: 78
+   Files scanned: 81
    Structs: 54
-   Classes: 41
+   Classes: 43
    Enums: 8
    Protocols: 30
    Extensions: 44
 
 Sizes
-   Total lines of code: 4860
-   Source lines of code: 3920
+   Total lines of code: 5016
+   Source lines of code: 4043
    Longest file: GetComic.swift (462 source lines)
    Longest type: R (219 source lines)
 
 Structure
-   Imports: Foundation (66), UIKit (32), XCTest (6), MarvelApiClient (5), AlamofireImage (2), Rswift (1), CryptoKit (1)
+   Imports: Foundation (68), UIKit (32), XCTest (9), MarvelApiClient (8), AlamofireImage (2), Rswift (1), CryptoKit (1)
    UIKit View Controllers: 6
    UIKit Views: 0
    SwiftUI Views: 0
