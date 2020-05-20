@@ -16,7 +16,7 @@ class CharactersListPresenter {
 
   private var dependencies: AppDependenciesProtocol! // swiftlint:disable:this implicitly_unwrapped_optional
 
-  private var apiClient: MarvelAPIProtocol{
+  private var apiClient: MarvelApiProtocol{
     dependencies.marvelApiClient
   }
 

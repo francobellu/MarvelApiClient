@@ -1,22 +1,11 @@
 import Foundation
 
-protocol MarvelAPIProtocol {
-  // Characters
-  func getCharactersList(completion: @escaping (Result<DataContainer<GetCharacters.Response>, Error>) -> Void)
-  func getCharacter(with id: Int, completion:  @escaping (Result<DataContainer<GetCharacters.Response>, Error>) -> Void)
-
-  // Comics
-  func getComicsList(completion: @escaping ([ComicResult]) -> Void)
-  func getComicsAvengers(completion: @escaping ([ComicResult]) -> Void)
-
-  func getComic(with id: Int, completion: @escaping (ComicResult) -> Void)
-}
 
 /// Implementation of a generic-based Marvel API client
-internal class MarvelAPIClient {
+internal class MarvelApiClient {
 
   // Singleton
-  //static internal let shared: MarvelAPIProtocol = MarvelAPIClient(httpClient: <#HttpClient#>)
+  //static internal let shared: MarvelApiProtocol = MarvelAPIClient(httpClient: <#HttpClient#>)
 
   // number of items to be fetched each time (i.e., database LIMIT)
   private let limit = 50
@@ -36,7 +25,7 @@ internal class MarvelAPIClient {
 }
 
 // Exposed API
-extension MarvelAPIClient: MarvelAPIProtocol {
+extension MarvelApiClient: MarvelApiProtocol {
 
   func getCharactersList(completion: @escaping (Result<DataContainer<GetCharacters.Response>, Error>) -> Void ) {
 

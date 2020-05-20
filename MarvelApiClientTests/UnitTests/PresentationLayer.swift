@@ -95,7 +95,7 @@ class MockAppDependencies: AppDependenciesProtocol {
     return HttpClient(session: MockURLSession())
   }()
 
-  lazy var marvelApiClient: MarvelAPIProtocol = {
+  lazy var marvelApiClient: MarvelApiProtocol = {
     return MockApiClient()
   }()
 
@@ -116,7 +116,7 @@ struct MockApiCLientData {
   let mockComicsAvengersData: [ComicResult]?
 }
 
-class MockApiClient:  MarvelAPIProtocol{
+class MockApiClient:  MarvelApiProtocol{
   var mockApiClientData = MockApiCLientData(mockCharacterData: nil,
                                             mockCharactersData: nil,
                                             mockComicData: nil,

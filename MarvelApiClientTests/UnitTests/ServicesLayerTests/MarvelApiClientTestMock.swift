@@ -12,13 +12,13 @@ import XCTest
 
 class MarvelApiClientCharactersTestMock: XCTestCase {
 
-  var sut: MarvelAPIClient! // swiftlint:disable:this implicitly_unwrapped_optional
+  var sut: MarvelApiClient! // swiftlint:disable:this implicitly_unwrapped_optional
 
   override func setUpWithError() throws {
     let session = MockURLSession()
     session.nextData = mockContentData(for: "MockedResponseGetCharacters")
     let httpCLient = HttpClient(session: session)
-    sut = MarvelAPIClient(httpClient: httpCLient)
+    sut = MarvelApiClient(httpClient: httpCLient)
   }
 
   override func tearDownWithError() throws {
@@ -36,13 +36,13 @@ class MarvelApiClientCharactersTestMock: XCTestCase {
 
 class MarvelApiClientCharacterTestMock: XCTestCase {
 
-  var sut: MarvelAPIClient! // swiftlint:disable:this implicitly_unwrapped_optional
+  var sut: MarvelApiClient! // swiftlint:disable:this implicitly_unwrapped_optional
 
   override func setUpWithError() throws {
     let session = MockURLSession()
     session.nextData = mockContentData(for: "MockedResponseGetCharacter")
     let httpCLient = HttpClient(session: session)
-    sut = MarvelAPIClient(httpClient: httpCLient)
+    sut = MarvelApiClient(httpClient: httpCLient)
   }
 
   override func tearDownWithError() throws {

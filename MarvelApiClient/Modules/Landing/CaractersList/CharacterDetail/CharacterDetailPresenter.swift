@@ -15,7 +15,7 @@ class CharacterDetailPresenter {
 
   private var interactor: CharacterDetailInteractor?
 
-  private var apiClient: MarvelAPIProtocol{
+  private var apiClient: MarvelApiProtocol{
     dependencies.marvelApiClient
   }
 

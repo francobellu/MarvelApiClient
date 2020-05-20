@@ -1,5 +1,5 @@
 //
-//  DataStore.swift
+//  UserDefaultsDataStore.swift
 //  MarvelApiClient
 //
 //  Created by BELLU Franco on 14/05/2020.
@@ -7,16 +7,6 @@
 //
 
 import Foundation
-
-protocol DataStoreProtocol {
-  func getAny(_ key: String)-> Any?
-  func getString(_ key: String, defaultValue: String) -> String
-  func getBool(_ key: String, defaultValue: Bool) -> Bool
-
-  func setAny(key: String, value: Any)
-  func setString(key: String, value: String)
-  func setBool(key: String, value: Bool)
-}
 
 /// set functions are private because only the T4F_API should modify the settings
 class UserDefaultsDataStore: DataStoreProtocol {
