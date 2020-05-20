@@ -63,7 +63,10 @@ extension CharactersListCoordinator: Coordinator, DeepLinkable {
   }
 
   private func presentCharacterDetailViewController(with characterId: String ) {
-    let presenter = CharacterDetailPresenter(dependencies: self.dependencies, characterId: characterId)
+    let interactor = CharacterDetailInteractor(dependencies: dependencies)
+
+    let presenter = CharacterDetailPresenter(dependencies: self.dependencies, characterId: characterId, interactor: interactor)
+
     DispatchQueue.global(qos: .background).async{
       guard let id = Int(characterId)  else {
         print("Invalid deepLink url")

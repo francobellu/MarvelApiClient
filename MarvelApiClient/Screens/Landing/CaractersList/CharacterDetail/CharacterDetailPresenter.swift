@@ -13,6 +13,8 @@ class CharacterDetailPresenter {
 
   private var dependencies: AppDependenciesProtocol! // swiftlint:disable:this implicitly_unwrapped_optional
 
+  private var interactor: CharacterDetailInteractor?
+
   private var apiClient: MarvelAPIProtocol{
     dependencies.marvelApiClient
   }
@@ -23,8 +25,9 @@ class CharacterDetailPresenter {
   }
 
   /// Initializer used for deep linking
-  init(dependencies: AppDependenciesProtocol, characterId: String) {
+  init(dependencies: AppDependenciesProtocol, characterId: String, interactor: CharacterDetailInteractor) {
     self.dependencies = dependencies
+    self.interactor = interactor
   }
 
   func getThumbnailUrl() -> URL? {
@@ -59,13 +62,13 @@ class CharacterDetailPresenter {
     return "Stories available: \(comicsCount)"
   }
 
-  // MARK: - API FUNCTIONS
+  // MARK: - Business logic
   func getCharacter(with characterId: Int, completion: @escaping () -> Void) {
-    apiClient.getCharacter(with: characterId) { character in
+    guard let interactor = interactor else { return }
+    interactor.getCharacter(with: characterId) { character in
       self.character = character
       print("FB: character: \(character)")
       completion()
     }
   }
-
 }
