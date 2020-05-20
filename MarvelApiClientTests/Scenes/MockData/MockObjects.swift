@@ -155,7 +155,7 @@ struct MockApiCLientData {
   let mockComicsAvengersData: [ComicResult]?
 }
 
-class MockApiClient:  MarvelApiProtocol{
+class MockApiClient: MarvelApiProtocol{
   var mockApiClientData = MockApiCLientData(mockCharacterData: nil,
                                             mockCharactersData: nil,
                                             mockComicData: nil,

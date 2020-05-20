@@ -224,9 +224,9 @@
 		287C9A08217F39CB00D63092 /* MarvelApiClient */ = {
 			isa = PBXGroup;
 			children = (
-				C703660A24753DEA0005886F /* Modules */,
 				C70365E4247535C60005886F /* Architecture */,
-				287EBEEF2190ADE400BCCEE1 /* ServiceLayer */,
+				C703660A24753DEA0005886F /* Scenes */,
+				287EBEEF2190ADE400BCCEE1 /* Services */,
 				28998EB9217F636A0037039B /* Utils */,
 				28998EBE217F636A0037039B /* Models */,
 				C70873D22471F54800184DE0 /* Resources */,
@@ -238,13 +238,13 @@
 			path = MarvelApiClient;
 			sourceTree = "<group>";
 		};
-		287EBEEF2190ADE400BCCEE1 /* ServiceLayer */ = {
+		287EBEEF2190ADE400BCCEE1 /* Services */ = {
 			isa = PBXGroup;
 			children = (
 				C7EC670E2443688400F88FDE /* DataServices */,
 				C703665024753FB80005886F /* Networking Services */,
 			);
-			path = ServiceLayer;
+			path = Services;
 			sourceTree = "<group>";
 		};
 		28998EB9217F636A0037039B /* Utils */ = {
@@ -298,13 +298,13 @@
 			path = Architecture;
 			sourceTree = "<group>";
 		};
-		C703660A24753DEA0005886F /* Modules */ = {
+		C703660A24753DEA0005886F /* Scenes */ = {
 			isa = PBXGroup;
 			children = (
 				C703660B24753DEA0005886F /* Landing */,
 				C703662324753DEA0005886F /* Onboarding */,
 			);
-			path = Modules;
+			path = Scenes;
 			sourceTree = "<group>";
 		};
 		C703660B24753DEA0005886F /* Landing */ = {
