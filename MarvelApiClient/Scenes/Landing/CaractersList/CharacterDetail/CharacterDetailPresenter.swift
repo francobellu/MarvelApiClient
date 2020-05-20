@@ -13,7 +13,7 @@ class CharacterDetailPresenter {
 
   private var dependencies: AppDependenciesProtocol! // swiftlint:disable:this implicitly_unwrapped_optional
 
-  private var interactor: CharacterDetailInteractor?
+  private var interactor: CharacterDetailInteractorProtocol?
 
   private var apiClient: MarvelApiProtocol{
     dependencies.marvelApiClient
@@ -25,7 +25,7 @@ class CharacterDetailPresenter {
   }
 
   /// Initializer used for deep linking
-  init(dependencies: AppDependenciesProtocol, characterId: String, interactor: CharacterDetailInteractor) {
+  init(dependencies: AppDependenciesProtocol, characterId: String, interactor: CharacterDetailInteractorProtocol) {
     self.dependencies = dependencies
     self.interactor = interactor
   }

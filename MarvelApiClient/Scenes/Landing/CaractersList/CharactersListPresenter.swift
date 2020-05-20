@@ -12,7 +12,7 @@ class CharactersListPresenter {
 
   private weak var coordinatorDelegate: CharactersListCoordinatorDelegate!  //swiftlint:disable:this implicitly_unwrapped_optional
 
-  private var interactor: CharactersListInteractor
+  private var interactor: CharactersListInteractorProtocol
 
   private var dependencies: AppDependenciesProtocol! // swiftlint:disable:this implicitly_unwrapped_optional
 
@@ -25,7 +25,7 @@ class CharactersListPresenter {
 
   private(set) var title = "Marvel Comics"
 
-  init(dependencies: AppDependenciesProtocol, coordinatorDelegate: CharactersListCoordinatorDelegate, interactor: CharactersListInteractor) {
+  init(dependencies: AppDependenciesProtocol, coordinatorDelegate: CharactersListCoordinatorDelegate, interactor: CharactersListInteractorProtocol) {
     self.dependencies = dependencies
     self.coordinatorDelegate = coordinatorDelegate
     self.interactor = interactor

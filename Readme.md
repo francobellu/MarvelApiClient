@@ -41,8 +41,6 @@ MarvelApiCLient:
 - characterList: take out the api and put it in VM or coordinator
 - create open characterDertail with the character sent by deeplink
 - intercept back using navcontrollerdelegate
-
-- remove Characterlist coordinator, Comics coord, AvengerCoors( already not used); move al the delegates to the LandingCoord
 - unit test deep links
 
 

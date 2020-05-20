@@ -12,39 +12,32 @@ import XCTest
 
 class CharactersListInteractorTest: XCTestCase {
 
-  var sut: CharactersListPresenter! // swiftlint:disable:this implicitly_unwrapped_optional
+  var sut: CharactersListInteractor! // swiftlint:disable:this implicitly_unwrapped_optional
 
   let mockAppDependencies = MockAppDependencies()
   let mockCoordinator =  MockCharactersListCoordinatorDelegate()
   
   override func setUpWithError() throws {
-    let mockApiClient = mockAppDependencies.marvelApiClient as! MockApiClient
 
-    let testCharacterResultId1009144: [CharacterResult] =  getObjec(from: mockContentData(for: "MockedResponseCharacterResultId1011334"))
-    mockApiClient.mockApiClientData.mockCharactersData = testCharacterResultId1009144
-    sut = CharactersListPresenter(dependencies: mockAppDependencies, coordinatorDelegate: mockCoordinator)
+    // CONFIGURE THE MOCK DATA
+    let mockApiClient = mockAppDependencies.marvelApiClient as! MockApiClient
+//    let testCharacterResultId1009144: [CharacterResult] =
+//      getObjec(from: mockContentData(for: "MockedResponseCharacterResultId1011334")) // TODO: move to presenter Test
+//
+    let mockCharacters = [CharacterResult]() // TODO create from json??
+    let mockDataContainer = DataContainer(offset: 0, limit: 20, total: 1000, count: 0, results: mockCharacters)
+    mockApiClient.mockApiClientData.mockCharactersResults = mockDataContainer
+    sut = CharactersListInteractor(dependencies: mockAppDependencies)
   }
 
-  // MARK: - TEST API FUNCTIONS
+  // MARK: - Business logic
   func test() throws {
 
     // TEST initial count is zero - charactersCount(at:)
-    XCTAssert(sut.charactersCount() == 0 )
 
-    // TEST getNextCharactersList(at:)
-    sut.getNextCharactersList {
-      // TEST count now is > zero - charactersCount()
-      let charactercount = self.sut.charactersCount()
-      XCTAssert(charactercount > 0 )
-
-      // TEST character at index 0 has expected id - getCharacter(at:)
-      let character = self.sut.getCharacter(at: 0)
-      let characterIdAt0 = 1011334
-      XCTAssert(character.id == characterIdAt0)
-
-      XCTAssert(self.mockCoordinator.coordinatorState == .none)
-      self.sut.didGoBack()
-      self.mockCoordinator.coordinatorState = .didSelect(character: character)
+    sut.getNextCharactersList { characters in
+      // TEST characters
+      XCTAssertNotNil(characters)
     }
   }
 }

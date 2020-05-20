@@ -31,7 +31,7 @@
 		C703663E24753DEB0005886F /* CharactersListCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = C703661324753DEA0005886F /* CharactersListCoordinator.swift */; };
 		C703663F24753DEB0005886F /* CharacterDetailPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = C703661524753DEA0005886F /* CharacterDetailPresenter.swift */; };
 		C703664024753DEB0005886F /* CharacterDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C703661624753DEA0005886F /* CharacterDetailViewController.swift */; };
-		C703664124753DEB0005886F /* CharactersDetailInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = C703661724753DEA0005886F /* CharactersDetailInteractor.swift */; };
+		C703664124753DEB0005886F /* CharacterDetailInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = C703661724753DEA0005886F /* CharacterDetailInteractor.swift */; };
 		C703664224753DEB0005886F /* CharactersListPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = C703661824753DEA0005886F /* CharactersListPresenter.swift */; };
 		C703664324753DEB0005886F /* ComicsListCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = C703661A24753DEA0005886F /* ComicsListCoordinator.swift */; };
 		C703664424753DEB0005886F /* ComicCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C703661C24753DEA0005886F /* ComicCell.swift */; };
@@ -120,7 +120,7 @@
 		C703661324753DEA0005886F /* CharactersListCoordinator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CharactersListCoordinator.swift; sourceTree = "<group>"; };
 		C703661524753DEA0005886F /* CharacterDetailPresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CharacterDetailPresenter.swift; sourceTree = "<group>"; };
 		C703661624753DEA0005886F /* CharacterDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CharacterDetailViewController.swift; sourceTree = "<group>"; };
-		C703661724753DEA0005886F /* CharactersDetailInteractor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CharactersDetailInteractor.swift; sourceTree = "<group>"; };
+		C703661724753DEA0005886F /* CharacterDetailInteractor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CharacterDetailInteractor.swift; sourceTree = "<group>"; };
 		C703661824753DEA0005886F /* CharactersListPresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CharactersListPresenter.swift; sourceTree = "<group>"; };
 		C703661A24753DEA0005886F /* ComicsListCoordinator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ComicsListCoordinator.swift; sourceTree = "<group>"; };
 		C703661C24753DEA0005886F /* ComicCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ComicCell.swift; sourceTree = "<group>"; };
@@ -346,7 +346,7 @@
 			children = (
 				C703661524753DEA0005886F /* CharacterDetailPresenter.swift */,
 				C703661624753DEA0005886F /* CharacterDetailViewController.swift */,
-				C703661724753DEA0005886F /* CharactersDetailInteractor.swift */,
+				C703661724753DEA0005886F /* CharacterDetailInteractor.swift */,
 			);
 			path = CharacterDetail;
 			sourceTree = "<group>";
@@ -819,7 +819,7 @@
 				C703664E24753E930005886F /* ComicDetailPresenter.swift in Sources */,
 				C703663924753DEB0005886F /* LandingViewController.swift in Sources */,
 				287C9A0A217F39CB00D63092 /* AppDelegate.swift in Sources */,
-				C703664124753DEB0005886F /* CharactersDetailInteractor.swift in Sources */,
+				C703664124753DEB0005886F /* CharacterDetailInteractor.swift in Sources */,
 				C78A83F5244B8AD6004DE930 /* GetCharacter.swift in Sources */,
 				C7169221244D9D5A005BF4AB /* HttpClient.swift in Sources */,
 				C703663F24753DEB0005886F /* CharacterDetailPresenter.swift in Sources */,

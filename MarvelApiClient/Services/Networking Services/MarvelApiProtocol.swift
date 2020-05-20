@@ -15,7 +15,5 @@ protocol MarvelApiProtocol {
 
   // Comics
   func getComicsList(completion: @escaping ([ComicResult]) -> Void)
-  func getComicsAvengers(completion: @escaping ([ComicResult]) -> Void)
-
   func getComic(with id: Int, completion: @escaping (ComicResult) -> Void)
 }

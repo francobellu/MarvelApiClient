@@ -8,7 +8,12 @@
 
 import Foundation
 
-class CharactersListInteractor {
+protocol CharactersListInteractorProtocol {
+  init(dependencies: AppDependenciesProtocol)
+  func getNextCharactersList(completion: @escaping ([CharacterResult]) -> Void)
+}
+
+class CharactersListInteractor: CharactersListInteractorProtocol {
 
   private var dependencies: AppDependenciesProtocol! // swiftlint:disable:this implicitly_unwrapped_optional
 
@@ -18,7 +23,7 @@ class CharactersListInteractor {
 
   private var characters: [CharacterResult] = []
 
-  init(dependencies: AppDependenciesProtocol) {
+  required init(dependencies: AppDependenciesProtocol) {
     self.dependencies = dependencies
   }
 

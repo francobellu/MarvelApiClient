@@ -26,10 +26,9 @@ class MarvelApiClientTests: XCTestCase {
 
   func testGetCharactersList() throws {
     let promise = expectation(description: "Characters array not empty")
-    sut.getCharactersList { ( characters: [CharacterResult])  in
-      print("FB: characters: \(characters)")
+    sut.getCharactersList { response  in
+      XCTAssertNotNil(response)
       promise.fulfill()
-      XCTAssert(characters.isEmpty == false)
     }
     wait(for: [promise], timeout: 30)
   }

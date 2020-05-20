@@ -8,7 +8,14 @@
 
 import Foundation
 
-class CharacterDetailInteractor {
+protocol CharacterDetailInteractorProtocol {
+  init(dependencies: AppDependenciesProtocol)
+
+  // MARK: - Business logic
+  func getCharacter(with characterId: Int, completion: @escaping (CharacterResult) -> Void)
+}
+
+class CharacterDetailInteractor: CharacterDetailInteractorProtocol{
 
   private var dependencies: AppDependenciesProtocol! // swiftlint:disable:this implicitly_unwrapped_optional
 
@@ -18,7 +25,7 @@ class CharacterDetailInteractor {
 
   private var character: CharacterResult?
 
-  init(dependencies: AppDependenciesProtocol) {
+  required init(dependencies: AppDependenciesProtocol) {
     self.dependencies = dependencies
   }
 

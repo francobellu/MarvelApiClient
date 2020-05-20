@@ -25,7 +25,7 @@ class MarvelApiClientCharactersTestMock: XCTestCase {
     let httpCLient = HttpClient(session: session)
     sut = MarvelApiClient(httpClient: httpCLient)
 
-    let mockedResults: [CharacterResult]  = getObjec(from: mockContentData(for: "MockedResponseCharacterResultId1011334"))
+    let mockedResults: [CharacterResult]  = getObjec(from: mockContentData(for: "MockedResponseGetCharacters"))
 
     sut.getCharactersList { response in
       print("FB: response: \(response)")
@@ -47,7 +47,7 @@ class MarvelApiClientCharactersTestMock: XCTestCase {
   func testGetCharacter() throws {
 
     let session = MockURLSession()
-    session.nextData = mockContentData(for: "MockedResponseGetCharacter")
+    session.nextData = mockContentData(for: "MockedResponseCharacterResultId1011334")
     let httpCLient = HttpClient(session: session)
     sut = MarvelApiClient(httpClient: httpCLient)
 

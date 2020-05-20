@@ -48,51 +48,51 @@ class MockURLSessionDataTask: URLSessionDataTaskProtocol {
 }
 
 
-class OnboardingPresenterlTest: XCTestCase {
-
-  var sut: OnboardingPresenter! // swiftlint:disable:this implicitly_unwrapped_optional
-  override func setUpWithError() throws {
-
-  }
-  override func tearDownWithError() throws {
-    // Put teardown code here. This method is called after the invocation of each test method in the class.
-  }
-
-  func testExample() throws {
-    // This is an example of a functional test case.
-    // Use XCTAssert and related functions to verify your tests produce the correct results.
-  }
-
-  func testPerformanceExample() throws {
-    // This is an example of a performance test case.
-    self.measure {
-      // Put the code you want to measure the time of here.
-    }
-  }
-}
-
-class LandingPresenterTest: XCTestCase {
-
-  var sut: LandingPresenter! // swiftlint:disable:this implicitly_unwrapped_optional
-  override func setUpWithError() throws {
-
-  }
-  override func tearDownWithError() throws {
-    // Put teardown code here. This method is called after the invocation of each test method in the class.
-  }
-
-  func testExample() throws {
-    // This is an example of a functional test case.
-    // Use XCTAssert and related functions to verify your tests produce the correct results.
-  }
-
-  func testPerformanceExample() throws {
-    // This is an example of a performance test case.
-    self.measure {
-      // Put the code you want to measure the time of here.
-    }
-  }
-}
+//class OnboardingPresenterlTest: XCTestCase {
+//
+//  var sut: OnboardingPresenter! // swiftlint:disable:this implicitly_unwrapped_optional
+//  override func setUpWithError() throws {
+//
+//  }
+//  override func tearDownWithError() throws {
+//    // Put teardown code here. This method is called after the invocation of each test method in the class.
+//  }
+//
+//  func testExample() throws {
+//    // This is an example of a functional test case.
+//    // Use XCTAssert and related functions to verify your tests produce the correct results.
+//  }
+//
+//  func testPerformanceExample() throws {
+//    // This is an example of a performance test case.
+//    self.measure {
+//      // Put the code you want to measure the time of here.
+//    }
+//  }
+//}
+//
+//class LandingPresenterTest: XCTestCase {
+//
+//  var sut: LandingPresenter! // swiftlint:disable:this implicitly_unwrapped_optional
+//  override func setUpWithError() throws {
+//
+//  }
+//  override func tearDownWithError() throws {
+//    // Put teardown code here. This method is called after the invocation of each test method in the class.
+//  }
+//
+//  func testExample() throws {
+//    // This is an example of a functional test case.
+//    // Use XCTAssert and related functions to verify your tests produce the correct results.
+//  }
+//
+//  func testPerformanceExample() throws {
+//    // This is an example of a performance test case.
+//    self.measure {
+//      // Put the code you want to measure the time of here.
+//    }
+//  }
+//}
 
 enum CoordinatorState: Equatable{
   static func == (lhs: CoordinatorState, rhs: CoordinatorState) -> Bool {
@@ -147,39 +147,46 @@ class MockAppDependencies: AppDependenciesProtocol {
   }()
 }
 
+/// This struct
 struct MockApiCLientData {
-  var mockCharacterData: CharacterResult?
-  var mockCharactersData: [CharacterResult]?
-  let mockComicData: ComicResult?
+  var mockCharactersResults: DataContainer<[CharacterResult]>?
+  var mockCharacterResults: DataContainer<[CharacterResult]>?
   let mockComicsData: [ComicResult]?
-  let mockComicsAvengersData: [ComicResult]?
+  let mockComicData: ComicResult?
 }
 
 class MockApiClient: MarvelApiProtocol{
-  var mockApiClientData = MockApiCLientData(mockCharacterData: nil,
-                                            mockCharactersData: nil,
-                                            mockComicData: nil,
-                                            mockComicsData: nil,
-                                            mockComicsAvengersData: nil)
 
-  func getCharactersList(completion: @escaping ([CharacterResult]) -> Void) {
-    completion( self.mockApiClientData.mockCharactersData!)
+
+  /// Used to configure the test case
+  var mockApiClientData = MockApiCLientData(mockCharactersResults: nil,
+                                            mockCharacterResults: nil,
+                                            mockComicsData: nil,
+                                            mockComicData: nil)
+
+  func getCharactersList(completion: @escaping (Result<DataContainer<GetCharacters.Response>, Error>) -> Void) {
+
+//    let results = [CharacterResult]() // TODO: move to test and create mock array
+//    let mockDataContainer: DataContainer<[CharacterResult]> = DataContainer(offset: 0, limit: 20, total: 1000, count: 0, results: results)
+
+    completion(.success(mockApiClientData.mockCharactersResults!))
   }
 
-  func getCharacter(with id: Int, completion: @escaping (CharacterResult) -> Void) {
-    completion( self.mockApiClientData.mockCharacterData!)
+  func getCharacter(with id: Int, completion: @escaping (Result<DataContainer<GetCharacters.Response>, Error>) -> Void) {
+//    let results = [CharacterResult]() // TODO: move to test and create mock array
+//    let mockDataContainer: DataContainer<[CharacterResult]> = DataContainer(offset: 0, limit: 20, total: 1000, count: 0, results: results)
+    completion(.success(mockApiClientData.mockCharacterResults!))
   }
 
   func getComicsList(completion: @escaping ([ComicResult]) -> Void) {
-    completion(self.mockApiClientData.mockComicsData!)
+      //    let mockComicResult: ComicResult = // TODO: create mock [ComicResult] object from Json
+    completion( mockApiClientData.mockComicsData!)
+
   }
 
   func getComic(with id: Int, completion: @escaping (ComicResult) -> Void) {
-    completion( self.mockApiClientData.mockComicData!)
-  }
 
-  func getComicsAvengers(completion: @escaping ([ComicResult]) -> Void) {
-    completion( self.mockApiClientData.mockComicsAvengersData!)
+//    let mockComicResult: ComicResult = // TODO: create mock ComicResult object from Json
+    completion( mockApiClientData.mockComicData!)
   }
-
 }
