@@ -21,8 +21,6 @@ class CharactersListInteractor: CharactersListInteractorProtocol {
     dependencies.marvelApiClient
   }
 
-  private var characters: [CharacterResult] = []
-
   required init(dependencies: AppDependenciesProtocol) {
     self.dependencies = dependencies
   }
@@ -33,20 +31,11 @@ class CharactersListInteractor: CharactersListInteractorProtocol {
 
       switch response {
       case .success(let dataContainer):
-
-        // 3) append the new results into the data source for the tems table view
-        //weakself.characters += dataContainer.results
-        //guard let results = dataContainer.results else { return}
         completion(dataContainer.results)
-        for character in dataContainer.results {
-          guard let thumbnail = character.thumbnail else {return}
-          print("FB:  Title: \(character.name ?? "Unnamed character")")
-          print("  Thumbnail: \(thumbnail.url.absoluteString)")
-        }
       case .failure(let error):
         print(error)
+        completion([CharacterResult]())
       }
-      completion(self.characters)
     }
   }
 }

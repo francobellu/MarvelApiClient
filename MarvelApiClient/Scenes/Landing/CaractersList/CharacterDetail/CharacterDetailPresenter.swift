@@ -67,7 +67,7 @@ class CharacterDetailPresenter {
     guard let interactor = interactor else { return }
     interactor.getCharacter(with: characterId) { character in
       self.character = character
-      print("FB: character: \(character)")
+      print("FB: character: \(String(describing: character))")
       completion()
     }
   }

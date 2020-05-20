@@ -20,7 +20,7 @@ import XCTest
 @testable import MarvelApiClient
 
 class MockCharacterDetailInteractor: CharacterDetailInteractorProtocol{
-  func getCharacter(with characterId: Int, completion: @escaping (CharacterResult) -> Void) {
+  func getCharacter(with characterId: Int, completion: @escaping ((CharacterResult)?) -> Void) {
     //    TODO:
   }
 
@@ -39,7 +39,7 @@ class CharacterDetailPresenterTest: XCTestCase {
   override func setUpWithError() throws {
 
     // CONFIGURE THE MOCK DATA
-    let results: [CharacterResult]  = getObjec(from: mockContentData(for: "MockedResponseCharacterResultId1011334"))
+    let results: [CharacterResult]  = getResults(from: mockContentData(for: "MockedResponseCharacterResultId1011334"))
     testCharacterResultId1011334 = results.first!
     mockIterator = MockCharacterDetailInteractor(dependencies: mockAppDependencies)
   }

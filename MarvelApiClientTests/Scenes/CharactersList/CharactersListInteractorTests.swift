@@ -16,28 +16,38 @@ class CharactersListInteractorTest: XCTestCase {
 
   let mockAppDependencies = MockAppDependencies()
   let mockCoordinator =  MockCharactersListCoordinatorDelegate()
+  var mockApiClient: MockApiClient!
   
   override func setUpWithError() throws {
-
-    // CONFIGURE THE MOCK DATA
-    let mockApiClient = mockAppDependencies.marvelApiClient as! MockApiClient
-//    let testCharacterResultId1009144: [CharacterResult] =
-//      getObjec(from: mockContentData(for: "MockedResponseCharacterResultId1011334")) // TODO: move to presenter Test
-//
-    let mockCharacters = [CharacterResult]() // TODO create from json??
-    let mockDataContainer = DataContainer(offset: 0, limit: 20, total: 1000, count: 0, results: mockCharacters)
-    mockApiClient.mockApiClientData.mockCharactersResults = mockDataContainer
+    mockApiClient = mockAppDependencies.marvelApiClient as? MockApiClient
     sut = CharactersListInteractor(dependencies: mockAppDependencies)
   }
 
   // MARK: - Business logic
-  func test() throws {
+  func testSuccess() throws {
 
-    // TEST initial count is zero - charactersCount(at:)
+    // CONFIGURE THE MOCK DATA WITH AN ARRAY OF EMPTY CharacterResult
+    let testCharacters: [CharacterResult] = getResults(from: mockContentData(for: "MockedResponseGetCharacters"))
+    let testDataContainer = DataContainer(offset: 0, limit: 20, total: 1000, count: 0, results: testCharacters)
+    mockApiClient.mockApiClientData.mockCharactersResults = testDataContainer
+
+    sut.getNextCharactersList { characters in
+     // TEST characters
+      XCTAssertNotNil(characters)
+      XCTAssertNotNil(characters.count == testCharacters.count)
+    }
+  }
+
+  func testFailure() throws {
+
+    // CONFIGURE THE MOCK DATA WITH EMPTY ARRAY
+    let testCharacters: [CharacterResult] = []
+    let mockDataContainer = DataContainer(offset: 0, limit: 20, total: 1000, count: 0, results: testCharacters)
+    mockApiClient.mockApiClientData.mockCharactersResults = mockDataContainer
 
     sut.getNextCharactersList { characters in
       // TEST characters
-      XCTAssertNotNil(characters)
+      XCTAssert(characters.isEmpty)
     }
   }
 }

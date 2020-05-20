@@ -36,6 +36,5 @@ class CharacterDetailViewController: UIViewController, StoryboardInstantiable {
     comicsLabel.text = presenter.getComicsCount()
     seriesLabel.text = presenter.getSeriesCount()
     storiesLabel.text = presenter.getStoriesCount()
-
   }
 }

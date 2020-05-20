@@ -165,17 +165,19 @@ class MockApiClient: MarvelApiProtocol{
                                             mockComicData: nil)
 
   func getCharactersList(completion: @escaping (Result<DataContainer<GetCharacters.Response>, Error>) -> Void) {
-
-//    let results = [CharacterResult]() // TODO: move to test and create mock array
-//    let mockDataContainer: DataContainer<[CharacterResult]> = DataContainer(offset: 0, limit: 20, total: 1000, count: 0, results: results)
-
-    completion(.success(mockApiClientData.mockCharactersResults!))
+    if let results = mockApiClientData.mockCharactersResults{
+      completion(.success(results))
+    } else{
+      completion(.failure(MarvelError.noData))
+    }
   }
 
   func getCharacter(with id: Int, completion: @escaping (Result<DataContainer<GetCharacters.Response>, Error>) -> Void) {
-//    let results = [CharacterResult]() // TODO: move to test and create mock array
-//    let mockDataContainer: DataContainer<[CharacterResult]> = DataContainer(offset: 0, limit: 20, total: 1000, count: 0, results: results)
-    completion(.success(mockApiClientData.mockCharacterResults!))
+    if let result = mockApiClientData.mockCharacterResults{
+      completion(.success(result))
+    } else{
+      completion(.failure(MarvelError.noData))
+    }
   }
 
   func getComicsList(completion: @escaping ([ComicResult]) -> Void) {

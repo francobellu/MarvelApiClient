@@ -12,7 +12,7 @@ protocol CharacterDetailInteractorProtocol {
   init(dependencies: AppDependenciesProtocol)
 
   // MARK: - Business logic
-  func getCharacter(with characterId: Int, completion: @escaping (CharacterResult) -> Void)
+  func getCharacter(with characterId: Int, completion: @escaping ((CharacterResult)?) -> Void)
 }
 
 class CharacterDetailInteractor: CharacterDetailInteractorProtocol{
@@ -23,21 +23,19 @@ class CharacterDetailInteractor: CharacterDetailInteractorProtocol{
     dependencies.marvelApiClient
   }
 
-  private var character: CharacterResult?
-
   required init(dependencies: AppDependenciesProtocol) {
     self.dependencies = dependencies
   }
 
   // MARK: - Business logic
-  func getCharacter(with characterId: Int, completion: @escaping (CharacterResult) -> Void) {
-
+  func getCharacter(with characterId: Int, completion: @escaping ((CharacterResult)?) -> Void) {
     apiClient.getCharacter(with: characterId) { response in
       switch response {
       case .success(let dataContainer):
         guard let character = dataContainer.results.first else { return  }
         completion(character)
       case .failure(let error):
+        completion( nil )
         print(error)
       }
     }

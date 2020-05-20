@@ -23,7 +23,7 @@ extension XCTestCase{
       return data
   }
 
-  func getObjec<T: Decodable> (from jsonData: Data) -> T {
+  func getResults<T: Decodable> (from jsonData: Data) -> T {
     let response: MarvelResponse<T> = try! JSONDecoder().decode(MarvelResponse<T>.self, from: jsonData)
 
     return response.data!.results

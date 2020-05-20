@@ -50,7 +50,7 @@ class CharactersListPresenterTest: XCTestCase {
   // MARK: - TEST API FUNCTIONS
   func test() throws {
 
-    let testResults: [CharacterResult] = getObjec(from: mockContentData(for: "MockedResponseCharacterResultId1011334"))
+    let testResults: [CharacterResult] = getResults(from: mockContentData(for: "MockedResponseCharacterResultId1011334"))
 
     let testCharacterResultId1009144 = testResults.first!
     // TEST initial count is zero - charactersCount(at:)

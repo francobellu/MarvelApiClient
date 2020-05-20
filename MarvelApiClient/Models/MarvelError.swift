@@ -5,5 +5,6 @@ import Foundation
 public enum MarvelError: Error {
   case encoding
 	case decoding
+  case noData
 	case server(message: String)
 }

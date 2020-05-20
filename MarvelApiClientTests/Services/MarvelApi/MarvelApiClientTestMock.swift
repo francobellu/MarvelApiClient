@@ -25,7 +25,7 @@ class MarvelApiClientCharactersTestMock: XCTestCase {
     let httpCLient = HttpClient(session: session)
     sut = MarvelApiClient(httpClient: httpCLient)
 
-    let mockedResults: [CharacterResult]  = getObjec(from: mockContentData(for: "MockedResponseGetCharacters"))
+    let testResult: [CharacterResult]  = getResults(from: mockContentData(for: "MockedResponseGetCharacters"))
 
     sut.getCharactersList { response in
       print("FB: response: \(response)")
@@ -34,9 +34,9 @@ class MarvelApiClientCharactersTestMock: XCTestCase {
       switch response {
       case .success(let dataContainer):
 
-        XCTAssert(dataContainer.results.count == mockedResults.count)
+        XCTAssert(dataContainer.results.count == testResult.count)
         for index  in dataContainer.results.indices {
-          XCTAssert(dataContainer.results[index].id == mockedResults[index].id)
+          XCTAssert(dataContainer.results[index].id == testResult[index].id)
         }
       case .failure(_):
         XCTAssert(false)
@@ -51,18 +51,20 @@ class MarvelApiClientCharactersTestMock: XCTestCase {
     let httpCLient = HttpClient(session: session)
     sut = MarvelApiClient(httpClient: httpCLient)
 
-    let mockedResult: CharacterResult = getObjec(from: mockContentData(for: "MockedResponseCharacterResultId1011334"))
+    let testResults: [CharacterResult] = getResults(from: mockContentData(for: "MockedResponseCharacterResultId1011334"))
+    let testResult = testResults.first!
 
-    sut.getCharacter(with: mockedResult.id!) { [mockedResult] response in
-      XCTAssertNotNil(response)
-      switch response {
+    sut.getCharacter(with: testResult.id!) { result in
+      XCTAssertNotNil(result)
+      switch result {
       case .success(let dataContainer):
         XCTAssert(dataContainer.results.count == 1)
-        XCTAssert(dataContainer.results[0].id == mockedResult.id)
+        XCTAssert(dataContainer.results[0].id == testResult.id)
       case .failure(_):
         XCTAssert(false)
       }
     }
   }
 }
+
 
