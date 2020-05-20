@@ -15,47 +15,54 @@ class MarvelApiClientCharactersTestMock: XCTestCase {
   var sut: MarvelApiClient! // swiftlint:disable:this implicitly_unwrapped_optional
 
   override func setUpWithError() throws {
+
+  }
+
+  func testGetCharactersList() throws {
+
     let session = MockURLSession()
     session.nextData = mockContentData(for: "MockedResponseGetCharacters")
     let httpCLient = HttpClient(session: session)
     sut = MarvelApiClient(httpClient: httpCLient)
-  }
 
-  override func tearDownWithError() throws {
-  }
+    let mockedResults: [CharacterResult]  = getObjec(from: mockContentData(for: "MockedResponseCharacterResultId1011334"))
 
-  func testGetCharactersList() throws {
-    sut.getCharactersList { ( characters: [CharacterResult])  in
-      print("FB: characters: \(characters)")
-      XCTAssert(characters.isEmpty == false)
-      let mockedCharacters: [CharacterResult] = self.getObjec(from: self.mockContentData(for: "MockedResponseGetCharacters"))
-      XCTAssert(characters.count == mockedCharacters.count )
+    sut.getCharactersList { response in
+      print("FB: response: \(response)")
+
+      XCTAssertNotNil(response)
+      switch response {
+      case .success(let dataContainer):
+
+        XCTAssert(dataContainer.results.count == mockedResults.count)
+        for index  in dataContainer.results.indices {
+          XCTAssert(dataContainer.results[index].id == mockedResults[index].id)
+        }
+      case .failure(_):
+        XCTAssert(false)
       }
+    }
   }
-}
 
-class MarvelApiClientCharacterTestMock: XCTestCase {
+  func testGetCharacter() throws {
 
-  var sut: MarvelApiClient! // swiftlint:disable:this implicitly_unwrapped_optional
-
-  override func setUpWithError() throws {
     let session = MockURLSession()
     session.nextData = mockContentData(for: "MockedResponseGetCharacter")
     let httpCLient = HttpClient(session: session)
     sut = MarvelApiClient(httpClient: httpCLient)
-  }
 
-  override func tearDownWithError() throws {
-  }
+    let mockedResult: CharacterResult = getObjec(from: mockContentData(for: "MockedResponseCharacterResultId1011334"))
 
-  let characterId_1011334 = 1011334
-  func testGetCharacter() throws {
-    sut.getCharacter(with: characterId_1011334){ ( character: CharacterResult)  in
-      let mockedCharacter: CharacterResult = self.getObjec(from: self.mockContentData(for: "MockedResponseGetCharacter"))
-      XCTAssert(character.name == mockedCharacter.name )
-      XCTAssert(character.description == mockedCharacter.description )
-      XCTAssert(character.id == mockedCharacter.id)
+    sut.getCharacter(with: mockedResult.id!) { [mockedResult] response in
+      XCTAssertNotNil(response)
+      switch response {
+      case .success(let dataContainer):
+        XCTAssert(dataContainer.results.count == 1)
+        XCTAssert(dataContainer.results[0].id == mockedResult.id)
+      case .failure(_):
+        XCTAssert(false)
       }
+    }
   }
-
 }
+
