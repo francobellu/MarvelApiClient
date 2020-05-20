@@ -12,6 +12,8 @@ class CharactersListPresenter {
 
   private weak var coordinatorDelegate: CharactersListCoordinatorDelegate!  //swiftlint:disable:this implicitly_unwrapped_optional
 
+  private var interactor: CharactersListInteractor
+
   private var dependencies: AppDependenciesProtocol! // swiftlint:disable:this implicitly_unwrapped_optional
 
   private var apiClient: MarvelAPIProtocol{
@@ -23,9 +25,10 @@ class CharactersListPresenter {
 
   private(set) var title = "Marvel Comics"
 
-  init(dependencies: AppDependenciesProtocol, coordinatorDelegate: CharactersListCoordinatorDelegate) {
+  init(dependencies: AppDependenciesProtocol, coordinatorDelegate: CharactersListCoordinatorDelegate, interactor: CharactersListInteractor) {
     self.dependencies = dependencies
     self.coordinatorDelegate = coordinatorDelegate
+    self.interactor = interactor
   }
 
   func getCharacter(at index: Int) -> CharacterResult {
@@ -39,9 +42,8 @@ class CharactersListPresenter {
 
   // MARK: - API FUNCTIONS
 
-  func getNextCharactersList(completion: @escaping () -> Void) {
-    apiClient.getCharactersList { ( characters: [CharacterResult])  in
-      // Update dataSource array
+  func getNextCharactersList( completion: @escaping () -> Void) {
+    interactor.getNextCharactersList { (characters: [CharacterResult]) in
       self.characters += characters
       completion()
     }

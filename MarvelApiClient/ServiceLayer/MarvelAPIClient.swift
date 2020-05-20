@@ -2,7 +2,7 @@ import Foundation
 
 protocol MarvelAPIProtocol {
   // Characters
-  func getCharactersList(completion: @escaping ([CharacterResult]) -> Void)
+  func getCharactersList(completion: @escaping (Result<DataContainer<GetCharacters.Response>, Error>) -> Void)
   func getCharacter(with id: Int, completion: @escaping (CharacterResult) -> Void)
 
   // Comics
@@ -32,37 +32,6 @@ internal class MarvelAPIClient {
   init(httpClient: HttpClient) {
     self.httpClient = httpClient
 
-  }
-
-  private func handleGetCharacters(_ weakself: MarvelAPIClient,
-                                   _ response: (Result<DataContainer<GetCharacters.Response>, Error>),
-                                   _ completion: @escaping ([CharacterResult]) -> Void  ) {
-    print("\nGetCharacters list finished, limit: \(weakself.limit), offset: \(weakself.offset)")
-
-    switch response {
-    case .success(let dataContainer):
-
-      // 3) append the new results into the data source for the tems table view
-      //weakself.characters += dataContainer.results
-      //guard let results = dataContainer.results else { return}
-      completion(dataContainer.results)
-      for character in dataContainer.results {
-        guard let thumbnail = character.thumbnail else {return}
-        print("FB:  Title: \(character.name ?? "Unnamed character")")
-        print("  Thumbnail: \(thumbnail.url.absoluteString)")
-      }
-
-      // 4) Reset the offset for the next data query
-      weakself.offset += weakself.limit
-
-      // 5) check if this was the last of the data
-      if dataContainer.results.count < weakself.limit {
-        weakself.reachedEndOfItems = true
-        print("reached end of data. Batch count: \(dataContainer.results.count)")
-      }
-    case .failure(let error):
-      print(error)
-    }
   }
 
   private func handleGetComics(_ weakself: MarvelAPIClient,
@@ -95,49 +64,6 @@ internal class MarvelAPIClient {
       print(error)
     }
   }
-
-//  private func handleGetCharacter( _ weakself: MarvelAPIClient,
-//                                   _ response: (Result<DataContainer<GetCharacter.Response>, Error>),
-//                                   _ completion: @escaping (CharacterResult) -> Void  ) {
-//
-//    switch response {
-//    case .success(let dataContainer):
-//
-//      // 3) append the new results into the data source for the tems table view
-//      //weakself.characters += dataContainer.results
-//      guard let character = dataContainer.results.first,
-//        let thumbnail = character.thumbnail
-//        else{return}
-//      print("FB:  Title: \(character.name ?? "Unnamed character")")
-//      print("  Thumbnail: \(thumbnail.url.absoluteString)")
-//
-//      completion(character)
-//    case .failure(let error):
-//      print(error)
-//    }
-//  }
-//
-//  private func handleGetComic( _ weakself: MarvelAPIClient,
-//                               _ response: (Result<DataContainer<GetComic.Response>, Error>),
-//                               _ completion: @escaping (ComicResult) -> Void  ) {
-//    print("\nGetCharacters list finished, limit: \(weakself.limit), offset: \(weakself.offset)")
-//
-//    switch response {
-//    case .success(let dataContainer):
-//
-//      // 3) append the new results into the data source for the tems table view
-//      //weakself.characters += dataContainer.results
-//      guard let comic = dataContainer.results.first,
-//        let thumbnail = comic.thumbnail
-//        else{return}
-//      print("FB:  Title: \(comic.title ?? "Unnamed comic")")
-//      print("  Thumbnail: \(thumbnail.url.absoluteString)")
-//
-//      completion(comic)
-//    case .failure(let error):
-//      print(error)
-//    }
-//  }
 }
 
 // Exposed API
@@ -163,12 +89,27 @@ extension MarvelAPIClient: MarvelAPIProtocol {
     }
   }
 
-  func getCharactersList(completion: @escaping ([CharacterResult]) -> Void ) {
+  func getCharactersList(completion: @escaping (Result<DataContainer<GetCharacters.Response>, Error>) -> Void ) {
 
     // Get the first <limit> characters
-    httpClient.send(GetCharacters(limit: limit, offset: 0) ) { [weak self] response in
-      guard let weakself = self else { return}
-      self?.handleGetCharacters(weakself, response, completion)
+    httpClient.send(GetCharacters(limit: limit, offset: 0) ) { response in
+
+      print("\nGetCharacters list finished, limit: \(self.limit), offset: \(self.offset)")
+
+      switch response {
+      case .success(let dataContainer):
+        // 4) Reset the offset for the next data query
+        self.offset += self.limit
+
+        // 5) check if this was the last of the data
+        if dataContainer.results.count < self.limit {
+          self.reachedEndOfItems = true
+          print("reached end of data. Batch count: \(dataContainer.results.count)")
+        }
+      case .failure(let error):
+        print(error)
+      }
+      completion(response)
     }
   }
 

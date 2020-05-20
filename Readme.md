@@ -25,12 +25,6 @@ Principles:
   - This means that each VC doens't need to know about about the following VC ( prepare for segue) AND doens't need to tell its owner, the navigator, to push a new VC.
   - So we take the flow control out of the VC so that the VC can be also reused in other flows and can be more easily tested
 
-
-Wish List:
-  1.  Spinner for async list view
-  2.  apiClient: should be a singleton or passed as dependency injection by the coordinators chain?
-
-
 TODO:
 
 Architecture: Interactor with tests?
@@ -59,14 +53,4 @@ Optional
 - controllare memory leaks etc
 - the top level json structure is different if server returns an error. { code: int, message = String}
 
-DONE
-
-
-
-OLD TODO
-  1.  Fare View2, view3 UI
-  2.  Coordinators: revisare quali non ho bisogno
-  3.  Unit Test API
-  4.  Unit Test storage
-  5.  creare 3 framwewoks diversi per view, VC,model
 
