@@ -25,10 +25,6 @@ Principles:
   - This means that each VC doens't need to know about about the following VC ( prepare for segue) AND doens't need to tell its owner, the navigator, to push a new VC.
   - So we take the flow control out of the VC so that the VC can be also reused in other flows and can be more easily tested
 
-TODO:
-
-Architecture: Interactor with tests?
-
 
 HTTP:
   - URLQueryItemEncoder is not used??

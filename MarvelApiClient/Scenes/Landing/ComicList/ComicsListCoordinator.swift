@@ -15,15 +15,15 @@ protocol ComicsListCoordinatorDelegate: class {
 
 class ComicsListCoordinator {
 
-  var presenter: AnyObject?
+  var coordinatorPresenter: AnyObject?
   weak var parentCoordinator: Coordinator?
   var coordinators = [Coordinator]()
   weak var dependencies: AppDependenciesProtocol! // swiftlint:disable:this implicitly_unwrapped_optional
 
-  init(parentCoordinator: Coordinator, presenter: UINavigationController, dependencies: AppDependenciesProtocol) {
+  init(parentCoordinator: Coordinator, coordinatorPresenter: UINavigationController, dependencies: AppDependenciesProtocol) {
     print("FB:ComicsListCoordinator:init()")
     self.dependencies = dependencies
-    self.presenter = presenter
+    self.coordinatorPresenter = coordinatorPresenter
     self.parentCoordinator = parentCoordinator
   }
 }
@@ -56,7 +56,7 @@ extension ComicsListCoordinator: Coordinator {
     let viewController = ComicsListViewController.instantiateViewController()
     viewController.presenter = viewPresenter
 
-    (presenter as? UINavigationController)?.pushViewController(viewController, animated: true)
+    (coordinatorPresenter as? UINavigationController)?.pushViewController(viewController, animated: true)
   }
 
   private func presentComicDetailViewController(with comicId: String ) {
@@ -70,7 +70,7 @@ extension ComicsListCoordinator: Coordinator {
         DispatchQueue.main.sync{
           let viewController = ComicDetailViewController.instantiateViewController()
           viewController.presenter = presenter
-          (self.presenter as? UINavigationController)?.pushViewController(viewController, animated: true)
+          (self.coordinatorPresenter as? UINavigationController)?.pushViewController(viewController, animated: true)
         }
       }
     }
@@ -82,7 +82,7 @@ extension ComicsListCoordinator: ComicsListCoordinatorDelegate {
   func didGoBack() {
     print("FB: ComicsListCoordinator:goBack()")
     print("FB:  popVC")
-    guard let navigationController = presenter as? UINavigationController else { return }
+    guard let navigationController = coordinatorPresenter as? UINavigationController else { return }
     if navigationController.viewControllers.count > 1{
       navigationController.popViewController(animated: true)
       parentCoordinator?.disposeChild(coordinator: self)
@@ -101,6 +101,6 @@ extension ComicsListCoordinator: ComicsListCoordinatorDelegate {
     //viewController.coordinatorDelegate = self
     print("FB:  Created VC: \(viewController) ")
     print("FB:  Presenting VC: \(viewController) ")
-    (presenter as? UINavigationController)?.pushViewController(viewController, animated: true)
+    (coordinatorPresenter as? UINavigationController)?.pushViewController(viewController, animated: true)
   }
 }

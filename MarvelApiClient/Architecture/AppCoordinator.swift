@@ -28,7 +28,7 @@ private enum AppCoordinatorState {
 
 // This coordinator
 class AppCoordinator: AppDependencyInjectable {
-  var presenter: AnyObject?
+  var coordinatorPresenter: AnyObject?
 
   var coordinators = [Coordinator]()
   var dependencies: AppDependenciesProtocol! // swiftlint:disable:this implicitly_unwrapped_optional
@@ -38,7 +38,7 @@ class AppCoordinator: AppDependencyInjectable {
   init(presenter: UIWindow =  UIWindow(frame: UIScreen.main.bounds),
        dependencies: AppDependenciesProtocol) {
 
-    self.presenter = presenter
+    self.coordinatorPresenter = presenter
     self.dependencies = dependencies
     self.state = AppCoordinatorState.next(dontShowOnboarding: dependencies.appConfig.dontShowOnboardingValue)
   }
@@ -67,14 +67,14 @@ extension AppCoordinator: Coordinator {
             case .character, .characters:
               let navController = UINavigationController()
               present(viewController: navController)
-              let coordinator = CharactersListCoordinator(parentCoordinator: self, presenter: navController, dependencies: dependencies)
+              let coordinator = CharactersListCoordinator(parentCoordinator: self, coordinatorPresenter: navController, dependencies: dependencies)
               add(coordinator)
               let deeplinkableCoord = coordinator
               deeplinkableCoord.start(with: option)
             case .comics, .comic:
               let navController = UINavigationController()
               present(viewController: navController)
-              let coordinator = ComicsListCoordinator(parentCoordinator: self, presenter: navController, dependencies: dependencies)
+              let coordinator = ComicsListCoordinator(parentCoordinator: self, coordinatorPresenter: navController, dependencies: dependencies)
               add(coordinator)
               let deeplinkableCoord = coordinator
               deeplinkableCoord.start(with: option)
@@ -100,15 +100,15 @@ extension AppCoordinator: Coordinator {
     let coordinator = LandingCoordinator(parentCoordinator: self, presenter: UINavigationController(), dependencies: dependencies)
     add(coordinator)
     coordinator.start()
-    guard let presenter = coordinator.presenter as? UIViewController else { return }
+    guard let presenter = coordinator.coordinatorPresenter as? UIViewController else { return }
     present(viewController: presenter )
   }
 
   // MARK: - HELPER METHODS
   private func present( viewController: UIViewController) {
-    guard let presenter = presenter as? UIWindow  else { return }
-    presenter.rootViewController = viewController
-    presenter.makeKeyAndVisible()
+    guard let coordinatorPresenter = coordinatorPresenter as? UIWindow  else { return }
+    coordinatorPresenter.rootViewController = viewController
+    coordinatorPresenter.makeKeyAndVisible()
   }
 
   private func runFlowfor(state: AppCoordinatorState) {

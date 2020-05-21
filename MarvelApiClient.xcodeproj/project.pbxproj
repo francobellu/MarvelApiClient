@@ -322,12 +322,12 @@
 		C703660D24753DEA0005886F /* CaractersList */ = {
 			isa = PBXGroup;
 			children = (
-				C703660E24753DEA0005886F /* CharacterCell */,
 				C703661124753DEA0005886F /* CharactersListViewController.swift */,
 				C703661224753DEA0005886F /* CharactersListInteractor.swift */,
 				C703661324753DEA0005886F /* CharactersListCoordinator.swift */,
-				C703661424753DEA0005886F /* CharacterDetail */,
 				C703661824753DEA0005886F /* CharactersListPresenter.swift */,
+				C703660E24753DEA0005886F /* CharacterCell */,
+				C703661424753DEA0005886F /* CharacterDetail */,
 			);
 			path = CaractersList;
 			sourceTree = "<group>";

@@ -25,7 +25,7 @@ class LandingCoordinator: NSObject {
   private var dependencies: AppDependenciesProtocol! // swiftlint:disable:this implicitly_unwrapped_optional
   //private var landingViewController: LandingViewController
 
-  var presenter: AnyObject?
+  var coordinatorPresenter: AnyObject?
 
   // MARK: - Coordinator
   internal var coordinators: [Coordinator] = []
@@ -34,7 +34,7 @@ class LandingCoordinator: NSObject {
   init(parentCoordinator: AppCoordinator, presenter: UINavigationController = UINavigationController(), dependencies: AppDependenciesProtocol ) {
     print("FB:LandingCoordinator:init()")
     self.parentCoordinator = parentCoordinator
-    self.presenter = presenter
+    self.coordinatorPresenter = presenter
 
     self.dependencies = dependencies
     super.init()
@@ -62,7 +62,7 @@ extension LandingCoordinator: Coordinator {
 
   // MARK: - VC transitions handling
   private func present(viewController: UIViewController) {
-    (presenter as? UINavigationController)?.pushViewController(viewController, animated: true)
+    (coordinatorPresenter as? UINavigationController)?.pushViewController(viewController, animated: true)
   }
 }
 
@@ -79,7 +79,7 @@ extension LandingCoordinator: LandingCoordinatorDelegate {
   // MARK: - UTILITY FUNCTIONS
   private func  showAllCharacters() {
     // Create new coordinator...
-    let charactersListCoordinator = CharactersListCoordinator(parentCoordinator: self, presenter: presenter as! UINavigationController, dependencies: dependencies)
+    let charactersListCoordinator = CharactersListCoordinator(parentCoordinator: self, coordinatorPresenter: coordinatorPresenter as! UINavigationController, dependencies: dependencies)
     charactersListCoordinator.parentCoordinator = self
     // ...start it...
     charactersListCoordinator.start()
@@ -89,7 +89,7 @@ extension LandingCoordinator: LandingCoordinatorDelegate {
 
   private func showAllComics() {
     // Create new coordinator...
-    let comicsCoordinator = ComicsListCoordinator(parentCoordinator: self, presenter: presenter as! UINavigationController, dependencies: dependencies)
+    let comicsCoordinator = ComicsListCoordinator(parentCoordinator: self, coordinatorPresenter: coordinatorPresenter as! UINavigationController, dependencies: dependencies)
     comicsCoordinator.parentCoordinator = self
     // ...start it...
     comicsCoordinator.start()

@@ -15,16 +15,16 @@ protocol CharactersListCoordinatorDelegate: class {
 
 class CharactersListCoordinator: NSObject {
 
-  var presenter: AnyObject?
+  var coordinatorPresenter: AnyObject?
   weak var parentCoordinator: Coordinator?
   var coordinators = [Coordinator]()
   private var dependencies: AppDependenciesProtocol! // swiftlint:disable:this implicitly_unwrapped_optional
 
-  init(parentCoordinator: Coordinator, presenter: UINavigationController, dependencies: AppDependenciesProtocol) {
+  init(parentCoordinator: Coordinator, coordinatorPresenter: UINavigationController, dependencies: AppDependenciesProtocol) {
     print("FB:CharactersListCoordinator:init()")
     self.dependencies = dependencies
     self.parentCoordinator = parentCoordinator
-    self.presenter = presenter
+    self.coordinatorPresenter = coordinatorPresenter
     super.init()
   }
 }
@@ -54,12 +54,12 @@ extension CharactersListCoordinator: Coordinator, DeepLinkable {
 
     let interactor = CharactersListInteractor(dependencies: dependencies)
 
-    let viewPresenter = CharactersListPresenter(dependencies: dependencies, coordinatorDelegate: self, interactor: interactor)
+    let presenter = CharactersListPresenter(dependencies: dependencies, coordinatorDelegate: self, interactor: interactor)
 
     let viewController = CharactersListViewController.instantiateViewController()
-    viewController.presenter = viewPresenter
+    viewController.presenter = presenter
 
-    (presenter as? UINavigationController)?.pushViewController(viewController, animated: true)
+    (coordinatorPresenter as? UINavigationController)?.pushViewController(viewController, animated: true)
   }
 
   private func presentCharacterDetailViewController(with characterId: String ) {
@@ -76,7 +76,7 @@ extension CharactersListCoordinator: Coordinator, DeepLinkable {
         DispatchQueue.main.sync{
           let viewController = CharacterDetailViewController.instantiateViewController()
           viewController.presenter = presenter
-          (self.presenter as? UINavigationController)?.pushViewController(viewController, animated: true)
+          (self.coordinatorPresenter as? UINavigationController)?.pushViewController(viewController, animated: true)
         }
       }
     }
@@ -86,7 +86,7 @@ extension CharactersListCoordinator: Coordinator, DeepLinkable {
 // MARK: - VC transitions handling
 extension CharactersListCoordinator: CharactersListCoordinatorDelegate {
   func didGoBack() {
-    guard let navigationController = presenter as? UINavigationController else { return }
+    guard let navigationController = coordinatorPresenter as? UINavigationController else { return }
     if navigationController.viewControllers.count > 1{
       navigationController.popViewController(animated: true)
       parentCoordinator?.disposeChild(coordinator: self)
@@ -104,6 +104,6 @@ extension CharactersListCoordinator: CharactersListCoordinatorDelegate {
     let viewController = CharacterDetailViewController.instantiateViewController()
     viewController.presenter = viewPresenter
 
-    (presenter as? UINavigationController)?.pushViewController(viewController, animated: true)
+    (coordinatorPresenter as? UINavigationController)?.pushViewController(viewController, animated: true)
   }
 }

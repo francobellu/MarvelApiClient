@@ -10,8 +10,8 @@ Overview
    Extensions: 44
 
 Sizes
-   Total lines of code: 4963
-   Source lines of code: 3994
+   Total lines of code: 4958
+   Source lines of code: 3991
    Longest file: GetComic.swift (462 source lines)
    Longest type: R (219 source lines)
 

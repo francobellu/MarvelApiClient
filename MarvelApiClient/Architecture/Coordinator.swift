@@ -13,7 +13,7 @@ import UIKit
 protocol Coordinator: class {
   var coordinators: [Coordinator] { get set}
 
-  var presenter: AnyObject? { get set}
+  var coordinatorPresenter: AnyObject? { get set}
 
   func disposeChild(coordinator: Coordinator)
   /// Set up a new coordinator or present a new view  ( if no coord needed)

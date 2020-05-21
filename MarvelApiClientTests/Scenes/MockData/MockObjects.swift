@@ -134,14 +134,10 @@ class MockApiClient: MarvelApiProtocol{
   }
 
   func getComicsList(completion: @escaping ([ComicResult]) -> Void) {
-      //    let mockComicResult: ComicResult = // TODO: create mock [ComicResult] object from Json
     completion( mockApiClientData.mockComicsData!)
-
   }
 
   func getComic(with id: Int, completion: @escaping (ComicResult) -> Void) {
-
-//    let mockComicResult: ComicResult = // TODO: create mock ComicResult object from Json
     completion( mockApiClientData.mockComicData!)
   }
 }
@@ -155,7 +151,6 @@ class MockCharactersListInteractor: CharactersListInteractorProtocol{
   var mockCharactersListInteractorData = MockCharactersListInteractorData(mockCharactersResults: nil)
 
   required init(dependencies: AppDependenciesProtocol) {
-    //    TODO:
   }
 
   func getNextCharactersList(completion: @escaping ([CharacterResult]) -> Void) {
