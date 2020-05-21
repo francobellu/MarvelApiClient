@@ -1,6 +1,6 @@
 //
 //  GetComic.swift
-//  ApiLayer
+//  MarvelApiClient
 //
 //  Created by franco bellu on 20/04/2020.
 //  Copyright © 2020 BELLU Franco. All rights reserved.

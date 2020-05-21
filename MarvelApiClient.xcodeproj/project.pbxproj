@@ -15,9 +15,7 @@
 		287C9A11217F39CC00D63092 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 287C9A10217F39CC00D63092 /* Assets.xcassets */; };
 		287C9A14217F39CC00D63092 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 287C9A12217F39CC00D63092 /* LaunchScreen.storyboard */; };
 		28998ECA217F636A0037039B /* MarvelAPIClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28998EB8217F636A0037039B /* MarvelAPIClient.swift */; };
-		28998ECB217F636A0037039B /* HTTPParameter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28998EBA217F636A0037039B /* HTTPParameter.swift */; };
 		28998ECC217F636A0037039B /* Result.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28998EBB217F636A0037039B /* Result.swift */; };
-		28998ECE217F636A0037039B /* URLQueryItemEncoder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28998EBD217F636A0037039B /* URLQueryItemEncoder.swift */; };
 		28998ED5217F636A0037039B /* APIRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28998EC5217F636A0037039B /* APIRequest.swift */; };
 		28998ED6217F636A0037039B /* GetComics.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28998EC7217F636A0037039B /* GetComics.swift */; };
 		28998ED7217F636A0037039B /* GetCharacters.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28998EC8217F636A0037039B /* GetCharacters.swift */; };
@@ -100,9 +98,7 @@
 		287C9A13217F39CC00D63092 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		287C9A15217F39CC00D63092 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		28998EB8217F636A0037039B /* MarvelAPIClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MarvelAPIClient.swift; sourceTree = "<group>"; };
-		28998EBA217F636A0037039B /* HTTPParameter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HTTPParameter.swift; sourceTree = "<group>"; };
 		28998EBB217F636A0037039B /* Result.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Result.swift; sourceTree = "<group>"; };
-		28998EBD217F636A0037039B /* URLQueryItemEncoder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = URLQueryItemEncoder.swift; sourceTree = "<group>"; };
 		28998EC5217F636A0037039B /* APIRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = APIRequest.swift; sourceTree = "<group>"; };
 		28998EC7217F636A0037039B /* GetComics.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GetComics.swift; sourceTree = "<group>"; };
 		28998EC8217F636A0037039B /* GetCharacters.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GetCharacters.swift; sourceTree = "<group>"; };
@@ -453,8 +449,6 @@
 			children = (
 				28998EC5217F636A0037039B /* APIRequest.swift */,
 				C7169220244D9D5A005BF4AB /* RestApiClient.swift */,
-				28998EBD217F636A0037039B /* URLQueryItemEncoder.swift */,
-				28998EBA217F636A0037039B /* HTTPParameter.swift */,
 			);
 			path = NetworkingLayer;
 			sourceTree = "<group>";
@@ -838,7 +832,6 @@
 				C7D3F040243B770F004E4C0E /* Coordinator.swift in Sources */,
 				285122812181E3E5009D4AB0 /* Extensions.swift in Sources */,
 				C703664F24753E940005886F /* ComicDetailViewController.swift in Sources */,
-				28998ECE217F636A0037039B /* URLQueryItemEncoder.swift in Sources */,
 				C7096D772449C7C500DEE7D3 /* SceneDelegate.swift in Sources */,
 				C7036655247540990005886F /* MarvelApiProtocol.swift in Sources */,
 				C703664724753DEB0005886F /* ComicsListPresenter.swift in Sources */,
@@ -847,7 +840,6 @@
 				C703664824753DEB0005886F /* LandingCoordinator.swift in Sources */,
 				C7036653247540350005886F /* DataStoreProtocol.swift in Sources */,
 				C703664024753DEB0005886F /* CharacterDetailViewController.swift in Sources */,
-				28998ECB217F636A0037039B /* HTTPParameter.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
