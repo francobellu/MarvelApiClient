@@ -1,6 +1,6 @@
 # Marvel Client App
 
-##  Note: This markdown file doen't include images.  Please download the documentation file [MarvelApp.docx] (MarvelApp.docx) file to see the full documentation
+##  Note: This markdown file doen't include images.  Please download the documentation file [MarvelApp.docx](MarvelApp.docx) file to see the full documentation
 
 ## Overview: Scope of the work
 
