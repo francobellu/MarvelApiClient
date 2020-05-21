@@ -9,7 +9,7 @@
 import UIKit
 
 protocol AppDependenciesProtocol: class {
-  var httpClient: HttpClient { get }
+  var restApiClient: RestApiClient { get }
 
   var marvelApiClient: MarvelApiProtocol { get }
 
@@ -22,12 +22,12 @@ protocol AppDependenciesProtocol: class {
 class AppDependencies: AppDependenciesProtocol {
   // MARK: - All the app dependencies
 
-  lazy var httpClient: HttpClient = {
-    return HttpClient()
+  lazy var restApiClient: RestApiClient = {
+    return RestApiClient()
   }()
 
   lazy var marvelApiClient: MarvelApiProtocol = {
-    MarvelApiClient(httpClient: HttpClient())
+    MarvelApiClient(restApiClient: RestApiClient())
   }()
 
   lazy var dataStore: DataStoreProtocol = {

@@ -4,9 +4,6 @@ import Foundation
 /// Implementation of a generic-based Marvel API client
 internal class MarvelApiClient {
 
-  // Singleton
-  //static internal let shared: MarvelApiProtocol = MarvelAPIClient(httpClient: <#HttpClient#>)
-
   // number of items to be fetched each time (i.e., database LIMIT)
   private let limit = 50
 
@@ -16,10 +13,10 @@ internal class MarvelApiClient {
   // a flag for when all database items have already been loaded
   private var reachedEndOfItems = false
 
-  private let httpClient: HttpClient! // swiftlint:disable:this implicitly_unwrapped_optional
+  private let restApiClient: RestApiClient! // swiftlint:disable:this implicitly_unwrapped_optional
 
-  init(httpClient: HttpClient) {
-    self.httpClient = httpClient
+  init(restApiClient: RestApiClient) {
+    self.restApiClient = restApiClient
 
   }
 }
@@ -30,7 +27,7 @@ extension MarvelApiClient: MarvelApiProtocol {
   func getCharactersList(completion: @escaping (Result<DataContainer<GetCharacters.Response>, Error>) -> Void ) {
 
     // Get the first <limit> characters
-    httpClient.send(GetCharacters(limit: limit, offset: 0) ) { response in
+    restApiClient.send(GetCharacters(limit: limit, offset: 0) ) { response in
 
       print("\nGetCharacters list finished, limit: \(self.limit), offset: \(self.offset)")
 
@@ -52,7 +49,7 @@ extension MarvelApiClient: MarvelApiProtocol {
   }
 
   func getCharacter(with id: Int, completion: @escaping (Result<DataContainer<GetCharacters.Response>, Error>) -> Void) {
-    httpClient.send(GetCharacter(id: id) ) { response in
+    restApiClient.send(GetCharacter(id: id) ) { response in
       print("\nGetCharacter \(id) finished:")
       completion(response)
     }
@@ -60,7 +57,7 @@ extension MarvelApiClient: MarvelApiProtocol {
 
   func getComic(with id: Int, completion: @escaping (ComicResult) -> Void) {
     // Yet another request with a mandatory parameter
-    httpClient.send(GetComic(comicId: id)) { response in
+    restApiClient.send(GetComic(comicId: id)) { response in
       print("\nGetComic \(id) finished:")
 
       switch response {
@@ -84,7 +81,7 @@ extension MarvelApiClient: MarvelApiProtocol {
       return
     }
 
-    httpClient.send(GetComics(format: .digital) ) { response in
+    restApiClient.send(GetComics(format: .digital) ) { response in
       print("\nGetComics finished:")
       switch response {
       case .success(let dataContainer):
@@ -107,7 +104,7 @@ extension MarvelApiClient: MarvelApiProtocol {
 
   func getComicsAvengers(completion: @escaping ([ComicResult]) -> Void) {
     // Another request filling interesting optional parameters, a string and an enum
-    httpClient.send(GetComics(titleStartsWith: "Avengers", format: .digital) ) { response in
+    restApiClient.send(GetComics(titleStartsWith: "Avengers", format: .digital) ) { response in
       print("\nGetComics starting with  \"Avengers\" finished:")
 
       switch response {

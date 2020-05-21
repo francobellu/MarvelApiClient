@@ -16,8 +16,8 @@ class MarvelApiClientTests: XCTestCase {
 
   override func setUpWithError() throws {
     let session = URLSession(configuration: .default)
-    let httpCLient = HttpClient(session: session)
-    sut = MarvelApiClient(httpClient: httpCLient)
+    let restApiClient = RestApiClient(session: session)
+    sut = MarvelApiClient(restApiClient: restApiClient)
   }
 
   override func tearDownWithError() throws {

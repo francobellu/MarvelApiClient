@@ -1,5 +1,5 @@
 //
-//  HttpClient.swift
+//  RestApiClient.swift
 //  MarvelApiClient
 //
 //  Created by BELLU Franco on 14/05/2020.
@@ -28,7 +28,7 @@ extension URLSession: URLSessionProtocol {
 
 extension URLSessionDataTask: URLSessionDataTaskProtocol {}
 
-internal class HttpClient {
+class RestApiClient {
 
   private let session: URLSessionProtocol
 

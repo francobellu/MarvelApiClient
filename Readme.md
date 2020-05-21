@@ -32,7 +32,7 @@ HTTP:
 MarvelApiCLient: 
 - unit tests con Mock data
 - 1 Coordinator for all with deeplinks and no  
-- httpCLient in framework? swiftPM, github?
+- restApiClient in framework? swiftPM, github?
 
 - characterList: take out the api and put it in VM or coordinator
 - create open characterDertail with the character sent by deeplink

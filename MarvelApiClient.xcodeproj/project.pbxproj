@@ -53,7 +53,7 @@
 		C7096D772449C7C500DEE7D3 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7096D762449C7C500DEE7D3 /* SceneDelegate.swift */; };
 		C7169219244C99A5005BF4AB /* MockObjects.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7169218244C99A5005BF4AB /* MockObjects.swift */; };
 		C716921B244CD083005BF4AB /* MarvelApiClientTestMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = C716921A244CD083005BF4AB /* MarvelApiClientTestMock.swift */; };
-		C7169221244D9D5A005BF4AB /* HttpClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7169220244D9D5A005BF4AB /* HttpClient.swift */; };
+		C7169221244D9D5A005BF4AB /* RestApiClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7169220244D9D5A005BF4AB /* RestApiClient.swift */; };
 		C7169232244DE062005BF4AB /* MarvelDTOs.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7169228244DE062005BF4AB /* MarvelDTOs.swift */; };
 		C7169240244F0385005BF4AB /* MarvelError.swift in Sources */ = {isa = PBXBuildFile; fileRef = C716923F244F0385005BF4AB /* MarvelError.swift */; };
 		C728C2AB246C375300F60806 /* AppDependencies.swift in Sources */ = {isa = PBXBuildFile; fileRef = C728C2AA246C375200F60806 /* AppDependencies.swift */; };
@@ -143,7 +143,7 @@
 		C7096D762449C7C500DEE7D3 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		C7169218244C99A5005BF4AB /* MockObjects.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockObjects.swift; sourceTree = "<group>"; };
 		C716921A244CD083005BF4AB /* MarvelApiClientTestMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MarvelApiClientTestMock.swift; sourceTree = "<group>"; };
-		C7169220244D9D5A005BF4AB /* HttpClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HttpClient.swift; sourceTree = "<group>"; };
+		C7169220244D9D5A005BF4AB /* RestApiClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RestApiClient.swift; sourceTree = "<group>"; };
 		C7169228244DE062005BF4AB /* MarvelDTOs.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MarvelDTOs.swift; sourceTree = "<group>"; };
 		C716923F244F0385005BF4AB /* MarvelError.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MarvelError.swift; sourceTree = "<group>"; };
 		C728C2AA246C375200F60806 /* AppDependencies.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDependencies.swift; sourceTree = "<group>"; };
@@ -452,7 +452,7 @@
 			isa = PBXGroup;
 			children = (
 				28998EC5217F636A0037039B /* APIRequest.swift */,
-				C7169220244D9D5A005BF4AB /* HttpClient.swift */,
+				C7169220244D9D5A005BF4AB /* RestApiClient.swift */,
 				28998EBD217F636A0037039B /* URLQueryItemEncoder.swift */,
 				28998EBA217F636A0037039B /* HTTPParameter.swift */,
 			);
@@ -821,7 +821,7 @@
 				287C9A0A217F39CB00D63092 /* AppDelegate.swift in Sources */,
 				C703664124753DEB0005886F /* CharacterDetailInteractor.swift in Sources */,
 				C78A83F5244B8AD6004DE930 /* GetCharacter.swift in Sources */,
-				C7169221244D9D5A005BF4AB /* HttpClient.swift in Sources */,
+				C7169221244D9D5A005BF4AB /* RestApiClient.swift in Sources */,
 				C703663F24753DEB0005886F /* CharacterDetailPresenter.swift in Sources */,
 				C7EC670D24435E3C00F88FDE /* UserDefaultsDataStore.swift in Sources */,
 				C703663B24753DEB0005886F /* CharacterCell.swift in Sources */,

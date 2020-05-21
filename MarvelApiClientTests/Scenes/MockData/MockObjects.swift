@@ -84,8 +84,8 @@ class MockAppDependencies: AppDependenciesProtocol {
 
   let mockData: String = ""
 
-  lazy var httpClient: HttpClient = {
-    return HttpClient(session: MockURLSession())
+  lazy var restApiClient: RestApiClient = {
+    return RestApiClient(session: MockURLSession())
   }()
 
   lazy var marvelApiClient: MarvelApiProtocol = {
