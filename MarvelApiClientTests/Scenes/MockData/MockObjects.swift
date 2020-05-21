@@ -47,53 +47,6 @@ class MockURLSessionDataTask: URLSessionDataTaskProtocol {
   }
 }
 
-
-//class OnboardingPresenterlTest: XCTestCase {
-//
-//  var sut: OnboardingPresenter! // swiftlint:disable:this implicitly_unwrapped_optional
-//  override func setUpWithError() throws {
-//
-//  }
-//  override func tearDownWithError() throws {
-//    // Put teardown code here. This method is called after the invocation of each test method in the class.
-//  }
-//
-//  func testExample() throws {
-//    // This is an example of a functional test case.
-//    // Use XCTAssert and related functions to verify your tests produce the correct results.
-//  }
-//
-//  func testPerformanceExample() throws {
-//    // This is an example of a performance test case.
-//    self.measure {
-//      // Put the code you want to measure the time of here.
-//    }
-//  }
-//}
-//
-//class LandingPresenterTest: XCTestCase {
-//
-//  var sut: LandingPresenter! // swiftlint:disable:this implicitly_unwrapped_optional
-//  override func setUpWithError() throws {
-//
-//  }
-//  override func tearDownWithError() throws {
-//    // Put teardown code here. This method is called after the invocation of each test method in the class.
-//  }
-//
-//  func testExample() throws {
-//    // This is an example of a functional test case.
-//    // Use XCTAssert and related functions to verify your tests produce the correct results.
-//  }
-//
-//  func testPerformanceExample() throws {
-//    // This is an example of a performance test case.
-//    self.measure {
-//      // Put the code you want to measure the time of here.
-//    }
-//  }
-//}
-
 enum CoordinatorState: Equatable{
   static func == (lhs: CoordinatorState, rhs: CoordinatorState) -> Bool {
 
@@ -113,6 +66,7 @@ enum CoordinatorState: Equatable{
   case didGoBack
   case didSelect(character: CharacterResult)
 }
+
 class MockCharactersListCoordinatorDelegate:  CharactersListCoordinatorDelegate{
   var coordinatorState: CoordinatorState = .none
 
@@ -147,7 +101,6 @@ class MockAppDependencies: AppDependenciesProtocol {
   }()
 }
 
-/// This struct
 struct MockApiCLientData {
   var mockCharactersResults: DataContainer<[CharacterResult]>?
   var mockCharacterResults: DataContainer<[CharacterResult]>?
@@ -190,5 +143,37 @@ class MockApiClient: MarvelApiProtocol{
 
 //    let mockComicResult: ComicResult = // TODO: create mock ComicResult object from Json
     completion( mockApiClientData.mockComicData!)
+  }
+}
+
+struct MockCharactersListInteractorData {
+  var mockCharactersResults: [CharacterResult]?
+}
+
+class MockCharactersListInteractor: CharactersListInteractorProtocol{
+
+  var mockCharactersListInteractorData = MockCharactersListInteractorData(mockCharactersResults: nil)
+
+  required init(dependencies: AppDependenciesProtocol) {
+    //    TODO:
+  }
+
+  func getNextCharactersList(completion: @escaping ([CharacterResult]) -> Void) {
+    completion(mockCharactersListInteractorData.mockCharactersResults!)
+  }
+}
+
+struct MockCharacterDetailInteractorData {
+  var mockCharacterDetailResult: CharacterResult?
+}
+
+class MockCharacterDetailInteractor: CharacterDetailInteractorProtocol{
+  var mockCharacterDetailInteractorData = MockCharacterDetailInteractorData(mockCharacterDetailResult: nil)
+
+  func getCharacter(with characterId: Int, completion: @escaping ((CharacterResult)?) -> Void) {
+    completion(mockCharacterDetailInteractorData.mockCharacterDetailResult!)
+  }
+
+  required init(dependencies: AppDependenciesProtocol) {
   }
 }

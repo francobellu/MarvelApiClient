@@ -8,51 +8,30 @@
 
 import Foundation
 
-//
-//  PresentationLayer.swift
-//  MarvelApiClientTests
-//
-//  Created by franco bellu on 19/05/2020.
-//  Copyright © 2020 BELLU Franco. All rights reserved.
-//
-
 import XCTest
 @testable import MarvelApiClient
 
-class MockCharactersListInteractor: CharactersListInteractorProtocol{
-  required init(dependencies: AppDependenciesProtocol) {
-    //    TODO:
-  }
-
-  func getNextCharactersList(completion: @escaping ([CharacterResult]) -> Void) {
-
-  }
-}
-
 class CharactersListPresenterTest: XCTestCase {
-
   var sut: CharactersListPresenter! // swiftlint:disable:this implicitly_unwrapped_optional
-
   let mockAppDependencies = MockAppDependencies()
   let mockCoordinator =  MockCharactersListCoordinatorDelegate()
-  var mockCharactersListInteractor: MockCharactersListInteractor? = nil
-  var testCharacterResultId1009144: [CharacterResult]? = nil
+  var mockIterator: MockCharactersListInteractor!
 
   override func setUpWithError() throws {
-//    let mockApiClient = mockAppDependencies.marvelApiClient as! MockApiClient
-
-    mockCharactersListInteractor =  MockCharactersListInteractor(dependencies: mockAppDependencies)
-
-//    mockApiClient.mockApiClientData.mockCharactersResults = testCharacterResultId1009144
-    sut = CharactersListPresenter(dependencies: mockAppDependencies, coordinatorDelegate: mockCoordinator, interactor: mockCharactersListInteractor!)
+    mockIterator =  MockCharactersListInteractor(dependencies: mockAppDependencies)
   }
 
-  // MARK: - TEST API FUNCTIONS
   func test() throws {
 
-    let testResults: [CharacterResult] = getResults(from: mockContentData(for: "MockedResponseCharacterResultId1011334"))
+    // CONFIGURE THE MOCK DATA
+    let testResults: [CharacterResult] = getResults(from: mockContentData(for: "MockedResponseGetCharacters"))
+    let testResult = testResults.first!
+    mockIterator.mockCharactersListInteractorData.mockCharactersResults = testResults
+    sut = CharactersListPresenter(dependencies: mockAppDependencies,
+                                  coordinatorDelegate: mockCoordinator,
+                                  interactor: mockIterator!)
 
-    let testCharacterResultId1009144 = testResults.first!
+
     // TEST initial count is zero - charactersCount(at:)
     XCTAssert(sut.charactersCount() == 0 )
 
@@ -64,7 +43,7 @@ class CharactersListPresenterTest: XCTestCase {
 
       // TEST character at index 0 has expected id - getCharacter(at:)
      let character = self.sut.getCharacter(at: 0)
-      XCTAssert(character.id == testCharacterResultId1009144.id)
+      XCTAssert(character.id == testResult.id)
 
       XCTAssert(self.mockCoordinator.coordinatorState == .none)
       self.sut.didGoBack()

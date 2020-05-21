@@ -8,49 +8,27 @@
 
 import Foundation
 
-//
-//  PresentationLayer.swift
-//  MarvelApiClientTests
-//
-//  Created by franco bellu on 19/05/2020.
-//  Copyright © 2020 BELLU Franco. All rights reserved.
-//
-
 import XCTest
 @testable import MarvelApiClient
-
-class MockCharacterDetailInteractor: CharacterDetailInteractorProtocol{
-  func getCharacter(with characterId: Int, completion: @escaping ((CharacterResult)?) -> Void) {
-    //    TODO:
-  }
-
-  required init(dependencies: AppDependenciesProtocol) {
-
-  }
-}
 
 class CharacterDetailPresenterTest: XCTestCase {
   var sut: CharacterDetailPresenter! // swiftlint:disable:this implicitly_unwrapped_optional
   let mockAppDependencies = MockAppDependencies()
-  var testCharacterResultId1011334: CharacterResult!
-  var testCharacterResultId1009144: CharacterResult!
-  var mockIterator: CharacterDetailInteractorProtocol!
+  var mockIterator: MockCharacterDetailInteractor!
 
   override func setUpWithError() throws {
-
-    // CONFIGURE THE MOCK DATA
-    let results: [CharacterResult]  = getResults(from: mockContentData(for: "MockedResponseCharacterResultId1011334"))
-    testCharacterResultId1011334 = results.first!
     mockIterator = MockCharacterDetailInteractor(dependencies: mockAppDependencies)
   }
 
-  // MARK: - TEST API FUNCTIONS
-
-
   /// TEST  sut creation using  init(dependencies: AppDependenciesProtocol, characterId: String)
-  func testInitFromIterator() throws {
+  func testInitWithIterator() throws {
+
+    // CONFIGURE THE MOCK DATA
+    let testResults: [CharacterResult] = getResults(from: mockContentData(for: "MockedResponseGetCharacters"))
+    let testResult = testResults.first!
+    mockIterator.mockCharacterDetailInteractorData.mockCharacterDetailResult = testResult
     sut = CharacterDetailPresenter(dependencies: mockAppDependencies,
-                                   characterId: String(testCharacterResultId1011334.id!),
+                                   characterId: String(testResult.id!),
                                    interactor: mockIterator)
     XCTAssert(self.sut.getName() == "Character Detail" )
     XCTAssert(self.sut.getDescription() == "No Description Available")
@@ -59,18 +37,18 @@ class CharacterDetailPresenterTest: XCTestCase {
     XCTAssert(self.sut.getSeriesCount() == "" )
     XCTAssert(self.sut.getStoriesCount() == "" )
 
-    sut.getCharacter(with: testCharacterResultId1011334.id!){
+    sut.getCharacter(with: testResult.id!){
      // TEST current character corresponds to testCharacterResultId1011334
-      let name = !self.testCharacterResultId1011334.name!.isEmpty ? self.testCharacterResultId1011334.name : "Character Detail"
+      let name = !testResult.name!.isEmpty ? testResult.name : "Character Detail"
       XCTAssert(self.sut.getName() == name )
-      let descr = !self.testCharacterResultId1011334.description!.isEmpty ? self.testCharacterResultId1011334.description! : "No Description Available"
+      let descr = !testResult.description!.isEmpty ? testResult.description! : "No Description Available"
       XCTAssert(self.sut.getDescription() == descr)
       XCTAssert(self.sut.getThumbnailUrl() == URL(string: "http://i.annihil.us/u/prod/marvel/i/mg/c/e0/535fecbbb9784.jpg") )
-      let comicsCount = "Comics available: \((self.testCharacterResultId1011334.comics!.items?.count)!)"
+      let comicsCount = "Comics available: \((testResult.comics!.items?.count)!)"
       XCTAssert(self.sut.getComicsCount() == String(comicsCount) )
-      let seriesCount = "Series available: \((self.testCharacterResultId1011334.series!.items?.count)!)"
+      let seriesCount = "Series available: \((testResult.series!.items?.count)!)"
       XCTAssert(self.sut.getSeriesCount() == String(seriesCount) )
-      let storiesCount = "Stories available: \((self.testCharacterResultId1011334.stories!.items?.count)!)"
+      let storiesCount = "Stories available: \((testResult.stories!.items?.count)!)"
       XCTAssert(self.sut.getStoriesCount() == String(storiesCount) )
     }
   }
