@@ -54,6 +54,8 @@
 		C7169221244D9D5A005BF4AB /* RestApiClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7169220244D9D5A005BF4AB /* RestApiClient.swift */; };
 		C7169232244DE062005BF4AB /* MarvelDTOs.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7169228244DE062005BF4AB /* MarvelDTOs.swift */; };
 		C7169240244F0385005BF4AB /* MarvelError.swift in Sources */ = {isa = PBXBuildFile; fileRef = C716923F244F0385005BF4AB /* MarvelError.swift */; };
+		C71B79632476A31D002D5B09 /* superheros.png in Resources */ = {isa = PBXBuildFile; fileRef = C70873D32471F55500184DE0 /* superheros.png */; };
+		C71B79652476AA14002D5B09 /* MarvelApp.docx in Resources */ = {isa = PBXBuildFile; fileRef = C71B79642476AA14002D5B09 /* MarvelApp.docx */; };
 		C728C2AB246C375300F60806 /* AppDependencies.swift in Sources */ = {isa = PBXBuildFile; fileRef = C728C2AA246C375200F60806 /* AppDependencies.swift */; };
 		C72CF2B2247163B80048B0A2 /* AppConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = C72CF2B1247163B80048B0A2 /* AppConfig.swift */; };
 		C72CF2B92471ED860048B0A2 /* .swiftlint.yml in Resources */ = {isa = PBXBuildFile; fileRef = C72CF2B42471ED860048B0A2 /* .swiftlint.yml */; };
@@ -142,6 +144,7 @@
 		C7169220244D9D5A005BF4AB /* RestApiClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RestApiClient.swift; sourceTree = "<group>"; };
 		C7169228244DE062005BF4AB /* MarvelDTOs.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MarvelDTOs.swift; sourceTree = "<group>"; };
 		C716923F244F0385005BF4AB /* MarvelError.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MarvelError.swift; sourceTree = "<group>"; };
+		C71B79642476AA14002D5B09 /* MarvelApp.docx */ = {isa = PBXFileReference; lastKnownFileType = file; path = MarvelApp.docx; sourceTree = "<group>"; };
 		C728C2AA246C375200F60806 /* AppDependencies.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDependencies.swift; sourceTree = "<group>"; };
 		C72CF2B1247163B80048B0A2 /* AppConfig.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppConfig.swift; sourceTree = "<group>"; };
 		C72CF2B42471ED860048B0A2 /* .swiftlint.yml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.yaml; path = .swiftlint.yml; sourceTree = "<group>"; };
@@ -194,6 +197,7 @@
 		287C99FD217F39CB00D63092 = {
 			isa = PBXGroup;
 			children = (
+				C71B79642476AA14002D5B09 /* MarvelApp.docx */,
 				2851229221832BB9009D4AB0 /* Readme.md */,
 				287C9A08217F39CB00D63092 /* MarvelApiClient */,
 				C76B29A4243A5F1B00793179 /* MarvelApiClientTests */,
@@ -629,6 +633,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C71B79652476AA14002D5B09 /* MarvelApp.docx in Resources */,
 				C72CF2BA2471ED860048B0A2 /* swiftlint.sh in Resources */,
 				287C9A14217F39CC00D63092 /* LaunchScreen.storyboard in Resources */,
 				287C9A11217F39CC00D63092 /* Assets.xcassets in Resources */,
@@ -642,6 +647,7 @@
 				287C9A0F217F39CB00D63092 /* Main.storyboard in Resources */,
 				C72CF2B92471ED860048B0A2 /* .swiftlint.yml in Resources */,
 				C72CF3682471F1B40048B0A2 /* sitrep in Resources */,
+				C71B79632476A31D002D5B09 /* superheros.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
