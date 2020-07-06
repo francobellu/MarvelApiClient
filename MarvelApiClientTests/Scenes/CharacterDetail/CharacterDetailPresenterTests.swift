@@ -16,7 +16,7 @@ class CharacterDetailPresenterTest: XCTestCase {
   let mockAppDependencies = MockAppDependencies()
   var mockIterator: MockCharacterDetailInteractor!
 
-  override func setUpWithError() throws {
+  func setUpWithError() throws {
     mockIterator = MockCharacterDetailInteractor(dependencies: mockAppDependencies)
   }
 

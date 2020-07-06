@@ -8,7 +8,18 @@
 
 import Foundation
 
-class CharactersListPresenter {
+class CharactersListPresenter: CharactersListPresenterProtocol {
+  weak var viewControllerDelegate: CharactersListPresenterToViewProtocol?
+
+  var numberOfSections: Int = 1
+
+  func viewDidLoad() {
+    viewControllerDelegate?.prepareView()
+  }
+
+  var didGetCharacter: ((CharacterResult) -> Void)?
+
+  var didGetNextCharactersList: (([CharacterResult]) -> Void)?
 
   private weak var coordinatorDelegate: CharactersListCoordinatorDelegate!  //swiftlint:disable:this implicitly_unwrapped_optional
 
@@ -20,10 +31,14 @@ class CharactersListPresenter {
     dependencies.marvelApiClient
   }
 
+  // Observables
+  var title = Observable<String>(value: "Marvel Comics")
+  var cellViewModels =  Observable<[CharacterCellViewModel]>(value: [])
+  var isLoading = Observable<Bool>(value: false)
+
+
   private var characters: [CharacterResult] = []
 
-
-  private(set) var title = "Marvel Comics"
 
   init(dependencies: AppDependenciesProtocol, coordinatorDelegate: CharactersListCoordinatorDelegate, interactor: CharactersListInteractorProtocol) {
     self.dependencies = dependencies
@@ -33,7 +48,6 @@ class CharactersListPresenter {
 
   func getCharacter(at index: Int) -> CharacterResult {
     return characters[index]
-
   }
 
   func charactersCount() -> Int {
@@ -41,18 +55,31 @@ class CharactersListPresenter {
   }
 
   // MARK: - API FUNCTIONS
-
-  func getNextCharactersList( completion: @escaping () -> Void) {
-    interactor.getNextCharactersList { (characters: [CharacterResult]) in
-      self.characters += characters
-      completion()
+  func getNextCharactersList() {
+    isLoading.value = true
+    interactor.getNextCharactersList { [weak self] (characters: [CharacterResult]) in
+      self?.characters += characters
+      self?.isLoading.value = false
+      self?.buildViewModels(characters: characters)
     }
+  }
+
+  /// Arrange the sections/row view model and caregorize by date
+  func buildViewModels(characters: [CharacterResult]) {
+    var cellViewModels = [CharacterCellViewModel]()
+    for character in characters {
+      let characterCellViewModel: CharacterCellViewModel = CharacterCellViewModel(character: character)
+      cellViewModels.append(characterCellViewModel)
+    }
+    self.cellViewModels.value += cellViewModels
   }
 }
 
+// MARK: - FLOW CharactersListCoordinatorDelegate
 extension CharactersListPresenter{
 
-  func didSelect(character: CharacterResult) {
+  func didSelectCharacter(at index: Int) {
+    let character = getCharacter(at: index)
     coordinatorDelegate.didSelect(character: character)
   }
 

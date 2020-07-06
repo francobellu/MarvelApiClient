@@ -38,6 +38,21 @@ struct CharacterResult: Codable {
   let stories: Stories?
   let events: Comics?
   let series: Comics?
+
+  init(name: String, imageUrl: URL?) {
+    self.name = name
+    self.thumbnail = Thumbnail(from: imageUrl )
+    id = nil
+
+    description = nil
+    modified = nil
+    resourceURI = nil
+    urls = nil
+    comics = nil
+    stories = nil
+    events = nil
+    series = nil
+  }
 }
 
 // Comics.swift
@@ -100,6 +115,11 @@ struct Thumbnail: Codable {
       throw MarvelError.decoding }
 
     self.url = url
+  }
+
+  public init(from imageUrl: URL?) {
+    let defaultImageUrl = Bundle.main.url(forResource: "amour-1", withExtension: "jpg")!
+    url = imageUrl != nil ? imageUrl! : defaultImageUrl
   }
 }
 

@@ -14,7 +14,7 @@ class MarvelApiClientCharactersTestMock: XCTestCase {
 
   var sut: MarvelApiClient! // swiftlint:disable:this implicitly_unwrapped_optional
 
-  override func setUpWithError() throws {
+  func setUpWithError() throws {
 
   }
 

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Scheme
-   LastUpgradeVersion = "1140"
+   LastUpgradeVersion = "1200"
    version = "1.3">
    <BuildAction
       parallelizeBuildables = "YES"
@@ -14,9 +14,9 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "287C9A05217F39CB00D63092"
-               BuildableName = "MarvelApiClient.app"
-               BlueprintName = "MarvelApiClient"
+               BlueprintIdentifier = "C752C8E424B35B5E000FB6F7"
+               BuildableName = "MarvelApiClientMac.app"
+               BlueprintName = "MarvelApiClientMac"
                ReferencedContainer = "container:MarvelApiClient.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
@@ -26,16 +26,15 @@
       buildConfiguration = "Debug"
       selectedDebuggerIdentifier = "Xcode.DebuggerFoundation.Debugger.LLDB"
       selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.LLDB"
-      shouldUseLaunchSchemeArgsEnv = "YES"
-      codeCoverageEnabled = "YES">
+      shouldUseLaunchSchemeArgsEnv = "YES">
       <Testables>
          <TestableReference
             skipped = "NO">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "C76B29A2243A5F1B00793179"
-               BuildableName = "MarvelApiClientTests.xctest"
-               BlueprintName = "MarvelApiClientTests"
+               BlueprintIdentifier = "C752C8F524B35B60000FB6F7"
+               BuildableName = "MarvelApiClientMacTests.xctest"
+               BlueprintName = "MarvelApiClientMacTests"
                ReferencedContainer = "container:MarvelApiClient.xcodeproj">
             </BuildableReference>
          </TestableReference>
@@ -43,9 +42,9 @@
             skipped = "NO">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "C74963932472DCBD001B9A5E"
-               BuildableName = "xxxx.xctest"
-               BlueprintName = "xxxx"
+               BlueprintIdentifier = "C752C90024B35B60000FB6F7"
+               BuildableName = "MarvelApiClientMacUITests.xctest"
+               BlueprintName = "MarvelApiClientMacUITests"
                ReferencedContainer = "container:MarvelApiClient.xcodeproj">
             </BuildableReference>
          </TestableReference>
@@ -65,9 +64,9 @@
          runnableDebuggingMode = "0">
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "287C9A05217F39CB00D63092"
-            BuildableName = "MarvelApiClient.app"
-            BlueprintName = "MarvelApiClient"
+            BlueprintIdentifier = "C752C8E424B35B5E000FB6F7"
+            BuildableName = "MarvelApiClientMac.app"
+            BlueprintName = "MarvelApiClientMac"
             ReferencedContainer = "container:MarvelApiClient.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
@@ -82,9 +81,9 @@
          runnableDebuggingMode = "0">
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "287C9A05217F39CB00D63092"
-            BuildableName = "MarvelApiClient.app"
-            BlueprintName = "MarvelApiClient"
+            BlueprintIdentifier = "C752C8E424B35B5E000FB6F7"
+            BuildableName = "MarvelApiClientMac.app"
+            BlueprintName = "MarvelApiClientMac"
             ReferencedContainer = "container:MarvelApiClient.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>

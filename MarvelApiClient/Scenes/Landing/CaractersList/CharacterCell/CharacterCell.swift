@@ -23,11 +23,11 @@ class CharacterCell: UITableViewCell {
   override func setSelected(_ selected: Bool, animated: Bool) {
     super.setSelected(selected, animated: animated)
   }
-  func config(with characther: CharacterResult) {
-    title.text = characther.name
-    guard let thumbnail = characther.thumbnail else { return }
+
+  func config(with characterViewModel: CharacterCellViewModel) {
+    title.text = characterViewModel.title
     let placeholderImage = UIImage(named: "amour-0.jpg")
-    imgView.af.setImage(withURL: thumbnail.url, placeholderImage: placeholderImage, filter: nil)
+    imgView.af.setImage(withURL: characterViewModel.imgViewUrl, placeholderImage: placeholderImage, filter: nil)
     imgView.contentMode = .scaleToFill
   }
 }

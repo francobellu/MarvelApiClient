@@ -71,10 +71,14 @@
 		C74963AB2473C89A001B9A5E /* DataLayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = C74963AA2473C89A001B9A5E /* DataLayer.swift */; };
 		C74963B324740277001B9A5E /* MockedResponseCharacterResultId1011334.json in Resources */ = {isa = PBXBuildFile; fileRef = C74963B224740277001B9A5E /* MockedResponseCharacterResultId1011334.json */; };
 		C76B29A6243A5F1B00793179 /* MarvelApiClientTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C76B29A5243A5F1B00793179 /* MarvelApiClientTests.swift */; };
+		C776993B24B31394003BE9BD /* CharacterCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C776993A24B31394003BE9BD /* CharacterCellViewModel.swift */; };
+		C776993D24B313BE003BE9BD /* Observable.swift in Sources */ = {isa = PBXBuildFile; fileRef = C776993C24B313BE003BE9BD /* Observable.swift */; };
 		C78A83F5244B8AD6004DE930 /* GetCharacter.swift in Sources */ = {isa = PBXBuildFile; fileRef = C78A83F4244B8AD6004DE930 /* GetCharacter.swift */; };
+		C7BE8B8924AF5F0D00B8A569 /* CharacterListViewControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7BE8B8824AF5F0D00B8A569 /* CharacterListViewControllerTests.swift */; };
+		C7BE8B8B24AF603400B8A569 /* CharactersListProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7BE8B8A24AF603400B8A569 /* CharactersListProtocols.swift */; };
+		C7C170D724AF4FDC0083B41E /* AlamofireImage in Frameworks */ = {isa = PBXBuildFile; productRef = C7C170D624AF4FDC0083B41E /* AlamofireImage */; };
 		C7D3F040243B770F004E4C0E /* Coordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7D3F03F243B770F004E4C0E /* Coordinator.swift */; };
 		C7E02812243FD4DB00888249 /* AppCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7E02811243FD4DB00888249 /* AppCoordinator.swift */; };
-		C7E37BE52438F0360096F2E9 /* AlamofireImage in Frameworks */ = {isa = PBXBuildFile; productRef = C7E37BE42438F0360096F2E9 /* AlamofireImage */; };
 		C7EC670A2440DFDB00F88FDE /* R.generated.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7EC67082440DFDB00F88FDE /* R.generated.swift */; };
 		C7EC670D24435E3C00F88FDE /* UserDefaultsDataStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7EC670C24435E3C00F88FDE /* UserDefaultsDataStore.swift */; };
 /* End PBXBuildFile section */
@@ -163,7 +167,11 @@
 		C76B29A5243A5F1B00793179 /* MarvelApiClientTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MarvelApiClientTests.swift; sourceTree = "<group>"; };
 		C76B29A7243A5F1B00793179 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		C76B29AE243A639F00793179 /* sitrep.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = sitrep.txt; sourceTree = "<group>"; };
+		C776993A24B31394003BE9BD /* CharacterCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharacterCellViewModel.swift; sourceTree = "<group>"; };
+		C776993C24B313BE003BE9BD /* Observable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Observable.swift; sourceTree = "<group>"; };
 		C78A83F4244B8AD6004DE930 /* GetCharacter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GetCharacter.swift; sourceTree = "<group>"; };
+		C7BE8B8824AF5F0D00B8A569 /* CharacterListViewControllerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharacterListViewControllerTests.swift; sourceTree = "<group>"; };
+		C7BE8B8A24AF603400B8A569 /* CharactersListProtocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharactersListProtocols.swift; sourceTree = "<group>"; };
 		C7D3F03F243B770F004E4C0E /* Coordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Coordinator.swift; sourceTree = "<group>"; };
 		C7E02811243FD4DB00888249 /* AppCoordinator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppCoordinator.swift; sourceTree = "<group>"; };
 		C7EC67042440D7CE00F88FDE /* Podfile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Podfile; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
@@ -178,8 +186,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				C7E37BE52438F0360096F2E9 /* AlamofireImage in Frameworks */,
 				6713D79A83C952EAF643E4EA /* Pods_MarvelApiClient.framework in Frameworks */,
+				C7C170D724AF4FDC0083B41E /* AlamofireImage in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -294,6 +302,7 @@
 				C7E02811243FD4DB00888249 /* AppCoordinator.swift */,
 				C7096D712448E6C000DEE7D3 /* DeepLink.swift */,
 				C7D3F03F243B770F004E4C0E /* Coordinator.swift */,
+				C776993C24B313BE003BE9BD /* Observable.swift */,
 			);
 			path = Architecture;
 			sourceTree = "<group>";
@@ -322,6 +331,7 @@
 		C703660D24753DEA0005886F /* CaractersList */ = {
 			isa = PBXGroup;
 			children = (
+				C7BE8B8A24AF603400B8A569 /* CharactersListProtocols.swift */,
 				C703661124753DEA0005886F /* CharactersListViewController.swift */,
 				C703661224753DEA0005886F /* CharactersListInteractor.swift */,
 				C703661324753DEA0005886F /* CharactersListCoordinator.swift */,
@@ -337,6 +347,7 @@
 			children = (
 				C703660F24753DEA0005886F /* CharacterCell.xib */,
 				C703661024753DEA0005886F /* CharacterCell.swift */,
+				C776993A24B31394003BE9BD /* CharacterCellViewModel.swift */,
 			);
 			path = CharacterCell;
 			sourceTree = "<group>";
@@ -433,6 +444,7 @@
 			children = (
 				C74963A82473C886001B9A5E /* CharactersListInteractorTests.swift */,
 				C703665924754D010005886F /* CharactersListPresenterTests.swift */,
+				C7BE8B8824AF5F0D00B8A569 /* CharacterListViewControllerTests.swift */,
 			);
 			path = CharactersList;
 			sourceTree = "<group>";
@@ -560,7 +572,7 @@
 			);
 			name = MarvelApiClient;
 			packageProductDependencies = (
-				C7E37BE42438F0360096F2E9 /* AlamofireImage */,
+				C7C170D624AF4FDC0083B41E /* AlamofireImage */,
 			);
 			productName = ApiLayer;
 			productReference = 287C9A06217F39CB00D63092 /* MarvelApiClient.app */;
@@ -591,7 +603,7 @@
 		287C99FE217F39CB00D63092 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastSwiftUpdateCheck = 1140;
+				LastSwiftUpdateCheck = 1200;
 				LastUpgradeCheck = 1000;
 				ORGANIZATIONNAME = "BELLU Franco";
 				TargetAttributes = {
@@ -615,8 +627,7 @@
 			);
 			mainGroup = 287C99FD217F39CB00D63092;
 			packageReferences = (
-				C7E37BE32438F0360096F2E9 /* XCRemoteSwiftPackageReference "AlamofireImage" */,
-				C72CF3662471EEAA0048B0A2 /* XCRemoteSwiftPackageReference "Sitrep" */,
+				C7C170D524AF4FDC0083B41E /* XCRemoteSwiftPackageReference "AlamofireImage" */,
 			);
 			productRefGroup = 287C9A07217F39CB00D63092 /* Products */;
 			projectDirPath = "";
@@ -736,7 +747,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${PROJECT_DIR}/Scripts/sitrep.sh\" \n";
+			shellScript = "#\"${PROJECT_DIR}/Scripts/sitrep.sh\" \n";
 		};
 		C7E37BE924390DC60096F2E9 /* Increment Build Number */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -805,12 +816,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C776993D24B313BE003BE9BD /* Observable.swift in Sources */,
 				C7E02812243FD4DB00888249 /* AppCoordinator.swift in Sources */,
 				28998ECA217F636A0037039B /* MarvelAPIClient.swift in Sources */,
 				C72CF2B2247163B80048B0A2 /* AppConfig.swift in Sources */,
 				28998ED8217F636A0037039B /* GetComic.swift in Sources */,
 				C703663D24753DEB0005886F /* CharactersListInteractor.swift in Sources */,
 				C703663E24753DEB0005886F /* CharactersListCoordinator.swift in Sources */,
+				C7BE8B8B24AF603400B8A569 /* CharactersListProtocols.swift in Sources */,
 				C703664B24753DEB0005886F /* OnboardingViewController.swift in Sources */,
 				C7096D722448E6C000DEE7D3 /* DeepLink.swift in Sources */,
 				C7169240244F0385005BF4AB /* MarvelError.swift in Sources */,
@@ -820,6 +833,7 @@
 				C703663924753DEB0005886F /* LandingViewController.swift in Sources */,
 				287C9A0A217F39CB00D63092 /* AppDelegate.swift in Sources */,
 				C703664124753DEB0005886F /* CharacterDetailInteractor.swift in Sources */,
+				C776993B24B31394003BE9BD /* CharacterCellViewModel.swift in Sources */,
 				C78A83F5244B8AD6004DE930 /* GetCharacter.swift in Sources */,
 				C7169221244D9D5A005BF4AB /* RestApiClient.swift in Sources */,
 				C703663F24753DEB0005886F /* CharacterDetailPresenter.swift in Sources */,
@@ -853,6 +867,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C7BE8B8924AF5F0D00B8A569 /* CharacterListViewControllerTests.swift in Sources */,
 				C716921B244CD083005BF4AB /* MarvelApiClientTestMock.swift in Sources */,
 				C703665D24754D4B0005886F /* CharacterDetailPresenterTests.swift in Sources */,
 				C74963AB2473C89A001B9A5E /* DataLayer.swift in Sources */,
@@ -946,7 +961,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.2;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -1001,7 +1016,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.2;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;
@@ -1020,7 +1035,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 3VPL75LCE8;
 				INFOPLIST_FILE = MarvelApiClient/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.2;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -1042,7 +1057,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 3VPL75LCE8;
 				INFOPLIST_FILE = MarvelApiClient/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.2;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -1063,7 +1078,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 3VPL75LCE8;
 				INFOPLIST_FILE = MarvelApiClientTests/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 13.4;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.2;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -1085,7 +1100,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 3VPL75LCE8;
 				INFOPLIST_FILE = MarvelApiClientTests/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 13.4;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.2;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -1132,28 +1147,20 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
-		C72CF3662471EEAA0048B0A2 /* XCRemoteSwiftPackageReference "Sitrep" */ = {
+		C7C170D524AF4FDC0083B41E /* XCRemoteSwiftPackageReference "AlamofireImage" */ = {
 			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/twostraws/Sitrep";
+			repositoryURL = "git@github.com:Alamofire/AlamofireImage.git";
 			requirement = {
 				branch = master;
 				kind = branch;
 			};
 		};
-		C7E37BE32438F0360096F2E9 /* XCRemoteSwiftPackageReference "AlamofireImage" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/Alamofire/AlamofireImage.git";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 4.0.3;
-			};
-		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		C7E37BE42438F0360096F2E9 /* AlamofireImage */ = {
+		C7C170D624AF4FDC0083B41E /* AlamofireImage */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = C7E37BE32438F0360096F2E9 /* XCRemoteSwiftPackageReference "AlamofireImage" */;
+			package = C7C170D524AF4FDC0083B41E /* XCRemoteSwiftPackageReference "AlamofireImage" */;
 			productName = AlamofireImage;
 		};
 /* End XCSwiftPackageProductDependency section */
