@@ -41,7 +41,7 @@ final class CharacterListViewControllerTests: XCTestCase {
 
   // MARK: Outlets initialized
   func testOutletsConnectedWhenViewIsLoaded() {
-    XCTAssertNotNil(sut.tableViewOutlet)
+    XCTAssertNotNil(sut.tableView)
     XCTAssertNotNil(sut.activityIndicator)
   }
 
@@ -246,7 +246,7 @@ final class CharacterListViewController_TableViewDelegateTests: XCTestCase {
     tableViewMock = UITableView()
     //    tableViewMock.dataSource = sut
     //    tableViewMock.delegate = sut
-    sut.tableViewOutlet = tableViewMock
+    sut.tableView = tableViewMock
     sut.tableView2(tableViewMock, indexPath: IndexPath(row: 1, section: 0))
     //    (sut as UITableViewDelegate).tableView!(tableViewMock , didSelectRowAt: IndexPath(row: 1, section: 0))
     //    delegateDatasourceMock.tableView(tableViewMock , didSelectRowAt: IndexPath(row: 1, section: 0))

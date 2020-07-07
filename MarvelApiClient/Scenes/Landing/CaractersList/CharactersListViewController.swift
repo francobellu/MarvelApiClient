@@ -17,20 +17,19 @@ protocol CharactersListPresenterToViewProtocol: class{
 class CharactersListViewController: UIViewController, StoryboardInstantiable {
   var presenter: CharactersListPresenterProtocol! // swiftlint:disable:this implicitly_unwrapped_optional
 
-  @IBOutlet weak var tableViewOutlet: UITableView!
+  @IBOutlet weak var tableView: UITableView! {
+   didSet {
+     tableView.delegate = self
+     tableView.dataSource = self
+     tableView.register(UINib(nibName: R.nib.characterCell.name, bundle: nil), forCellReuseIdentifier: R.reuseIdentifier.characterCellId.identifier)
+   }
+  }
 
   @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
 
-  lazy var tableView: UITableView = {
-         tableViewOutlet.delegate = self
-         tableViewOutlet.dataSource = self
-         tableViewOutlet.register(UINib(nibName: R.nib.characterCell.name, bundle: nil), forCellReuseIdentifier: R.reuseIdentifier.characterCellId.identifier)
-         return tableViewOutlet
-     }()
-
   override func viewDidLoad() {
     super.viewDidLoad()
-    _ = self.tableView // call the lazy tableView
+//    _ = self.tableView // call the lazy tableView
     initBinding()
     presenter.viewDidLoad()
   }
@@ -58,7 +57,7 @@ class CharactersListViewController: UIViewController, StoryboardInstantiable {
     // TableView
     presenter.cellViewModels.valueChanged = { [weak self] (_) in
       DispatchQueue.main.async {
-        self?.tableViewOutlet.reloadData()
+        self?.tableView.reloadData()
       }
     }
 
@@ -79,12 +78,12 @@ class CharactersListViewController: UIViewController, StoryboardInstantiable {
       if isLoading.value {
         self.activityIndicator.startAnimating()
         UIView.animate(withDuration: 0.2, animations: {
-          self.tableViewOutlet.alpha = 0.0
+          self.tableView.alpha = 0.0
         })
       } else {
         self.activityIndicator.stopAnimating()
         UIView.animate(withDuration: 0.2, animations: {
-          self.tableViewOutlet.alpha = 1.0
+          self.tableView.alpha = 1.0
         })
       }
     }
@@ -146,7 +145,7 @@ extension CharactersListViewController: UITableViewDelegate {
 extension CharactersListViewController: CharactersListPresenterToViewProtocol {
   func reloadTableViewClosure(){
     DispatchQueue.main.async {
-      self.tableViewOutlet.reloadData()
+      self.tableView.reloadData()
     }
   }
 

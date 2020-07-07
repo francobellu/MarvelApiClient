@@ -185,7 +185,7 @@
                     </view>
                     <connections>
                         <outlet property="activityIndicator" destination="N1g-W8-rgQ" id="Br5-m0-0lw"/>
-                        <outlet property="tableViewOutlet" destination="CtM-kq-aFh" id="ejs-2I-am9"/>
+                        <outlet property="tableView" destination="CtM-kq-aFh" id="ejs-2I-am9"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="eAp-Ab-8b9" userLabel="First Responder" sceneMemberID="firstResponder"/>
