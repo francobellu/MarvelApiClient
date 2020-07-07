@@ -120,6 +120,7 @@ extension CharactersListViewController: UITableViewDataSource {
     let rowViewModel = presenter.cellViewModels.value[indexPath.row]
 
     guard let myCell = cell as? CharacterCell else{ fatalError()}
+    _ = myCell.contentView
     myCell.config(with: rowViewModel)
 
     // Check if the last row number is the same as the last current data element

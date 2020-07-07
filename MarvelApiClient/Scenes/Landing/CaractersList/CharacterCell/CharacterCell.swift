@@ -11,13 +11,23 @@ import UIKit
 //@IBDesignable
 class CharacterCell: UITableViewCell {
 
-  @IBOutlet weak var imgView: UIImageView!
-  @IBOutlet weak var title: UILabel!
+  @IBOutlet var imgView: UIImageView!
+  @IBOutlet var title: UILabel!
 
   static let id = R.reuseIdentifier.characterCellId
-  override func awakeFromNib() {
-    super.awakeFromNib()
-    // Initialization code
+//  override func awakeFromNib() {
+//    super.awakeFromNib()
+//    // Initialization code
+//  }
+
+  override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
+    super.init(style: style, reuseIdentifier: reuseIdentifier)
+    title = UILabel()
+    imgView = UIImageView()
+  }
+
+  required init?(coder aDecoder: NSCoder) {
+    super.init(coder: aDecoder)
   }
 
   override func setSelected(_ selected: Bool, animated: Bool) {

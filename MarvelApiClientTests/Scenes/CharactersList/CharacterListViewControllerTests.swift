@@ -162,65 +162,55 @@ final class CharacterListViewControllerTests: XCTestCase {
 
 
 final class CharacterListViewController_DataSourceTests: XCTestCase {
-  var sut: CharactersListViewController!
+  var sut: UITableViewDataSource!
   var presenterMock: CharacterListPresenterMock!
-  var delegateDatasource: DelegateDatasourceMock!
+//  var delegateDatasource: DelegateDatasourceMock!
   var tableViewMock: UITableView!
-  var dataSource: CharactersListViewController!
+  var vc: CharactersListViewController!
   var testCellsViewModel: [CharacterCellViewModel] = []
 
   override func setUp() {
     presenterMock = CharacterListPresenterMock()
     let testCharacters: [CharacterResult] = getResults(from: mockContentData(for: "MockedResponseGetCharacters"))
     testCellsViewModel = testCharacters.map{ CharacterCellViewModel(character: $0) }
-
 //
-    sut = CharactersListViewController.instantiateViewController()
-    sut.presenter = presenterMock
-    sut.loadViewIfNeeded()
+    vc = CharactersListViewController.instantiateViewController()
+    vc.presenter = presenterMock
+    vc.loadViewIfNeeded()
 
-    dataSource = sut
+    sut = vc
 
   }
 
   override func tearDown() {
     sut = nil
+    vc = nil
     presenterMock = nil
   }
 
   func testNumberOfRows() {
-    //    let tableViewExp = XCTestExpectation(description: "testCellViewModels == 0")
-    //    presenterMock.cellViewModels.completion = {
-    //      tableViewExp.fulfill()
-    //    }
-
     // Given
     let tableView = UITableView()
 
     // When
-    dataSource.presenter.cellViewModels.value = testCellsViewModel
+    vc.presenter.cellViewModels.value = testCellsViewModel
 
     // Then
-    let numberOfRows = dataSource.tableView(tableView, numberOfRowsInSection: 0)
+    let numberOfRows = sut.tableView(tableView, numberOfRowsInSection: 0)
     XCTAssertTrue( 1 == presenterMock.charactersCountCalled, line: #line)
     XCTAssertEqual(numberOfRows, 20, "Number of rows in table should match number of items in the presenter")
   }
 
   func testCellForRow() {
-
-//    let tableViewExp = XCTestExpectation(description: "testCellViewModels == 0")
-//    presenterMock.cellViewModels.completion = {
-//      tableViewExp.fulfill()
-//    }
+    tableViewMock = UITableView()
+    tableViewMock.register(CharacterCell.self, forCellReuseIdentifier: R.reuseIdentifier.characterCellId.identifier)
+    tableViewMock.estimatedRowHeight = 44
 
     // Given
-    let tableView = UITableView()
-    tableView.register(UITableViewCell.self, forCellReuseIdentifier: R.reuseIdentifier.characterCellId.identifier)
-    tableView.estimatedRowHeight = 44
+    vc.presenter.cellViewModels.value = testCellsViewModel
 
     // When
-    dataSource.presenter.cellViewModels.value = testCellsViewModel
-    let cell = dataSource.tableView(dataSource.tableView, cellForRowAt: IndexPath(row: 0, section: 0)) as! CharacterCell
+    let cell = sut.tableView(tableViewMock, cellForRowAt: IndexPath(row: 0, section: 0)) as! CharacterCell
 
     // Then
     XCTAssertEqual(cell.title.text, "3-D Man", "The first cell should display name of first character")
@@ -323,17 +313,6 @@ class CharacterListPresenterMock: CharactersListPresenterProtocol {
   var didSelectCalled = 0
   //    var charsCount = 0
 }
-
-//  class DelegateDatasourceMock: DelegateDatasourceProtocol {
-//    var didSelectCell: Bool = false
-//    var data: String?
-//
-//    func didSelectCell(data: String) {
-//
-//      didSelectCell = true
-//      self.data = data
-//    }
-//  }
 
 extension CharacterListPresenterMock: DelegateDatasourceProtocol{
   func didSelectCharacter(at: Int){
