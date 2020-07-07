@@ -34,10 +34,10 @@ class CharacterCell: UITableViewCell {
     super.setSelected(selected, animated: animated)
   }
 
-  func config(with characterViewModel: CharacterCellViewModel) {
-    title.text = characterViewModel.title
+  func config(with characterCellViewModel: CharacterCellViewModel) {
+    title.text = characterCellViewModel.title
     let placeholderImage = UIImage(named: "amour-0.jpg")
-    imgView.af.setImage(withURL: characterViewModel.imgViewUrl, placeholderImage: placeholderImage, filter: nil)
+    imgView.af.setImage(withURL: characterCellViewModel.imgViewUrl, placeholderImage: placeholderImage, filter: nil)
     imgView.contentMode = .scaleToFill
   }
 }

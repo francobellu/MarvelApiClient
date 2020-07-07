@@ -16,40 +16,37 @@ class CharactersListPresenterTest: XCTestCase {
   let mockAppDependencies = MockAppDependencies()
   let mockCoordinator =  MockCharactersListCoordinatorDelegate()
   var mockIterator: MockCharactersListInteractor!
+//
+  var testResults: [CharacterResult]! = nil
 
-  func setUpWithError() throws {
+  override func setUp() {
+    testResults = fetch(from: "MockedResponseGetCharacters")
+
     mockIterator =  MockCharactersListInteractor(dependencies: mockAppDependencies)
+
+    mockIterator.mockCharactersListInteractorData.mockCharactersResults = testResults
+
+    sut = CharactersListPresenter(dependencies: mockAppDependencies,
+                                  coordinatorDelegate: mockCoordinator,
+                                  interactor: mockIterator!)
   }
 
   func test() throws {
 
-    // CONFIGURE THE MOCK DATA
-    let testResults: [CharacterResult] = getResults(from: mockContentData(for: "MockedResponseGetCharacters"))
-    let testResult = testResults.first!
-    mockIterator.mockCharactersListInteractorData.mockCharactersResults = testResults
-    sut = CharactersListPresenter(dependencies: mockAppDependencies,
-                                  coordinatorDelegate: mockCoordinator,
-                                  interactor: mockIterator!)
-
-
-    // TEST initial count is zero - charactersCount(at:)
+    // Given
     XCTAssert(sut.charactersCount() == 0 )
 
     // TEST getNextCharactersList(at:)
     sut.getNextCharactersList()
-//    {
-//      // TEST count now is > zero - charactersCount()
-//      let charactersCount = self.sut.charactersCount()
-//      XCTAssert(charactersCount > 0 )
-//
-//      // TEST character at index 0 has expected id - getCharacter(at:)
-//     let character = self.sut.getCharacter(at: 0)
-//      XCTAssert(character.id == testResult.id)
-//
-//      XCTAssert(self.mockCoordinator.coordinatorState == .none)
-//      self.sut.didGoBack()
-//      self.mockCoordinator.coordinatorState = .didSelect(character: character)
-//    }
+    XCTAssert(sut.charactersCount() == 20 )
+
+    // TEST character at index 0 has expected id - getCharacter(at:)
+    let character = self.sut.getCharacter(at: 0)
+    XCTAssert(character.id == testResults.first!.id)
+
+    XCTAssert(self.mockCoordinator.coordinatorState == .none)
+    self.sut.didGoBack()
+    self.mockCoordinator.coordinatorState = .didSelect(character: character)
   }
 }
 
