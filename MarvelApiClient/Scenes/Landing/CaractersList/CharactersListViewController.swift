@@ -68,10 +68,6 @@ class CharactersListViewController: UIViewController, StoryboardInstantiable {
     }
   }
 
-  func tableView2(_ tableView: UITableView, indexPath: IndexPath) {
-    presenter.didSelectCharacter(at: indexPath.row)
-  }
-
   private func updateLoadingStatus(){
     DispatchQueue.main.async {
       let isLoading = self.presenter.isLoading
@@ -130,14 +126,14 @@ extension CharactersListViewController: UITableViewDataSource {
   }
 
   func numberOfSections(in tableView: UITableView) -> Int {
-    presenter.numberOfSections
+    presenter.cellViewModels.value.count > 0 ? 1 : 0
   }
 }
 
 // MARK: - UITableViewDelegate
 extension CharactersListViewController: UITableViewDelegate {
   func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-    tableView2(tableView, indexPath: indexPath)
+     presenter.didSelectCharacter(at: indexPath.row)
   }
 }
 

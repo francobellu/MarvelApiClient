@@ -9,6 +9,30 @@ import XCTest
 
 @testable import MarvelApiClient
 
+//final class CharacterListViewControllerTests1: XCTestCase {
+//
+//  var testCharacters: [CharacterResult] {
+//    getResults(from: mockContentData(for: "MockedResponseGetCharacters"))
+//  }
+//
+//  var sut: CharactersListViewController!
+//  var dataSourceMock: UITableViewDataSource!
+//
+//  override func setUp() {
+//
+//    // SUT
+//    sut = CharactersListViewController.instantiateViewController()
+//    sut.loadViewIfNeeded()
+//
+//    // DataSource & Delegate Mock
+//    dataSourceMock = DelegateDatasourceMock()
+//  }
+//
+//  override func tearDown() {
+//    sut = nil
+//    dataSourceMock = nil
+//  }
+//}
 
 final class CharacterListViewControllerTests: XCTestCase {
 
@@ -18,6 +42,7 @@ final class CharacterListViewControllerTests: XCTestCase {
 
   var sut: CharactersListViewController!
   var presenterMock: CharacterListPresenterMock!
+  var dataSourceMock: UITableViewDataSource!
 
   override func setUp() {
     presenterMock = CharacterListPresenterMock()
@@ -45,12 +70,12 @@ final class CharacterListViewControllerTests: XCTestCase {
     XCTAssertNotNil(sut.activityIndicator)
   }
 
-  // MARK: Life cycle
-  func testViewDidLoadIsCalledFromViewDidLoad() {
-    XCTAssertTrue( 1 == presenterMock.viewDidLoadCalled, line: #line)
-
-    XCTAssertTrue( sut.activityIndicator.isAnimating == true, line: #line)
-  }
+//  // MARK: Life cycle
+//  func testViewDidLoadIsCalledFromViewDidLoad() {
+//    XCTAssertTrue( 1 == presenterMock.viewDidLoadCalled, line: #line)
+//
+//    XCTAssertTrue( sut.activityIndicator.isAnimating == true, line: #line)
+//  }
 
   // MARK: - Title
   func testTitleIsSet() {
@@ -98,44 +123,39 @@ final class CharacterListViewControllerTests: XCTestCase {
                     "TableView's data source should be a CharactersListPresenterToViewProtocol")
   }
 
+  // TODO: Move to datasource tests
   func testTableView_Empty() {
     // Given
-    let testCellViewModels = Observable<[CharacterCellViewModel]>(value: [])
-    let tableViewExp = XCTestExpectation(description: "testCellViewModels == 0")
-    presenterMock.cellViewModels.completion = {
-      tableViewExp.fulfill()
-    }
+    let tableViewMock = UITableView()
 
     // When
-    presenterMock.cellViewModels.value = testCellViewModels.value
 
     // Then
-    wait(for: [tableViewExp], timeout: 5)
-    let count = sut.tableView.numberOfRows(inSection: 0)
+    let count = sut.tableView(tableViewMock, numberOfRowsInSection: 0)
     XCTAssertTrue( count == 0, line: #line)
   }
 
+  // TODO: Move to datasource tests
   func testTableView_NotEmpty() {
     // Given
-    let tableViewExp = XCTestExpectation(description: "testCellViewModels != 0")
+    let tableViewMock = UITableView()
 
-    presenterMock.cellViewModels.completion = {
-      tableViewExp.fulfill()
-    }
-
-//    presenterMock.cellViewModels.value = testCharacters.map{ CharacterCellViewModel(character: $0) }
+    presenterMock.cellViewModels.value = testCharacters.map{ CharacterCellViewModel(character: $0) }
 
     // prepare the test data
     presenterMock.testCharacterCellViewModel = testCharacters.map{ CharacterCellViewModel(character: $0) }
 
     // When
-    presenterMock.cellViewModels.completion = { tableViewExp.fulfill() }
-    presenterMock.getNextCharactersList()
 
     // Then
-    wait(for: [tableViewExp], timeout: 100)
-    let count = sut.tableView.numberOfRows(inSection: 0)
-    XCTAssertTrue( count != 0, line: #line)
+    let count = sut.tableView(tableViewMock, numberOfRowsInSection: 0)
+    XCTAssertTrue( count == 20, line: #line)
+  }
+
+  func testTableViewHasCells() {
+      let cell = sut.tableView.dequeueReusableCell(withIdentifier: R.reuseIdentifier.characterCellId.identifier)
+
+      XCTAssertNotNil(cell, "TableView should be able to dequeue cell with identifier: 'Cell'")
   }
 
   // MARK: Local data getters
@@ -152,6 +172,22 @@ final class CharacterListViewControllerTests: XCTestCase {
 
   // MARK: Async calls
 
+  func testTableView_NotEmpty_getNextCharactersList() {
+    // Given
+    let tableViewMock = UITableView()
+
+    // prepare the test data
+    presenterMock.testCharacterCellViewModel = testCharacters.map{ CharacterCellViewModel(character: $0) }
+
+    // When
+    presenterMock.getNextCharactersList()
+
+    // Then
+    let count = sut.tableView(tableViewMock, numberOfRowsInSection: 0)
+    XCTAssertTrue( count == 20, line: #line)
+  }
+
+
   // MARK: UI sub components
   //  func testActivityIndicator() {
   //    s
@@ -164,25 +200,31 @@ final class CharacterListViewControllerTests: XCTestCase {
 final class CharacterListViewController_DataSourceTests: XCTestCase {
   var sut: UITableViewDataSource!
   var presenterMock: CharacterListPresenterMock!
-//  var delegateDatasource: DelegateDatasourceMock!
   var tableViewMock: UITableView!
   var vc: CharactersListViewController!
   var testCellsViewModel: [CharacterCellViewModel] = []
 
   override func setUp() {
+    super.setUp()
+
+    // The DataSource is the SUT
     presenterMock = CharacterListPresenterMock()
     let testCharacters: [CharacterResult] = getResults(from: mockContentData(for: "MockedResponseGetCharacters"))
     testCellsViewModel = testCharacters.map{ CharacterCellViewModel(character: $0) }
-//
+
     vc = CharactersListViewController.instantiateViewController()
     vc.presenter = presenterMock
     vc.loadViewIfNeeded()
 
     sut = vc
 
+    tableViewMock = UITableView()
+    tableViewMock.register(CharacterCell.self, forCellReuseIdentifier: R.reuseIdentifier.characterCellId.identifier)
+    tableViewMock.estimatedRowHeight = 44
   }
 
   override func tearDown() {
+    super.tearDown()
     sut = nil
     vc = nil
     presenterMock = nil
@@ -190,68 +232,95 @@ final class CharacterListViewController_DataSourceTests: XCTestCase {
 
   func testNumberOfRows() {
     // Given
-    let tableView = UITableView()
+    let tableViewMock2 = UITableView() // even more simple table view for this test
 
     // When
     vc.presenter.cellViewModels.value = testCellsViewModel
 
     // Then
-    let numberOfRows = sut.tableView(tableView, numberOfRowsInSection: 0)
+    let numberOfRows = sut.tableView(tableViewMock2, numberOfRowsInSection: 0)
     XCTAssertTrue( 1 == presenterMock.charactersCountCalled, line: #line)
     XCTAssertEqual(numberOfRows, 20, "Number of rows in table should match number of items in the presenter")
   }
 
-  func testCellForRow() {
-    tableViewMock = UITableView()
-    tableViewMock.register(CharacterCell.self, forCellReuseIdentifier: R.reuseIdentifier.characterCellId.identifier)
-    tableViewMock.estimatedRowHeight = 44
-
+  func testHasZeroSectionsWhenZeroCellModelViews() {
     // Given
-    vc.presenter.cellViewModels.value = testCellsViewModel
 
     // When
-    let cell = sut.tableView(tableViewMock, cellForRowAt: IndexPath(row: 0, section: 0)) as! CharacterCell
+    vc.presenter.cellViewModels.value = []
 
     // Then
+    XCTAssertEqual(sut.numberOfSections!(in: tableViewMock), 0, "TableView should have zero sections when no items are present")
+  }
+
+  func testHasOneSectionWhenItemsArePresent() {
+    // Given
+
+    // When
+    vc.presenter.cellViewModels.value = testCellsViewModel
+
+    // Then
+    XCTAssertEqual(sut.numberOfSections!(in: tableViewMock), 1, "TableView should have 1 sections when items are present")
+  }
+
+  func testCellForRow() {
+
+    // Given
+
+    // When
+    vc.presenter.cellViewModels.value = testCellsViewModel
+
+    // Then
+    let cell = sut.tableView(tableViewMock, cellForRowAt: IndexPath(row: 0, section: 0)) as! CharacterCell
     XCTAssertEqual(cell.title.text, "3-D Man", "The first cell should display name of first character")
+  }
+//----------------------------------------------------------------------------------------------------//
+
+  func testTableViewDelegateIsViewController() {
+    XCTAssertTrue(vc.tableView.delegate === sut,
+                  "Controller should be delegate for the table view")
   }
 }
 
+//----------------------------------------------------------------------------------------------------//
+
 final class CharacterListViewController_TableViewDelegateTests: XCTestCase {
 
-  var sut: CharactersListViewController!
-  var presenter: CharacterListPresenterMock!
-  var delegateDatasource: DelegateDatasourceMock!
+  var sut: UITableViewDelegate!
+  var presenterMock: CharacterListPresenterMock!
   var tableViewMock: UITableView!
+  var vc: CharactersListViewController!
+  var testCellsViewModel: [CharacterCellViewModel] = []
 
   override func setUp() {
-    presenter = CharacterListPresenterMock()
+    super.setUp()
+    // The DataSource is the SUT
+    presenterMock = CharacterListPresenterMock()
     let testCharacters: [CharacterResult] = getResults(from: mockContentData(for: "MockedResponseGetCharacters"))
-    presenter.cellViewModels.value = testCharacters.map{ CharacterCellViewModel(character: $0) }
+    testCellsViewModel = testCharacters.map{ CharacterCellViewModel(character: $0) }
 
-    sut = CharactersListViewController.instantiateViewController()
-    sut.presenter = presenter
-    sut.loadViewIfNeeded()
+    vc = CharactersListViewController.instantiateViewController()
+    vc.presenter = presenterMock
+    vc.loadViewIfNeeded()
+
+    sut = vc
+
+    tableViewMock = UITableView()
+    tableViewMock.register(CharacterCell.self, forCellReuseIdentifier: R.reuseIdentifier.characterCellId.identifier)
+    tableViewMock.estimatedRowHeight = 44
   }
 
   override func tearDown() {
+    super.tearDown()
     sut = nil
-    presenter = nil
+    vc = nil
+    presenterMock = nil
   }
 
   // MARK: User Interaction
   func testDidSelectIsCalled() {
-    let delegateDatasourceMock = DelegateDatasourceMock()
-    delegateDatasourceMock.presenter = presenter
-    tableViewMock = UITableView()
-    //    tableViewMock.dataSource = sut
-    //    tableViewMock.delegate = sut
-    sut.tableView = tableViewMock
-    sut.tableView2(tableViewMock, indexPath: IndexPath(row: 1, section: 0))
-    //    (sut as UITableViewDelegate).tableView!(tableViewMock , didSelectRowAt: IndexPath(row: 1, section: 0))
-    //    delegateDatasourceMock.tableView(tableViewMock , didSelectRowAt: IndexPath(row: 1, section: 0))
-    //    XCTAssertTrue( 1 == delegateDatasourceMock.didSelectCalled, file: #filePath, line: #line)
-    XCTAssertTrue( 1 == presenter.didSelectCalled, line: #line)
+    sut.tableView!(tableViewMock, didSelectRowAt: IndexPath(row: 1, section: 0))
+    XCTAssertTrue( 1 == presenterMock.didSelectCalled, line: #line)
   }
 }
 
@@ -287,9 +356,7 @@ class CharacterListPresenterMock: CharactersListPresenterProtocol {
   // Async calls
   func getNextCharactersList() {
     getNextCharactersListCalled += 1
-    DispatchQueue.global().async {
-      self.cellViewModels.value = self.testCharacterCellViewModel
-    }
+    self.cellViewModels.value += self.testCharacterCellViewModel
   }
 
   // User Interaction
@@ -312,58 +379,9 @@ class CharacterListPresenterMock: CharactersListPresenterProtocol {
 
   var didSelectCalled = 0
   //    var charsCount = 0
-}
 
-extension CharacterListPresenterMock: DelegateDatasourceProtocol{
   func didSelectCharacter(at: Int){
     didSelectCalled += 1
-  }
-}
-
-protocol DelegateDatasourceProtocol {
-  //  func didSelectCell(data: String)
-  func didSelectCharacter(at: Int)
-}
-
-class DelegateDatasourceMock: NSObject, UITableViewDelegate, UITableViewDataSource {
-
-  var data: [String]?
-
-  var numberOfSessiontCalled = 0
-  var numberOfRowsInSectionCalled = 0
-  var cellForRowAtCalled = 0
-  var didSelectCalled = 0
-  weak var presenter: CharactersListPresenterProtocol?
-
-  //MARK: Datasource
-  func numberOfSections(in tableView: UITableView) -> Int {
-    numberOfSessiontCalled += 1
-    return 1
-  }
-
-  func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-    numberOfRowsInSectionCalled += 1
-    if let count = data?.count {
-      return count
-    }
-    return 0
-  }
-
-  func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-    cellForRowAtCalled += 1
-    let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath)
-    cell.textLabel?.text = data?[indexPath.row]
-
-    return cell
-  }
-
-  //MARK: Delegate
-  func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-    didSelectCalled += 1
-    presenter?.didSelectCharacter(at: indexPath.row)
-//    if let data = data?[indexPath.row] {
-//      presenter?.didSelectCharacter(at: indexPath.row)
-//    }
   }
 }
 

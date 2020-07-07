@@ -13,7 +13,6 @@ protocol CharactersListPresenterProtocol: class {
   var cellViewModels: Observable<[CharacterCellViewModel]>  { get set}
   var title: Observable<String> { get set}
   var isLoading: Observable<Bool> {get set }
-  var numberOfSections: Int { get }
 
   // View life cycle
   func viewDidLoad()

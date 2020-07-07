@@ -11,8 +11,6 @@ import Foundation
 class CharactersListPresenter: CharactersListPresenterProtocol {
   weak var viewControllerDelegate: CharactersListPresenterToViewProtocol?
 
-  var numberOfSections: Int = 1
-
   func viewDidLoad() {
     viewControllerDelegate?.prepareView()
   }
