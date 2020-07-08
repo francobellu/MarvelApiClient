@@ -18,7 +18,7 @@ import XCTest
 //  var sut: CharactersListViewController!
 //  var dataSourceMock: UITableViewDataSource!
 //
-//  override func setUp() {
+//  override func setUpWithError() throws {
 //
 //    // SUT
 //    sut = CharactersListViewController.instantiateViewController()
@@ -28,7 +28,7 @@ import XCTest
 //    dataSourceMock = DelegateDatasourceMock()
 //  }
 //
-//  override func tearDown() {
+//  override func tearDownWithError() throws {
 //    sut = nil
 //    dataSourceMock = nil
 //  }
@@ -44,7 +44,7 @@ final class CharacterListViewControllerTests: XCTestCase {
   var presenterMock: CharacterListPresenterMock!
   var dataSourceMock: UITableViewDataSource!
 
-  override func setUp() {
+  override func setUpWithError() throws {
     presenterMock = CharacterListPresenterMock()
 //    presenterMock.cellViewModels.value = testCharacters.map{ CharacterCellViewModel(character: $0) }
 
@@ -53,7 +53,7 @@ final class CharacterListViewControllerTests: XCTestCase {
     sut.loadViewIfNeeded()
   }
 
-  override func tearDown() {
+  override func tearDownWithError() throws {
     sut = nil
     presenterMock = nil
   }
@@ -79,14 +79,16 @@ final class CharacterListViewControllerTests: XCTestCase {
 
   // MARK: - Title
   func testTitleIsSet() {
+    
     // Given
-    let testTitle = "testTitle"
     let titleExp = XCTestExpectation(description: "TitleIsSet")
 
-    // When
     presenterMock.title.completion = {
       titleExp.fulfill()
     }
+    let testTitle = "testTitle"
+
+    // When
     presenterMock.title.value = testTitle
 
     // Then
@@ -95,7 +97,8 @@ final class CharacterListViewControllerTests: XCTestCase {
   }
 
   // MARK: - Title
-  func testActivityIndicator() {
+  func testActivityIndicator_setToFalse() {
+
     // Given
     let testIsLoadingFalse = false
     let titleExp = XCTestExpectation(description: "IsLoading")
@@ -110,6 +113,45 @@ final class CharacterListViewControllerTests: XCTestCase {
     wait(for: [titleExp], timeout: 5)
     XCTAssertTrue( sut.activityIndicator.isAnimating == false, line: #line)
   }
+
+  func testActivityIndicator_setToTrue() {
+    // Given
+    let testIsLoadingFalse = true
+    let titleExp = XCTestExpectation(description: "IsLoading")
+    presenterMock.isLoading.completion = {
+      titleExp.fulfill()
+    }
+
+    // When
+    presenterMock.isLoading.value = testIsLoadingFalse
+
+    // Then
+    wait(for: [titleExp], timeout: 5)
+    XCTAssertTrue( sut.activityIndicator.isAnimating == true, line: #line)
+  }
+
+  func testPrepareView() {
+    // Given
+    let navContr = UINavigationController()
+    navContr.pushViewController(sut, animated: false)
+
+    // When
+    sut.prepareView()
+
+    // Then
+    guard let navigationController = sut.navigationController else {
+      XCTAssert(false, "sut should have a NavigationBar")
+      return
+    }
+    
+    guard let leftBtn = sut.navigationItem.leftBarButtonItem else {
+      XCTAssert(false, "leftBtn should exist")
+      return
+    }
+
+    XCTAssertTrue(leftBtn.title == "Back", line: #line)
+    XCTAssertFalse(navigationController.interactivePopGestureRecognizer!.isEnabled )
+   }
 
   // MARK: - TableView
 
@@ -204,8 +246,7 @@ final class CharacterListViewController_DataSourceTests: XCTestCase {
   var vc: CharactersListViewController!
   var testCellsViewModel: [CharacterCellViewModel] = []
 
-  override func setUp() {
-    super.setUp()
+  override func setUpWithError() throws {
 
     // The DataSource is the SUT
     presenterMock = CharacterListPresenterMock()
@@ -223,8 +264,7 @@ final class CharacterListViewController_DataSourceTests: XCTestCase {
     tableViewMock.estimatedRowHeight = 44
   }
 
-  override func tearDown() {
-    super.tearDown()
+  override func tearDownWithError() throws {
     sut = nil
     vc = nil
     presenterMock = nil
@@ -292,8 +332,7 @@ final class CharacterListViewController_TableViewDelegateTests: XCTestCase {
   var vc: CharactersListViewController!
   var testCellsViewModel: [CharacterCellViewModel] = []
 
-  override func setUp() {
-    super.setUp()
+  override func setUpWithError() throws {
     // The DataSource is the SUT
     presenterMock = CharacterListPresenterMock()
     let testCharacters: [CharacterResult] = getResults(from: mockContentData(for: "MockedResponseGetCharacters"))
@@ -310,8 +349,7 @@ final class CharacterListViewController_TableViewDelegateTests: XCTestCase {
     tableViewMock.estimatedRowHeight = 44
   }
 
-  override func tearDown() {
-    super.tearDown()
+  override func tearDownWithError() throws {
     sut = nil
     vc = nil
     presenterMock = nil

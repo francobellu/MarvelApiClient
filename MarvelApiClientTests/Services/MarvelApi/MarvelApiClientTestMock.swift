@@ -14,10 +14,6 @@ class MarvelApiClientCharactersTestMock: XCTestCase {
 
   var sut: MarvelApiClient! // swiftlint:disable:this implicitly_unwrapped_optional
 
-  func setUpWithError() throws {
-
-  }
-
   func testGetCharactersList() throws {
 
     let session = MockURLSession()

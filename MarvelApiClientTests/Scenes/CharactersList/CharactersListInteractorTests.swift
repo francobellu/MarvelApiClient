@@ -18,7 +18,7 @@ class CharactersListInteractorTest: XCTestCase {
   let mockCoordinator =  MockCharactersListCoordinatorDelegate()
   var mockApiClient: MockApiClient!
   
-  func setUpWithError() throws {
+  override func setUpWithError() throws {
     mockApiClient = mockAppDependencies.marvelApiClient as? MockApiClient
     sut = CharactersListInteractor(dependencies: mockAppDependencies)
   }

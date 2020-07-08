@@ -147,6 +147,5 @@ extension CharactersListViewController: CharactersListPresenterToViewProtocol {
 
   func prepareView(){
     setBackBtnInterceptMechanism()
-    presenter.getNextCharactersList()
   }
 }

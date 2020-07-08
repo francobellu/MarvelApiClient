@@ -13,6 +13,7 @@ class CharactersListPresenter: CharactersListPresenterProtocol {
 
   func viewDidLoad() {
     viewControllerDelegate?.prepareView()
+    getNextCharactersList()
   }
 
   var didGetCharacter: ((CharacterResult) -> Void)?

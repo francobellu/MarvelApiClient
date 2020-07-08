@@ -95,7 +95,7 @@ struct StoriesItem: Codable {
 // Thumbnail.swift
 
 // MARK: - Thumbnail
-struct Thumbnail: Codable {
+struct Thumbnail: Codable{
   let url: URL
   enum ImageKeys: String, CodingKey {
     case path = "path"
@@ -105,21 +105,30 @@ struct Thumbnail: Codable {
   public init(from decoder: Decoder) throws {
     let container = try decoder.container(keyedBy: ImageKeys.self)
 
-
     let thumbnailExtension = try container.decode(String.self, forKey: .thumbnailExtension)
-    let path = try container.decode(String.self, forKey: .path)
-    //guard let path = path, let thumbnailExtension = thumbnailExtension else { fatalError() }
-    let urlStr = "\(path).\(thumbnailExtension)"
-    guard let url = URL(string: urlStr) else {
-      print("Errror")
-      throw MarvelError.decoding }
-
-    self.url = url
+    do {
+      let path = try container.decode(String.self, forKey: .path)
+      let urlStr = "\(path).\(thumbnailExtension)"
+      guard let url = URL(string: urlStr) else {
+        print("Errror")
+        throw MarvelError.decoding
+      }
+      self.url = url
+    } catch {
+     throw MarvelError.decoding
+    }
   }
 
   public init(from imageUrl: URL?) {
-    let defaultImageUrl = Bundle.main.url(forResource: "amour-1", withExtension: "jpg")!
-    url = imageUrl != nil ? imageUrl! : defaultImageUrl
+    guard let defaultImageUrl = Bundle.main.url(forResource: "amour-1", withExtension: "jpg") else{
+      fatalError()
+    }
+
+    if let url = imageUrl {
+      self.url = url
+    } else {
+      self.url = defaultImageUrl
+    }
   }
 }
 

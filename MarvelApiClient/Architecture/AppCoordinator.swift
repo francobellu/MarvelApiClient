@@ -34,6 +34,7 @@ class AppCoordinator: AppDependencyInjectable {
   var dependencies: AppDependenciesProtocol! // swiftlint:disable:this implicitly_unwrapped_optional
 //  private var coordinator: (Coordinator)?
   private var state: AppCoordinatorState
+  let navController = UINavigationController()
 
   init(presenter: UIWindow =  UIWindow(frame: UIScreen.main.bounds),
        dependencies: AppDependenciesProtocol) {
@@ -65,14 +66,12 @@ extension AppCoordinator: Coordinator {
             case .onboarding: runOnboardingFlow()
             case .landing: runLandingFlow()
             case .character, .characters:
-              let navController = UINavigationController()
               present(viewController: navController)
               let coordinator = CharactersListCoordinator(parentCoordinator: self, coordinatorPresenter: navController, dependencies: dependencies)
               add(coordinator)
               let deeplinkableCoord = coordinator
               deeplinkableCoord.start(with: option)
             case .comics, .comic:
-              let navController = UINavigationController()
               present(viewController: navController)
               let coordinator = ComicsListCoordinator(parentCoordinator: self, coordinatorPresenter: navController, dependencies: dependencies)
               add(coordinator)
@@ -97,7 +96,7 @@ extension AppCoordinator: Coordinator {
   }
 
   private func runLandingFlow() {
-    let coordinator = LandingCoordinator(parentCoordinator: self, presenter: UINavigationController(), dependencies: dependencies)
+    let coordinator = LandingCoordinator(parentCoordinator: self, presenter: navController, dependencies: dependencies)
     add(coordinator)
     coordinator.start()
     guard let presenter = coordinator.coordinatorPresenter as? UIViewController else { return }

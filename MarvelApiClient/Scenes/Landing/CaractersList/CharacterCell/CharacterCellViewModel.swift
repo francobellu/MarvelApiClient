@@ -14,14 +14,14 @@ class CharacterCellViewModel {
   var imgViewUrl: URL
   init(character: CharacterResult) {
     title = character.name ?? ""
-    let defaultImageUrl = Bundle.main.url(forResource: "amour-1", withExtension: "jpg")!
+    guard let defaultImageUrl = Bundle.main.url(forResource: "amour-1", withExtension: "jpg") else{
+      fatalError()
+    }
 
-    imgViewUrl = character.thumbnail?.url != nil ? character.thumbnail!.url : defaultImageUrl
-//
-//    if let thumbnailUrl = character.thumbnail?.url {
-//      imgViewUrl = thumbnailUrl
-//    } else {
-//      imgViewUrl = defaultImageUrl
-//    }
+    if let thumbnailUrl = character.thumbnail?.url {
+      imgViewUrl = thumbnailUrl
+    } else {
+      imgViewUrl = defaultImageUrl
+    }
   }
 }

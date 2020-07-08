@@ -19,7 +19,7 @@ class CharactersListPresenterTest: XCTestCase {
 //
   var testResults: [CharacterResult]! = nil
 
-  override func setUp() {
+  override func setUpWithError() throws{
     testResults = fetch(from: "MockedResponseGetCharacters")
 
     mockIterator =  MockCharactersListInteractor(dependencies: mockAppDependencies)

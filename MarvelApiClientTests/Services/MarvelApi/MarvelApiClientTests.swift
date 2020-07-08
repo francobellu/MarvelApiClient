@@ -14,13 +14,13 @@ class MarvelApiClientTests: XCTestCase {
 
   var sut: MarvelApiClient! // swiftlint:disable:this implicitly_unwrapped_optional
 
-  func setUpWithError() throws {
+  override func setUpWithError() throws {
     let session = URLSession(configuration: .default)
     let restApiClient = RestApiClient(session: session)
     sut = MarvelApiClient(restApiClient: restApiClient)
   }
 
-  func tearDownWithError() throws {
+  override func tearDownWithError() throws {
     sut = nil
   }
 
