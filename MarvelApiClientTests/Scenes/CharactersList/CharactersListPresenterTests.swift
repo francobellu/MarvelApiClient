@@ -49,34 +49,34 @@ class CharactersListPresenterTest: XCTestCase {
     self.mockCoordinator.coordinatorState = .didSelect(character: character)
   }
 }
-
-class VCMock: XCTestCase {
-  var presenter: CharactersListPresenterProtocol! // swiftlint:disable:this implicitly_unwrapped_optional
-
-  var cellViewModelsChanged = false
-  var titleChanged = false
-  var activityIndicatorChanged = false
-
-  private func initBinding() {
-
-    // TableView
-    presenter.cellViewModels.valueChanged = { [weak self] (_) in
-      self?.cellViewModelsChanged = true
-//      self?.tableViewXX.reloadData()
-    }
-
-    // Title
-//    self.title = presenter.title.value
-    presenter.title.valueChanged = { [weak self] (title) in
-      self?.titleChanged = true
-//      self?.title = title
-    }
-
-    // ActivityIndicator
-//    updateLoadingStatus()
-    presenter.isLoading.valueChanged = { [weak self] (isLoading) in
-      self?.activityIndicatorChanged = true
-//      self?.updateLoadingStatus()
-    }
-  }
-}
+//
+//class VCMock: XCTestCase {
+//  var presenter: CharactersListPresenterProtocol! // swiftlint:disable:this implicitly_unwrapped_optional
+//
+//  var cellViewModelsChanged = false
+//  var titleChanged = false
+//  var activityIndicatorChanged = false
+//
+//  private func initBinding() {
+//
+//    // TableView
+//    presenter.cellViewModels.valueChanged = { [weak self] (_) in
+//      self?.cellViewModelsChanged = true
+////      self?.tableViewXX.reloadData()
+//    }
+//
+//    // Title
+////    self.title = presenter.title.value
+//    presenter.title.valueChanged = { [weak self] (title) in
+//      self?.titleChanged = true
+////      self?.title = title
+//    }
+//
+//    // ActivityIndicator
+////    updateLoadingStatus()
+//    presenter.isLoading.valueChanged = { [weak self] (isLoading) in
+//      self?.activityIndicatorChanged = true
+////      self?.updateLoadingStatus()
+//    }
+//  }
+//}

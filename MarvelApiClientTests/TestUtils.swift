@@ -36,10 +36,8 @@ extension XCTestCase{
       completion?(nil, "There is a problem in fetching the data")
       return nil
     }
-    do{
-      let data = try Data(contentsOf: URL(fileURLWithPath: path), options: .alwaysMapped )
-//      let data = try Data(contentsOf: URL(fileURLWithPath: path), options: .mappedIfSafe)
-
+    do {
+      let data = try Data(contentsOf: URL(fileURLWithPath: path) )
       let marvelResponse = try JSONDecoder().decode(MarvelResponse<T>.self, from: data)
       dump(marvelResponse)
       if let dataContainer = marvelResponse.data {
@@ -49,15 +47,6 @@ extension XCTestCase{
       } else {
         completion?(nil, "There is a problem in fetching the data")
       }
-
-//      let json = try JSONSerialization.jsonObject(with: data, options: .mutableLeaves)
-//      guard let jsonResult = json as? [T] else {
-//          completion?(nil, "There is a problem in fetching places for you.")
-//          return nil
-//      }
-////      guard let results = jsonResult["results"] as? [[String: Any]] else { return nil}
-//      returnValue = jsonResult
-//      completion?(returnValue, nil)
     } catch{
         completion?(nil, "There is a problem in fetching the data")
     }
