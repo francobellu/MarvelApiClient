@@ -2,7 +2,7 @@ import Foundation
 
 struct GetCharacter: APIRequest {
 
-  typealias Response = [CharacterResult]
+  typealias Response = CharacterResult
 
   var apiRequestConfig: ApiRequestConfigProtocol = MarvelApiRequestConfig()
 

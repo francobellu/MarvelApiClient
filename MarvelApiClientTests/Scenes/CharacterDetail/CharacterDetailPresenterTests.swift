@@ -24,7 +24,7 @@ class CharacterDetailPresenterTest: XCTestCase {
   func testInitWithIterator() throws {
 
     // CONFIGURE THE MOCK DATA
-    let testResults: [CharacterResult] = fetch(from: "MockedResponseGetCharacters")
+    let testResults: [CharacterResult] = getObjects(from: "MockedResponseGetCharacters")
     let testResult = testResults.first!
     mockIterator.mockCharacterDetailInteractorData.mockCharacterDetailResult = testResult
     sut = CharacterDetailPresenter(dependencies: mockAppDependencies,

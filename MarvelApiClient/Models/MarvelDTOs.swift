@@ -20,10 +20,8 @@ struct DataContainer<Results: Decodable>: Decodable {
   public let limit: Int
   public let total: Int
   public let count: Int
-  public let results: Results
+  public let results: [Results]
 }
-
-///////////////
 
 // MARK: - Result
 struct CharacterResult: Codable {

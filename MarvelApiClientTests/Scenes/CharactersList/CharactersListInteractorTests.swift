@@ -15,39 +15,34 @@ class CharactersListInteractorTest: XCTestCase {
   var sut: CharactersListInteractor! // swiftlint:disable:this implicitly_unwrapped_optional
 
   let mockAppDependencies = MockAppDependencies()
-  let mockCoordinator =  MockCharactersListCoordinatorDelegate()
-  var mockApiClient: MockApiClient!
+  var mockApiClient: MockApiClient!{
+    mockAppDependencies.marvelApiClient as? MockApiClient
+  }
   
   override func setUpWithError() throws {
-    mockApiClient = mockAppDependencies.marvelApiClient as? MockApiClient
     sut = CharactersListInteractor(dependencies: mockAppDependencies)
   }
 
   // MARK: - Business logic
   func testSuccess() throws {
-
     // CONFIGURE THE MOCK DATA WITH AN ARRAY OF EMPTY CharacterResult
-    let testCharacters: [CharacterResult] = fetch(from: "MockedResponseGetCharacters")
-    let testDataContainer = DataContainer(offset: 0, limit: 20, total: 1000, count: 0, results: testCharacters)
-    mockApiClient.mockApiClientData.mockCharactersResults = testDataContainer
-
+    let testResponse: MarvelResponse<CharacterResult> = getResponse(from: "MockedResponseGetCharacters")
+    XCTAssertTrue(testResponse.code == 200)
+    guard let data = testResponse.data else{
+      XCTAssert(true, "data should exist")
+      return
+    }
+    XCTAssertTrue(data.results.count == 20 )
     sut.getNextCharactersList { characters in
-     // TEST characters
       XCTAssertNotNil(characters)
-      XCTAssertNotNil(characters.count == testCharacters.count)
+      XCTAssertNotNil(characters.count == data.results.count)
     }
   }
 
   func testFailure() throws {
-
-    // CONFIGURE THE MOCK DATA WITH EMPTY ARRAY
-    let testCharacters: [CharacterResult] = []
-    let mockDataContainer = DataContainer(offset: 0, limit: 20, total: 1000, count: 0, results: testCharacters)
-    mockApiClient.mockApiClientData.mockCharactersResults = mockDataContainer
-
+    let response: MarvelResponse<CharacterResult> = getResponse(from: "MockedResponseGetCharacters")
+    XCTAssertFalse(response.code == 404)
     sut.getNextCharactersList { characters in
-      // TEST characters
-      XCTAssert(characters.isEmpty)
     }
   }
 }

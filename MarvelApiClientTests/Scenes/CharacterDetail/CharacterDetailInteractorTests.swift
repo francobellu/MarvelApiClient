@@ -28,7 +28,7 @@ class CharacterDetailInteractorTest: XCTestCase {
   func testSuccess() throws {
 
     // CONFIGURE THE MOCK DATA
-    let testCharacters: [CharacterResult] = fetch(from: "MockedResponseGetCharacters")
+    let testCharacters: [CharacterResult] = getObjects(from: "MockedResponseGetCharacters")
     let testDataContainer = DataContainer(offset: 0, limit: 20, total: 1000, count: 0, results: testCharacters)
     mockApiClient.mockApiClientData.mockCharacterResults = testDataContainer
 

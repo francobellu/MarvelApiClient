@@ -23,15 +23,15 @@ internal class MarvelApiClient {
 
 // Exposed API
 extension MarvelApiClient: MarvelApiProtocol {
+   func getCharactersList(completion: @escaping (Result<DataContainer<GetCharacters.Response>, Error>) -> Void) {
 
-  func getCharactersList(completion: @escaping (Result<DataContainer<GetCharacters.Response>, Error>) -> Void ) {
 
     // Get the first <limit> characters
-    restApiClient.send(GetCharacters(limit: limit, offset: 0) ) { response in
+    restApiClient.send(GetCharacters(limit: limit, offset: 0) ) { result in
 
       print("\nGetCharacters list finished, limit: \(self.limit), offset: \(self.offset)")
 
-      switch response {
+      switch result {
       case .success(let dataContainer):
         // 4) Reset the offset for the next data query
         self.offset += self.limit
@@ -41,10 +41,11 @@ extension MarvelApiClient: MarvelApiProtocol {
           self.reachedEndOfItems = true
           print("reached end of data. Batch count: \(dataContainer.results.count)")
         }
+        completion(result)
       case .failure(let error):
         print(error)
+        completion(result)
       }
-      completion(response)
     }
   }
 

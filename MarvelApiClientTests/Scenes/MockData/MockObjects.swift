@@ -102,14 +102,13 @@ class MockAppDependencies: AppDependenciesProtocol {
 }
 
 struct MockApiCLientData {
-  var mockCharactersResults: DataContainer<[CharacterResult]>?
-  var mockCharacterResults: DataContainer<[CharacterResult]>?
+  var mockCharactersResults: DataContainer<CharacterResult>?
+  var mockCharacterResults: DataContainer<CharacterResult>?
   let mockComicsData: [ComicResult]?
   let mockComicData: ComicResult?
 }
 
 class MockApiClient: MarvelApiProtocol{
-
 
   /// Used to configure the test case
   var mockApiClientData = MockApiCLientData(mockCharactersResults: nil,
@@ -119,7 +118,7 @@ class MockApiClient: MarvelApiProtocol{
 
   func getCharactersList(completion: @escaping (Result<DataContainer<GetCharacters.Response>, Error>) -> Void) {
     if let results = mockApiClientData.mockCharactersResults{
-      completion(.success(results))
+      completion(.success(results ))
     } else{
       completion(.failure(MarvelError.noData))
     }

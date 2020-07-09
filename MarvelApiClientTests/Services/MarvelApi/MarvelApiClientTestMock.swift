@@ -21,7 +21,7 @@ class MarvelApiClientCharactersTestMock: XCTestCase {
     let restApiClient = RestApiClient(session: session)
     sut = MarvelApiClient(restApiClient: restApiClient)
 
-    let testResult: [CharacterResult]  = fetch(from: "MockedResponseGetCharacters")
+    let testResult: [CharacterResult]  = getObjects(from: "MockedResponseGetCharacters")
 
     sut.getCharactersList { response in
       print("FB: response: \(response)")
@@ -47,7 +47,7 @@ class MarvelApiClientCharactersTestMock: XCTestCase {
     let restApiClient = RestApiClient(session: session)
     sut = MarvelApiClient(restApiClient: restApiClient)
 
-    let testResults: [CharacterResult] = fetch(from: "MockedResponseGetCharacters")
+    let testResults: [CharacterResult] = getObjects(from: "MockedResponseGetCharacters")
     let testResult = testResults.first!
 
     sut.getCharacter(with: testResult.id!) { result in
