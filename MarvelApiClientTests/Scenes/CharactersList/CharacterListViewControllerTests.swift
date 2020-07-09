@@ -37,7 +37,7 @@ import XCTest
 final class CharacterListViewControllerTests: XCTestCase {
 
   var testCharacters: [CharacterResult] {
-    getResults(from: mockContentData(for: "MockedResponseGetCharacters"))
+    fetch(from: "MockedResponseGetCharacters")
   }
 
   var sut: CharactersListViewController!
@@ -46,7 +46,6 @@ final class CharacterListViewControllerTests: XCTestCase {
 
   override func setUpWithError() throws {
     presenterMock = CharacterListPresenterMock()
-//    presenterMock.cellViewModels.value = testCharacters.map{ CharacterCellViewModel(character: $0) }
 
     sut = CharactersListViewController.instantiateViewController()
     sut.presenter = presenterMock
@@ -250,7 +249,7 @@ final class CharacterListViewController_DataSourceTests: XCTestCase {
 
     // The DataSource is the SUT
     presenterMock = CharacterListPresenterMock()
-    let testCharacters: [CharacterResult] = getResults(from: mockContentData(for: "MockedResponseGetCharacters"))
+    let testCharacters: [CharacterResult] = fetch(from: "MockedResponseGetCharacters")
     testCellsViewModel = testCharacters.map{ CharacterCellViewModel(character: $0) }
 
     vc = CharactersListViewController.instantiateViewController()
@@ -335,7 +334,7 @@ final class CharacterListViewController_TableViewDelegateTests: XCTestCase {
   override func setUpWithError() throws {
     // The DataSource is the SUT
     presenterMock = CharacterListPresenterMock()
-    let testCharacters: [CharacterResult] = getResults(from: mockContentData(for: "MockedResponseGetCharacters"))
+    let testCharacters: [CharacterResult] = fetch(from: "MockedResponseGetCharacters")
     testCellsViewModel = testCharacters.map{ CharacterCellViewModel(character: $0) }
 
     vc = CharactersListViewController.instantiateViewController()

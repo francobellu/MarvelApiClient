@@ -9,6 +9,33 @@
 import Foundation
 import XCTest
 
+ func fetch<T: Decodable>(from file: String, completion: ( (T,_ errorMessage: String?)->())? = nil  ) -> T {
+    var returnValue: T
+  let testBundle = Bundle(for:  CharactersListInteractorTest.self)
+    guard let path = testBundle.path(forResource: file, ofType: "json") else{
+      fatalError()
+//      completion?(nil, "There is a problem in fetching the data")
+//      return nil
+    }
+    do {
+      let data = try Data(contentsOf: URL(fileURLWithPath: path) )
+      let marvelResponse = try JSONDecoder().decode(MarvelResponse<T>.self, from: data)
+      dump(marvelResponse)
+      if let dataContainer = marvelResponse.data {
+        returnValue = dataContainer.results
+        completion?(returnValue, nil)
+        //self.offset +=  self.limit
+      } else {
+         fatalError()
+//        completion?(nil, "There is a problem in fetching the data")
+      }
+    } catch{
+       fatalError()
+//        completion?(nil, "There is a problem in fetching the data")
+    }
+    return returnValue
+  }
+
 @testable import MarvelApiClient
 
 extension XCTestCase{
@@ -28,30 +55,33 @@ extension XCTestCase{
 
     return response.data!.results
   }
-
-  func fetch<T: Decodable>(from file: String, completion: ( (T?,_ errorMessage: String?)->())? = nil  ) -> T? {
-    var returnValue: T? = nil
-    let testBundle = Bundle(for: type(of: self))
-    guard let path = testBundle.path(forResource: file, ofType: "json") else{
-      completion?(nil, "There is a problem in fetching the data")
-      return nil
-    }
-    do {
-      let data = try Data(contentsOf: URL(fileURLWithPath: path) )
-      let marvelResponse = try JSONDecoder().decode(MarvelResponse<T>.self, from: data)
-      dump(marvelResponse)
-      if let dataContainer = marvelResponse.data {
-        returnValue = dataContainer.results
-        completion?(returnValue, nil)
-        //self.offset +=  self.limit
-      } else {
-        completion?(nil, "There is a problem in fetching the data")
-      }
-    } catch{
-        completion?(nil, "There is a problem in fetching the data")
-    }
-    return returnValue
-  }
+//
+//  func fetch<T: Decodable>(from file: String, completion: ( (T,_ errorMessage: String?)->())? = nil  ) -> T {
+//    var returnValue: T
+//    let testBundle = Bundle(for: type(of: self))
+//    guard let path = testBundle.path(forResource: file, ofType: "json") else{
+//      fatalError()
+////      completion?(nil, "There is a problem in fetching the data")
+////      return nil
+//    }
+//    do {
+//      let data = try Data(contentsOf: URL(fileURLWithPath: path) )
+//      let marvelResponse = try JSONDecoder().decode(MarvelResponse<T>.self, from: data)
+//      dump(marvelResponse)
+//      if let dataContainer = marvelResponse.data {
+//        returnValue = dataContainer.results
+//        completion?(returnValue, nil)
+//        //self.offset +=  self.limit
+//      } else {
+//         fatalError()
+////        completion?(nil, "There is a problem in fetching the data")
+//      }
+//    } catch{
+//       fatalError()
+////        completion?(nil, "There is a problem in fetching the data")
+//    }
+//    return returnValue
+//  }
 
 //  func handleResponse<T: APIRequest>( data: Data?, error: Error?,  completion: @escaping ResultCallback<DataContainer<T.Response>>) throws -> T {
 //    if let data = data {
