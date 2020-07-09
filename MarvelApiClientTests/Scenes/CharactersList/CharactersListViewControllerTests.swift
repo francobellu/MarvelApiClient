@@ -1,5 +1,5 @@
 //
-//  CharacterListViewControllerTests.swift
+//  CharactersListViewControllerTests.swift
 //  MarvelApiClientTests
 //
 //  Created by franco bellu on 03/07/2020.
@@ -34,7 +34,7 @@ import XCTest
 //  }
 //}
 
-final class CharacterListViewControllerTests: XCTestCase {
+final class CharactersListViewControllerTests: XCTestCase {
 
   var testCharacters: [CharacterResult] {
     getObjects(from: "MockedResponseGetCharacters")
@@ -382,12 +382,6 @@ class CharacterListPresenterMock: CharactersListPresenterProtocol {
   func charactersCount() -> Int {
     charactersCountCalled += 1
     return cellViewModels.value.count
-  }
-
-  func getCharacter(at index: Int) -> CharacterResult {
-    let viewModel = cellViewModels.value[index]
-    let character = CharacterResult(name: viewModel.title, imageUrl: viewModel.imgViewUrl)
-    return character
   }
 
   // Async calls

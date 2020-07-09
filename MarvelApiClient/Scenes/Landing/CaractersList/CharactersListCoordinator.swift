@@ -74,7 +74,7 @@ extension CharactersListCoordinator: Coordinator, DeepLinkable {
         print("Invalid deepLink url")
         return
       }
-      presenter.getCharacter(with: id){
+      presenter.getCharacter(with: id){ // TODO fare con il binding
         DispatchQueue.main.sync{
           let viewController = CharacterDetailViewController.instantiateViewController()
           viewController.presenter = presenter

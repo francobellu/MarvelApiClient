@@ -21,7 +21,6 @@ protocol CharactersListPresenterProtocol: class {
   func charactersCount() -> Int
 
   // Async calls
-  func getCharacter(at index: Int) -> CharacterResult
   func getNextCharactersList()
 
   // User Interaction

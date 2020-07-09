@@ -36,7 +36,7 @@ class CharactersListPresenter: CharactersListPresenterProtocol {
   var isLoading = Observable<Bool>(value: false)
 
 
-  private var characters: [CharacterResult] = []
+//  private var characters: [CharacterResult] = []
 
 
   init(dependencies: AppDependenciesProtocol, coordinatorDelegate: CharactersListCoordinatorDelegate, interactor: CharactersListInteractorProtocol) {
@@ -45,19 +45,20 @@ class CharactersListPresenter: CharactersListPresenterProtocol {
     self.interactor = interactor
   }
 
-  func getCharacter(at index: Int) -> CharacterResult {
-    return characters[index]
+  private func getCharacter(at index: Int) -> CharacterResult {
+    let viewModel = cellViewModels.value[index]
+    return CharacterResult(name: viewModel.title, imageUrl: viewModel.imgViewUrl)
   }
 
   func charactersCount() -> Int {
-    return characters.count
+    return cellViewModels.value.count
   }
 
   // MARK: - API FUNCTIONS
   func getNextCharactersList() {
     isLoading.value = true
     interactor.getNextCharactersList { [weak self] (characters: [CharacterResult]) in
-      self?.characters += characters
+//      self?.characters += characters
       self?.isLoading.value = false
       self?.buildViewModels(characters: characters)
     }
@@ -76,9 +77,9 @@ class CharactersListPresenter: CharactersListPresenterProtocol {
 
 // MARK: - FLOW CharactersListCoordinatorDelegate
 extension CharactersListPresenter{
-
   func didSelectCharacter(at index: Int) {
-    let character = getCharacter(at: index)
+    let viewModel = cellViewModels.value[index]
+    let character = CharacterResult(name: viewModel.title, imageUrl: viewModel.imgViewUrl)
     coordinatorDelegate.didSelect(character: character)
   }
 

@@ -37,7 +37,7 @@ class CharactersListPresenterTest: XCTestCase {
     // Given
     XCTAssert(sut.charactersCount() == 0 )
 
-    // TEST getNextCharactersList(at:)
+    // When
     sut.getNextCharactersList()
     XCTAssert(sut.charactersCount() == 20 )
 
