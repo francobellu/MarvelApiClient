@@ -105,7 +105,7 @@ class CharactersListViewController: UIViewController, StoryboardInstantiable {
 // MARK: - UITableViewDataSource
 extension CharactersListViewController: UITableViewDataSource {
   func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-    return presenter.charactersCount()
+    return presenter.cellViewModels.value.count
   }
 
   func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -119,7 +119,7 @@ extension CharactersListViewController: UITableViewDataSource {
     myCell.config(with: rowViewModel)
 
     // Check if the last row number is the same as the last current data element
-    if indexPath.row == presenter.charactersCount() - 1 {
+    if indexPath.row == presenter.cellViewModels.value.count - 1 {
       presenter.getNextCharactersList()
     }
     return myCell

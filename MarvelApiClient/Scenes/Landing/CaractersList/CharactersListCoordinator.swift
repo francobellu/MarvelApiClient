@@ -67,23 +67,14 @@ extension CharactersListCoordinator: Coordinator, DeepLinkable {
   private func presentCharacterDetailViewController(with characterId: String ) {
     let interactor = CharacterDetailInteractor(dependencies: dependencies)
 
-    let presenter = CharacterDetailPresenter(dependencies: self.dependencies, characterId: characterId, interactor: interactor)
+    let presenter = CharacterDetailPresenter(dependencies: self.dependencies, characterId: Int(characterId)!, interactor: interactor)
 
-    DispatchQueue.global(qos: .background).async{
-      guard let id = Int(characterId)  else {
-        print("Invalid deepLink url")
-        return
-      }
-      presenter.getCharacter(with: id){ // TODO fare con il binding
-        DispatchQueue.main.sync{
-          let viewController = CharacterDetailViewController.instantiateViewController()
-          viewController.presenter = presenter
-          (self.coordinatorPresenter as? UINavigationController)?.pushViewController(viewController, animated: true)
-        }
-      }
-    }
+    let viewController = CharacterDetailViewController.instantiateViewController()
+    viewController.presenter = presenter
+    (self.coordinatorPresenter as? UINavigationController)?.pushViewController(viewController, animated: true)
   }
 }
+
 
 // MARK: - VC transitions handling
 extension CharactersListCoordinator: CharactersListCoordinatorDelegate {

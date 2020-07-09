@@ -31,7 +31,7 @@ class MarvelApiClientTests: XCTestCase {
       XCTAssertNotNil(response)
       promise.fulfill()
     }
-    wait(for: [promise], timeout: 30)
+    wait(for: [promise], timeout: 100)
   }
 
   func testGetCharacter() throws {

@@ -9,16 +9,17 @@
 import Foundation
 
 class CharactersListPresenter: CharactersListPresenterProtocol {
+  // Observables
+  var title = Observable<String>(value: "Marvel Comics")
+  var cellViewModels =  Observable<[CharacterCellViewModel]>(value: [])
+  var isLoading = Observable<Bool>(value: false)
+
   weak var viewControllerDelegate: CharactersListPresenterToViewProtocol?
 
   func viewDidLoad() {
     viewControllerDelegate?.prepareView()
     getNextCharactersList()
   }
-
-  var didGetCharacter: ((CharacterResult) -> Void)?
-
-  var didGetNextCharactersList: (([CharacterResult]) -> Void)?
 
   private weak var coordinatorDelegate: CharactersListCoordinatorDelegate!  //swiftlint:disable:this implicitly_unwrapped_optional
 
@@ -29,15 +30,6 @@ class CharactersListPresenter: CharactersListPresenterProtocol {
   private var apiClient: MarvelApiProtocol{
     dependencies.marvelApiClient
   }
-
-  // Observables
-  var title = Observable<String>(value: "Marvel Comics")
-  var cellViewModels =  Observable<[CharacterCellViewModel]>(value: [])
-  var isLoading = Observable<Bool>(value: false)
-
-
-//  private var characters: [CharacterResult] = []
-
 
   init(dependencies: AppDependenciesProtocol, coordinatorDelegate: CharactersListCoordinatorDelegate, interactor: CharactersListInteractorProtocol) {
     self.dependencies = dependencies

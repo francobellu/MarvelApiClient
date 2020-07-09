@@ -10,5 +10,31 @@
             </PersistentString>
          </PersistentStrings>
       </ContextState>
+      <ContextState
+         contextName = "CharacterListViewControllerTests.testPrepareView():CharacterListViewControllerTests.swift">
+      </ContextState>
+      <ContextState
+         contextName = "CharactersListPresenterTest.testDidSelect():CharactersListPresenterTest.swift">
+      </ContextState>
+      <ContextState
+         contextName = "CharactersListViewController.setBackBtnInterceptMechanism():CharactersListViewController.swift">
+      </ContextState>
+      <ContextState
+         contextName = "CharactersListPresenterTest.test():CharactersListPresenterTests.swift">
+      </ContextState>
+      <ContextState
+         contextName = "getResponse&lt;A&gt;(from:completion:):TestUtils.swift">
+      </ContextState>
+      <ContextState
+         contextName = "CharactersListPresenterTest.setUpWithError():CharactersListPresenterTest.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "mockIterator">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "CharactersListInteractorTest.testSuccess():CharactersListInteractorTests.swift">
+      </ContextState>
    </ContextStates>
 </VariablesViewState>

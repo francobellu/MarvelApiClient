@@ -47,27 +47,26 @@ class MockURLSessionDataTask: URLSessionDataTaskProtocol {
   }
 }
 
-enum CoordinatorState: Equatable{
-  static func == (lhs: CoordinatorState, rhs: CoordinatorState) -> Bool {
-
-    switch (lhs, rhs) {
-    case (.none, .none):
-      return true
-    case (.didGoBack, .didGoBack):
-      return true
-    case (.didSelect(_), .didSelect(_)):
-      return true
-    default:
-      return false
-    }
-  }
-
-  case none
-  case didGoBack
-  case didSelect(character: CharacterResult)
-}
-
 class MockCharactersListCoordinatorDelegate:  CharactersListCoordinatorDelegate{
+  enum CoordinatorState: Equatable{
+    static func == (lhs: CoordinatorState, rhs: CoordinatorState) -> Bool {
+
+      switch (lhs, rhs) {
+      case (.none, .none):
+        return true
+      case (.didGoBack, .didGoBack):
+        return true
+      case (.didSelect(_), .didSelect(_)):
+        return true
+      default:
+        return false
+      }
+    }
+
+    case none
+    case didGoBack
+    case didSelect(character: CharacterResult)
+  }
   var coordinatorState: CoordinatorState = .none
 
   func didGoBack() {
@@ -141,19 +140,17 @@ class MockApiClient: MarvelApiProtocol{
   }
 }
 
-struct MockCharactersListInteractorData {
-  var mockCharactersResults: [CharacterResult]?
-}
-
 class MockCharactersListInteractor: CharactersListInteractorProtocol{
 
-  var mockCharactersListInteractorData = MockCharactersListInteractorData(mockCharactersResults: nil)
+  var mockCharactersListInteractorData:  [CharacterResult]?
 
   required init(dependencies: AppDependenciesProtocol) {
   }
 
   func getNextCharactersList(completion: @escaping ([CharacterResult]) -> Void) {
-    completion(mockCharactersListInteractorData.mockCharactersResults!)
+    DispatchQueue.global().async {
+      completion(self.mockCharactersListInteractorData!)
+    }
   }
 }
 

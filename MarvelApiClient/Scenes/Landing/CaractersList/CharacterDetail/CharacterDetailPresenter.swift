@@ -9,7 +9,7 @@
 import Foundation
 
 class CharacterDetailPresenter {
-  private var character: CharacterResult?
+  private var character = Observable<CharacterResult?>(value: nil)
 
   private var dependencies: AppDependenciesProtocol! // swiftlint:disable:this implicitly_unwrapped_optional
 
@@ -20,45 +20,46 @@ class CharacterDetailPresenter {
   }
 
   init(dependencies: AppDependenciesProtocol, character: CharacterResult) {
-    self.character = character
+    self.character.value = character
     self.dependencies = dependencies
   }
-
   /// Initializer used for deep linking
-  init(dependencies: AppDependenciesProtocol, characterId: String, interactor: CharacterDetailInteractorProtocol) {
+  init(dependencies: AppDependenciesProtocol, characterId: Int, interactor: CharacterDetailInteractorProtocol) {
     self.dependencies = dependencies
     self.interactor = interactor
+    self.getCharacter(with: characterId){
+    }
   }
 
   func getThumbnailUrl() -> URL? {
-    return character?.thumbnail?.url
+    return character.value?.thumbnail?.url
   }
 
   func getName() -> String {
-    guard let name = character?.name,
+    guard let name = character.value?.name,
               !name.isEmpty  else { return "Character Detail" }
     return name
   }
 
   func getDescription() -> String {
-    guard let description = character?.description,
+    guard let description = character.value?.description,
               !description.isEmpty else { return "No Description Available"}
     return description
   }
 
   func getComicsCount() -> String {
-    guard let comicsCount = character?.comics?.items?.count,
+    guard let comicsCount = character.value?.comics?.items?.count,
               comicsCount != 0 else { return "" }
     return "Comics available: \(comicsCount)"
   }
 
   func getSeriesCount() -> String {
-    guard let comicsCount = character?.series?.items?.count else { return "" }
+    guard let comicsCount = character.value?.series?.items?.count else { return "" }
     return "Series available: \(comicsCount)"
   }
 
   func getStoriesCount() -> String {
-    guard let comicsCount = character?.stories?.items?.count else { return "" }
+    guard let comicsCount = character.value?.stories?.items?.count else { return "" }
     return "Stories available: \(comicsCount)"
   }
 
@@ -66,7 +67,7 @@ class CharacterDetailPresenter {
   func getCharacter(with characterId: Int, completion: @escaping () -> Void) {
     guard let interactor = interactor else { return }
     interactor.getCharacter(with: characterId) { character in
-      self.character = character
+      self.character.value = character
       print("FB: character: \(String(describing: character))")
       completion()
     }

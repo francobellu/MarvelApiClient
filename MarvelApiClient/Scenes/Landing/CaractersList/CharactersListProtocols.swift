@@ -17,8 +17,8 @@ protocol CharactersListPresenterProtocol: class {
   // View life cycle
   func viewDidLoad()
 
-  // loca data getters
-  func charactersCount() -> Int
+  // Data source data
+//  func charactersCount() -> Int
 
   // Async calls
   func getNextCharactersList()

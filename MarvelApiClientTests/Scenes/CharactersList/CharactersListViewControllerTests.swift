@@ -278,7 +278,6 @@ final class CharacterListViewController_DataSourceTests: XCTestCase {
 
     // Then
     let numberOfRows = sut.tableView(tableViewMock2, numberOfRowsInSection: 0)
-    XCTAssertTrue( 1 == presenterMock.charactersCountCalled, line: #line)
     XCTAssertEqual(numberOfRows, 20, "Number of rows in table should match number of items in the presenter")
   }
 

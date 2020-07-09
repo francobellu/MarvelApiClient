@@ -135,3 +135,11 @@ So we take the flow control out of the viewcontroller making in fact the viewcon
 - Be able to select a character comic from the character detail screen and vice versa
 - Implement Error screens
 - Search comics and characters by name or other parameters.
+
+
+
+
+
+TODO:
+- Improve error handling: net /decoding errors should propagate back to the View which should handle them. (Initially with a dialog)
+- Interactor is not doing anything more that the ApiClient.
