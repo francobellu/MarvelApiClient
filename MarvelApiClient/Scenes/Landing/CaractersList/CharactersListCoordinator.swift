@@ -59,8 +59,6 @@ extension CharactersListCoordinator: Coordinator, DeepLinkable {
     let viewController = CharactersListViewController.instantiateViewController()
     viewController.presenter = presenter
 
-    presenter.viewControllerDelegate = viewController
-
     (coordinatorPresenter as? UINavigationController)?.pushViewController(viewController, animated: true)
   }
 

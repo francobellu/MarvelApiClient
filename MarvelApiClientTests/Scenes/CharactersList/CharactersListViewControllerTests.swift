@@ -9,31 +9,6 @@ import XCTest
 
 @testable import MarvelApiClient
 
-//final class CharacterListViewControllerTests1: XCTestCase {
-//
-//  var testCharacters: [CharacterResult] {
-//    getResults(from: mockContentData(for: "MockedResponseGetCharacters"))
-//  }
-//
-//  var sut: CharactersListViewController!
-//  var dataSourceMock: UITableViewDataSource!
-//
-//  override func setUpWithError() throws {
-//
-//    // SUT
-//    sut = CharactersListViewController.instantiateViewController()
-//    sut.loadViewIfNeeded()
-//
-//    // DataSource & Delegate Mock
-//    dataSourceMock = DelegateDatasourceMock()
-//  }
-//
-//  override func tearDownWithError() throws {
-//    sut = nil
-//    dataSourceMock = nil
-//  }
-//}
-
 final class CharactersListViewControllerTests: XCTestCase {
 
   var testCharacters: [CharacterResult] {
@@ -49,7 +24,10 @@ final class CharactersListViewControllerTests: XCTestCase {
 
     sut = CharactersListViewController.instantiateViewController()
     sut.presenter = presenterMock
+
+    XCTAssertTrue( presenterMock.viewDidLoad.value == false, line: #line)
     sut.loadViewIfNeeded()
+    XCTAssertTrue( presenterMock.viewDidLoad.value == true, line: #line)
   }
 
   override func tearDownWithError() throws {
@@ -68,13 +46,6 @@ final class CharactersListViewControllerTests: XCTestCase {
     XCTAssertNotNil(sut.tableView)
     XCTAssertNotNil(sut.activityIndicator)
   }
-
-//  // MARK: Life cycle
-//  func testViewDidLoadIsCalledFromViewDidLoad() {
-//    XCTAssertTrue( 1 == presenterMock.viewDidLoadCalled, line: #line)
-//
-//    XCTAssertTrue( sut.activityIndicator.isAnimating == true, line: #line)
-//  }
 
   // MARK: - Title
   func testTitleIsSet() {
@@ -363,6 +334,8 @@ final class CharacterListViewController_TableViewDelegateTests: XCTestCase {
 // MARK: Mocks
 
 class CharacterListPresenterMock: CharactersListPresenterProtocol {
+  var viewDidLoad: Observable<Bool> = Observable(value:false)
+
   var cellViewModels: Observable<[CharacterCellViewModel]>  = Observable(value:[])
   
   var title: Observable<String> = Observable.init(value:  "")
@@ -372,10 +345,6 @@ class CharacterListPresenterMock: CharactersListPresenterProtocol {
 
   var numberOfSections: Int = 1
 
-  // View life cycle
-  func viewDidLoad() {
-    viewDidLoadCalled += 1
-  }
 
   // Local data getters
   func charactersCount() -> Int {

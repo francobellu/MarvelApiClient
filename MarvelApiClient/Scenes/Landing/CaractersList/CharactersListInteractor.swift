@@ -8,10 +8,7 @@
 
 import Foundation
 
-protocol CharactersListInteractorProtocol {
-  init(dependencies: AppDependenciesProtocol)
-  func getNextCharactersList(completion: @escaping ([CharacterResult]) -> Void)
-}
+
 
 class CharactersListInteractor: CharactersListInteractorProtocol {
 

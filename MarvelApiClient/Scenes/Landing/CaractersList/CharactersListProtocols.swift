@@ -8,14 +8,17 @@
 
 import Foundation
 
-protocol CharactersListPresenterProtocol: class {
+// Presenter --> ViewController
+protocol CharactersListPresenterToViewProtocol: class{
+  func prepareView()
+}
 
+// Presenter --> ViewController
+protocol CharactersListPresenterProtocol: class {
+  var viewDidLoad: Observable<Bool>  { get set}
   var cellViewModels: Observable<[CharacterCellViewModel]>  { get set}
   var title: Observable<String> { get set}
   var isLoading: Observable<Bool> {get set }
-
-  // View life cycle
-  func viewDidLoad()
 
   // Data source data
 //  func charactersCount() -> Int
@@ -26,4 +29,10 @@ protocol CharactersListPresenterProtocol: class {
   // User Interaction
   func didSelectCharacter(at: Int)
   func didGoBack()
+}
+
+// Presenter --> Interactor
+protocol CharactersListInteractorProtocol {
+  init(dependencies: AppDependenciesProtocol)
+  func getNextCharactersList(completion: @escaping ([CharacterResult]) -> Void)
 }

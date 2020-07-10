@@ -8,18 +8,14 @@
 
 import Foundation
 
-class CharactersListPresenter: CharactersListPresenterProtocol {
+class CharactersListPresenter: CharactersListPresenterProtocol { 
+
   // Observables
+  var viewDidLoad = Observable<Bool>(value: false)
   var title = Observable<String>(value: "Marvel Comics")
   var cellViewModels =  Observable<[CharacterCellViewModel]>(value: [])
   var isLoading = Observable<Bool>(value: false)
 
-  weak var viewControllerDelegate: CharactersListPresenterToViewProtocol?
-
-  func viewDidLoad() {
-    viewControllerDelegate?.prepareView()
-    getNextCharactersList()
-  }
 
   private weak var coordinatorDelegate: CharactersListCoordinatorDelegate!  //swiftlint:disable:this implicitly_unwrapped_optional
 

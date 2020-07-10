@@ -8,12 +8,6 @@
 
 import UIKit
 
-protocol CharactersListPresenterToViewProtocol: class{
-
-  func prepareView()
-  func reloadTableViewClosure()
-}
-
 class CharactersListViewController: UIViewController, StoryboardInstantiable {
   var presenter: CharactersListPresenterProtocol! // swiftlint:disable:this implicitly_unwrapped_optional
 
@@ -31,7 +25,8 @@ class CharactersListViewController: UIViewController, StoryboardInstantiable {
     super.viewDidLoad()
 //    _ = self.tableView // call the lazy tableView
     initBinding()
-    presenter.viewDidLoad()
+    presenter.viewDidLoad.value = true
+
   }
 
   // Then handle the button selection
@@ -47,6 +42,12 @@ class CharactersListViewController: UIViewController, StoryboardInstantiable {
   }
 
   private func initBinding() {
+
+    // Title
+    presenter.viewDidLoad.valueChanged = { [weak self] (viewDidLoad) in
+      self?.prepareView()
+      self?.presenter.getNextCharactersList()
+    }
 
     // Title
     self.title = presenter.title.value
@@ -139,12 +140,6 @@ extension CharactersListViewController: UITableViewDelegate {
 
 // MARK: - CharactersListPresenterToViewProtocol
 extension CharactersListViewController: CharactersListPresenterToViewProtocol {
-  func reloadTableViewClosure(){
-    DispatchQueue.main.async {
-      self.tableView.reloadData()
-    }
-  }
-
   func prepareView(){
     setBackBtnInterceptMechanism()
   }
