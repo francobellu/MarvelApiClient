@@ -16,7 +16,7 @@ protocol CharactersListPresenterToViewProtocol: class{
 // Presenter --> ViewController
 protocol CharactersListPresenterProtocol: class {
   var viewDidLoad: Observable<Bool>  { get set}
-  var cellViewModels: Observable<[CharacterCellViewModel]>  { get set}
+  var cellPresentationModels: Observable<[CharacterCellPresentationModel]>  { get set}
   var title: Observable<String> { get set}
   var isLoading: Observable<Bool> {get set }
 
@@ -32,7 +32,7 @@ protocol CharactersListPresenterProtocol: class {
 }
 
 // Presenter --> Interactor
-protocol CharactersListInteractorProtocol {
+protocol GetCharactersListInteractorProtocol {
   init(dependencies: AppDependenciesProtocol)
-  func getNextCharactersList(completion: @escaping ([CharacterResult]) -> Void)
+  func execute(completion: @escaping ([CharacterResult]) -> Void)
 }

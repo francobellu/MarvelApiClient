@@ -34,7 +34,7 @@ class CharacterCell: UITableViewCell {
     super.setSelected(selected, animated: animated)
   }
 
-  func config(with characterCellViewModel: CharacterCellViewModel) {
+  func config(with characterCellViewModel: CharacterCellPresentationModel) {
     title.text = characterCellViewModel.title
     let placeholderImage = UIImage(named: "amour-0.jpg")
     imgView.af.setImage(withURL: characterCellViewModel.imgViewUrl, placeholderImage: placeholderImage, filter: nil)

@@ -56,7 +56,7 @@ class CharactersListViewController: UIViewController, StoryboardInstantiable {
     }
 
     // TableView
-    presenter.cellViewModels.valueChanged = { [weak self] (_) in
+    presenter.cellPresentationModels.valueChanged = { [weak self] (_) in
       DispatchQueue.main.async {
         self?.tableView.reloadData()
       }
@@ -106,28 +106,28 @@ class CharactersListViewController: UIViewController, StoryboardInstantiable {
 // MARK: - UITableViewDataSource
 extension CharactersListViewController: UITableViewDataSource {
   func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-    return presenter.cellViewModels.value.count
+    return presenter.cellPresentationModels.value.count
   }
 
   func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
 
     let cell = tableView.dequeueReusableCell(withIdentifier: R.reuseIdentifier.characterCellId.identifier, for: indexPath)
 
-    let rowViewModel = presenter.cellViewModels.value[indexPath.row]
+    let rowViewModel = presenter.cellPresentationModels.value[indexPath.row]
 
     guard let myCell = cell as? CharacterCell else{ fatalError()}
     _ = myCell.contentView
     myCell.config(with: rowViewModel)
 
     // Check if the last row number is the same as the last current data element
-    if indexPath.row == presenter.cellViewModels.value.count - 1 {
+    if indexPath.row == presenter.cellPresentationModels.value.count - 1 {
       presenter.getNextCharactersList()
     }
     return myCell
   }
 
   func numberOfSections(in tableView: UITableView) -> Int {
-    presenter.cellViewModels.value.count > 0 ? 1 : 0
+    presenter.cellPresentationModels.value.count > 0 ? 1 : 0
   }
 }
 

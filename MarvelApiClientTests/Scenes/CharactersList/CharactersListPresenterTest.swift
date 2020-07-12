@@ -11,6 +11,7 @@ import Foundation
 import XCTest
 @testable import MarvelApiClient
 
+/// Test the 4 bindings
 class CharactersListPresenterTest: XCTestCase {
   var sut: CharactersListPresenter! // swiftlint:disable:this implicitly_unwrapped_optional
   let mockAppDependencies = MockAppDependencies()
@@ -65,10 +66,10 @@ class CharactersListPresenterTest: XCTestCase {
   func testGetNextCharactersList() throws {
 
     // Given
-    XCTAssert(sut.cellViewModels.value.isEmpty )
+    XCTAssert(sut.cellPresentationModels.value.isEmpty )
 
     let exp = XCTestExpectation(description: "wait for list")
-    sut.cellViewModels.completion = {
+    sut.cellPresentationModels.completion = {
       exp.fulfill()
     }
 
@@ -77,16 +78,16 @@ class CharactersListPresenterTest: XCTestCase {
 
     // Then
     wait(for: [exp], timeout: 50)
-    print("FB: sut.cellViewModels.value.count: \(sut.cellViewModels.value.count)")
-    XCTAssert(sut.cellViewModels.value.count == 20 )
+    print("FB: sut.cellPresentationModels.value.count: \(sut.cellPresentationModels.value.count)")
+    XCTAssert(sut.cellPresentationModels.value.count == 20 )
   }
 
   func testDidSelect() throws{
     // Given
-    XCTAssert(sut.cellViewModels.value.isEmpty )
+    XCTAssert(sut.cellPresentationModels.value.isEmpty )
 
     let exp = XCTestExpectation(description: "wait for list")
-    sut.cellViewModels.completion = {
+    sut.cellPresentationModels.completion = {
       exp.fulfill()
     }
 
@@ -98,8 +99,8 @@ class CharactersListPresenterTest: XCTestCase {
 
     // Then
 
-    XCTAssert(sut.cellViewModels.value.count == 20 )
-    let viewModel = sut.cellViewModels.value[0]
+    XCTAssert(sut.cellPresentationModels.value.count == 20 )
+    let viewModel = sut.cellPresentationModels.value[0]
     let character = CharacterResult(name: viewModel.title, imageUrl: viewModel.imgViewUrl)
 
     XCTAssert(self.mockCoordinator.coordinatorState ==  .didSelect(character: character))
@@ -107,7 +108,7 @@ class CharactersListPresenterTest: XCTestCase {
 
   func testDidGoBack() throws {
       // Given
-      XCTAssert(sut.cellViewModels.value.isEmpty )
+      XCTAssert(sut.cellPresentationModels.value.isEmpty )
 
       // When
       self.sut.didGoBack()

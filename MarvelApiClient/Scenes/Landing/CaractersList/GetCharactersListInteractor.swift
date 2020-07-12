@@ -1,5 +1,5 @@
 //
-//  CharactersListInteractor.swift
+//  GetCharactersListInteractor.swift
 //  MarvelApiClient
 //
 //  Created by franco bellu on 20/05/2020.
@@ -10,7 +10,7 @@ import Foundation
 
 
 
-class CharactersListInteractor: CharactersListInteractorProtocol {
+class GetCharactersListInteractor: GetCharactersListInteractorProtocol {
 
   private var dependencies: AppDependenciesProtocol! // swiftlint:disable:this implicitly_unwrapped_optional
 
@@ -23,7 +23,7 @@ class CharactersListInteractor: CharactersListInteractorProtocol {
   }
 
   // MARK: - Business logic
-  func getNextCharactersList(completion: @escaping ([CharacterResult]) -> Void) {
+  func execute(completion: @escaping ([CharacterResult]) -> Void) {
     apiClient.getCharactersList { response in
 
       switch response {

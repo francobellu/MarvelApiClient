@@ -1,5 +1,5 @@
 //
-//  CharacterCellViewModel.swift
+//  CharacterCellPresentationModel.swift
 //  MarvelApiClient
 //
 //  Created by franco bellu on 06/07/2020.
@@ -9,7 +9,7 @@
 import Foundation
 
 
-class CharacterCellViewModel {
+class CharacterCellPresentationModel {
   var title: String
   var imgViewUrl: URL
   init(character: CharacterResult) {

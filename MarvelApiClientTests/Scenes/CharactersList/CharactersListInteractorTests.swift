@@ -12,7 +12,7 @@ import XCTest
 
 class CharactersListInteractorTest: XCTestCase {
 
-  var sut: CharactersListInteractor! // swiftlint:disable:this implicitly_unwrapped_optional
+  var sut: GetCharactersListInteractor! // swiftlint:disable:this implicitly_unwrapped_optional
 
   let mockAppDependencies = MockAppDependencies()
   var mockApiClient: MockApiClient!{
@@ -20,7 +20,7 @@ class CharactersListInteractorTest: XCTestCase {
   }
   
   override func setUpWithError() throws {
-    sut = CharactersListInteractor(dependencies: mockAppDependencies)
+    sut = GetCharactersListInteractor(dependencies: mockAppDependencies)
   }
 
   // MARK: - Business logic
@@ -33,7 +33,7 @@ class CharactersListInteractorTest: XCTestCase {
       return
     }
     XCTAssertTrue(data.results.count == 20 )
-    sut.getNextCharactersList { characters in
+    sut.execute { characters in
       XCTAssertNotNil(characters)
       XCTAssertNotNil(characters.count == data.results.count)
     }
@@ -41,8 +41,8 @@ class CharactersListInteractorTest: XCTestCase {
 
   func testFailure() throws {
     let response: MarvelResponse<CharacterResult> = getResponse(from: "MockedResponseGetCharacters")
-    XCTAssertFalse(response.code == 404)
-    sut.getNextCharactersList { characters in
+    XCTAssertTrue(response.code == 404)
+    sut.execute { characters in
     }
   }
 }
