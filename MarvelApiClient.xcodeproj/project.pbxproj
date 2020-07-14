@@ -233,7 +233,7 @@
 			isa = PBXGroup;
 			children = (
 				C70365E4247535C60005886F /* Architecture */,
-				C703660A24753DEA0005886F /* Scenes */,
+				C703660A24753DEA0005886F /* Scene Modules */,
 				287EBEEF2190ADE400BCCEE1 /* Services */,
 				28998EB9217F636A0037039B /* Utils */,
 				28998EBE217F636A0037039B /* Models */,
@@ -307,13 +307,13 @@
 			path = Architecture;
 			sourceTree = "<group>";
 		};
-		C703660A24753DEA0005886F /* Scenes */ = {
+		C703660A24753DEA0005886F /* Scene Modules */ = {
 			isa = PBXGroup;
 			children = (
 				C703660B24753DEA0005886F /* Landing */,
 				C703662324753DEA0005886F /* Onboarding */,
 			);
-			path = Scenes;
+			path = "Scene Modules";
 			sourceTree = "<group>";
 		};
 		C703660B24753DEA0005886F /* Landing */ = {
