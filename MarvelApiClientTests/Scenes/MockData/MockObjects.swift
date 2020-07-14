@@ -140,19 +140,6 @@ class MockApiClient: MarvelApiProtocol{
   }
 }
 
-class MockCharactersListInteractor: GetCharactersListInteractorProtocol{
-
-  var mockCharactersListInteractorData:  [CharacterResult]?
-
-  required init(dependencies: AppDependenciesProtocol) {
-  }
-
-  func execute(completion: @escaping ([CharacterResult]) -> Void) {
-    DispatchQueue.global().async {
-      completion(self.mockCharactersListInteractorData!)
-    }
-  }
-}
 
 struct MockCharacterDetailInteractorData {
   var mockCharacterDetailResult: CharacterResult?

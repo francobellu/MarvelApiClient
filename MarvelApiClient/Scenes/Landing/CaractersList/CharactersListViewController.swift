@@ -8,7 +8,39 @@
 
 import UIKit
 
-class CharactersListViewController: UIViewController, StoryboardInstantiable {
+// Presenter --> View
+protocol CharactersListPresenterToViewProtocol: class{
+  var viewDidLoadChanged: ((Bool) -> Void)? { get set }
+  var titleChanged: ((String) -> Void)? { get set }
+  var cellPresentationModelsChanged: (([CharacterCellPresentationModel]) -> Void)? { get set }
+  func isLoadingChanged(_: Bool)
+
+  func prepareView()
+}
+
+class CharactersListViewController: UIViewController, StoryboardInstantiable, CharactersListPresenterToViewProtocol {
+  // MARK: - CharactersListPresenterToViewProtocol
+  lazy var viewDidLoadChanged: ((Bool) -> Void)? = {  [weak self] (viewDidLoad) in
+    self?.prepareView()
+    self?.presenter.getNextCharactersList()
+  }
+
+  lazy var titleChanged: ((String) -> Void)? = {[weak self] (title) in
+      self?.title = title
+  }
+
+  lazy var cellPresentationModelsChanged: (([CharacterCellPresentationModel]) -> Void)? = { [weak self] (_) in
+    self?.tableView.reloadData()
+  }
+
+  func isLoadingChanged(_: Bool) {
+    self.updateLoadingStatus()
+  }
+
+  func prepareView(){
+    setBackBtnInterceptMechanism()
+  }
+
   var presenter: CharactersListPresenterProtocol! // swiftlint:disable:this implicitly_unwrapped_optional
 
   @IBOutlet weak var tableView: UITableView! {
@@ -23,10 +55,16 @@ class CharactersListViewController: UIViewController, StoryboardInstantiable {
 
   override func viewDidLoad() {
     super.viewDidLoad()
-//    _ = self.tableView // call the lazy tableView
-    initBinding()
-    presenter.viewDidLoad.value = true
 
+    initBinding()
+
+    // Title
+    self.title = presenter.title.value
+
+    // ActivityIndicator
+    updateLoadingStatus()
+
+    presenter.viewDidLoad.value = true
   }
 
   // Then handle the button selection
@@ -41,49 +79,33 @@ class CharactersListViewController: UIViewController, StoryboardInstantiable {
     }
   }
 
-  private func initBinding() {
+private func initBinding() {
+  // viewDidLoad
+  presenter.viewDidLoad.valueChanged = viewDidLoadChanged
 
-    // Title
-    presenter.viewDidLoad.valueChanged = { [weak self] (viewDidLoad) in
-      self?.prepareView()
-      self?.presenter.getNextCharactersList()
-    }
+  // Title
+  presenter.title.valueChanged = titleChanged
 
-    // Title
-    self.title = presenter.title.value
-    presenter.title.valueChanged = { [weak self] (title) in
-      self?.title = title
-    }
+  // TableView
+  presenter.cellPresentationModels.valueChanged = cellPresentationModelsChanged
 
-    // TableView
-    presenter.cellPresentationModels.valueChanged = { [weak self] (_) in
-      DispatchQueue.main.async {
-        self?.tableView.reloadData()
-      }
-    }
-
-    // ActivityIndicator
-    updateLoadingStatus()
-    presenter.isLoading.valueChanged = { [weak self] (isLoading) in
-      self?.updateLoadingStatus()
-    }
-  }
+  // ActivityIndicator
+  presenter.isLoading.valueChanged = isLoadingChanged
+}
 
   private func updateLoadingStatus(){
-    DispatchQueue.main.async {
-      let isLoading = self.presenter.isLoading
-      if isLoading.value {
-        self.activityIndicator.startAnimating()
-        UIView.animate(withDuration: 0.2, animations: {
-          self.tableView.alpha = 0.0
-        })
-      } else {
-        self.activityIndicator.stopAnimating()
-        UIView.animate(withDuration: 0.2, animations: {
-          self.tableView.alpha = 1.0
-        })
-      }
+    let isLoading = self.presenter.isLoading
+    var alpha: CGFloat = -1
+    if isLoading.value {
+      self.activityIndicator.startAnimating()
+      alpha = 0.0
+    } else {
+      self.activityIndicator.stopAnimating()
+      alpha = 1.0
     }
+    UIView.animate(withDuration: 0.2, animations: {
+      self.tableView.alpha = alpha
+    })
   }
 
   /// this technics loses the swipe right gesture to go back!!!
@@ -138,9 +160,3 @@ extension CharactersListViewController: UITableViewDelegate {
   }
 }
 
-// MARK: - CharactersListPresenterToViewProtocol
-extension CharactersListViewController: CharactersListPresenterToViewProtocol {
-  func prepareView(){
-    setBackBtnInterceptMechanism()
-  }
-}

@@ -9,8 +9,18 @@
 import Foundation
 
 
+protocol GetCharactersListInteractorInputPort{
+  var presenterDelegate: GetCharactersListInteractorOutputPort? { get set }
+  func execute()
+}
 
-class GetCharactersListInteractor: GetCharactersListInteractorProtocol {
+// Implemented in the Presentation Layer
+protocol GetCharactersListInteractorOutputPort: class{
+
+  var interactorCompletion: (([CharacterResult]) -> Void)? {get set}
+}
+
+class GetCharactersListInteractor: GetCharactersListInteractorInputPort{
 
   private var dependencies: AppDependenciesProtocol! // swiftlint:disable:this implicitly_unwrapped_optional
 
@@ -18,20 +28,23 @@ class GetCharactersListInteractor: GetCharactersListInteractorProtocol {
     dependencies.marvelApiClient
   }
 
+  weak var presenterDelegate: GetCharactersListInteractorOutputPort?
+
   required init(dependencies: AppDependenciesProtocol) {
     self.dependencies = dependencies
   }
 
   // MARK: - Business logic
-  func execute(completion: @escaping ([CharacterResult]) -> Void) {
+  func execute() {
     apiClient.getCharactersList { response in
 
       switch response {
       case .success(let dataContainer):
-        completion(dataContainer.results)
+        // completion is the interactor output port
+        self.presenterDelegate?.interactorCompletion?(dataContainer.results)
       case .failure(let error):
         print(error)
-        completion([CharacterResult]())
+        self.presenterDelegate?.interactorCompletion?([CharacterResult]())
       }
     }
   }

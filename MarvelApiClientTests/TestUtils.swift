@@ -14,7 +14,7 @@ import XCTest
 
 func getResponse<T: Decodable>(from file: String, completion: ( (MarvelResponse<T>,_ errorMessage: String?)->())? = nil  ) -> MarvelResponse<T> {
   var returnValue: MarvelResponse<T>
-  let testBundle = Bundle(for:  CharactersListInteractorTest.self)
+  let testBundle = Bundle(for:  CharactersListPresenterTest.self)
   guard let url = testBundle.url(forResource: file, withExtension: "json") else{
     fatalError()
     //      completion?(nil, "There is a problem in fetching the data")
@@ -37,7 +37,7 @@ func getResponse<T: Decodable>(from file: String, completion: ( (MarvelResponse<
 
 func getObjects<T: Decodable>(from file: String, completion: ( ([T],_ errorMessage: String?)->())? = nil  ) -> [T] {
   var returnValue: [T]
-  let testBundle = Bundle(for:  CharactersListInteractorTest.self)
+  let testBundle = Bundle(for:  CharactersListPresenterTest.self)
   guard let path = testBundle.path(forResource: file, ofType: "json") else{
     fatalError()
     //      completion?(nil, "There is a problem in fetching the data")

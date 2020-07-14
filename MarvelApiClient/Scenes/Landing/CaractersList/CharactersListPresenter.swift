@@ -8,16 +8,22 @@
 
 import Foundation
 
-class CharactersListPresenter: CharactersListPresenterProtocol {
+class CharactersListPresenter: CharactersListPresenterProtocol, GetCharactersListInteractorOutputPort {
+
 
   private weak var coordinatorDelegate: CharactersListCoordinatorDelegate!  //swiftlint:disable:this implicitly_unwrapped_optional
 
-  private var interactor: GetCharactersListInteractorProtocol
+  private var interactor: GetCharactersListInteractorInputPort
 
   private var dependencies: AppDependenciesProtocol! // swiftlint:disable:this implicitly_unwrapped_optional
 
   private var apiClient: MarvelApiProtocol{
     dependencies.marvelApiClient
+  }
+
+  lazy var interactorCompletion: (([CharacterResult]) -> Void)? = { characters in
+    self.isLoading.value = false
+    self.buildViewModels(characters: characters)
   }
 
   // Presentation Model Observables
@@ -26,7 +32,7 @@ class CharactersListPresenter: CharactersListPresenterProtocol {
   var cellPresentationModels =  Observable<[CharacterCellPresentationModel]>(value: [])
   var isLoading = Observable<Bool>(value: false)
 
-  init(dependencies: AppDependenciesProtocol, coordinatorDelegate: CharactersListCoordinatorDelegate, interactor: GetCharactersListInteractorProtocol) {
+  init(dependencies: AppDependenciesProtocol, coordinatorDelegate: CharactersListCoordinatorDelegate, interactor: GetCharactersListInteractorInputPort) {
     self.dependencies = dependencies
     self.coordinatorDelegate = coordinatorDelegate
     self.interactor = interactor
@@ -39,11 +45,7 @@ class CharactersListPresenter: CharactersListPresenterProtocol {
   // MARK: - API FUNCTIONS
   func getNextCharactersList() {
     isLoading.value = true
-    interactor.execute { [weak self] (characters: [CharacterResult]) in
-//      self?.characters += characters
-      self?.isLoading.value = false
-      self?.buildViewModels(characters: characters)
-    }
+    interactor.execute()
   }
 
   /// Arrange the sections/row view model and caregorize by date

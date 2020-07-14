@@ -8,27 +8,39 @@
 
 import Foundation
 
-// Presenter --> ViewController
-protocol CharactersListPresenterToViewProtocol: class{
-  func prepareView()
-}
+//// Presenter --> ViewController
+//protocol CharactersListPresenterToViewProtocol: class{
+//  var viewDidLoad: ((Bool) -> Void)? { get set }
+//  var changedTitle: ((String) -> Void)? { get set }
+//  var cellPresentationModels: (([CharacterCellPresentationModel]) -> Void)? { get set }
+//  var isLoading: ((Bool) -> Void)? { get set }
+//  
+//  func prepareView()
+//}
 
-// Presenter --> ViewController
+// Presenter
 protocol CharactersListPresenterProtocol: class {
+
+  // ViewController <--> Presenter
   var viewDidLoad: Observable<Bool>  { get set}
   var cellPresentationModels: Observable<[CharacterCellPresentationModel]>  { get set}
   var title: Observable<String> { get set}
   var isLoading: Observable<Bool> {get set }
 
+  // ViewController --> Presenter  TODO: should ViewController call directly the coord?
+  func didSelectCharacter(at: Int)
+  func didGoBack()
+
   // Data source data
 //  func charactersCount() -> Int
 
-  // Async calls
+  // Presenter --> Interactor
   func getNextCharactersList()
 
+  // Presenter <-- Interactor
+
   // User Interaction
-  func didSelectCharacter(at: Int)
-  func didGoBack()
+
 }
 
 // Presenter --> Interactor

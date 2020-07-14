@@ -53,9 +53,11 @@ final class CharactersListViewControllerTests: XCTestCase {
     // Given
     let titleExp = XCTestExpectation(description: "TitleIsSet")
 
-    presenterMock.title.completion = {
+    presenterMock.title.valueChanged = { [weak self] (title) in
+      self?.sut.title = title
       titleExp.fulfill()
     }
+
     let testTitle = "testTitle"
 
     // When
@@ -71,32 +73,39 @@ final class CharactersListViewControllerTests: XCTestCase {
 
     // Given
     let testIsLoadingFalse = false
-    let titleExp = XCTestExpectation(description: "IsLoading")
-    presenterMock.isLoading.completion = {
-      titleExp.fulfill()
+    sut.activityIndicator.startAnimating()
+    XCTAssertTrue( sut.activityIndicator.isAnimating == true, line: #line)
+    let isLoadingExp = XCTestExpectation(description: "IsLoading")
+
+    presenterMock.isLoading.valueChanged = { [weak self] (isLoading) in
+      self?.sut.isLoadingChanged(isLoading)
+      isLoadingExp.fulfill()
     }
 
     // When
     presenterMock.isLoading.value = testIsLoadingFalse
 
     // Then
-    wait(for: [titleExp], timeout: 5)
+    wait(for: [isLoadingExp], timeout: 5)
     XCTAssertTrue( sut.activityIndicator.isAnimating == false, line: #line)
   }
 
   func testActivityIndicator_setToTrue() {
     // Given
-    let testIsLoadingFalse = true
-    let titleExp = XCTestExpectation(description: "IsLoading")
-    presenterMock.isLoading.completion = {
-      titleExp.fulfill()
+    let testIsLoadingTrue = true
+    let isLoadingExp = XCTestExpectation(description: "IsLoading")
+    XCTAssertTrue( sut.activityIndicator.isAnimating == false, line: #line)
+
+    presenterMock.isLoading.valueChanged = { [weak self] (isLoading) in
+      self?.sut.isLoadingChanged(isLoading)
+      isLoadingExp.fulfill()
     }
 
     // When
-    presenterMock.isLoading.value = testIsLoadingFalse
+    presenterMock.isLoading.value = testIsLoadingTrue
 
     // Then
-    wait(for: [titleExp], timeout: 5)
+    wait(for: [isLoadingExp], timeout: 5)
     XCTAssertTrue( sut.activityIndicator.isAnimating == true, line: #line)
   }
 
@@ -152,14 +161,18 @@ final class CharactersListViewControllerTests: XCTestCase {
     // Given
     let tableViewMock = UITableView()
 
-    presenterMock.cellPresentationModels.value = testCharacters.map{ CharacterCellPresentationModel(character: $0) }
+    let isLoadingExp = XCTestExpectation(description: "IsLoading")
 
-    // prepare the test data
-    presenterMock.testCharacterCellViewModel = testCharacters.map{ CharacterCellPresentationModel(character: $0) }
+    presenterMock.cellPresentationModels.valueChanged = { [weak self] (cellPresentationModels) in
+      tableViewMock.reloadData()
+      isLoadingExp.fulfill()
+    }
 
     // When
+    presenterMock.cellPresentationModels.value = testCharacters.map{ CharacterCellPresentationModel(character: $0) }
 
     // Then
+    wait(for: [isLoadingExp], timeout: 5)
     let count = sut.tableView(tableViewMock, numberOfRowsInSection: 0)
     XCTAssertTrue( count == 20, line: #line)
   }
@@ -198,16 +211,7 @@ final class CharactersListViewControllerTests: XCTestCase {
     let count = sut.tableView(tableViewMock, numberOfRowsInSection: 0)
     XCTAssertTrue( count == 20, line: #line)
   }
-
-
-  // MARK: UI sub components
-  //  func testActivityIndicator() {
-  //    s
-  //    presenter.didSelectCharacter(at: 0)
-  //    XCTAssertTrue( 1 == presenter., file: #filePath, line: #line)
-  //  }
 }
-
 
 final class CharacterListViewController_DataSourceTests: XCTestCase {
   var sut: UITableViewDataSource!

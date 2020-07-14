@@ -10,12 +10,11 @@ import Foundation
 
 
 class Observable<T> {
-  var completion: (() -> Void)?
   var value: T {
     didSet {
+      print("FB value did set: \(value)")
       DispatchQueue.main.async {
         self.valueChanged?(self.value)
-        self.completion?()
       }
     }
   }
