@@ -163,7 +163,7 @@ final class CharactersListViewControllerTests: XCTestCase {
 
     let isLoadingExp = XCTestExpectation(description: "IsLoading")
 
-    presenterMock.cellPresentationModels.valueChanged = { [weak self] (cellPresentationModels) in
+    presenterMock.cellPresentationModels.valueChanged = {  (cellPresentationModels) in
       tableViewMock.reloadData()
       isLoadingExp.fulfill()
     }

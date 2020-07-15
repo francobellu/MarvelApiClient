@@ -43,8 +43,8 @@ protocol CharactersListPresenterProtocol: class {
 
 }
 
-// Presenter --> Interactor
-protocol GetCharactersListInteractorProtocol {
-  init(dependencies: AppDependenciesProtocol)
-  func execute(completion: @escaping ([CharacterResult]) -> Void)
-}
+//// Presenter --> Interactor
+//protocol GetCharactersListInteractorProtocol {
+//  init(dependencies: AppDependenciesProtocol)
+//  func execute(completion: @escaping ([CharacterResult]) -> Void)
+//}

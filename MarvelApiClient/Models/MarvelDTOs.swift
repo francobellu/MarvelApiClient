@@ -24,7 +24,11 @@ struct DataContainer<Results: Decodable>: Decodable {
 }
 
 // MARK: - Result
-struct CharacterResult: Codable {
+struct CharacterResult: Codable, Equatable {
+  static func == (lhs: CharacterResult, rhs: CharacterResult) -> Bool {
+    lhs.id == rhs.id
+  }
+
   let id: Int?
   let name: String?
   let description: String?

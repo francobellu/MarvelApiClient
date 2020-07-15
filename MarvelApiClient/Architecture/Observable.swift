@@ -12,7 +12,7 @@ import Foundation
 class Observable<T> {
   var value: T {
     didSet {
-      print("FB value did set: \(value)")
+//      print("FB value did set: \(value)")
       DispatchQueue.main.async {
         self.valueChanged?(self.value)
       }

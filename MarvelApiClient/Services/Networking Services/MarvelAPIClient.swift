@@ -19,12 +19,20 @@ internal class MarvelApiClient {
     self.restApiClient = restApiClient
 
   }
+  func executeRequestLogic(count: Int){
+    // Reset the offset for the next data query
+    self.offset += self.limit
+    // Check if this was the last of the data
+    if count < self.limit {
+      self.reachedEndOfItems = true
+      print("reached end of data. Batch count: \(count)")
+    }
+  }
 }
 
 // Exposed API
 extension MarvelApiClient: MarvelApiProtocol {
    func getCharactersList(completion: @escaping (Result<DataContainer<GetCharacters.Response>, Error>) -> Void) {
-
 
     // Get the first <limit> characters
     restApiClient.send(GetCharacters(limit: limit, offset: 0) ) { result in
@@ -33,19 +41,11 @@ extension MarvelApiClient: MarvelApiProtocol {
 
       switch result {
       case .success(let dataContainer):
-        // 4) Reset the offset for the next data query
-        self.offset += self.limit
-
-        // 5) check if this was the last of the data
-        if dataContainer.results.count < self.limit {
-          self.reachedEndOfItems = true
-          print("reached end of data. Batch count: \(dataContainer.results.count)")
-        }
-        completion(result)
+        self.executeRequestLogic(count: dataContainer.results.count)
       case .failure(let error):
         print(error)
-        completion(result)
       }
+      completion(result)
     }
   }
 

@@ -10,7 +10,7 @@ import Foundation
 
 class LandingPresenter {
 
-  private weak var coordinatorDelegate: LandingCoordinatorDelegate! //swiftlint:disable:this implicitly_unwrapped_optional
+  private unowned var coordinatorDelegate: LandingCoordinatorDelegate
 
   private var dependencies: AppDependenciesProtocol! // swiftlint:disable:this implicitly_unwrapped_optional
 

@@ -8,44 +8,59 @@
 
 import Foundation
 
-
-protocol GetCharactersListInteractorInputPort{
-  var presenterDelegate: GetCharactersListInteractorOutputPort? { get set }
+//  PRESENTER INPUT
+protocol GetCharactersListInteractorInputPort: class{
   func execute()
 }
 
-// Implemented in the Presentation Layer
+//  PRESENTER OUTPUT
 protocol GetCharactersListInteractorOutputPort: class{
-
-  var interactorCompletion: (([CharacterResult]) -> Void)? {get set}
+  func domainData(result: Result<DataContainer<GetCharacters.Response>, Error>)
 }
 
-class GetCharactersListInteractor: GetCharactersListInteractorInputPort{
+private protocol GetCharactersListInteractorProtocol: class{
+  init(dependencies: AppDependenciesProtocol)
+  func handle(result: Result<DataContainer<GetCharacters.Response>, Error>)
+}
 
+class GetCharactersListInteractor{
   private var dependencies: AppDependenciesProtocol! // swiftlint:disable:this implicitly_unwrapped_optional
 
   private var apiClient: MarvelApiProtocol{
     dependencies.marvelApiClient
   }
 
-  weak var presenterDelegate: GetCharactersListInteractorOutputPort?
+  weak var output: GetCharactersListInteractorOutputPort?
 
   required init(dependencies: AppDependenciesProtocol) {
     self.dependencies = dependencies
   }
+}
+
+extension GetCharactersListInteractor: GetCharactersListInteractorInputPort{
 
   // MARK: - Business logic
   func execute() {
-    apiClient.getCharactersList { response in
+    getCharactersList()
+  }
+}
 
-      switch response {
-      case .success(let dataContainer):
-        // completion is the interactor output port
-        self.presenterDelegate?.interactorCompletion?(dataContainer.results)
-      case .failure(let error):
-        print(error)
-        self.presenterDelegate?.interactorCompletion?([CharacterResult]())
-      }
+// MARK: - PRIVATE functions
+extension GetCharactersListInteractor{
+  private func getCharactersList() {
+    apiClient.getCharactersList { result in
+      self.handle(result: result)
+    }
+  }
+
+  fileprivate func handle(result: Result<DataContainer<GetCharacters.Response>, Error>){
+    switch result {
+    case .success(_):
+      // completion is the interactor output port
+      self.output?.domainData(result: result)
+    case .failure(let error):
+      print(error)
+      self.output?.domainData(result: result)
     }
   }
 }

@@ -8,9 +8,7 @@
 
 import Foundation
 
-class CharactersListPresenter: CharactersListPresenterProtocol, GetCharactersListInteractorOutputPort {
-
-
+class CharactersListPresenter: CharactersListPresenterProtocol {
   private weak var coordinatorDelegate: CharactersListCoordinatorDelegate!  //swiftlint:disable:this implicitly_unwrapped_optional
 
   private var interactor: GetCharactersListInteractorInputPort
@@ -19,11 +17,6 @@ class CharactersListPresenter: CharactersListPresenterProtocol, GetCharactersLis
 
   private var apiClient: MarvelApiProtocol{
     dependencies.marvelApiClient
-  }
-
-  lazy var interactorCompletion: (([CharacterResult]) -> Void)? = { characters in
-    self.isLoading.value = false
-    self.buildViewModels(characters: characters)
   }
 
   // Presentation Model Observables
@@ -49,7 +42,7 @@ class CharactersListPresenter: CharactersListPresenterProtocol, GetCharactersLis
   }
 
   /// Arrange the sections/row view model and caregorize by date
-  func buildViewModels(characters: [CharacterResult]) {
+  func buildViewModels(from characters: [CharacterResult]) {
     var cellPresentationModels = [CharacterCellPresentationModel]()
     for character in characters {
       let characterCellViewModel: CharacterCellPresentationModel = CharacterCellPresentationModel(character: character)
@@ -69,5 +62,19 @@ extension CharactersListPresenter{
 
   func didGoBack() {
     coordinatorDelegate.didGoBack()
+  }
+}
+
+// MARK: - GetCharactersListInteractorOutputPort
+extension CharactersListPresenter: GetCharactersListInteractorOutputPort{
+  func domainData(result: Result<DataContainer<GetCharacters.Response>, Error>) {
+    switch result {
+    case .success(let dataContainer):
+      self.isLoading.value = false
+      self.buildViewModels(from: dataContainer.results)
+    case .failure(let error):
+      print(error)
+      // Hanlde Errors
+    }
   }
 }

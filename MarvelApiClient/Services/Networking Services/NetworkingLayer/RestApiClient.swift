@@ -37,7 +37,7 @@ class RestApiClient {
   }
 
   /// Sends a request to Marvel servers, calling the completion method when finished
-  internal func send<T: APIRequest>(_ request: T, completion: @escaping ResultCallback<DataContainer<T.Response>>) {
+  func send<T: APIRequest>(_ request: T, completion: @escaping ResultCallback<DataContainer<T.Response>>) {
     // swiftlint:disable:previous function_body_length
     // CREATE THE URL INCLUDING THE PARAMETERS
     guard let endpoint = request.endpoint() else { return }
@@ -53,7 +53,8 @@ class RestApiClient {
                  // try to read out a string array
 
           let marvelResponse = try JSONDecoder().decode(MarvelResponse<T.Response>.self, from: data)
-          dump(marvelResponse)
+          print("FB: marvelResponse: \(marvelResponse)")
+//          dump(marvelResponse)
           if let dataContainer = marvelResponse.data {
             completion(.success(dataContainer))
             //self.offset +=  self.limit

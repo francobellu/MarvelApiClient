@@ -159,4 +159,3 @@ extension CharactersListViewController: UITableViewDelegate {
      presenter.didSelectCharacter(at: indexPath.row)
   }
 }
-
