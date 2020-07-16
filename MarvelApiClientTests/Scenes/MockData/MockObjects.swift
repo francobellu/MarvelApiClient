@@ -78,7 +78,7 @@ class MockCharactersListCoordinatorDelegate:  CharactersListCoordinatorDelegate{
   }
 }
 
-class MockAppDependencies: AppDependenciesProtocol {
+class AppDependenciesDummy: AppDependenciesProtocol {
   // MARK: - All the app dependencies
 
   let mockData: String = ""

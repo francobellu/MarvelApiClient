@@ -13,11 +13,11 @@ import XCTest
 
 class CharacterDetailPresenterTest: XCTestCase {
   var sut: CharacterDetailPresenter! // swiftlint:disable:this implicitly_unwrapped_optional
-  let mockAppDependencies = MockAppDependencies()
+  let appDependenciesDummy = AppDependenciesDummy()
   var mockIterator: MockCharacterDetailInteractor!
 
   override func setUpWithError() throws {
-    mockIterator = MockCharacterDetailInteractor(dependencies: mockAppDependencies)
+    mockIterator = MockCharacterDetailInteractor(dependencies: appDependenciesDummy)
   }
 
   /// TEST  sut creation using  init(dependencies: AppDependenciesProtocol, characterId: String)
@@ -29,7 +29,7 @@ class CharacterDetailPresenterTest: XCTestCase {
     let testResults: [CharacterResult] = getObjects(from: "MockedResponseGetCharacters")
     let testResult = testResults.first!
     mockIterator.mockCharacterDetailInteractorData.mockCharacterDetailResult = testResult
-    sut = CharacterDetailPresenter(dependencies: mockAppDependencies,
+    sut = CharacterDetailPresenter(dependencies: appDependenciesDummy,
                                    characterId: Int(testResult.id!),
                                    interactor: mockIterator)
     XCTAssert(self.sut.getName() == testResult.name )

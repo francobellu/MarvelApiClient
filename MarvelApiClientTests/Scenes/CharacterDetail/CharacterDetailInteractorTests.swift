@@ -13,13 +13,13 @@ import XCTest
 class CharacterDetailInteractorTest: XCTestCase {
   var sut: CharacterDetailInteractor! // swiftlint:disable:this implicitly_unwrapped_optional
 
-  let mockAppDependencies = MockAppDependencies()
+  let appDependenciesDummy = AppDependenciesDummy()
   let mockCoordinator =  MockCharactersListCoordinatorDelegate()
   var mockApiClient: MockApiClient!
 
   override func setUpWithError() throws {
-    mockApiClient = mockAppDependencies.marvelApiClient as? MockApiClient
-    sut = CharacterDetailInteractor(dependencies: mockAppDependencies)
+    mockApiClient = appDependenciesDummy.marvelApiClient as? MockApiClient
+    sut = CharacterDetailInteractor(dependencies: appDependenciesDummy)
   }
 
   // MARK: - TEST Business logic
