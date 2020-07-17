@@ -8,8 +8,11 @@
 
 import Foundation
 
+class CharacterCellPresentationModel: Equatable {
+  static func == (lhs: CharacterCellPresentationModel, rhs: CharacterCellPresentationModel) -> Bool {
+    lhs.title == rhs.title
+  }
 
-class CharacterCellPresentationModel {
   var title: String
   var imgViewUrl: URL
   init(character: CharacterResult) {

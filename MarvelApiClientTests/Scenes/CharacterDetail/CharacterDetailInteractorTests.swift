@@ -14,7 +14,6 @@ class CharacterDetailInteractorTest: XCTestCase {
   var sut: CharacterDetailInteractor! // swiftlint:disable:this implicitly_unwrapped_optional
 
   let appDependenciesDummy = AppDependenciesDummy()
-  let mockCoordinator =  MockCharactersListCoordinatorDelegate()
   var mockApiClient: MockApiClient!
 
   override func setUpWithError() throws {
@@ -50,5 +49,20 @@ class CharacterDetailInteractorTest: XCTestCase {
       // TEST characters
       XCTAssertNil(characterResult)
     })
+  }
+}
+
+struct MockCharacterDetailInteractorData {
+  var mockCharacterDetailResult: CharacterResult?
+}
+
+class MockCharacterDetailInteractor: CharacterDetailInteractorProtocol{
+  var mockCharacterDetailInteractorData = MockCharacterDetailInteractorData(mockCharacterDetailResult: nil)
+
+  func getCharacter(with characterId: Int, completion: @escaping ((CharacterResult)?) -> Void) {
+    completion(mockCharacterDetailInteractorData.mockCharacterDetailResult!)
+  }
+
+  required init(dependencies: AppDependenciesProtocol) {
   }
 }

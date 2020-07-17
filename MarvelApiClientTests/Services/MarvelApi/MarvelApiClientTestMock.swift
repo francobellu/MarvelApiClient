@@ -17,7 +17,7 @@ class MarvelApiClientCharactersTestMock: XCTestCase {
   func testGetCharactersList() throws {
 
     let session = MockURLSession()
-    session.nextData = mockContentData(for: "MockedResponseGetCharacters")
+    session.nextData = mockResponseData(for: "MockedResponseGetCharacters")
     let restApiClient = RestApiClient(session: session)
     sut = MarvelApiClient(restApiClient: restApiClient)
 
@@ -43,7 +43,7 @@ class MarvelApiClientCharactersTestMock: XCTestCase {
   func testGetCharacter() throws {
 
     let session = MockURLSession()
-    session.nextData = mockContentData(for: "MockedResponseCharacterResultId1011334")
+    session.nextData = mockResponseData(for: "MockedResponseCharacterResultId1011334")
     let restApiClient = RestApiClient(session: session)
     sut = MarvelApiClient(restApiClient: restApiClient)
 

@@ -87,7 +87,7 @@ private func initBinding() {
   presenter.title.valueChanged = titleChanged
 
   // TableView
-  presenter.cellPresentationModels.valueChanged = cellPresentationModelsChanged
+  presenter.presentationModel.valueChanged = cellPresentationModelsChanged
 
   // ActivityIndicator
   presenter.isLoading.valueChanged = isLoadingChanged
@@ -128,28 +128,28 @@ private func initBinding() {
 // MARK: - UITableViewDataSource
 extension CharactersListViewController: UITableViewDataSource {
   func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-    return presenter.cellPresentationModels.value.count
+    return presenter.presentationModel.value.count
   }
 
   func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
 
     let cell = tableView.dequeueReusableCell(withIdentifier: R.reuseIdentifier.characterCellId.identifier, for: indexPath)
 
-    let rowViewModel = presenter.cellPresentationModels.value[indexPath.row]
+    let rowViewModel = presenter.presentationModel.value[indexPath.row]
 
     guard let myCell = cell as? CharacterCell else{ fatalError()}
     _ = myCell.contentView
     myCell.config(with: rowViewModel)
 
     // Check if the last row number is the same as the last current data element
-    if indexPath.row == presenter.cellPresentationModels.value.count - 1 {
+    if indexPath.row == presenter.presentationModel.value.count - 1 {
       presenter.getNextCharactersList()
     }
     return myCell
   }
 
   func numberOfSections(in tableView: UITableView) -> Int {
-    presenter.cellPresentationModels.value.count > 0 ? 1 : 0
+    presenter.presentationModel.value.count > 0 ? 1 : 0
   }
 }
 

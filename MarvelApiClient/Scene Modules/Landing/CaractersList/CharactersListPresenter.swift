@@ -8,6 +8,8 @@
 
 import Foundation
 
+let charactersListTitle = "Marvel Characters"
+
 class CharactersListPresenter: CharactersListPresenterProtocol {
   private weak var coordinatorDelegate: CharactersListCoordinatorDelegate!  //swiftlint:disable:this implicitly_unwrapped_optional
 
@@ -21,8 +23,8 @@ class CharactersListPresenter: CharactersListPresenterProtocol {
 
   // Presentation Model Observables
   var viewDidLoad = Observable<Bool>(value: false)
-  var title = Observable<String>(value: "Marvel Comics")
-  var cellPresentationModels =  Observable<[CharacterCellPresentationModel]>(value: [])
+  var title = Observable<String>(value: "Marvel Characters")
+  var presentationModel =  Observable<[CharacterCellPresentationModel]>(value: [])
   var isLoading = Observable<Bool>(value: false)
 
   init(dependencies: AppDependenciesProtocol, coordinatorDelegate: CharactersListCoordinatorDelegate, interactor: GetCharactersListInteractorInputPort) {
@@ -31,37 +33,31 @@ class CharactersListPresenter: CharactersListPresenterProtocol {
     self.interactor = interactor
   }
 
-  func charactersCount() -> Int {
-    return cellPresentationModels.value.count
-  }
-
   // MARK: - API FUNCTIONS
   func getNextCharactersList() {
     isLoading.value = true
     interactor.execute()
   }
 
-  /// Arrange the sections/row view model and caregorize by date
-  func buildViewModels(from characters: [CharacterResult]) {
-    var cellPresentationModels = [CharacterCellPresentationModel]()
-    for character in characters {
-      let characterCellViewModel: CharacterCellPresentationModel = CharacterCellPresentationModel(character: character)
-      cellPresentationModels.append(characterCellViewModel)
-    }
-    self.cellPresentationModels.value += cellPresentationModels
-  }
-}
-
-// MARK: - FLOW CharactersListCoordinatorDelegate
-extension CharactersListPresenter{
+  // MARK: - FLOW CharactersListCoordinatorDelegate
   func didSelectCharacter(at index: Int) {
-    let presentationModel = cellPresentationModels.value[index]
-    let character = CharacterResult(name: presentationModel.title, imageUrl: presentationModel.imgViewUrl)
+    let cellPresentationModel = presentationModel.value[index]
+    let character = CharacterResult(name: cellPresentationModel.title, imageUrl: cellPresentationModel.imgViewUrl)
     coordinatorDelegate.didSelect(character: character)
   }
 
   func didGoBack() {
     coordinatorDelegate.didGoBack()
+  }
+
+  /// Arrange the sections/row view model and caregorize by date
+  private func buildPresentationModel(from characters: [CharacterResult]) {
+    var cellPresentationModels = [CharacterCellPresentationModel]()
+    for character in characters {
+      let characterCellViewModel: CharacterCellPresentationModel = CharacterCellPresentationModel(character: character)
+      cellPresentationModels.append(characterCellViewModel)
+    }
+    self.presentationModel.value += cellPresentationModels
   }
 }
 
@@ -71,10 +67,19 @@ extension CharactersListPresenter: GetCharactersListInteractorOutputPort{
     switch result {
     case .success(let dataContainer):
       self.isLoading.value = false
-      self.buildViewModels(from: dataContainer.results)
+      self.buildPresentationModel(from: dataContainer.results)
     case .failure(let error):
       print(error)
       // Hanlde Errors
     }
   }
+}
+
+func buildPresentationModels(from characters: [CharacterResult]) -> [CharacterCellPresentationModel] {
+  var cellPresentationModels = [CharacterCellPresentationModel]()
+  for character in characters {
+    let characterCellViewModel: CharacterCellPresentationModel = CharacterCellPresentationModel(character: character)
+    cellPresentationModels.append(characterCellViewModel)
+  }
+  return cellPresentationModels
 }

@@ -23,24 +23,14 @@ protocol CharactersListPresenterProtocol: class {
 
   // ViewController <--> Presenter
   var viewDidLoad: Observable<Bool>  { get set}
-  var cellPresentationModels: Observable<[CharacterCellPresentationModel]>  { get set}
+  var presentationModel: Observable<[CharacterCellPresentationModel]>  { get set}
   var title: Observable<String> { get set}
   var isLoading: Observable<Bool> {get set }
 
-  // ViewController --> Presenter  TODO: should ViewController call directly the coord?
   func didSelectCharacter(at: Int)
+  
   func didGoBack()
-
-  // Data source data
-//  func charactersCount() -> Int
-
-  // Presenter --> Interactor
   func getNextCharactersList()
-
-  // Presenter <-- Interactor
-
-  // User Interaction
-
 }
 
 //// Presenter --> Interactor

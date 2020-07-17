@@ -55,7 +55,7 @@ extension GetCharactersListInteractor{
 
   fileprivate func handle(result: Result<DataContainer<GetCharacters.Response>, Error>){
     switch result {
-    case .success(_):
+    case .success:
       // completion is the interactor output port
       self.output?.domainData(result: result)
     case .failure(let error):

@@ -163,13 +163,13 @@ final class CharactersListViewControllerTests: XCTestCase {
 
     let isLoadingExp = XCTestExpectation(description: "IsLoading")
 
-    presenterMock.cellPresentationModels.valueChanged = {  (cellPresentationModels) in
+    presenterMock.presentationModel.valueChanged = {  (cellPresentationModels) in
       tableViewMock.reloadData()
       isLoadingExp.fulfill()
     }
 
     // When
-    presenterMock.cellPresentationModels.value = testCharacters.map{ CharacterCellPresentationModel(character: $0) }
+    presenterMock.presentationModel.value = testCharacters.map{ CharacterCellPresentationModel(character: $0) }
 
     // Then
     wait(for: [isLoadingExp], timeout: 5)
@@ -249,7 +249,7 @@ final class CharacterListViewController_DataSourceTests: XCTestCase {
     let tableViewMock2 = UITableView() // even more simple table view for this test
 
     // When
-    vc.presenter.cellPresentationModels.value = testCellsViewModel
+    vc.presenter.presentationModel.value = testCellsViewModel
 
     // Then
     let numberOfRows = sut.tableView(tableViewMock2, numberOfRowsInSection: 0)
@@ -260,7 +260,7 @@ final class CharacterListViewController_DataSourceTests: XCTestCase {
     // Given
 
     // When
-    vc.presenter.cellPresentationModels.value = []
+    vc.presenter.presentationModel.value = []
 
     // Then
     XCTAssertEqual(sut.numberOfSections!(in: tableViewMock), 0, "TableView should have zero sections when no items are present")
@@ -270,7 +270,7 @@ final class CharacterListViewController_DataSourceTests: XCTestCase {
     // Given
 
     // When
-    vc.presenter.cellPresentationModels.value = testCellsViewModel
+    vc.presenter.presentationModel.value = testCellsViewModel
 
     // Then
     XCTAssertEqual(sut.numberOfSections!(in: tableViewMock), 1, "TableView should have 1 sections when items are present")
@@ -281,7 +281,7 @@ final class CharacterListViewController_DataSourceTests: XCTestCase {
     // Given
 
     // When
-    vc.presenter.cellPresentationModels.value = testCellsViewModel
+    vc.presenter.presentationModel.value = testCellsViewModel
 
     // Then
     let cell = sut.tableView(tableViewMock, cellForRowAt: IndexPath(row: 0, section: 0)) as! CharacterCell
@@ -340,7 +340,7 @@ final class CharacterListViewController_TableViewDelegateTests: XCTestCase {
 class CharacterListPresenterMock: CharactersListPresenterProtocol {
   var viewDidLoad: Observable<Bool> = Observable(value:false)
 
-  var cellPresentationModels: Observable<[CharacterCellPresentationModel]>  = Observable(value:[])
+  var presentationModel: Observable<[CharacterCellPresentationModel]>  = Observable(value:[])
   
   var title: Observable<String> = Observable.init(value:  "")
   
@@ -353,13 +353,13 @@ class CharacterListPresenterMock: CharactersListPresenterProtocol {
   // Local data getters
   func charactersCount() -> Int {
     charactersCountCalled += 1
-    return cellPresentationModels.value.count
+    return presentationModel.value.count
   }
 
   // Async calls
   func getNextCharactersList() {
     getNextCharactersListCalled += 1
-    self.cellPresentationModels.value += self.testCharacterCellViewModel
+    self.presentationModel.value += self.testCharacterCellViewModel
   }
 
   // User Interaction
