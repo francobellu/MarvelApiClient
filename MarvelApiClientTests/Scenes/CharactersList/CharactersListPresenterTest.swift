@@ -179,6 +179,36 @@ class CharactersListPresenterTest: XCTestCase {
     XCTAssertEqual(presentationModelSpy, testValue)
   }
 
+  func testIsErrorBinding() throws {
+
+    // Given
+    var errorSpy =  MarvelError.none
+    XCTAssertFalse(sut.isLoading.value)
+    let testValue = MarvelError.noData
+
+    // Create async exp for the async interactor.getCharacters  operation
+    let presentationModelExp = XCTestExpectation(description: "Wait for Async binding callback for isLoading")
+
+    // Bind isLoading value change to a mock closure
+    sut.isError.valueChanged = { error in
+      guard let error = error else { fatalError()}
+      errorSpy = error as! MarvelError
+      presentationModelExp.fulfill()
+    }
+
+    // When
+    sut.isError.value = testValue
+
+    // Then
+    wait(for: [presentationModelExp], timeout: 5)  // wait for the  async MockCharactersListInteractor.execute()
+
+    // Assert the error is MarvelError.noData
+    guard case MarvelError.noData = errorSpy else{
+      XCTAssertTrue( false, "result should be MarvelError.noData")
+      return
+    }
+  }
+
   // Test 5.1
   // Test when calling domainData(result:) with success result, the presentationModel is correct
   func testDomainDataWithResultSuccess() throws {

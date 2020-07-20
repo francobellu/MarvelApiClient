@@ -8,15 +8,14 @@
 
 import Foundation
 
-//// Presenter --> ViewController
-//protocol CharactersListPresenterToViewProtocol: class{
-//  var viewDidLoad: ((Bool) -> Void)? { get set }
-//  var changedTitle: ((String) -> Void)? { get set }
-//  var cellPresentationModels: (([CharacterCellPresentationModel]) -> Void)? { get set }
-//  var isLoading: ((Bool) -> Void)? { get set }
-//  
-//  func prepareView()
-//}
+// Presenter --> View
+protocol DataBinding: class{
+  var viewDidLoadChanged: ((Bool) -> Void)? { get set }
+  var titleChanged: ((String) -> Void)? { get set }
+  var presentationModelChanged: (([CharacterCellPresentationModel]) -> Void)? { get set }
+  var isLoadingChanged: (( Bool) -> Void)? {get set}
+  var isErrorChanged: (( Error?) -> Void)? {get set}
+}
 
 // Presenter
 protocol CharactersListPresenterProtocol: class {
@@ -26,6 +25,7 @@ protocol CharactersListPresenterProtocol: class {
   var presentationModel: Observable<[CharacterCellPresentationModel]>  { get set}
   var title: Observable<String> { get set}
   var isLoading: Observable<Bool> {get set }
+  var isError: Observable<Error?> {get set }
 
   func didSelectCharacter(at: Int)
   

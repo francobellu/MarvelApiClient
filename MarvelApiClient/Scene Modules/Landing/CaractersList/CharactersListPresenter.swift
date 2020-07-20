@@ -26,6 +26,7 @@ class CharactersListPresenter: CharactersListPresenterProtocol {
   var title = Observable<String>(value: "Marvel Characters")
   var presentationModel =  Observable<[CharacterCellPresentationModel]>(value: [])
   var isLoading = Observable<Bool>(value: false)
+  var isError = Observable<Error?>(value: nil)
 
   init(dependencies: AppDependenciesProtocol, coordinatorDelegate: CharactersListCoordinatorDelegate, interactor: GetCharactersListInteractorInputPort) {
     self.dependencies = dependencies
@@ -70,6 +71,7 @@ extension CharactersListPresenter: GetCharactersListInteractorOutputPort{
       self.buildPresentationModel(from: dataContainer.results)
     case .failure(let error):
       print(error)
+      self.isError.value = error
       // Hanlde Errors
     }
   }

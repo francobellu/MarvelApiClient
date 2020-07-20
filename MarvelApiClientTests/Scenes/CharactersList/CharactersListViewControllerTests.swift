@@ -140,7 +140,7 @@ final class CharactersListViewControllerTests: XCTestCase {
 //  }
 
   func testTableViewDataSourceIsCharactersListPresenterToViewProtocol() {
-      XCTAssertTrue(sut.tableView.dataSource is CharactersListPresenterToViewProtocol,
+      XCTAssertTrue(sut.tableView.dataSource is DataBinding,
                     "TableView's data source should be a CharactersListPresenterToViewProtocol")
   }
 
@@ -346,9 +346,9 @@ class CharacterListPresenterMock: CharactersListPresenterProtocol {
   
   var isLoading: Observable<Bool> = Observable.init(value: false)
   
+  var isError: Observable<Error?> = Observable(value: nil)
 
   var numberOfSections: Int = 1
-
 
   // Local data getters
   func charactersCount() -> Int {

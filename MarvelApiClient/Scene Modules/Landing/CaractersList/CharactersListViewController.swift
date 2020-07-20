@@ -8,17 +8,7 @@
 
 import UIKit
 
-// Presenter --> View
-protocol CharactersListPresenterToViewProtocol: class{
-  var viewDidLoadChanged: ((Bool) -> Void)? { get set }
-  var titleChanged: ((String) -> Void)? { get set }
-  var cellPresentationModelsChanged: (([CharacterCellPresentationModel]) -> Void)? { get set }
-  var isLoadingChanged: (( Bool) -> Void)? {get set}
-
-  var prepareView: () -> Void {get set}
-}
-
-class CharactersListViewController: UIViewController, StoryboardInstantiable, CharactersListPresenterToViewProtocol {
+class CharactersListViewController: UIViewController, StoryboardInstantiable, DataBinding {
   // MARK: - CharactersListPresenterToViewProtocol
   lazy var viewDidLoadChanged: ((Bool) -> Void)? = {  [weak self] (viewDidLoad) in
     self?.prepareView()
@@ -26,10 +16,10 @@ class CharactersListViewController: UIViewController, StoryboardInstantiable, Ch
   }
 
   lazy var titleChanged: ((String) -> Void)? = {[weak self] (title) in
-      self?.title = title
+    self?.title = title
   }
 
-  lazy var cellPresentationModelsChanged: (([CharacterCellPresentationModel]) -> Void)? = { [weak self] (_) in
+  lazy var presentationModelChanged: (([CharacterCellPresentationModel]) -> Void)? = { [weak self] (_) in
     self?.tableView.reloadData()
   }
 
@@ -37,18 +27,24 @@ class CharactersListViewController: UIViewController, StoryboardInstantiable, Ch
     self?.updateLoadingStatus()
   }
 
-  lazy var prepareView: (() -> Void) = { [weak self] in
-    self?.setBackBtnInterceptMechanism()
+  lazy var isErrorChanged: ((Error?) -> Void)? = { [weak self] (error: Error?) in
+    guard let error = error else{ fatalError()}
+    self?.showErrorAlert(error: error)
+  }
+
+  // MARK: -
+  func prepareView(){
+    setBackBtnInterceptMechanism()
   }
 
   var presenter: CharactersListPresenterProtocol! // swiftlint:disable:this implicitly_unwrapped_optional
 
   @IBOutlet weak var tableView: UITableView! {
-   didSet {
-     tableView.delegate = self
-     tableView.dataSource = self
-     tableView.register(UINib(nibName: R.nib.characterCell.name, bundle: nil), forCellReuseIdentifier: R.reuseIdentifier.characterCellId.identifier)
-   }
+    didSet {
+      tableView.delegate = self
+      tableView.dataSource = self
+      tableView.register(UINib(nibName: R.nib.characterCell.name, bundle: nil), forCellReuseIdentifier: R.reuseIdentifier.characterCellId.identifier)
+    }
   }
 
   @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
@@ -79,19 +75,22 @@ class CharactersListViewController: UIViewController, StoryboardInstantiable, Ch
     }
   }
 
-private func initBinding() {
-  // viewDidLoad
-  presenter.viewDidLoad.valueChanged = viewDidLoadChanged
+  private func initBinding() {
+    // viewDidLoad
+    presenter.viewDidLoad.valueChanged = viewDidLoadChanged
 
-  // Title
-  presenter.title.valueChanged = titleChanged
+    // Title
+    presenter.title.valueChanged = titleChanged
 
-  // TableView
-  presenter.presentationModel.valueChanged = cellPresentationModelsChanged
+    // TableView
+    presenter.presentationModel.valueChanged = presentationModelChanged
 
-  // ActivityIndicator
-  presenter.isLoading.valueChanged = isLoadingChanged
-}
+    // ActivityIndicator
+    presenter.isLoading.valueChanged = isLoadingChanged
+
+    // Error Dialog
+    presenter.isError.valueChanged = isErrorChanged
+  }
 
   private func updateLoadingStatus(){
     let isLoading = self.presenter.isLoading
@@ -156,6 +155,6 @@ extension CharactersListViewController: UITableViewDataSource {
 // MARK: - UITableViewDelegate
 extension CharactersListViewController: UITableViewDelegate {
   func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-     presenter.didSelectCharacter(at: indexPath.row)
+    presenter.didSelectCharacter(at: indexPath.row)
   }
 }
