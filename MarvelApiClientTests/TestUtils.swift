@@ -65,13 +65,9 @@ func getObjects<T: Decodable>(from file: String, completion: ( ([T],_ errorMessa
   return returnValue
 }
 
-//
-extension XCTestCase{
-  // Get a response data representation of a json file containing a marvel response
-  func mockResponseData(for name: String ) -> Data {
-      let testBundle = Bundle(for: type(of: self))
-      let path = testBundle.path(forResource: name, ofType: "json")!
-      let data = try! Data(contentsOf: URL(fileURLWithPath: path), options: .alwaysMapped )
-      return data
-  }
+func mockResponseData(for name: String ) -> Data {
+    let testBundle = Bundle(for:  GetCharactersListInteractorInputPortTest.self)
+    let path = testBundle.path(forResource: name, ofType: "json")!
+    let data = try! Data(contentsOf: URL(fileURLWithPath: path), options: .alwaysMapped )
+    return data
 }

@@ -13,9 +13,9 @@ protocol CharactersListPresenterToViewProtocol: class{
   var viewDidLoadChanged: ((Bool) -> Void)? { get set }
   var titleChanged: ((String) -> Void)? { get set }
   var cellPresentationModelsChanged: (([CharacterCellPresentationModel]) -> Void)? { get set }
-  func isLoadingChanged(_: Bool)
+  var isLoadingChanged: (( Bool) -> Void)? {get set}
 
-  func prepareView()
+  var prepareView: () -> Void {get set}
 }
 
 class CharactersListViewController: UIViewController, StoryboardInstantiable, CharactersListPresenterToViewProtocol {
@@ -33,12 +33,12 @@ class CharactersListViewController: UIViewController, StoryboardInstantiable, Ch
     self?.tableView.reloadData()
   }
 
-  func isLoadingChanged(_: Bool) {
-    self.updateLoadingStatus()
+  lazy var isLoadingChanged: ((Bool) -> Void)? = { [weak self] (isLoading) in
+    self?.updateLoadingStatus()
   }
 
-  func prepareView(){
-    setBackBtnInterceptMechanism()
+  lazy var prepareView: (() -> Void) = { [weak self] in
+    self?.setBackBtnInterceptMechanism()
   }
 
   var presenter: CharactersListPresenterProtocol! // swiftlint:disable:this implicitly_unwrapped_optional
