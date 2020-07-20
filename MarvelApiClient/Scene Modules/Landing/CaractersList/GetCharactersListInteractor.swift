@@ -30,7 +30,7 @@ class GetCharactersListInteractor{
     dependencies.marvelApiClient
   }
 
-  weak var output: GetCharactersListInteractorOutputPort?
+  weak var outputPort: GetCharactersListInteractorOutputPort?
 
   required init(dependencies: AppDependenciesProtocol) {
     self.dependencies = dependencies
@@ -57,10 +57,10 @@ extension GetCharactersListInteractor{
     switch result {
     case .success:
       // completion is the interactor output port
-      self.output?.domainData(result: result)
+      self.outputPort?.domainData(result: result)
     case .failure(let error):
       print(error)
-      self.output?.domainData(result: result)
+      self.outputPort?.domainData(result: result)
     }
   }
 }

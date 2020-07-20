@@ -56,7 +56,7 @@ extension CharactersListCoordinator: Coordinator, DeepLinkable {
 
     let presenter = CharactersListPresenter(dependencies: dependencies, coordinatorDelegate: self, interactor: interactor)
 
-    interactor.output = presenter
+    interactor.outputPort = presenter
 
     let viewController = CharactersListViewController.instantiateViewController()
     viewController.presenter = presenter

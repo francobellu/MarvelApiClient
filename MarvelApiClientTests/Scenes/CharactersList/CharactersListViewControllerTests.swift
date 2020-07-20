@@ -78,7 +78,7 @@ final class CharactersListViewControllerTests: XCTestCase {
     let isLoadingExp = XCTestExpectation(description: "IsLoading")
 
     presenterMock.isLoading.valueChanged = { [weak self] (isLoading) in
-      self?.sut.isLoadingChanged(isLoading)
+      self?.sut.isLoadingChanged!(isLoading)
       isLoadingExp.fulfill()
     }
 
@@ -97,7 +97,7 @@ final class CharactersListViewControllerTests: XCTestCase {
     XCTAssertTrue( sut.activityIndicator.isAnimating == false, line: #line)
 
     presenterMock.isLoading.valueChanged = { [weak self] (isLoading) in
-      self?.sut.isLoadingChanged(isLoading)
+      self?.sut.isLoadingChanged!(isLoading)
       isLoadingExp.fulfill()
     }
 
