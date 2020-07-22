@@ -73,11 +73,11 @@
 		C76B29A6243A5F1B00793179 /* MarvelApiClientIntegrationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C76B29A5243A5F1B00793179 /* MarvelApiClientIntegrationTests.swift */; };
 		C776993B24B31394003BE9BD /* CharacterCellPresentationModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C776993A24B31394003BE9BD /* CharacterCellPresentationModel.swift */; };
 		C776993D24B313BE003BE9BD /* Observable.swift in Sources */ = {isa = PBXBuildFile; fileRef = C776993C24B313BE003BE9BD /* Observable.swift */; };
+		C787673824C75AAF00D43553 /* AlamofireImage in Frameworks */ = {isa = PBXBuildFile; productRef = C787673724C75AAF00D43553 /* AlamofireImage */; };
 		C7887B7D24C6196000EAEB1F /* UIViewController +  ErrorDialog.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7887B7C24C6196000EAEB1F /* UIViewController +  ErrorDialog.swift */; };
 		C78A83F5244B8AD6004DE930 /* GetCharacter.swift in Sources */ = {isa = PBXBuildFile; fileRef = C78A83F4244B8AD6004DE930 /* GetCharacter.swift */; };
 		C7BE8B8924AF5F0D00B8A569 /* CharactersListViewControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7BE8B8824AF5F0D00B8A569 /* CharactersListViewControllerTests.swift */; };
 		C7BE8B8B24AF603400B8A569 /* CharactersListProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7BE8B8A24AF603400B8A569 /* CharactersListProtocols.swift */; };
-		C7C170D724AF4FDC0083B41E /* AlamofireImage in Frameworks */ = {isa = PBXBuildFile; productRef = C7C170D624AF4FDC0083B41E /* AlamofireImage */; };
 		C7D3F040243B770F004E4C0E /* Coordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7D3F03F243B770F004E4C0E /* Coordinator.swift */; };
 		C7E02812243FD4DB00888249 /* AppCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7E02811243FD4DB00888249 /* AppCoordinator.swift */; };
 		C7EC670A2440DFDB00F88FDE /* R.generated.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7EC67082440DFDB00F88FDE /* R.generated.swift */; };
@@ -189,7 +189,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				6713D79A83C952EAF643E4EA /* Pods_MarvelApiClient.framework in Frameworks */,
-				C7C170D724AF4FDC0083B41E /* AlamofireImage in Frameworks */,
+				C787673824C75AAF00D43553 /* AlamofireImage in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -583,7 +583,7 @@
 			);
 			name = MarvelApiClient;
 			packageProductDependencies = (
-				C7C170D624AF4FDC0083B41E /* AlamofireImage */,
+				C787673724C75AAF00D43553 /* AlamofireImage */,
 			);
 			productName = ApiLayer;
 			productReference = 287C9A06217F39CB00D63092 /* MarvelApiClient.app */;
@@ -638,7 +638,7 @@
 			);
 			mainGroup = 287C99FD217F39CB00D63092;
 			packageReferences = (
-				C7C170D524AF4FDC0083B41E /* XCRemoteSwiftPackageReference "AlamofireImage" */,
+				C787673624C75AAF00D43553 /* XCRemoteSwiftPackageReference "AlamofireImage" */,
 			);
 			productRefGroup = 287C9A07217F39CB00D63092 /* Products */;
 			projectDirPath = "";
@@ -1159,20 +1159,20 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
-		C7C170D524AF4FDC0083B41E /* XCRemoteSwiftPackageReference "AlamofireImage" */ = {
+		C787673624C75AAF00D43553 /* XCRemoteSwiftPackageReference "AlamofireImage" */ = {
 			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "git@github.com:Alamofire/AlamofireImage.git";
+			repositoryURL = "https://github.com/Alamofire/AlamofireImage.git";
 			requirement = {
-				branch = master;
-				kind = branch;
+				kind = upToNextMajorVersion;
+				minimumVersion = 4.1.0;
 			};
 		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		C7C170D624AF4FDC0083B41E /* AlamofireImage */ = {
+		C787673724C75AAF00D43553 /* AlamofireImage */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = C7C170D524AF4FDC0083B41E /* XCRemoteSwiftPackageReference "AlamofireImage" */;
+			package = C787673624C75AAF00D43553 /* XCRemoteSwiftPackageReference "AlamofireImage" */;
 			productName = AlamofireImage;
 		};
 /* End XCSwiftPackageProductDependency section */

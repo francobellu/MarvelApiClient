@@ -46,18 +46,14 @@ class RestApiClient {
     let task = session.dataTask(with: URLRequest(url: endpoint)) { data, _, error in
       if let data = data {
         do {
-          // Decode the top level response, and look up the decoded response to see
-          // if it's a success or a failure
-
-          //let marvelResponse = try JSONSerialization.jsonObject(with: data, options: []) as? [String: Any]
-                 // try to read out a string array
-
+          // debug: print json data before to decode
+          print(data)
+          let jsonData = try JSONSerialization.jsonObject(with: data, options: .mutableContainers)
+          print("Data: \(data),  json: \(jsonData)")
           let marvelResponse = try JSONDecoder().decode(MarvelResponse<T.Response>.self, from: data)
           print("FB: marvelResponse: \(marvelResponse)")
-//          dump(marvelResponse)
           if let dataContainer = marvelResponse.data {
             completion(.success(dataContainer))
-            //self.offset +=  self.limit
           } else {
             completion(.failure(MarvelError.decoding))
           }
