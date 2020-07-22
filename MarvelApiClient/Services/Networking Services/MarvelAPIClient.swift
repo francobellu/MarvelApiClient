@@ -1,6 +1,5 @@
 import Foundation
 
-
 /// Implementation of a generic-based Marvel API client
 class MarvelApiClient {
 
@@ -29,8 +28,8 @@ class MarvelApiClient {
     }
   }
 
+  // Handle decoding errors and situation where the response object MarvelResponse dones't have a .data field
   private func decode<T: APIRequest> (data: Data, request: T) -> Result<DataContainer<T.Response>, Error> {
-
       var result: Result<DataContainer<T.Response>, Error>
       do {
         let marvelResponse = try JSONDecoder().decode(MarvelResponse<T.Response>.self, from: data)
@@ -104,16 +103,15 @@ extension MarvelApiClient: MarvelApiProtocol {
 
     let request = GetCharacter(id: id)
     restApiClient.send(request ) { result in
-      print("\nGetCharacter \(id) finished:")
-
-      var completionValue: Result<GetCharacters.Response, Error>
+      print("\nGetCharacter \(id) finished")
+      var completionResult: Result<GetCharacters.Response, Error>
       switch result {
       case .success((_, let data)):
-        completionValue = self.handleSuccessResultGetCharacter(data, request: request)
+        completionResult = self.handleSuccessResultGetCharacter(data, request: request)
       case .failure(let error):
-        completionValue = .failure(error)
+        completionResult = .failure(error)
       }
-      completion(completionValue)
+      completion(completionResult)
     }
   }
 }

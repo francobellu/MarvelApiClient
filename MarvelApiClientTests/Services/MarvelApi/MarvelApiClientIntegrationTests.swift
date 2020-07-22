@@ -47,23 +47,25 @@ class MarvelApiClientTests: XCTestCase {
 
   // MARK: - Comics
   func testGetComicsList() throws {
-    let promise = expectation(description: "Comics array not empty")
-    sut.getComicsList { ( comics: [ComicResult])  in
-      print("FB: comics: \(comics)")
-      promise.fulfill()
-      XCTAssert(comics.isEmpty == false)
-    }
-    wait(for: [promise], timeout: 30)
+     XCTAssert(false)
+//    let promise = expectation(description: "Comics array not empty")
+//    sut.getComicsList { ( comics: [ComicResult])  in
+//      print("FB: comics: \(comics)")
+//      promise.fulfill()
+//      XCTAssert(comics.isEmpty == false)
+//    }
+//    wait(for: [promise], timeout: 30)
   }
 
   func testGetComic() throws {
-    let promise = expectation(description: "Comic")
-    let comicId = 61537
-    sut.getComic(with: comicId) { comic in
-      print("FB: comic: \(comic)")
-      promise.fulfill()
-      XCTAssertNotNil(comic)
-    }
-    wait(for: [promise], timeout: 30)
+    XCTAssert(false)
+//    let promise = expectation(description: "Comic")
+//    let comicId = 61537
+//    sut.getComic(with: comicId) { comic in
+//      print("FB: comic: \(comic)")
+//      promise.fulfill()
+//      XCTAssertNotNil(comic)
+//    }
+//    wait(for: [promise], timeout: 30)
   }
 }
