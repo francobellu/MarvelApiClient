@@ -64,11 +64,11 @@ class CharactersListPresenter: CharactersListPresenterProtocol {
 
 // MARK: - GetCharactersListInteractorOutputPort
 extension CharactersListPresenter: GetCharactersListInteractorOutputPort{
-  func domainData(result: Result<DataContainer<GetCharacters.Response>, Error>) {
+  func domainData(result: Result<[GetCharacters.Response], Error>) {
     switch result {
-    case .success(let dataContainer):
+    case .success(let characters):
       self.isLoading.value = false
-      self.buildPresentationModel(from: dataContainer.results)
+      self.buildPresentationModel(from: characters)
     case .failure(let error):
       print(error)
       self.isError.value = error

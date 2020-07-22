@@ -31,8 +31,7 @@ class CharacterDetailInteractor: CharacterDetailInteractorProtocol{
   func getCharacter(with characterId: Int, completion: @escaping ((CharacterResult)?) -> Void) {
     apiClient.getCharacter(with: characterId) { response in
       switch response {
-      case .success(let dataContainer):
-        guard let character = dataContainer.results.first else { return  }
+      case .success(let character):
         completion(character)
       case .failure(let error):
         completion( nil )

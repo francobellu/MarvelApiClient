@@ -32,7 +32,6 @@ class MarvelApiClient {
   private func decode<T: APIRequest> (data: Data, request: T) -> Result<DataContainer<T.Response>, Error> {
 
       var result: Result<DataContainer<T.Response>, Error>
-      // TODO response unused??
       do {
         let marvelResponse = try JSONDecoder().decode(MarvelResponse<T.Response>.self, from: data)
         if let dataContainer = marvelResponse.data {
@@ -46,35 +45,29 @@ class MarvelApiClient {
       }
       return result
     }
+
+  fileprivate func handleSuccessResultGetCharacter(_ data: Data, request: GetCharacter) -> Result<CharacterResult, Error> {
+     let returnValue: Result<CharacterResult, Error>
+
+     let dataContaineResult = self.decode(data: data, request: request)
+     switch dataContaineResult{
+     case .success(let dataContainer):
+       guard let character = dataContainer.results.first else{
+         returnValue = .failure(MarvelError.noData)
+         fatalError()
+       }
+       returnValue = .success(character)
+     case .failure(let error):
+       returnValue = .failure(error)
+     }
+     return returnValue
+   }
+
   }
-
-
-//  private func decode<T: APIRequest> (data: Data) -> Result<DataContainer<T.Response>, Error> {
-//
-//    var result: Result<DataContainer<T.Response>, Error>
-//    // TODO response unused??
-//    do {
-//      // debug: print json data before to decode
-//      print(data)
-//      let jsonData = try JSONSerialization.jsonObject(with: data, options: .mutableContainers)
-//      print("Data: \(data),  json: \(jsonData)")
-//      let marvelResponse = try JSONDecoder().decode(MarvelResponse<T.Response>.self, from: data)
-//      print("FB: marvelResponse: \(marvelResponse)")
-//      if let dataContainer = marvelResponse.data {
-//        result = .success(dataContainer)
-//      } else {
-//        result = .failure(MarvelError.noData)
-//      }
-//    } catch {
-//      _ = try? JSONDecoder().decode(ErrorResponse.self, from: data)
-//      result = .failure(MarvelError.decoding)
-//    }
-//    return result
-//  }
-//}
 
 // Exposed API
 extension MarvelApiClient: MarvelApiProtocol {
+
   func getComicsList(completion: @escaping ([ComicResult]) -> Void) {
     fatalError()
   }
@@ -83,16 +76,23 @@ extension MarvelApiClient: MarvelApiProtocol {
     fatalError()
   }
 
-  func getCharactersList(completion: @escaping (Result<DataContainer<GetCharacters.Response>, Error>) -> Void) {
+  func getCharactersList(completion: @escaping (Result<[GetCharacters.Response], Error>) -> Void) {
     // Get the first <limit> characters
     let request = GetCharacters(limit: limit, offset: 0)
     restApiClient.send(request ) { result in
       print("\nGetCharacters list finished, limit: \(self.limit), offset: \(self.offset)")
 
-      var completionValue: Result<DataContainer<GetCharacters.Response>, Error>
+      var completionValue: Result<[GetCharacters.Response], Error>
       switch result {
       case .success((_, let data)):
-        completionValue = self.decode(data: data, request: request)
+        let dataContaineResult = self.decode(data: data, request: request)
+        switch dataContaineResult{
+        case .success(let dataContainer):
+          completionValue = .success(dataContainer.results)
+        case .failure(let error):
+          completionValue = .failure(error)
+        }
+
       case .failure(let error):
         completionValue = .failure(error)
       }
@@ -100,16 +100,16 @@ extension MarvelApiClient: MarvelApiProtocol {
     }
   }
 
-  func getCharacter(with id: Int, completion: @escaping (Result<DataContainer<GetCharacters.Response>, Error>) -> Void) {
+  func getCharacter(with id: Int, completion: @escaping (Result<GetCharacter.Response, Error>) -> Void) {
 
     let request = GetCharacter(id: id)
     restApiClient.send(request ) { result in
       print("\nGetCharacter \(id) finished:")
 
-      var completionValue: Result<DataContainer<GetCharacters.Response>, Error>
+      var completionValue: Result<GetCharacters.Response, Error>
       switch result {
       case .success((_, let data)):
-        completionValue = self.decode(data: data, request: request)
+        completionValue = self.handleSuccessResultGetCharacter(data, request: request)
       case .failure(let error):
         completionValue = .failure(error)
       }

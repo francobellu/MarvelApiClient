@@ -15,12 +15,12 @@ protocol GetCharactersListInteractorInputPort: class{
 
 //  PRESENTER OUTPUT
 protocol GetCharactersListInteractorOutputPort: class{
-  func domainData(result: Result<DataContainer<GetCharacters.Response>, Error>)
+  func domainData(result: Result<[GetCharacters.Response], Error>)
 }
 
 private protocol GetCharactersListInteractorProtocol: class{
   init(dependencies: AppDependenciesProtocol)
-  func handle(result: Result<DataContainer<GetCharacters.Response>, Error>)
+  func handle(result: Result<[GetCharacters.Response], Error>)
 }
 
 class GetCharactersListInteractor{
@@ -53,7 +53,7 @@ extension GetCharactersListInteractor{
     }
   }
 
-  fileprivate func handle(result: Result<DataContainer<GetCharacters.Response>, Error>){
+  fileprivate func handle(result: Result<[GetCharacters.Response], Error>){
     switch result {
     case .success:
       // completion is the interactor output port
