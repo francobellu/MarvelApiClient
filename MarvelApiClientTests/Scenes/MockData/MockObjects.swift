@@ -72,8 +72,8 @@ class AppDependenciesDummy: AppDependenciesProtocol {
 }
 
 struct MockApiCLientData {
-  var mockCharactersResults: DataContainer<CharacterResult>?
-  var mockCharacterResults: DataContainer<CharacterResult>?
+  var mockCharactersResults: [CharacterResult]?
+  var mockCharacterResults: CharacterResult?
   let mockComicsData: [ComicResult]?
   let mockComicData: ComicResult?
 }
@@ -86,7 +86,7 @@ class MockApiClient: MarvelApiProtocol{
                                             mockComicsData: nil,
                                             mockComicData: nil)
 
-  func getCharactersList(completion: @escaping (Result<DataContainer<GetCharacters.Response>, Error>) -> Void) {
+  func getCharactersList(completion: @escaping (Result<[GetCharacters.Response], Error>) -> Void) {
     if let results = mockApiClientData.mockCharactersResults{
       completion(.success(results ))
     } else{
@@ -94,7 +94,7 @@ class MockApiClient: MarvelApiProtocol{
     }
   }
 
-  func getCharacter(with id: Int, completion: @escaping (Result<DataContainer<GetCharacters.Response>, Error>) -> Void) {
+  func getCharacter(with id: Int, completion: @escaping (Result<GetCharacters.Response, Error>) -> Void) {
     if let result = mockApiClientData.mockCharacterResults{
       completion(.success(result))
     } else{

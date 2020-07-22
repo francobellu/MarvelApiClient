@@ -28,11 +28,11 @@ class MarvelApiClientCharactersTestMock: XCTestCase {
 
       XCTAssertNotNil(response)
       switch response {
-      case .success(let dataContainer):
+      case .success(let characters):
 
-        XCTAssert(dataContainer.results.count == testResult.count)
-        for index  in dataContainer.results.indices {
-          XCTAssert(dataContainer.results[index].id == testResult[index].id)
+        XCTAssert(characters.count == testResult.count)
+        for index  in characters.indices {
+          XCTAssert(characters[index].id == testResult[index].id)
         }
       case .failure(_):
         XCTAssert(false)
@@ -53,9 +53,9 @@ class MarvelApiClientCharactersTestMock: XCTestCase {
     sut.getCharacter(with: testResult.id!) { result in
       XCTAssertNotNil(result)
       switch result {
-      case .success(let dataContainer):
-        XCTAssert(dataContainer.results.count == 1)
-        XCTAssert(dataContainer.results[0].id == testResult.id)
+      case .success(let character):
+//        XCTAssert(characters.count == 1)
+        XCTAssert(character.id == testResult.id)
       case .failure(_):
         XCTAssert(false)
       }

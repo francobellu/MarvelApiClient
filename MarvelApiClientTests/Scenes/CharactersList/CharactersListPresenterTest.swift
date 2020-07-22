@@ -216,16 +216,15 @@ class CharactersListPresenterTest: XCTestCase {
     // Given
     XCTAssert(sut.presentationModel.value.isEmpty)
 
-    let testSuccessResult = Result<DataContainer<GetCharacters.Response>,
-      Error>.success(getResponse(from: "MockedResponseGetCharacters").data!)
-    guard case let .success(dataContainer) = testSuccessResult else{
+    let testSuccessCharacters = Result<[GetCharacters.Response], Error>.success(getResponse(from: "MockedResponseGetCharacters").data!.results)
+    guard case let .success(characters) = testSuccessCharacters else{
       XCTAssertTrue(false, "result should have a valid dataContainer value")
       return
     }
-    let resultPresentationModel = buildPresentationModels(from: dataContainer.results)
+    let resultPresentationModel = buildPresentationModels(from: characters)
 
     // When
-    sut.domainData(result: testSuccessResult)
+    sut.domainData(result: testSuccessCharacters)
 
     // Then
     XCTAssert(sut.presentationModel.value == resultPresentationModel )
@@ -238,7 +237,7 @@ class CharactersListPresenterTest: XCTestCase {
     // Given
     XCTAssert(sut.presentationModel.value.isEmpty)
 
-    let testResultFailureNoData = Result<DataContainer<GetCharacters.Response>, Error>.failure(MarvelError.noData)
+    let testResultFailureNoData = Result<[GetCharacters.Response], Error>.failure(MarvelError.noData)
 
     // When
     sut.domainData(result: testResultFailureNoData)
@@ -314,7 +313,7 @@ class CharactersListInteractorTestDouble: GetCharactersListInteractorInputPort{
 
   var executeCalled = false
 
-  var stubbedResult = Result<DataContainer<GetCharacters.Response>, Error>.failure(MarvelError.noData)
+  var stubbedResult = Result<[GetCharacters.Response], Error>.failure(MarvelError.noData)
   var asyncOpExpectation: XCTestExpectation?
 
   required init(dependencies: AppDependenciesProtocol) {
@@ -365,7 +364,7 @@ class GetCharactersListInteractorOutputPortSpy: GetCharactersListInteractorOutpu
   init(domainDataCalledSpy: Bool = false) {
     self.domainDataCalledSpy = domainDataCalledSpy
   }
-  func domainData(result: Result<DataContainer<GetCharacters.Response>, Error>) {
+  func domainData(result: Result<[GetCharacters.Response], Error>) {
     domainDataCalledSpy = true
   }
 }

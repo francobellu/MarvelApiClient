@@ -28,8 +28,8 @@ class CharacterDetailInteractorTest: XCTestCase {
 
     // CONFIGURE THE MOCK DATA
     let testCharacters: [CharacterResult] = getObjects(from: "MockedResponseGetCharacters")
-    let testDataContainer = DataContainer(offset: 0, limit: 20, total: 1000, count: 0, results: testCharacters)
-    mockApiClient.mockApiClientData.mockCharacterResults = testDataContainer
+//    let testDataContainer = DataContainer(offset: 0, limit: 20, total: 1000, count: 0, results: testCharacters)
+    mockApiClient.mockApiClientData.mockCharacterResults = testCharacters.first!
 
     let testCharacter = testCharacters.first!
     sut.getCharacter(with: testCharacter.id!, completion: { characterResult in
