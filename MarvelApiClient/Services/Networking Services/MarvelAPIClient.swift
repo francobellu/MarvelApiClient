@@ -1,4 +1,5 @@
 import Foundation
+import MyModule
 
 /// Implementation of a generic-based Marvel API client
 class MarvelApiClient {

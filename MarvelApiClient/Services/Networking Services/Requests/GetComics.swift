@@ -1,11 +1,12 @@
 import Foundation
+import MyModule
 
 struct GetComics: APIRequest {
 	typealias Response = ComicResult
 
   var apiRequestConfig: ApiRequestConfigProtocol = MarvelApiRequestConfig()
 
-  var method: Method = .get
+  var method: MyModule.Method = .get
 
   var parameters: [String: String]?
 

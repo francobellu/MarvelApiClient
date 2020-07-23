@@ -7,6 +7,7 @@
 //
 
 import XCTest
+import MyModule
 
 @testable import MarvelApiClient
 

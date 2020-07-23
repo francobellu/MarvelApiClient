@@ -7,7 +7,7 @@
 //
 
 import Foundation
-
+import MyModule
 
 struct MarvelApiRequestConfig: ApiRequestConfigProtocol {
   let baseEndpointString = "https://gateway.marvel.com:443/v1/public/"
