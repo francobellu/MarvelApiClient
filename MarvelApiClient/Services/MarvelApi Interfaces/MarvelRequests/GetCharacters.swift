@@ -1,12 +1,12 @@
 import Foundation
-import MyModule
+import Rest
 
 struct GetCharacters: APIRequest {
   typealias Response = CharacterResult
 
   var apiRequestConfig: ApiRequestConfigProtocol = MarvelApiRequestConfig()
 
-  var method: MyModule.Method = .get
+  var method: Rest.Method = .get
 
   var parameters: [String: String]?
 

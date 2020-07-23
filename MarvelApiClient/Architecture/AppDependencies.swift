@@ -7,7 +7,7 @@
 //
 
 import UIKit
-import MyModule
+import Rest
 
 protocol AppDependenciesProtocol: class {
   var restApiClient: RestApiClient { get }

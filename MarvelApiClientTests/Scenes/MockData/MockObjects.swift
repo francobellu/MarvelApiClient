@@ -8,7 +8,7 @@
 
 import UIKit
 import XCTest
-import MyModule
+import Rest
 
 @testable import MarvelApiClient
 

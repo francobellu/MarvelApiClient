@@ -1,5 +1,5 @@
 import Foundation
-import MyModule
+import Rest
 
 struct GetCharacter: APIRequest {
 
@@ -11,7 +11,7 @@ struct GetCharacter: APIRequest {
     return "characters"
   }
 
-  var method: MyModule.Method = .get
+  var method: Rest.Method = .get
 
   var parameters: [String: String]?
 

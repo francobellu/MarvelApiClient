@@ -64,7 +64,6 @@
 		C7483D3424C99EAB00651D49 /* MarvelApiConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7483D3124C99EAA00651D49 /* MarvelApiConfig.swift */; };
 		C7483D3524C99EAB00651D49 /* MarvelApiProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7483D3224C99EAA00651D49 /* MarvelApiProtocol.swift */; };
 		C7483D3624C99EAB00651D49 /* MarvelAPIClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7483D3324C99EAA00651D49 /* MarvelAPIClient.swift */; };
-		C7483D4024C9A15F00651D49 /* MyModule in Frameworks */ = {isa = PBXBuildFile; productRef = C7483D3F24C9A15F00651D49 /* MyModule */; };
 		C74963A12472DD53001B9A5E /* MockedResponseGetCharacters.json in Resources */ = {isa = PBXBuildFile; fileRef = C74963A02472DD53001B9A5E /* MockedResponseGetCharacters.json */; };
 		C74963A32472F731001B9A5E /* TestUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = C74963A22472F731001B9A5E /* TestUtils.swift */; };
 		C74963A92473C886001B9A5E /* CharactersListInteractorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C74963A82473C886001B9A5E /* CharactersListInteractorTests.swift */; };
@@ -73,9 +72,10 @@
 		C76B29A6243A5F1B00793179 /* MarvelApiClientIntegrationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C76B29A5243A5F1B00793179 /* MarvelApiClientIntegrationTests.swift */; };
 		C776993B24B31394003BE9BD /* CharacterCellPresentationModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C776993A24B31394003BE9BD /* CharacterCellPresentationModel.swift */; };
 		C776993D24B313BE003BE9BD /* Observable.swift in Sources */ = {isa = PBXBuildFile; fileRef = C776993C24B313BE003BE9BD /* Observable.swift */; };
-		C787673824C75AAF00D43553 /* AlamofireImage in Frameworks */ = {isa = PBXBuildFile; productRef = C787673724C75AAF00D43553 /* AlamofireImage */; };
 		C7887B7D24C6196000EAEB1F /* UIViewController +  ErrorDialog.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7887B7C24C6196000EAEB1F /* UIViewController +  ErrorDialog.swift */; };
 		C78A83F5244B8AD6004DE930 /* GetCharacter.swift in Sources */ = {isa = PBXBuildFile; fileRef = C78A83F4244B8AD6004DE930 /* GetCharacter.swift */; };
+		C7B987CB24C9BA0800745406 /* AlamofireImage in Frameworks */ = {isa = PBXBuildFile; productRef = C7B987CA24C9BA0800745406 /* AlamofireImage */; };
+		C7B987D024C9D10E00745406 /* Rest in Frameworks */ = {isa = PBXBuildFile; productRef = C7B987CF24C9D10E00745406 /* Rest */; };
 		C7BE8B8924AF5F0D00B8A569 /* CharactersListViewControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7BE8B8824AF5F0D00B8A569 /* CharactersListViewControllerTests.swift */; };
 		C7BE8B8B24AF603400B8A569 /* CharactersListProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7BE8B8A24AF603400B8A569 /* CharactersListProtocols.swift */; };
 		C7D3F040243B770F004E4C0E /* Coordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7D3F03F243B770F004E4C0E /* Coordinator.swift */; };
@@ -158,7 +158,6 @@
 		C7483D3124C99EAA00651D49 /* MarvelApiConfig.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MarvelApiConfig.swift; sourceTree = "<group>"; };
 		C7483D3224C99EAA00651D49 /* MarvelApiProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MarvelApiProtocol.swift; sourceTree = "<group>"; };
 		C7483D3324C99EAA00651D49 /* MarvelAPIClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MarvelAPIClient.swift; sourceTree = "<group>"; };
-		C7483D3D24C99FCC00651D49 /* MyModule */ = {isa = PBXFileReference; lastKnownFileType = folder; name = MyModule; path = ../MyModule; sourceTree = "<group>"; };
 		C74963A02472DD53001B9A5E /* MockedResponseGetCharacters.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = MockedResponseGetCharacters.json; sourceTree = "<group>"; };
 		C74963A22472F731001B9A5E /* TestUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestUtils.swift; sourceTree = "<group>"; };
 		C74963A82473C886001B9A5E /* CharactersListInteractorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharactersListInteractorTests.swift; sourceTree = "<group>"; };
@@ -172,6 +171,7 @@
 		C776993C24B313BE003BE9BD /* Observable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Observable.swift; sourceTree = "<group>"; };
 		C7887B7C24C6196000EAEB1F /* UIViewController +  ErrorDialog.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController +  ErrorDialog.swift"; sourceTree = "<group>"; };
 		C78A83F4244B8AD6004DE930 /* GetCharacter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GetCharacter.swift; sourceTree = "<group>"; };
+		C7B987CE24C9D05F00745406 /* Rest */ = {isa = PBXFileReference; lastKnownFileType = folder; name = Rest; path = ../Rest; sourceTree = "<group>"; };
 		C7BE8B8824AF5F0D00B8A569 /* CharactersListViewControllerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharactersListViewControllerTests.swift; sourceTree = "<group>"; };
 		C7BE8B8A24AF603400B8A569 /* CharactersListProtocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharactersListProtocols.swift; sourceTree = "<group>"; };
 		C7D3F03F243B770F004E4C0E /* Coordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Coordinator.swift; sourceTree = "<group>"; };
@@ -189,8 +189,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				6713D79A83C952EAF643E4EA /* Pods_MarvelApiClient.framework in Frameworks */,
-				C7483D4024C9A15F00651D49 /* MyModule in Frameworks */,
-				C787673824C75AAF00D43553 /* AlamofireImage in Frameworks */,
+				C7B987D024C9D10E00745406 /* Rest in Frameworks */,
+				C7B987CB24C9BA0800745406 /* AlamofireImage in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -208,7 +208,7 @@
 		287C99FD217F39CB00D63092 = {
 			isa = PBXGroup;
 			children = (
-				C7483D3D24C99FCC00651D49 /* MyModule */,
+				C7B987CE24C9D05F00745406 /* Rest */,
 				C71B79642476AA14002D5B09 /* MarvelApp.docx */,
 				2851229221832BB9009D4AB0 /* Readme.md */,
 				287C9A08217F39CB00D63092 /* MarvelApiClient */,
@@ -576,8 +576,8 @@
 			);
 			name = MarvelApiClient;
 			packageProductDependencies = (
-				C787673724C75AAF00D43553 /* AlamofireImage */,
-				C7483D3F24C9A15F00651D49 /* MyModule */,
+				C7B987CA24C9BA0800745406 /* AlamofireImage */,
+				C7B987CF24C9D10E00745406 /* Rest */,
 			);
 			productName = ApiLayer;
 			productReference = 287C9A06217F39CB00D63092 /* MarvelApiClient.app */;
@@ -1163,14 +1163,14 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		C7483D3F24C9A15F00651D49 /* MyModule */ = {
-			isa = XCSwiftPackageProductDependency;
-			productName = MyModule;
-		};
-		C787673724C75AAF00D43553 /* AlamofireImage */ = {
+		C7B987CA24C9BA0800745406 /* AlamofireImage */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = C787673624C75AAF00D43553 /* XCRemoteSwiftPackageReference "AlamofireImage" */;
 			productName = AlamofireImage;
+		};
+		C7B987CF24C9D10E00745406 /* Rest */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = Rest;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

@@ -28,7 +28,7 @@ protocol CharactersListPresenterProtocol: class {
   var isError: Observable<Error?> {get set }
 
   func didSelectCharacter(at: Int)
-  
+
   func didGoBack()
   func getNextCharactersList()
 }

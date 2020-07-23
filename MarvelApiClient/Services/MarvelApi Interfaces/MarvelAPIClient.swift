@@ -1,5 +1,5 @@
 import Foundation
-import MyModule
+import Rest
 
 /// Implementation of a generic-based Marvel API client
 class MarvelApiClient {
