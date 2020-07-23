@@ -255,7 +255,7 @@
 			isa = PBXGroup;
 			children = (
 				C7EC670E2443688400F88FDE /* DataServices */,
-				C703665024753FB80005886F /* Networking Services */,
+				C703665024753FB80005886F /* MarvelApi Interfaces */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -278,7 +278,7 @@
 			path = Models;
 			sourceTree = "<group>";
 		};
-		28998EC6217F636A0037039B /* Requests */ = {
+		28998EC6217F636A0037039B /* MarvelRequests */ = {
 			isa = PBXGroup;
 			children = (
 				C78A83F4244B8AD6004DE930 /* GetCharacter.swift */,
@@ -286,7 +286,7 @@
 				28998EC8217F636A0037039B /* GetCharacters.swift */,
 				28998EC9217F636A0037039B /* GetComic.swift */,
 			);
-			path = Requests;
+			path = MarvelRequests;
 			sourceTree = "<group>";
 		};
 		B86FBFCF86B3E5EE17863D52 /* Pods */ = {
@@ -406,15 +406,15 @@
 			path = Onboarding;
 			sourceTree = "<group>";
 		};
-		C703665024753FB80005886F /* Networking Services */ = {
+		C703665024753FB80005886F /* MarvelApi Interfaces */ = {
 			isa = PBXGroup;
 			children = (
+				28998EC6217F636A0037039B /* MarvelRequests */,
 				C7483D3324C99EAA00651D49 /* MarvelAPIClient.swift */,
 				C7483D3124C99EAA00651D49 /* MarvelApiConfig.swift */,
 				C7483D3224C99EAA00651D49 /* MarvelApiProtocol.swift */,
-				28998EC6217F636A0037039B /* Requests */,
 			);
-			path = "Networking Services";
+			path = "MarvelApi Interfaces";
 			sourceTree = "<group>";
 		};
 		C7036651247540110005886F /* Interfaces */ = {
