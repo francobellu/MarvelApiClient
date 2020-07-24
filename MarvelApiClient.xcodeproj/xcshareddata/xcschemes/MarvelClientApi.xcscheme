@@ -43,10 +43,10 @@
             skipped = "NO">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "C74963932472DCBD001B9A5E"
-               BuildableName = "xxxx.xctest"
-               BlueprintName = "xxxx"
-               ReferencedContainer = "container:MarvelApiClient.xcodeproj">
+               BlueprintIdentifier = "RestTests"
+               BuildableName = "RestTests"
+               BlueprintName = "RestTests"
+               ReferencedContainer = "container:../Rest">
             </BuildableReference>
          </TestableReference>
       </Testables>

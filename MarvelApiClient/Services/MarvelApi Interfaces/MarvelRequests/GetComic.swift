@@ -1,7 +1,7 @@
 import Foundation
 import Rest
 
-struct GetComic: APIRequest {
+struct GetComic: RestAPIRequest {
   typealias Response = ComicResult
 
   var apiRequestConfig: ApiRequestConfigProtocol = MarvelApiRequestConfig()

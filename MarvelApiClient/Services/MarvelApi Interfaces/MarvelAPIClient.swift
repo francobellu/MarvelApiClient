@@ -30,7 +30,7 @@ class MarvelApiClient {
   }
 
   // Handle decoding errors and situation where the response object MarvelResponse dones't have a .data field
-  private func decode<T: APIRequest> (data: Data, request: T) -> Result<DataContainer<T.Response>, Error> {
+  private func decode<T: RestAPIRequest> (data: Data, request: T) -> Result<DataContainer<T.Response>, Error> {
       var result: Result<DataContainer<T.Response>, Error>
       do {
         let marvelResponse = try JSONDecoder().decode(MarvelResponse<T.Response>.self, from: data)
@@ -46,7 +46,7 @@ class MarvelApiClient {
       return result
     }
 
-  fileprivate func handleSuccessResultGetCharacter(_ data: Data, request: GetCharacter) -> Result<CharacterResult, Error> {
+  private func handleSuccessResultGetCharacter(_ data: Data, request: GetCharacter) -> Result<CharacterResult, Error> {
      let returnValue: Result<CharacterResult, Error>
 
      let dataContaineResult = self.decode(data: data, request: request)

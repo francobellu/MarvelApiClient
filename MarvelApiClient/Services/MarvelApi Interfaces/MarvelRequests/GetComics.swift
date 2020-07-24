@@ -1,8 +1,9 @@
 import Foundation
 import Rest
 
-struct GetComics: APIRequest {
-	typealias Response = ComicResult
+struct GetComics: RestAPIRequest {
+
+  typealias Response = ComicResult
 
   var apiRequestConfig: ApiRequestConfigProtocol = MarvelApiRequestConfig()
 
@@ -10,11 +11,11 @@ struct GetComics: APIRequest {
 
   var parameters: [String: String]?
 
-  //var decode: (Data) throws -> Response
-
   var resourceName: String {
     return "comics"
   }
+
+  //var decode: (Data) throws -> Response
 
   enum ComicFormat: String, Encodable {
     case comic = "comic"

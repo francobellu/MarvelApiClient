@@ -1,19 +1,19 @@
 import Foundation
 import Rest
 
-struct GetCharacter: APIRequest {
+struct GetCharacter: RestAPIRequest {
 
   typealias Response = CharacterResult
 
   var apiRequestConfig: ApiRequestConfigProtocol = MarvelApiRequestConfig()
 
-  var resourceName: String {
-    return "characters"
-  }
-
   var method: Rest.Method = .get
 
   var parameters: [String: String]?
+
+  var resourceName: String {
+    return "characters"
+  }
 
   //var decode: (Data) throws -> Response
 

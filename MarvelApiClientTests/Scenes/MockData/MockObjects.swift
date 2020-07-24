@@ -41,6 +41,10 @@ class MockURLSession: URLSessionProtocol {
 }
 
 class MockURLSessionDataTask: URLSessionDataTaskProtocol {
+  func cancel() {
+    fatalError()
+  }
+
   private (set) var resumeWasCalled = false
 
   func resume() {
