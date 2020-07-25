@@ -115,6 +115,48 @@ extension MarvelApiClient: MarvelApiProtocol {
       completion(completionResult)
     }
   }
+//  // Encodes a URL based on the given request using
+//  // Create a URLComponents url composing:
+//  // 1) baseUrl = baseEndpointUrl +  request.resourceName
+//  // 2) commonQueryItems
+//  // 3) customQueryItems a partir de request object
+//  func buildApiEndpoint<T: RestAPIRequest>(request: T) -> URL? { //swiftlint:disable:this function_body_length
+//    guard let baseUrl = URL(string: request.resourceName, relativeTo: URL(string: request.apiRequestConfig.baseEndpointString) ) else {
+//      //      fatalError("Bad resourceName: \(resourceName)")
+//      return URL(string: request.apiRequestConfig.baseEndpointString)
+//    }
+//    guard var components = URLComponents(url: baseUrl, resolvingAgainstBaseURL: true) else { return nil }
+//
+//    // Common query items needed for all Marvel requests
+//    var commonQueryItems = [URLQueryItem]()
+//
+//    if let privateKey = request.apiRequestConfig.privateKey, let publicKey = request.apiRequestConfig.publicKey{
+//      let timestamp = "\(Date().timeIntervalSince1970)"
+//
+//      let str = "\(timestamp)\(privateKey)\(publicKey)"
+//
+//      guard let digest =  str.insecureMD5Hash() else { return nil }
+//      commonQueryItems = [
+//        URLQueryItem(name: "ts", value: timestamp),
+//        URLQueryItem(name: "hash", value: digest),
+//        URLQueryItem(name: "apikey", value: request.apiRequestConfig.publicKey)
+//      ]
+//    }
+//
+//    // Custom query items needed for this specific request
+//    var customQueryItems = [URLQueryItem]()
+//
+//    if let params = request.parameters, !params.isEmpty {
+//      customQueryItems = params.map { item, value in
+//        URLQueryItem(name: item, value: value)
+//      }
+//    }
+//
+//    components.queryItems = commonQueryItems + customQueryItems
+//
+//    // Construct the final URL with all the previous data
+//    return components.url
+//  }
 }
 
 //  func getComic(with id: Int, completion: @escaping (ComicResult) -> Void) {
