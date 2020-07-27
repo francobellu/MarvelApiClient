@@ -38,8 +38,8 @@ func getResponse<T: Decodable>(from file: String, completion: ( (MarvelResponse<
 }
 
 // Get the T Objects ( [CharacterResult] or [ComicResult])  from a json file. The file needs to be a valid representation of  the T data struct
-func getObjects<T: Decodable>(from file: String, completion: ( ([T],_ errorMessage: String?)->())? = nil  ) -> [T] {
-  var returnValue: [T]
+func getObjects<T: Decodable>(from file: String, completion: ( (T,_ errorMessage: String?)->())? = nil  ) -> T {
+  var returnValue: T
   let testBundle = Bundle(for:  GetCharactersListInteractorInputPortTest.self)
   guard let path = testBundle.path(forResource: file, ofType: "json") else{
     fatalError()

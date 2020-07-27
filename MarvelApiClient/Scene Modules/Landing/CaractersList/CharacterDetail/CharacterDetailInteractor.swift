@@ -12,7 +12,7 @@ protocol CharacterDetailInteractorProtocol {
   init(dependencies: AppDependenciesProtocol)
 
   // MARK: - Business logic
-  func getCharacter(with characterId: Int, completion: @escaping ((CharacterResult)?) -> Void)
+  func getCharacter(with characterId: Int, completion: @escaping (CharacterResult?) -> Void)
 }
 
 class CharacterDetailInteractor: CharacterDetailInteractorProtocol{
@@ -28,11 +28,11 @@ class CharacterDetailInteractor: CharacterDetailInteractorProtocol{
   }
 
   // MARK: - Business logic
-  func getCharacter(with characterId: Int, completion: @escaping ((CharacterResult)?) -> Void) {
+  func getCharacter(with characterId: Int, completion: @escaping (CharacterResult?) -> Void) {
     apiClient.getCharacter(with: characterId) { response in
       switch response {
-      case .success(let character):
-        completion(character)
+      case .success(let characters):
+        completion(characters.first)
       case .failure(let error):
         completion( nil )
         print(error)

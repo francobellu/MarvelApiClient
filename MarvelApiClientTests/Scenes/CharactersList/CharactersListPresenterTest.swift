@@ -216,7 +216,7 @@ class CharactersListPresenterTest: XCTestCase {
     // Given
     XCTAssert(sut.presentationModel.value.isEmpty)
 
-    let testSuccessCharacters = Result<[GetCharacters.Response], Error>.success(getResponse(from: "MockedResponseGetCharacters").data!.results)
+    let testSuccessCharacters = Result<GetCharacters.Response, Error>.success(getResponse(from: "MockedResponseGetCharacters").data!.results)
     guard case let .success(characters) = testSuccessCharacters else{
       XCTAssertTrue(false, "result should have a valid dataContainer value")
       return
@@ -237,7 +237,7 @@ class CharactersListPresenterTest: XCTestCase {
     // Given
     XCTAssert(sut.presentationModel.value.isEmpty)
 
-    let testResultFailureNoData = Result<[GetCharacters.Response], Error>.failure(MarvelError.noData)
+    let testResultFailureNoData = Result<GetCharacters.Response, Error>.failure(MarvelError.noData)
 
     // When
     sut.domainData(result: testResultFailureNoData)
@@ -313,7 +313,7 @@ class CharactersListInteractorTestDouble: GetCharactersListInteractorInputPort{
 
   var executeCalled = false
 
-  var stubbedResult = Result<[GetCharacters.Response], Error>.failure(MarvelError.noData)
+  var stubbedResult = Result<GetCharacters.Response, Error>.failure(MarvelError.noData)
   var asyncOpExpectation: XCTestExpectation?
 
   required init(dependencies: AppDependenciesProtocol) {
@@ -364,7 +364,7 @@ class GetCharactersListInteractorOutputPortSpy: GetCharactersListInteractorOutpu
   init(domainDataCalledSpy: Bool = false) {
     self.domainDataCalledSpy = domainDataCalledSpy
   }
-  func domainData(result: Result<[GetCharacters.Response], Error>) {
+  func domainData(result: Result<GetCharacters.Response, Error>) {
     domainDataCalledSpy = true
   }
 }

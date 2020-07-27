@@ -21,7 +21,7 @@ class MockURLSession: URLSessionProtocol {
 
   private (set) var lastURL: URL?
 
-  func dataTask(with request: URLRequest, completionHandler: @escaping DataTaskResult) -> URLSessionDataTaskProtocol {
+  func dataTask(with request: URLRequest, completionHandler: @escaping DataTaskResultCompletion) -> URLSessionDataTaskProtocol {
     lastURL = request.url
 
     completionHandler(nextData, successHttpURLResponse(request: request), nextError)
@@ -78,7 +78,7 @@ class AppDependenciesDummy: AppDependenciesProtocol {
 
 struct MockApiCLientData {
   var mockCharactersResults: [CharacterResult]?
-  var mockCharacterResults: CharacterResult?
+  var mockCharacterResults: [CharacterResult]?
   let mockComicsData: [ComicResult]?
   let mockComicData: ComicResult?
 }
@@ -91,7 +91,7 @@ class MockApiClient: MarvelApiProtocol{
                                             mockComicsData: nil,
                                             mockComicData: nil)
 
-  func getCharactersList(completion: @escaping (Result<[GetCharacters.Response], Error>) -> Void) {
+  func getCharactersList(completion: @escaping (Result<GetCharacters.Response, Error>) -> Void) {
     if let results = mockApiClientData.mockCharactersResults{
       completion(.success(results ))
     } else{

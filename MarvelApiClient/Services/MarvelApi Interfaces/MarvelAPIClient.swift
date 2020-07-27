@@ -19,6 +19,8 @@ class MarvelApiClient {
     self.restApiClient = restApiClient
 
   }
+
+  // Todo: not used
   private func executeRequestLogic(count: Int){
     // Reset the offset for the next data query
     self.offset += self.limit
@@ -30,7 +32,7 @@ class MarvelApiClient {
   }
 
   // Handle decoding errors and situation where the response object MarvelResponse dones't have a .data field
-  private func decode<T: RestAPIRequest> (data: Data, request: T) -> Result<DataContainer<T.Response>, Error> {
+  private func decodeResponseDataToMarvelResponse<T: RestAPIRequest> (data: Data, request: T) -> Result<DataContainer<T.Response>, Error> {
       var result: Result<DataContainer<T.Response>, Error>
       do {
         let marvelResponse = try JSONDecoder().decode(MarvelResponse<T.Response>.self, from: data)
@@ -46,17 +48,18 @@ class MarvelApiClient {
       return result
     }
 
-  private func handleSuccessResultGetCharacter(_ data: Data, request: GetCharacter) -> Result<CharacterResult, Error> {
-     let returnValue: Result<CharacterResult, Error>
+  private func handleSuccessResultsGetCharacter(_ data: Data, request: GetCharacter) -> Result<[CharacterResult], Error> {
+     let returnValue: Result<[CharacterResult], Error>
 
-     let dataContaineResult = self.decode(data: data, request: request)
+     let dataContaineResult = self.decodeResponseDataToMarvelResponse(data: data, request: request)
      switch dataContaineResult{
      case .success(let dataContainer):
-       guard let character = dataContainer.results.first else{
-         returnValue = .failure(MarvelError.noData)
-         fatalError()
-       }
-       returnValue = .success(character)
+       let characters = dataContainer.results
+//       guard let characters = characters else{
+//         returnValue = .failure(MarvelError.noData)
+//         fatalError()
+//       }
+       returnValue = .success(characters)
      case .failure(let error):
        returnValue = .failure(error)
      }
@@ -76,16 +79,16 @@ extension MarvelApiClient: MarvelApiProtocol {
     fatalError()
   }
 
-  func getCharactersList(completion: @escaping (Result<[GetCharacters.Response], Error>) -> Void) {
+ func getCharactersList(completion: @escaping (Result<GetCharacters.Response, Error>) -> Void) {
     // Get the first <limit> characters
     let request = GetCharacters(limit: limit, offset: 0)
     restApiClient.send(request ) { result in
       print("\nGetCharacters list finished, limit: \(self.limit), offset: \(self.offset)")
 
-      var completionValue: Result<[GetCharacters.Response], Error>
+      var completionValue: Result<GetCharacters.Response, Error>
       switch result {
       case .success((_, let data)):
-        let dataContaineResult = self.decode(data: data, request: request)
+        let dataContaineResult = self.decodeResponseDataToMarvelResponse(data: data, request: request)
         switch dataContaineResult{
         case .success(let dataContainer):
           completionValue = .success(dataContainer.results)
@@ -108,55 +111,13 @@ extension MarvelApiClient: MarvelApiProtocol {
       var completionResult: Result<GetCharacters.Response, Error>
       switch result {
       case .success((_, let data)):
-        completionResult = self.handleSuccessResultGetCharacter(data, request: request)
+        completionResult = self.handleSuccessResultsGetCharacter(data, request: request)
       case .failure(let error):
         completionResult = .failure(error)
       }
       completion(completionResult)
     }
   }
-//  // Encodes a URL based on the given request using
-//  // Create a URLComponents url composing:
-//  // 1) baseUrl = baseEndpointUrl +  request.resourceName
-//  // 2) commonQueryItems
-//  // 3) customQueryItems a partir de request object
-//  func buildApiEndpoint<T: RestAPIRequest>(request: T) -> URL? { //swiftlint:disable:this function_body_length
-//    guard let baseUrl = URL(string: request.resourceName, relativeTo: URL(string: request.apiRequestConfig.baseEndpointString) ) else {
-//      //      fatalError("Bad resourceName: \(resourceName)")
-//      return URL(string: request.apiRequestConfig.baseEndpointString)
-//    }
-//    guard var components = URLComponents(url: baseUrl, resolvingAgainstBaseURL: true) else { return nil }
-//
-//    // Common query items needed for all Marvel requests
-//    var commonQueryItems = [URLQueryItem]()
-//
-//    if let privateKey = request.apiRequestConfig.privateKey, let publicKey = request.apiRequestConfig.publicKey{
-//      let timestamp = "\(Date().timeIntervalSince1970)"
-//
-//      let str = "\(timestamp)\(privateKey)\(publicKey)"
-//
-//      guard let digest =  str.insecureMD5Hash() else { return nil }
-//      commonQueryItems = [
-//        URLQueryItem(name: "ts", value: timestamp),
-//        URLQueryItem(name: "hash", value: digest),
-//        URLQueryItem(name: "apikey", value: request.apiRequestConfig.publicKey)
-//      ]
-//    }
-//
-//    // Custom query items needed for this specific request
-//    var customQueryItems = [URLQueryItem]()
-//
-//    if let params = request.parameters, !params.isEmpty {
-//      customQueryItems = params.map { item, value in
-//        URLQueryItem(name: item, value: value)
-//      }
-//    }
-//
-//    components.queryItems = commonQueryItems + customQueryItems
-//
-//    // Construct the final URL with all the previous data
-//    return components.url
-//  }
 }
 
 //  func getComic(with id: Int, completion: @escaping (ComicResult) -> Void) {

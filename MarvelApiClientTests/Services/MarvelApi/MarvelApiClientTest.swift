@@ -54,9 +54,9 @@ class MarvelApiClientCharactersTestMock: XCTestCase {
     sut.getCharacter(with: testResult.id!) { result in
       XCTAssertNotNil(result)
       switch result {
-      case .success(let character):
+      case .success(let characters):
 //        XCTAssert(characters.count == 1)
-        XCTAssert(character.id == testResult.id)
+        XCTAssert(characters.first!.id == testResult.id)
       case .failure(_):
         XCTAssert(false)
       }

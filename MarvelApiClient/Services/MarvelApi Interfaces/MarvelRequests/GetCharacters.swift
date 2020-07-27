@@ -3,7 +3,7 @@ import Rest
 
 struct GetCharacters: RestAPIRequest {
 
-  typealias Response = CharacterResult
+  typealias Response = [CharacterResult]
 
   var apiRequestConfig: ServiceConfigProtocol = MarvelApiRequestConfig()
 
@@ -29,5 +29,21 @@ struct GetCharacters: RestAPIRequest {
     if let limit = limit { params["limit"] = String(limit) }
     if let offset = offset { params["offset"] = String(offset)}
     self.parameters = params
+  }
+
+  func decode(_ data: Data) -> Result<Response, Error> {
+    var result: Result<Response, Error>
+    do {
+      let marvelResponse = try JSONDecoder().decode(MarvelResponse<Response>.self, from: data)
+      if let dataContainer = marvelResponse.data {
+        result = .success(dataContainer.results)
+      } else {
+        result = .failure(MarvelError.noData)
+      }
+    } catch {
+      _ = try? JSONDecoder().decode(ErrorResponse.self, from: data)
+      result = .failure(MarvelError.decoding)
+    }
+    return result
   }
 }

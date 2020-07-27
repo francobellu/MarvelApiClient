@@ -24,4 +24,21 @@ struct GetComic: RestAPIRequest {
     params["comicId"] = String(comicId)
     self.parameters = params
   }
+  
+  func decode(_ data: Data) -> Result<Response, Error> {
+    var result: Result<Response, Error>
+    do {
+      let marvelResponse = try JSONDecoder().decode(MarvelResponse<Response>.self, from: data)
+      if let dataContainer = marvelResponse.data {
+        let characters = dataContainer.results
+        result = .success(characters)
+      } else {
+        result = .failure(MarvelError.noData)
+      }
+    } catch {
+      _ = try? JSONDecoder().decode(ErrorResponse.self, from: data)
+      result = .failure(MarvelError.decoding)
+    }
+    return result
+  }
 }

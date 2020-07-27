@@ -15,7 +15,7 @@ protocol GetCharactersListInteractorInputPort: class{
 
 //  PRESENTER OUTPUT
 protocol GetCharactersListInteractorOutputPort: class{
-  func domainData(result: Result<[GetCharacters.Response], Error>)
+  func domainData(result: Result<GetCharacters.Response, Error>)
 }
 
 private protocol GetCharactersListInteractorProtocol: class{
@@ -46,21 +46,21 @@ extension GetCharactersListInteractor: GetCharactersListInteractorInputPort{
 }
 
 // MARK: - PRIVATE functions
-extension GetCharactersListInteractor{
+private extension GetCharactersListInteractor{
   private func getCharactersList() {
-    apiClient.getCharactersList { result in
-      self.handle(result: result)
+    apiClient.getCharactersList { results in
+      self.handle(results: results)
     }
   }
 
-  fileprivate func handle(result: Result<[GetCharacters.Response], Error>){
-    switch result {
+  private func handle(results: Result<GetCharacters.Response, Error>){
+    switch results {
     case .success:
       // completion is the interactor output port
-      self.outputPort?.domainData(result: result)
+      self.outputPort?.domainData(result: results)
     case .failure(let error):
       print(error)
-      self.outputPort?.domainData(result: result)
+      self.outputPort?.domainData(result: results)
     }
   }
 }

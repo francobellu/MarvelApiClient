@@ -80,7 +80,7 @@ class GetCharactersListInteractorInputPortTest: XCTestCase {
     let charactersWorkerSpy = CharacterWorkerTestDouble()
 
     // prepare the result that we want to use
-    let testResult = Result<[GetCharacters.Response], Error>.success(getResponse(from: "MockedResponseGetCharacters").data!.results)
+    let testResult = Result<GetCharacters.Response, Error>.success(getResponse(from: "MockedResponseGetCharacters").data!.results)
     charactersWorkerSpy.stubbedResult = testResult
 
     appDependenciesDummy.marvelApiClient = charactersWorkerSpy
@@ -113,7 +113,7 @@ class GetCharactersListInteractorInputPortTest: XCTestCase {
     let appDependenciesDummy = AppDependenciesDummy()
 
     // Initialize a worker Stub with a test  result
-    let testResult = Result<[GetCharacters.Response], Error>.failure(MarvelError.noData)
+    let testResult = Result<GetCharacters.Response, Error>.failure(MarvelError.noData)
     let charactersWorkerStub = CharacterWorkerTestDouble(stubbedResult: testResult)
 
     charactersWorkerStub.stubbedResult = testResult
@@ -145,14 +145,14 @@ class GetCharactersListInteractorInputPortTest: XCTestCase {
 class CharacterWorkerTestDouble: MarvelApiProtocol {
 
   var getCharactersListCalled = false
-  var stubbedResult: Result<[GetCharacters.Response], Error>?
+  var stubbedResult: Result<GetCharacters.Response, Error>?
 
-  init(stubbedResult: Result<[GetCharacters.Response], Error>? = nil) {
+  init(stubbedResult: Result<GetCharacters.Response, Error>? = nil) {
     // use a default result
-    self.stubbedResult = Result<[GetCharacters.Response], Error>.failure(MarvelError.noData)
+    self.stubbedResult = Result<GetCharacters.Response, Error>.failure(MarvelError.noData)
   }
 
-  func getCharactersList(completion: @escaping (Result<[GetCharacters.Response], Error>) -> Void) {
+  func getCharactersList(completion: @escaping (Result<GetCharacters.Response, Error>) -> Void) {
     getCharactersListCalled = true
 
     // Need to call campletion to test outputPort
@@ -173,10 +173,15 @@ class CharacterWorkerTestDouble: MarvelApiProtocol {
 }
 
 class PresenterTestDouble: GetCharactersListInteractorOutputPort {
+//  func domainData(result: Result<[GetCharacters.Response], Error>) {
+//    <#code#>
+//  }
+  
   var domainDataCalled = false
 
-  var result = Result<[GetCharacters.Response], Error>.success( getResponse(from: "MockedResponseGetCharacters").data!.results)
-  func domainData(result: Result<[GetCharacters.Response], Error>) {
+  var result = Result<[CharacterResult], Error>.success( getResponse(from: "MockedResponseGetCharacters").data!.results)
+
+  func domainData(result: Result<[CharacterResult], Error>) {
     domainDataCalled = true
     self.result = result
   }

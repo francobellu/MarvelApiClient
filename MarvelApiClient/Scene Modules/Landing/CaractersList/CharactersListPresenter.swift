@@ -64,7 +64,7 @@ class CharactersListPresenter: CharactersListPresenterProtocol {
 
 // MARK: - GetCharactersListInteractorOutputPort
 extension CharactersListPresenter: GetCharactersListInteractorOutputPort{
-  func domainData(result: Result<[GetCharacters.Response], Error>) {
+  func domainData(result: Result<GetCharacters.Response, Error>) {
     switch result {
     case .success(let characters):
       self.isLoading.value = false
