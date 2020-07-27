@@ -5,7 +5,7 @@ struct GetComics: RestAPIRequest {
 
   typealias Response = ComicResult
 
-  var apiRequestConfig: ApiRequestConfigProtocol = MarvelApiRequestConfig()
+  var apiRequestConfig: ServiceConfigProtocol = MarvelApiRequestConfig()
 
   var method: Rest.Method = .get
 

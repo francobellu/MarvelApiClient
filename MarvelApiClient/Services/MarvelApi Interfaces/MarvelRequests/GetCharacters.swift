@@ -5,7 +5,7 @@ struct GetCharacters: RestAPIRequest {
 
   typealias Response = CharacterResult
 
-  var apiRequestConfig: ApiRequestConfigProtocol = MarvelApiRequestConfig()
+  var apiRequestConfig: ServiceConfigProtocol = MarvelApiRequestConfig()
 
   var method: Rest.Method = .get
 
