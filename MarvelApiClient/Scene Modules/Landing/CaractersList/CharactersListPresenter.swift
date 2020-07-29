@@ -17,10 +17,6 @@ class CharactersListPresenter: CharactersListPresenterProtocol {
 
   private var dependencies: AppDependenciesProtocol! // swiftlint:disable:this implicitly_unwrapped_optional
 
-  private var apiClient: MarvelApiProtocol{
-    dependencies.marvelApiClient
-  }
-
   // Presentation Model Observables
   var viewDidLoad = Observable<Bool>(value: false)
   var title = Observable<String>(value: "Marvel Characters")

@@ -14,10 +14,6 @@ class ComicsListPresenter {
 
   private var dependencies: AppDependenciesProtocol! // swiftlint:disable:this implicitly_unwrapped_optional
 
-  private var apiClient: MarvelApiProtocol{
-    dependencies.marvelApiClient
-  }
-
   private var comics: [ComicResult] = []
 
   private(set) var title = "Marvel Comics"
@@ -40,17 +36,22 @@ class ComicsListPresenter {
   }
 
   // MARK: - API FUNCTIONS
-  func getComicsList(completion: @escaping ( () -> Void) ) {
-    apiClient.getComicsList { ( comics: [ComicResult])  in
-      self.comics = comics
-      completion()
-    }
-  }
-
   func getNextComicsList(completion: @escaping () -> Void) {
-    apiClient.getComicsList { ( comics: [ComicResult])  in
-      // Update dataSOurce array
-      self.comics += comics
+    let request = GetComics(restDependencies: dependencies.restDependencies)
+    // todo: use interactor
+    request.execute { ( result: Result<GetComics.Response, Error>)  in
+
+      switch result {
+      case .success(let comics):
+//        self.isLoading.value = false
+//        self.buildPresentationModel(from: characters)
+        self.comics += comics
+      case .failure(let error):
+        print(error)
+//        todo: handle error
+//        self.isError.value = error
+        // Hanlde Errors
+      }
       completion()
     }
   }

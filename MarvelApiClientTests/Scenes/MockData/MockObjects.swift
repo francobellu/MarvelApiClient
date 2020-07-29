@@ -59,6 +59,11 @@ class AppDependenciesDummy: AppDependenciesProtocol {
 
   let mockData: String = ""
 
+
+  lazy var  restDependencies: RestDependenciesProtocol = {
+    return RestDependencies()
+  }()
+
   lazy var restApiClient: RestApiClient = {
     return RestApiClient(session: MockURLSession())
   }()

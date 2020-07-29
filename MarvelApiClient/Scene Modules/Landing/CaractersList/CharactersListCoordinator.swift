@@ -92,10 +92,8 @@ extension CharactersListCoordinator: CharactersListCoordinatorDelegate {
   }
 
   private func presentCharacterDetailViewController(with character: CharacterResult ) {
-    let viewPresenter = CharacterDetailPresenter(dependencies: dependencies, character: character)
 
-    let viewController = CharacterDetailViewController.instantiateViewController()
-    viewController.presenter = viewPresenter
+    let viewController = dependencies.makeCharacterDetailView(character: character)
 
     (coordinatorPresenter as? UINavigationController)?.pushViewController(viewController, animated: true)
   }

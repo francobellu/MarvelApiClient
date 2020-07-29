@@ -1,13 +1,15 @@
 import Foundation
 import Rest
 
-struct GetCharacters: RestAPIRequest {
+struct GetCharacters: MarvelApiRequest {
 
   typealias Response = [CharacterResult]
 
-  var apiRequestConfig: ServiceConfigProtocol = MarvelApiRequestConfig()
+  var restDependencies: RestDependenciesProtocol
 
-  var method: Rest.Method = .get
+  var apiRequestConfig: RestServiceConfigProtocol
+
+  var method: RestMethod = .get
 
   var parameters: [String: String]?
 
@@ -18,10 +20,15 @@ struct GetCharacters: RestAPIRequest {
   //var decode: (Data) throws -> Response
 
   // Note that nil parameters will not be used
-  init(name: String? = nil,
+  init(restDependencies: RestDependenciesProtocol,
+       name: String? = nil,
        nameStartsWith: String? = nil,
        limit: Int? = nil,
        offset: Int? = nil) {
+
+    self.restDependencies = restDependencies
+
+    self.apiRequestConfig = restDependencies.apiRequestConfig
 
     var params = [String: String]()
     if let name = name {params["name"] = name}
@@ -30,20 +37,28 @@ struct GetCharacters: RestAPIRequest {
     if let offset = offset { params["offset"] = String(offset)}
     self.parameters = params
   }
-
-  func decode(_ data: Data) -> Result<Response, Error> {
-    var result: Result<Response, Error>
-    do {
-      let marvelResponse = try JSONDecoder().decode(MarvelResponse<Response>.self, from: data)
-      if let dataContainer = marvelResponse.data {
-        result = .success(dataContainer.results)
-      } else {
-        result = .failure(MarvelError.noData)
-      }
-    } catch {
-      _ = try? JSONDecoder().decode(ErrorResponse.self, from: data)
-      result = .failure(MarvelError.decoding)
-    }
-    return result
-  }
+//
+//  func getCharactersList(completion: @escaping (Result<Response, Error>) -> Void) {
+//    // Get the first <limit> characters
+////    let request = GetCharacters(limit: limit, offset: 0)
+//    restApiClient.send(self ) { result in
+////      print("\nGetCharacters list finished, limit: \(self.limit), offset: \(self.offset)")
+//
+//      var completionValue: Result<Response, Error>
+//      switch result {
+//      case .success((_, let data)):
+//        let dataContaineResult = self.decodeResponseDataToMarvelResponse(data: data, request: self)
+//        switch dataContaineResult{
+//        case .success(let dataContainer):
+//          completionValue = .success(dataContainer.results)
+//        case .failure(let error):
+//          completionValue = .failure(error)
+//        }
+//
+//      case .failure(let error):
+//        completionValue = .failure(error)
+//      }
+//      completion(completionValue)
+//    }
+//  }
 }

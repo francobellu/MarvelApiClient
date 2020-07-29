@@ -1,12 +1,15 @@
 import Foundation
 import Rest
 
-struct GetComics: RestAPIRequest {
-  typealias Response = ComicResult
+struct GetComics: MarvelApiRequest {
 
-  var apiRequestConfig: ServiceConfigProtocol = MarvelApiRequestConfig()
+  typealias Response = [ComicResult]
 
-  var method: Rest.Method = .get
+  var restDependencies: RestDependenciesProtocol
+
+  var apiRequestConfig: RestServiceConfigProtocol
+
+  var method: RestMethod = .get
 
   var parameters: [String: String]?
 
@@ -23,11 +26,16 @@ struct GetComics: RestAPIRequest {
   }
 
   // Note that nil parameters will not be used
-  init(title: String? = nil,
+  init(restDependencies: RestDependenciesProtocol,
+       title: String? = nil,
        titleStartsWith: String? = nil,
        format: ComicFormat? = nil,
        limit: Int? = nil,
        offset: Int? = nil) {
+    self.restDependencies = restDependencies
+
+    self.apiRequestConfig = restDependencies.apiRequestConfig
+
     var params = [String: String]()
     if let title = title {params["title"] = title }
     if let titleStartsWith = title {params["titleStartsWith"] = titleStartsWith }
@@ -35,22 +43,5 @@ struct GetComics: RestAPIRequest {
     if let limit = title {params["limit"] = limit }
     if let offset = title {params["offset"] = offset }
     self.parameters = params
-  }
-
-  func decode(_ data: Data) -> Result<Response, Error> {
-    var result: Result<Response, Error>
-    do {
-      let marvelResponse = try JSONDecoder().decode(MarvelResponse<Response>.self, from: data)
-      if let dataContainer = marvelResponse.data {
-        let characters = dataContainer.results
-        result = .success(characters)
-      } else {
-        result = .failure(MarvelError.noData)
-      }
-    } catch {
-      _ = try? JSONDecoder().decode(ErrorResponse.self, from: data)
-      result = .failure(MarvelError.decoding)
-    }
-    return result
   }
 }

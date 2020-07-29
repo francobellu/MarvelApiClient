@@ -13,10 +13,6 @@ class ComicDetailPresenter{
 
   private var dependencies: AppDependenciesProtocol! // swiftlint:disable:this implicitly_unwrapped_optional
 
-  private var apiClient: MarvelApiProtocol{
-    dependencies.marvelApiClient
-  }
-
   init(dependencies: AppDependenciesProtocol, comic: ComicResult) {
     self.comic = comic
   }
@@ -28,9 +24,20 @@ class ComicDetailPresenter{
 
   // MARK: - API FUNCTIONS
   func getComic(with comicId: Int, completion: @escaping () -> Void) {
-    apiClient.getComic(with: comicId) { comic in
-      self.comic = comic
-      print("FB: comic: \(comic)")
+
+    let request = GetComic(restDependencies: dependencies.restDependencies, comicId: comicId)
+    // todo: use interactor
+    request.execute { ( result: Result<GetComic.Response, Error>)  in
+      switch result {
+      case .success(let comic):
+        self.comic = comic
+      case .failure(let error):
+        print(error)
+        // TODO: handle error
+      }
+      completion()
+
+      print("FB: comic: \(String(describing: self.comic))")
       completion()
     }
   }

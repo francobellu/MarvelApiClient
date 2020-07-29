@@ -11,24 +11,43 @@ import Rest
 
 @testable import MarvelApiClient
 
+class RestDependenciesMock: RestDependenciesProtocol{
+
+  // MARK: - RestDependenciesProtocol
+  var restApiClient: RestApiClientProtocol
+
+  var apiRequestConfig: RestServiceConfigProtocol = MarvelApiRequestConfig()
+
+  var method: RestMethod = .get
+
+  init(sessionNextData: Data) {
+    let session = MockURLSession()
+    session.nextData = sessionNextData
+
+    restApiClient = RestApiClient(session:session)
+  }
+}
+
 class MarvelApiClientCharactersTestMock: XCTestCase {
 
-  var sut: MarvelApiClient! // swiftlint:disable:this implicitly_unwrapped_optional
+//  var sut: MarvelApiClient! // swiftlint:disable:this implicitly_unwrapped_optional
 
   func testGetCharactersList() throws {
 
-    let session = MockURLSession()
-    session.nextData = mockResponseData(for: "MockedResponseGetCharacters")
-    let restApiClient = RestApiClient(session: session)
-    sut = MarvelApiClient(restApiClient: restApiClient)
+    let nextData = mockResponseData(for: "MockedResponseGetCharacters")
+
+    let restDependenciesMock = RestDependenciesMock(sessionNextData: nextData)
 
     let testResult: [CharacterResult]  = getObjects(from: "MockedResponseGetCharacters")
 
-    sut.getCharactersList { response in
-      print("FB: response: \(response)")
+    let sut = GetCharacters(restDependencies: restDependenciesMock)
 
-      XCTAssertNotNil(response)
-      switch response {
+
+    sut.execute{ ( result: Result<[CharacterResult], Error>) in
+      print("FB: response: \(result)")
+
+      XCTAssertNotNil(result)
+      switch result {
       case .success(let characters):
 
         XCTAssert(characters.count == testResult.count)
@@ -43,15 +62,17 @@ class MarvelApiClientCharactersTestMock: XCTestCase {
 
   func testGetCharacter() throws {
 
-    let session = MockURLSession()
-    session.nextData = mockResponseData(for: "MockedResponseCharacterResultId1011334")
-    let restApiClient = RestApiClient(session: session)
-    sut = MarvelApiClient(restApiClient: restApiClient)
-
     let testResults: [CharacterResult] = getObjects(from: "MockedResponseGetCharacters")
     let testResult = testResults.first!
 
-    sut.getCharacter(with: testResult.id!) { result in
+
+    let nextData = mockResponseData(for: "MockedResponseCharacterResultId1011334")
+
+    let restDependenciesMock = RestDependenciesMock(sessionNextData: nextData)
+
+    let sut = GetCharacter(restDependencies: restDependenciesMock, id: testResult.id!)
+
+    sut.execute{ ( result: Result<[CharacterResult], Error>) in
       XCTAssertNotNil(result)
       switch result {
       case .success(let characters):

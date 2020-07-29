@@ -12,31 +12,40 @@ protocol CharacterDetailInteractorProtocol {
   init(dependencies: AppDependenciesProtocol)
 
   // MARK: - Business logic
-  func getCharacter(with characterId: Int, completion: @escaping (CharacterResult?) -> Void)
+   func getCharacter(with characterId: Int, completion: @escaping (Result<CharacterResult, Error>) -> Void)
 }
 
 class CharacterDetailInteractor: CharacterDetailInteractorProtocol{
 
   private var dependencies: AppDependenciesProtocol! // swiftlint:disable:this implicitly_unwrapped_optional
 
-  private var apiClient: MarvelApiProtocol{
-    dependencies.marvelApiClient
-  }
+//  private var apiClient: MarvelApiProtocol{
+//    dependencies.marvelApiClient
+//  }
 
   required init(dependencies: AppDependenciesProtocol) {
     self.dependencies = dependencies
   }
 
   // MARK: - Business logic
-  func getCharacter(with characterId: Int, completion: @escaping (CharacterResult?) -> Void) {
-    apiClient.getCharacter(with: characterId) { response in
-      switch response {
+  func getCharacter(with characterId: Int, completion: @escaping (Result<CharacterResult, Error>) -> Void) {
+
+    let request = GetCharacter(restDependencies: dependencies.restDependencies, id: characterId)
+    request.execute { result in
+      print("\nGetCharacter \(characterId) finished")
+
+      var completionResult: Result<CharacterResult, Error>
+      switch result {
       case .success(let characters):
-        completion(characters.first)
+        guard let character = characters.first else{
+          completionResult = .failure(MarvelError.noData)
+          return
+        }
+        completionResult = .success(character)
       case .failure(let error):
-        completion( nil )
-        print(error)
+        completionResult = .failure(error)
       }
+      completion(completionResult)
     }
   }
 }

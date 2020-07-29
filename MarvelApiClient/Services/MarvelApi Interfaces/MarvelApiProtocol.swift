@@ -10,10 +10,10 @@ import Foundation
 
 protocol MarvelApiProtocol {
   // Characters
-  func getCharactersList(completion: @escaping (Result<GetCharacters.Response, Error>) -> Void)
-  func getCharacter(with id: Int, completion:  @escaping (Result<GetCharacters.Response, Error>) -> Void)
-
-  // Comics
-  func getComicsList(completion: @escaping ([ComicResult]) -> Void)
-  func getComic(with id: Int, completion: @escaping (ComicResult) -> Void)
+//  func getCharactersList(completion: @escaping (Result<GetCharacters.Response, Error>) -> Void)
+//  func getCharacter(with id: Int, completion:  @escaping (Result<GetCharacters.Response, Error>) -> Void)
+//
+//  // Comics
+//  func getComicsList(completion: @escaping ([ComicResult]) -> Void)
+//  func getComic(with id: Int, completion: @escaping (ComicResult) -> Void)
 }

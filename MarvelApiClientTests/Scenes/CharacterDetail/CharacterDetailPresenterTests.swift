@@ -28,7 +28,7 @@ class CharacterDetailPresenterTest: XCTestCase {
     // CONFIGURE THE MOCK DATA
     let testResults: [CharacterResult] = getObjects(from: "MockedResponseGetCharacters")
     let testResult = testResults.first!
-    mockIterator.mockCharacterDetailInteractorData.mockCharacterDetailResult = testResult
+    mockIterator.mockCharacterDetailInteractorData.mockCharacterDetailResult = .success(testResult)
     sut = CharacterDetailPresenter(dependencies: appDependenciesDummy,
                                    characterId: Int(testResult.id!),
                                    interactor: mockIterator)
@@ -39,5 +39,22 @@ class CharacterDetailPresenterTest: XCTestCase {
     XCTAssert(self.sut.getComicsCount() == "Comics available: \(testResult.comics!.items!.count)" )
     XCTAssert(self.sut.getSeriesCount() == "Series available: \(testResult.series!.items!.count)" )
     XCTAssert(self.sut.getStoriesCount() == "Stories available: \(testResult.stories!.items!.count)")
+  }
+}
+
+
+struct MockCharacterDetailInteractorData {
+  var mockCharacterDetailResult: Result<CharacterResult, Error>?
+}
+
+class MockCharacterDetailInteractor: CharacterDetailInteractorProtocol{
+
+  var mockCharacterDetailInteractorData = MockCharacterDetailInteractorData(mockCharacterDetailResult: nil)
+
+  func getCharacter(with characterId: Int, completion: @escaping (Result<CharacterResult, Error>) -> Void) {
+    completion(mockCharacterDetailInteractorData.mockCharacterDetailResult!)
+  }
+
+  required init(dependencies: AppDependenciesProtocol) {
   }
 }

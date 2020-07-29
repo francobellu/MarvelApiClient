@@ -36,7 +36,7 @@ class GetCharactersListInteractorInputPortTest: XCTestCase {
     // Given
     let appDependenciesDummy = AppDependenciesDummy()
     let charactersWorkerSpy = CharacterWorkerTestDouble()
-    appDependenciesDummy.marvelApiClient = charactersWorkerSpy
+//    appDependenciesDummy.marvelApiClient = charactersWorkerSpy
     let sut = GetCharactersListInteractor(dependencies: appDependenciesDummy)
 
     // When
@@ -58,7 +58,7 @@ class GetCharactersListInteractorInputPortTest: XCTestCase {
     // Given
     let appDependenciesDummy = AppDependenciesDummy()
     let charactersWorkerSpy = CharacterWorkerTestDouble()
-    appDependenciesDummy.marvelApiClient = charactersWorkerSpy
+//    appDependenciesDummy.marvelApiClient = charactersWorkerSpy
     let presenterSpy = PresenterTestDouble()
     let sut = GetCharactersListInteractor(dependencies: appDependenciesDummy)
     sut.outputPort = presenterSpy // TODO: tghis should be a fdummy
@@ -83,7 +83,7 @@ class GetCharactersListInteractorInputPortTest: XCTestCase {
     let testResult = Result<GetCharacters.Response, Error>.success(getResponse(from: "MockedResponseGetCharacters").data!.results)
     charactersWorkerSpy.stubbedResult = testResult
 
-    appDependenciesDummy.marvelApiClient = charactersWorkerSpy
+//    appDependenciesDummy.marvelApiClient = charactersWorkerSpy
     let presenterSpy = PresenterTestDouble()
     let sut = GetCharactersListInteractor(dependencies: appDependenciesDummy)
     sut.outputPort = presenterSpy
@@ -118,7 +118,7 @@ class GetCharactersListInteractorInputPortTest: XCTestCase {
 
     charactersWorkerStub.stubbedResult = testResult
 
-    appDependenciesDummy.marvelApiClient = charactersWorkerStub
+//    appDependenciesDummy.marvelApiClient = charactersWorkerStub
     let presenterSpy = PresenterTestDouble()
     let sut = GetCharactersListInteractor(dependencies: appDependenciesDummy)
     sut.outputPort = presenterSpy // TODO: tghis should be a fdummy

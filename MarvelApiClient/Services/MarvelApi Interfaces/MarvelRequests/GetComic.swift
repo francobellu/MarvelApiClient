@@ -1,12 +1,14 @@
 import Foundation
 import Rest
 
-struct GetComic: RestAPIRequest {
+struct GetComic: MarvelApiRequest {
   typealias Response = ComicResult
 
-  var apiRequestConfig: ServiceConfigProtocol = MarvelApiRequestConfig()
+  var restDependencies: RestDependenciesProtocol
 
-  var method: Rest.Method = .get
+  var apiRequestConfig: RestServiceConfigProtocol
+
+  var method: RestMethod = .get
 
   var parameters: [String: String]?
 
@@ -18,27 +20,35 @@ struct GetComic: RestAPIRequest {
 
   private let comicId: Int
 
-  init(comicId: Int) {
+  init(restDependencies: RestDependenciesProtocol, comicId: Int) {
+    self.restDependencies = restDependencies
+
+    self.apiRequestConfig = restDependencies.apiRequestConfig
+
     self.comicId = comicId
     var params = [String: String]()
     params["comicId"] = String(comicId)
     self.parameters = params
   }
-  
-  func decode(_ data: Data) -> Result<Response, Error> {
-    var result: Result<Response, Error>
-    do {
-      let marvelResponse = try JSONDecoder().decode(MarvelResponse<Response>.self, from: data)
-      if let dataContainer = marvelResponse.data {
-        let characters = dataContainer.results
-        result = .success(characters)
-      } else {
-        result = .failure(MarvelError.noData)
-      }
-    } catch {
-      _ = try? JSONDecoder().decode(ErrorResponse.self, from: data)
-      result = .failure(MarvelError.decoding)
-    }
-    return result
-  }
+
+//  func execute(completion: @escaping (Result<Response, Error>) -> Void) {
+//    // Yet another request with a mandatory parameter
+//    restApiClient.send(self) { result in
+////      print("\nGetComic \(id) finished:")
+//      var completionValue: Result<Response, Error>
+//      switch result {
+//      case .success((_, let data)):
+//        let dataContaineResult = self.decodeResponseDataToMarvelResponse(data: data, request: self)
+//        switch dataContaineResult{
+//        case .success(let dataContainer):
+//          completionValue = .success(dataContainer.results)
+//        case .failure(let error):
+//          completionValue = .failure(error)
+//        }
+//      case .failure(let error):
+//        completionValue = .failure(error)
+//      }
+//      completion(completionValue)
+//    }
+//  }
 }

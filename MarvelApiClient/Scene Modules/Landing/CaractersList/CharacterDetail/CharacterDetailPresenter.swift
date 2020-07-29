@@ -15,10 +15,6 @@ class CharacterDetailPresenter {
 
   private var interactor: CharacterDetailInteractorProtocol?
 
-  private var apiClient: MarvelApiProtocol{
-    dependencies.marvelApiClient
-  }
-
   init(dependencies: AppDependenciesProtocol, character: CharacterResult) {
     self.character.value = character
     self.dependencies = dependencies
@@ -66,9 +62,13 @@ class CharacterDetailPresenter {
   // MARK: - Business logic
   func getCharacter(with characterId: Int, completion: @escaping () -> Void) {
     guard let interactor = interactor else { return }
-    interactor.getCharacter(with: characterId) { character in
-      self.character.value = character
-      print("FB: character: \(String(describing: character))")
+    interactor.getCharacter(with: characterId) { result in
+      switch result {
+      case .success(let character):
+        self.character.value = character
+      case .failure: break
+      }
+      print("FB: character: \(String(describing: self.character))")
       completion()
     }
   }

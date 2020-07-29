@@ -23,7 +23,7 @@ class ComicsListViewController: UIViewController, StoryboardInstantiable {
     setBackBtnInterceptMechanism()
     tableView.register(UINib(nibName: R.nib.comicCell.name, bundle: nil), forCellReuseIdentifier: R.reuseIdentifier.comicCellId.identifier)
     activityIndicator.startAnimating()
-    presenter.getComicsList {
+    presenter.getNextComicsList {
       // Reload Data
       DispatchQueue.main.async {
         self.tableView.reloadData()
