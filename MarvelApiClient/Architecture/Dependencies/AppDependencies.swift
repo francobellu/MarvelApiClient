@@ -18,21 +18,11 @@ class AppDependencies: AppDependenciesProtocol {
   //    MarvelApiClient(restApiClient: RestApiClient())
   //  }()
 
-  lazy var dataStore: DataStoreProtocol = {
-    UserDefaultsDataStore()
-  }()
+  lazy var dataStore: DataStoreProtocol = UserDefaultsDataStore()
 
-  lazy var appConfig: AppConfig = {
-    AppConfig(dataStore: self.dataStore)
-  }()
+  lazy var appConfig: AppConfig = AppConfig(dataStore: self.dataStore)
 
-  lazy var factory: Factory = {
-    Factory(dependencies: self)
-  }()
-
-//  init(<#parameters#>) {
-//    factory
-//  }
+  lazy var factory: Factory = Factory(dependencies: self)
 
   // When only property dependency injection is possible like for ViewControllers
   func inject(into object: AnyObject) {

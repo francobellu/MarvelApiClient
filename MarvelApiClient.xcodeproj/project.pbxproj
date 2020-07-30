@@ -482,8 +482,9 @@
 		C715DC2B24D30AF500DAC74A /* Dependencies */ = {
 			isa = PBXGroup;
 			children = (
-				C728C2AA246C375200F60806 /* AppDependencies.swift */,
 				C715DC2E24D30BC500DAC74A /* RestDependencies */,
+				C715DC3424D312B700DAC74A /* Factory */,
+				C728C2AA246C375200F60806 /* AppDependencies.swift */,
 			);
 			path = Dependencies;
 			sourceTree = "<group>";
@@ -509,9 +510,16 @@
 			isa = PBXGroup;
 			children = (
 				C715DC2F24D30BD200DAC74A /* RestDependencies.swift */,
-				C715DC3124D30C5D00DAC74A /* Factory.swift */,
 			);
 			path = RestDependencies;
+			sourceTree = "<group>";
+		};
+		C715DC3424D312B700DAC74A /* Factory */ = {
+			isa = PBXGroup;
+			children = (
+				C715DC3124D30C5D00DAC74A /* Factory.swift */,
+			);
+			path = Factory;
 			sourceTree = "<group>";
 		};
 		C72CF2B32471ED860048B0A2 /* Scripts */ = {
