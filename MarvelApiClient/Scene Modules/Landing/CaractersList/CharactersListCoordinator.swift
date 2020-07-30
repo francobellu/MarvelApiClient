@@ -66,17 +66,17 @@ extension CharactersListCoordinator: CharactersListCoordinatorDelegate {
 // MARK: - Implementation details
 private extension CharactersListCoordinator {
   private func presentCharactersListViewController() {
-     let view = dependencies.makeCharactersView(coordinatorDelegate: self)
+    let view = dependencies.factory.makeCharactersView(coordinatorDelegate: self)
      (coordinatorPresenter as? UINavigationController)?.pushViewController(view, animated: true)
    }
 
    private func presentCharacterDetailViewController(with characterId: String ) {
-     let view = dependencies.makeCharacterDetailView(with: characterId)
+    let view = dependencies.factory.makeCharacterDetailView(with: characterId)
      (self.coordinatorPresenter as? UINavigationController)?.pushViewController(view, animated: true)
    }
 
   private func presentCharacterDetailViewController(with character: CharacterResult ) {
-    let viewController = dependencies.makeCharacterDetailView(character: character)
+    let viewController = dependencies.factory.makeCharacterDetailView(character: character)
     (coordinatorPresenter as? UINavigationController)?.pushViewController(viewController, animated: true)
   }
 

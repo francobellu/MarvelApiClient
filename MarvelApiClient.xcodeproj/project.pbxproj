@@ -48,6 +48,12 @@
 		C7096D772449C7C500DEE7D3 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7096D762449C7C500DEE7D3 /* SceneDelegate.swift */; };
 		C715DC2024CF16F700DAC74A /* MarvelApiRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = C715DC1F24CF16F700DAC74A /* MarvelApiRequest.swift */; };
 		C715DC2224D2DB8D00DAC74A /* R.generated.swift in Sources */ = {isa = PBXBuildFile; fileRef = C715DC2124D2DB8D00DAC74A /* R.generated.swift */; };
+		C715DC2424D2DE1000DAC74A /* MockURLSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = C715DC2324D2DE1000DAC74A /* MockURLSession.swift */; };
+		C715DC2824D2DEB600DAC74A /* MockApiClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = C715DC2524D2DEB600DAC74A /* MockApiClient.swift */; };
+		C715DC2924D2DEB600DAC74A /* AppDependenciesDummy.swift in Sources */ = {isa = PBXBuildFile; fileRef = C715DC2624D2DEB600DAC74A /* AppDependenciesDummy.swift */; };
+		C715DC2A24D2DEB600DAC74A /* MockURLSessionDataTask.swift in Sources */ = {isa = PBXBuildFile; fileRef = C715DC2724D2DEB600DAC74A /* MockURLSessionDataTask.swift */; };
+		C715DC3024D30BD200DAC74A /* RestDependencies.swift in Sources */ = {isa = PBXBuildFile; fileRef = C715DC2F24D30BD200DAC74A /* RestDependencies.swift */; };
+		C715DC3224D30C5D00DAC74A /* Factory.swift in Sources */ = {isa = PBXBuildFile; fileRef = C715DC3124D30C5D00DAC74A /* Factory.swift */; };
 		C7169219244C99A5005BF4AB /* MockObjects.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7169218244C99A5005BF4AB /* MockObjects.swift */; };
 		C716921B244CD083005BF4AB /* MarvelApiClientTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = C716921A244CD083005BF4AB /* MarvelApiClientTest.swift */; };
 		C7169232244DE062005BF4AB /* MarvelDTOs.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7169228244DE062005BF4AB /* MarvelDTOs.swift */; };
@@ -144,6 +150,12 @@
 		C7096D762449C7C500DEE7D3 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		C715DC1F24CF16F700DAC74A /* MarvelApiRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MarvelApiRequest.swift; sourceTree = "<group>"; };
 		C715DC2124D2DB8D00DAC74A /* R.generated.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = R.generated.swift; sourceTree = "<group>"; };
+		C715DC2324D2DE1000DAC74A /* MockURLSession.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockURLSession.swift; sourceTree = "<group>"; };
+		C715DC2524D2DEB600DAC74A /* MockApiClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MockApiClient.swift; sourceTree = "<group>"; };
+		C715DC2624D2DEB600DAC74A /* AppDependenciesDummy.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDependenciesDummy.swift; sourceTree = "<group>"; };
+		C715DC2724D2DEB600DAC74A /* MockURLSessionDataTask.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MockURLSessionDataTask.swift; sourceTree = "<group>"; };
+		C715DC2F24D30BD200DAC74A /* RestDependencies.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestDependencies.swift; sourceTree = "<group>"; };
+		C715DC3124D30C5D00DAC74A /* Factory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Factory.swift; sourceTree = "<group>"; };
 		C7169218244C99A5005BF4AB /* MockObjects.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockObjects.swift; sourceTree = "<group>"; };
 		C716921A244CD083005BF4AB /* MarvelApiClientTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MarvelApiClientTest.swift; sourceTree = "<group>"; };
 		C7169228244DE062005BF4AB /* MarvelDTOs.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MarvelDTOs.swift; sourceTree = "<group>"; };
@@ -306,11 +318,10 @@
 		C70365E4247535C60005886F /* Architecture */ = {
 			isa = PBXGroup;
 			children = (
-				C728C2AA246C375200F60806 /* AppDependencies.swift */,
-				C7E02811243FD4DB00888249 /* AppCoordinator.swift */,
+				C715DC2D24D30B3000DAC74A /* UIDataBinding */,
+				C715DC2C24D30B1A00DAC74A /* Routing */,
+				C715DC2B24D30AF500DAC74A /* Dependencies */,
 				C7096D712448E6C000DEE7D3 /* DeepLink.swift */,
-				C7D3F03F243B770F004E4C0E /* Coordinator.swift */,
-				C776993C24B313BE003BE9BD /* Observable.swift */,
 			);
 			path = Architecture;
 			sourceTree = "<group>";
@@ -468,6 +479,41 @@
 			path = Resources;
 			sourceTree = "<group>";
 		};
+		C715DC2B24D30AF500DAC74A /* Dependencies */ = {
+			isa = PBXGroup;
+			children = (
+				C728C2AA246C375200F60806 /* AppDependencies.swift */,
+				C715DC2E24D30BC500DAC74A /* RestDependencies */,
+			);
+			path = Dependencies;
+			sourceTree = "<group>";
+		};
+		C715DC2C24D30B1A00DAC74A /* Routing */ = {
+			isa = PBXGroup;
+			children = (
+				C7E02811243FD4DB00888249 /* AppCoordinator.swift */,
+				C7D3F03F243B770F004E4C0E /* Coordinator.swift */,
+			);
+			path = Routing;
+			sourceTree = "<group>";
+		};
+		C715DC2D24D30B3000DAC74A /* UIDataBinding */ = {
+			isa = PBXGroup;
+			children = (
+				C776993C24B313BE003BE9BD /* Observable.swift */,
+			);
+			path = UIDataBinding;
+			sourceTree = "<group>";
+		};
+		C715DC2E24D30BC500DAC74A /* RestDependencies */ = {
+			isa = PBXGroup;
+			children = (
+				C715DC2F24D30BD200DAC74A /* RestDependencies.swift */,
+				C715DC3124D30C5D00DAC74A /* Factory.swift */,
+			);
+			path = RestDependencies;
+			sourceTree = "<group>";
+		};
 		C72CF2B32471ED860048B0A2 /* Scripts */ = {
 			isa = PBXGroup;
 			children = (
@@ -495,9 +541,13 @@
 		C74963AC2473D0E2001B9A5E /* MockData */ = {
 			isa = PBXGroup;
 			children = (
+				C715DC2524D2DEB600DAC74A /* MockApiClient.swift */,
+				C715DC2724D2DEB600DAC74A /* MockURLSessionDataTask.swift */,
+				C715DC2624D2DEB600DAC74A /* AppDependenciesDummy.swift */,
 				C7169218244C99A5005BF4AB /* MockObjects.swift */,
 				C74963B224740277001B9A5E /* MockedResponseCharacterResultId1011334.json */,
 				C74963A02472DD53001B9A5E /* MockedResponseGetCharacters.json */,
+				C715DC2324D2DE1000DAC74A /* MockURLSession.swift */,
 			);
 			path = MockData;
 			sourceTree = "<group>";
@@ -848,6 +898,7 @@
 				C728C2AB246C375300F60806 /* AppDependencies.swift in Sources */,
 				C715DC2024CF16F700DAC74A /* MarvelApiRequest.swift in Sources */,
 				C703664624753DEB0005886F /* ComicsListViewController.swift in Sources */,
+				C715DC3224D30C5D00DAC74A /* Factory.swift in Sources */,
 				C703664924753DEB0005886F /* LandingPresenter.swift in Sources */,
 				C7169232244DE062005BF4AB /* MarvelDTOs.swift in Sources */,
 				28998ED7217F636A0037039B /* GetCharacters.swift in Sources */,
@@ -858,6 +909,7 @@
 				28998ECC217F636A0037039B /* Result.swift in Sources */,
 				C703664424753DEB0005886F /* ComicCell.swift in Sources */,
 				C7D3F040243B770F004E4C0E /* Coordinator.swift in Sources */,
+				C715DC3024D30BD200DAC74A /* RestDependencies.swift in Sources */,
 				285122812181E3E5009D4AB0 /* Extensions.swift in Sources */,
 				C703664F24753E940005886F /* ComicDetailViewController.swift in Sources */,
 				C7096D772449C7C500DEE7D3 /* SceneDelegate.swift in Sources */,
@@ -877,6 +929,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				C7BE8B8924AF5F0D00B8A569 /* CharactersListViewControllerTests.swift in Sources */,
+				C715DC2924D2DEB600DAC74A /* AppDependenciesDummy.swift in Sources */,
 				C716921B244CD083005BF4AB /* MarvelApiClientTest.swift in Sources */,
 				C703665D24754D4B0005886F /* CharacterDetailPresenterTests.swift in Sources */,
 				C74963AB2473C89A001B9A5E /* DataLayer.swift in Sources */,
@@ -885,6 +938,9 @@
 				C74963A92473C886001B9A5E /* CharactersListInteractorTests.swift in Sources */,
 				C76B29A6243A5F1B00793179 /* MarvelApiClientIntegrationTests.swift in Sources */,
 				C703665A24754D010005886F /* CharactersListPresenterTest.swift in Sources */,
+				C715DC2824D2DEB600DAC74A /* MockApiClient.swift in Sources */,
+				C715DC2424D2DE1000DAC74A /* MockURLSession.swift in Sources */,
+				C715DC2A24D2DEB600DAC74A /* MockURLSessionDataTask.swift in Sources */,
 				C703665E24754D4B0005886F /* CharacterDetailInteractorTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
