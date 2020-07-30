@@ -72,11 +72,12 @@ extension AppCoordinator: Coordinator {
               let deeplinkableCoord = coordinator
               deeplinkableCoord.start(with: option)
             case .comics, .comic:
-              present(viewController: navController)
-              let coordinator = ComicsListCoordinator(parentCoordinator: self, coordinatorPresenter: navController, dependencies: dependencies)
-              add(coordinator)
-              let deeplinkableCoord = coordinator
-              deeplinkableCoord.start(with: option)
+//              present(viewController: navController)
+//              let coordinator = ComicsListCoordinator(parentCoordinator: self, coordinatorPresenter: navController, dependencies: dependencies)
+//              add(coordinator)
+//              let deeplinkableCoord = coordinator
+//              deeplinkableCoord.start(with: option)
+              break
           }
           //default start
         } else {

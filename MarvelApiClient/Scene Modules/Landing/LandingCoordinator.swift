@@ -89,11 +89,11 @@ extension LandingCoordinator: LandingCoordinatorDelegate {
 
   private func showAllComics() {
     // Create new coordinator...
-    let comicsCoordinator = ComicsListCoordinator(parentCoordinator: self, coordinatorPresenter: coordinatorPresenter as! UINavigationController, dependencies: dependencies)
-    comicsCoordinator.parentCoordinator = self
-    // ...start it...
-    comicsCoordinator.start()
-    // ...and add it
-    add(comicsCoordinator)
+//    let comicsCoordinator = ComicsListCoordinator(parentCoordinator: self, coordinatorPresenter: coordinatorPresenter as! UINavigationController, dependencies: dependencies)
+//    comicsCoordinator.parentCoordinator = self
+//    // ...start it...
+//    comicsCoordinator.start()
+//    // ...and add it
+//    add(comicsCoordinator)
   }
 }

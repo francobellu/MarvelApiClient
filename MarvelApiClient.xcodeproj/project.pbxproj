@@ -47,6 +47,7 @@
 		C7096D722448E6C000DEE7D3 /* DeepLink.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7096D712448E6C000DEE7D3 /* DeepLink.swift */; };
 		C7096D772449C7C500DEE7D3 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7096D762449C7C500DEE7D3 /* SceneDelegate.swift */; };
 		C715DC2024CF16F700DAC74A /* MarvelApiRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = C715DC1F24CF16F700DAC74A /* MarvelApiRequest.swift */; };
+		C715DC2224D2DB8D00DAC74A /* R.generated.swift in Sources */ = {isa = PBXBuildFile; fileRef = C715DC2124D2DB8D00DAC74A /* R.generated.swift */; };
 		C7169219244C99A5005BF4AB /* MockObjects.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7169218244C99A5005BF4AB /* MockObjects.swift */; };
 		C716921B244CD083005BF4AB /* MarvelApiClientTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = C716921A244CD083005BF4AB /* MarvelApiClientTest.swift */; };
 		C7169232244DE062005BF4AB /* MarvelDTOs.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7169228244DE062005BF4AB /* MarvelDTOs.swift */; };
@@ -81,7 +82,6 @@
 		C7BE8B8B24AF603400B8A569 /* CharactersListProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7BE8B8A24AF603400B8A569 /* CharactersListProtocols.swift */; };
 		C7D3F040243B770F004E4C0E /* Coordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7D3F03F243B770F004E4C0E /* Coordinator.swift */; };
 		C7E02812243FD4DB00888249 /* AppCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7E02811243FD4DB00888249 /* AppCoordinator.swift */; };
-		C7EC670A2440DFDB00F88FDE /* R.generated.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7EC67082440DFDB00F88FDE /* R.generated.swift */; };
 		C7EC670D24435E3C00F88FDE /* UserDefaultsDataStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7EC670C24435E3C00F88FDE /* UserDefaultsDataStore.swift */; };
 /* End PBXBuildFile section */
 
@@ -143,6 +143,7 @@
 		C7096D712448E6C000DEE7D3 /* DeepLink.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeepLink.swift; sourceTree = "<group>"; };
 		C7096D762449C7C500DEE7D3 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		C715DC1F24CF16F700DAC74A /* MarvelApiRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MarvelApiRequest.swift; sourceTree = "<group>"; };
+		C715DC2124D2DB8D00DAC74A /* R.generated.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = R.generated.swift; sourceTree = "<group>"; };
 		C7169218244C99A5005BF4AB /* MockObjects.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockObjects.swift; sourceTree = "<group>"; };
 		C716921A244CD083005BF4AB /* MarvelApiClientTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MarvelApiClientTest.swift; sourceTree = "<group>"; };
 		C7169228244DE062005BF4AB /* MarvelDTOs.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MarvelDTOs.swift; sourceTree = "<group>"; };
@@ -180,7 +181,6 @@
 		C7E02811243FD4DB00888249 /* AppCoordinator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppCoordinator.swift; sourceTree = "<group>"; };
 		C7EC67042440D7CE00F88FDE /* Podfile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Podfile; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
 		C7EC67072440DFDB00F88FDE /* Podfile.lock */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Podfile.lock; sourceTree = "<group>"; };
-		C7EC67082440DFDB00F88FDE /* R.generated.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = R.generated.swift; sourceTree = "<group>"; };
 		C7EC670C24435E3C00F88FDE /* UserDefaultsDataStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultsDataStore.swift; sourceTree = "<group>"; };
 		FBEAB5C3E0AA40D892C42941 /* Pods-MarvelApiClientTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MarvelApiClientTests.release.xcconfig"; path = "Target Support Files/Pods-MarvelApiClientTests/Pods-MarvelApiClientTests.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -210,6 +210,7 @@
 		287C99FD217F39CB00D63092 = {
 			isa = PBXGroup;
 			children = (
+				C715DC2124D2DB8D00DAC74A /* R.generated.swift */,
 				C7B987CE24C9D05F00745406 /* Rest */,
 				C71B79642476AA14002D5B09 /* MarvelApp.docx */,
 				2851229221832BB9009D4AB0 /* Readme.md */,
@@ -217,7 +218,6 @@
 				C76B29A4243A5F1B00793179 /* MarvelApiClientTests */,
 				C72CF2B32471ED860048B0A2 /* Scripts */,
 				C7EC67072440DFDB00F88FDE /* Podfile.lock */,
-				C7EC67082440DFDB00F88FDE /* R.generated.swift */,
 				C7EC67042440D7CE00F88FDE /* Podfile */,
 				C76B29AE243A639F00793179 /* sitrep.txt */,
 				287C9A07217F39CB00D63092 /* Products */,
@@ -826,6 +826,7 @@
 			files = (
 				C776993D24B313BE003BE9BD /* Observable.swift in Sources */,
 				C7E02812243FD4DB00888249 /* AppCoordinator.swift in Sources */,
+				C715DC2224D2DB8D00DAC74A /* R.generated.swift in Sources */,
 				C72CF2B2247163B80048B0A2 /* AppConfig.swift in Sources */,
 				28998ED8217F636A0037039B /* GetComic.swift in Sources */,
 				C703663D24753DEB0005886F /* GetCharactersListInteractor.swift in Sources */,
@@ -835,7 +836,6 @@
 				C7483D3624C99EAB00651D49 /* MarvelAPIClient.swift in Sources */,
 				C7096D722448E6C000DEE7D3 /* DeepLink.swift in Sources */,
 				C7169240244F0385005BF4AB /* MarvelError.swift in Sources */,
-				C7EC670A2440DFDB00F88FDE /* R.generated.swift in Sources */,
 				C703664E24753E930005886F /* ComicDetailPresenter.swift in Sources */,
 				C703663924753DEB0005886F /* LandingViewController.swift in Sources */,
 				287C9A0A217F39CB00D63092 /* AppDelegate.swift in Sources */,
