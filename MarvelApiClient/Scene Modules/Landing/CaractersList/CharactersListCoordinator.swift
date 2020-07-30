@@ -49,52 +49,42 @@ extension CharactersListCoordinator: Coordinator, DeepLinkable {
       return
     }
   }
-
-  private func presentCharactersListViewController() {
-
-    let interactor = GetCharactersListInteractor(dependencies: dependencies)
-
-    let presenter = CharactersListPresenter(dependencies: dependencies, coordinatorDelegate: self, interactor: interactor)
-
-    interactor.outputPort = presenter
-
-    let viewController = CharactersListViewController.instantiateViewController()
-    viewController.presenter = presenter
-
-    (coordinatorPresenter as? UINavigationController)?.pushViewController(viewController, animated: true)
-  }
-
-  private func presentCharacterDetailViewController(with characterId: String ) {
-    let interactor = CharacterDetailInteractor(dependencies: dependencies)
-
-    let presenter = CharacterDetailPresenter(dependencies: self.dependencies, characterId: Int(characterId)!, interactor: interactor)
-
-    let viewController = CharacterDetailViewController.instantiateViewController()
-    viewController.presenter = presenter
-    (self.coordinatorPresenter as? UINavigationController)?.pushViewController(viewController, animated: true)
-  }
 }
 
-
-// MARK: - VC transitions handling
+// MARK: - CharactersListCoordinatorDelegate VC transitions handling
 extension CharactersListCoordinator: CharactersListCoordinatorDelegate {
   func didGoBack() {
-    guard let navigationController = coordinatorPresenter as? UINavigationController else { return }
-    if navigationController.viewControllers.count > 1{
-      navigationController.popViewController(animated: true)
-      parentCoordinator?.disposeChild(coordinator: self)
-    }
+    popView()
   }
 
   func didSelect(character: CharacterResult) {
     // Destination doesn't need coordination, just present the VC
     presentCharacterDetailViewController(with: character)
   }
+}
+
+// MARK: - Implementation details
+private extension CharactersListCoordinator {
+  private func presentCharactersListViewController() {
+     let view = dependencies.makeCharactersView(coordinatorDelegate: self)
+     (coordinatorPresenter as? UINavigationController)?.pushViewController(view, animated: true)
+   }
+
+   private func presentCharacterDetailViewController(with characterId: String ) {
+     let view = dependencies.makeCharacterDetailView(with: characterId)
+     (self.coordinatorPresenter as? UINavigationController)?.pushViewController(view, animated: true)
+   }
 
   private func presentCharacterDetailViewController(with character: CharacterResult ) {
-
     let viewController = dependencies.makeCharacterDetailView(character: character)
-
     (coordinatorPresenter as? UINavigationController)?.pushViewController(viewController, animated: true)
+  }
+
+  private func popView() {
+    guard let navigationController = coordinatorPresenter as? UINavigationController else { return }
+    if navigationController.viewControllers.count > 1{
+      navigationController.popViewController(animated: true)
+      parentCoordinator?.disposeChild(coordinator: self)
+    }
   }
 }

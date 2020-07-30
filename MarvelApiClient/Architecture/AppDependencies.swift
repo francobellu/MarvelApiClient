@@ -74,6 +74,10 @@ protocol AppDependenciesProtocol: class {
   // Factory functions
   func makeCharacterDetailView(character: CharacterResult) -> CharacterDetailViewController
 
+  func makeCharacterDetailView(with characterId: String ) -> CharacterDetailViewController
+
+  func makeCharactersView(coordinatorDelegate: CharactersListCoordinatorDelegate) -> CharactersListViewController
+
 }
 
 /// Encapsulate all the app dependencies and act as a factory for them
@@ -106,6 +110,32 @@ class AppDependencies: AppDependenciesProtocol {
     let viewPresenter = CharacterDetailPresenter(dependencies: self, character: character)
     let view  = CharacterDetailViewController.instantiateViewController()
     view.presenter = viewPresenter
+    return view
+  }
+
+  func makeCharacterDetailView(with characterId: String ) -> CharacterDetailViewController{
+    let interactor = CharacterDetailInteractor(dependencies: self)
+
+    let presenter = CharacterDetailPresenter(dependencies: self, characterId: Int(characterId)!, interactor: interactor)
+
+    let view = CharacterDetailViewController.instantiateViewController()
+
+    view.presenter = presenter
+
+    return view
+  }
+
+  func makeCharactersView(coordinatorDelegate: CharactersListCoordinatorDelegate) -> CharactersListViewController{
+    let interactor = GetCharactersListInteractor(dependencies: self)
+
+    let presenter = CharactersListPresenter(dependencies: self, coordinatorDelegate: coordinatorDelegate, interactor: interactor)
+    interactor.outputPort = presenter
+
+
+    let view  = CharactersListViewController.instantiateViewController()
+
+    view.presenter = presenter
+
     return view
   }
 }
