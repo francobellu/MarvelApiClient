@@ -15,9 +15,7 @@
 		287C9A11217F39CC00D63092 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 287C9A10217F39CC00D63092 /* Assets.xcassets */; };
 		287C9A14217F39CC00D63092 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 287C9A12217F39CC00D63092 /* LaunchScreen.storyboard */; };
 		28998ECC217F636A0037039B /* Result.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28998EBB217F636A0037039B /* Result.swift */; };
-		28998ED6217F636A0037039B /* GetComics.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28998EC7217F636A0037039B /* GetComics.swift */; };
 		28998ED7217F636A0037039B /* GetCharacters.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28998EC8217F636A0037039B /* GetCharacters.swift */; };
-		28998ED8217F636A0037039B /* GetComic.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28998EC9217F636A0037039B /* GetComic.swift */; };
 		6713D79A83C952EAF643E4EA /* Pods_MarvelApiClient.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8A1E20E4A84485544C1BB354 /* Pods_MarvelApiClient.framework */; };
 		C703663924753DEB0005886F /* LandingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C703660C24753DEA0005886F /* LandingViewController.swift */; };
 		C703663A24753DEB0005886F /* CharacterCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = C703660F24753DEA0005886F /* CharacterCell.xib */; };
@@ -112,9 +110,7 @@
 		287C9A13217F39CC00D63092 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		287C9A15217F39CC00D63092 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		28998EBB217F636A0037039B /* Result.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Result.swift; sourceTree = "<group>"; };
-		28998EC7217F636A0037039B /* GetComics.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GetComics.swift; sourceTree = "<group>"; };
 		28998EC8217F636A0037039B /* GetCharacters.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GetCharacters.swift; sourceTree = "<group>"; };
-		28998EC9217F636A0037039B /* GetComic.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GetComic.swift; sourceTree = "<group>"; };
 		2BCEED2DB2E5F5A3838DCFEB /* Pods-MarvelApiClient.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MarvelApiClient.release.xcconfig"; path = "Target Support Files/Pods-MarvelApiClient/Pods-MarvelApiClient.release.xcconfig"; sourceTree = "<group>"; };
 		58B28587A4ECC64C455DD520 /* Pods_MarvelApiClientTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MarvelApiClientTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		832D9F0DA0189EE70B975696 /* Pods-MarvelApiClientTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MarvelApiClientTests.debug.xcconfig"; path = "Target Support Files/Pods-MarvelApiClientTests/Pods-MarvelApiClientTests.debug.xcconfig"; sourceTree = "<group>"; };
@@ -297,9 +293,7 @@
 			children = (
 				C715DC1F24CF16F700DAC74A /* MarvelApiRequest.swift */,
 				C78A83F4244B8AD6004DE930 /* GetCharacter.swift */,
-				28998EC7217F636A0037039B /* GetComics.swift */,
 				28998EC8217F636A0037039B /* GetCharacters.swift */,
-				28998EC9217F636A0037039B /* GetComic.swift */,
 			);
 			path = MarvelRequests;
 			sourceTree = "<group>";
@@ -886,7 +880,6 @@
 				C7E02812243FD4DB00888249 /* AppCoordinator.swift in Sources */,
 				C715DC2224D2DB8D00DAC74A /* R.generated.swift in Sources */,
 				C72CF2B2247163B80048B0A2 /* AppConfig.swift in Sources */,
-				28998ED8217F636A0037039B /* GetComic.swift in Sources */,
 				C703663D24753DEB0005886F /* GetCharactersListInteractor.swift in Sources */,
 				C703663E24753DEB0005886F /* CharactersListCoordinator.swift in Sources */,
 				C7BE8B8B24AF603400B8A569 /* CharactersListProtocols.swift in Sources */,
@@ -911,7 +904,6 @@
 				C7169232244DE062005BF4AB /* MarvelDTOs.swift in Sources */,
 				28998ED7217F636A0037039B /* GetCharacters.swift in Sources */,
 				C703664A24753DEB0005886F /* OnboardingPresenter.swift in Sources */,
-				28998ED6217F636A0037039B /* GetComics.swift in Sources */,
 				C7483D3524C99EAB00651D49 /* MarvelApiProtocol.swift in Sources */,
 				C703663C24753DEB0005886F /* CharactersListViewController.swift in Sources */,
 				28998ECC217F636A0037039B /* Result.swift in Sources */,
