@@ -67,13 +67,14 @@
 		C74963A92473C886001B9A5E /* CharactersListInteractorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C74963A82473C886001B9A5E /* CharactersListInteractorTests.swift */; };
 		C74963AB2473C89A001B9A5E /* DataLayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = C74963AA2473C89A001B9A5E /* DataLayer.swift */; };
 		C74963B324740277001B9A5E /* MockedResponseCharacterResultId1011334.json in Resources */ = {isa = PBXBuildFile; fileRef = C74963B224740277001B9A5E /* MockedResponseCharacterResultId1011334.json */; };
+		C74F3C6324D842A0005BDA4D /* Interface.swift in Sources */ = {isa = PBXBuildFile; fileRef = C74F3C6224D842A0005BDA4D /* Interface.swift */; };
+		C74F3C6824D864CE005BDA4D /* Rest in Frameworks */ = {isa = PBXBuildFile; productRef = C74F3C6724D864CE005BDA4D /* Rest */; };
 		C76B29A6243A5F1B00793179 /* MarvelApiClientIntegrationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C76B29A5243A5F1B00793179 /* MarvelApiClientIntegrationTests.swift */; };
 		C776993B24B31394003BE9BD /* CharacterCellPresentationModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C776993A24B31394003BE9BD /* CharacterCellPresentationModel.swift */; };
 		C776993D24B313BE003BE9BD /* Observable.swift in Sources */ = {isa = PBXBuildFile; fileRef = C776993C24B313BE003BE9BD /* Observable.swift */; };
 		C7887B7D24C6196000EAEB1F /* UIViewController +  ErrorDialog.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7887B7C24C6196000EAEB1F /* UIViewController +  ErrorDialog.swift */; };
 		C78A83F5244B8AD6004DE930 /* GetCharacter.swift in Sources */ = {isa = PBXBuildFile; fileRef = C78A83F4244B8AD6004DE930 /* GetCharacter.swift */; };
 		C7B987CB24C9BA0800745406 /* AlamofireImage in Frameworks */ = {isa = PBXBuildFile; productRef = C7B987CA24C9BA0800745406 /* AlamofireImage */; };
-		C7B987D024C9D10E00745406 /* Rest in Frameworks */ = {isa = PBXBuildFile; productRef = C7B987CF24C9D10E00745406 /* Rest */; };
 		C7BE8B8924AF5F0D00B8A569 /* CharactersListViewControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7BE8B8824AF5F0D00B8A569 /* CharactersListViewControllerTests.swift */; };
 		C7BE8B8B24AF603400B8A569 /* CharactersListProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7BE8B8A24AF603400B8A569 /* CharactersListProtocols.swift */; };
 		C7D3F040243B770F004E4C0E /* Coordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7D3F03F243B770F004E4C0E /* Coordinator.swift */; };
@@ -158,6 +159,7 @@
 		C74963A82473C886001B9A5E /* CharactersListInteractorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharactersListInteractorTests.swift; sourceTree = "<group>"; };
 		C74963AA2473C89A001B9A5E /* DataLayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataLayer.swift; sourceTree = "<group>"; };
 		C74963B224740277001B9A5E /* MockedResponseCharacterResultId1011334.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = MockedResponseCharacterResultId1011334.json; sourceTree = "<group>"; };
+		C74F3C6224D842A0005BDA4D /* Interface.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Interface.swift; sourceTree = "<group>"; };
 		C76B29A3243A5F1B00793179 /* MarvelApiClientTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MarvelApiClientTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		C76B29A5243A5F1B00793179 /* MarvelApiClientIntegrationTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MarvelApiClientIntegrationTests.swift; sourceTree = "<group>"; };
 		C76B29A7243A5F1B00793179 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -183,7 +185,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				6713D79A83C952EAF643E4EA /* Pods_MarvelApiClient.framework in Frameworks */,
-				C7B987D024C9D10E00745406 /* Rest in Frameworks */,
+				C74F3C6824D864CE005BDA4D /* Rest in Frameworks */,
 				C7B987CB24C9BA0800745406 /* AlamofireImage in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -428,9 +430,9 @@
 		C715DC2B24D30AF500DAC74A /* Dependencies */ = {
 			isa = PBXGroup;
 			children = (
+				C728C2AA246C375200F60806 /* AppDependencies.swift */,
 				C715DC2E24D30BC500DAC74A /* RestDependencies */,
 				C715DC3424D312B700DAC74A /* Factory */,
-				C728C2AA246C375200F60806 /* AppDependencies.swift */,
 			);
 			path = Dependencies;
 			sourceTree = "<group>";
@@ -456,6 +458,7 @@
 			isa = PBXGroup;
 			children = (
 				C715DC2F24D30BD200DAC74A /* RestDependencies.swift */,
+				C74F3C6224D842A0005BDA4D /* Interface.swift */,
 			);
 			path = RestDependencies;
 			sourceTree = "<group>";
@@ -584,7 +587,7 @@
 			name = MarvelApiClient;
 			packageProductDependencies = (
 				C7B987CA24C9BA0800745406 /* AlamofireImage */,
-				C7B987CF24C9D10E00745406 /* Rest */,
+				C74F3C6724D864CE005BDA4D /* Rest */,
 			);
 			productName = ApiLayer;
 			productReference = 287C9A06217F39CB00D63092 /* MarvelApiClient.app */;
@@ -862,6 +865,7 @@
 				C7483D3424C99EAB00651D49 /* MarvelApiConfig.swift in Sources */,
 				C703664224753DEB0005886F /* CharactersListPresenter.swift in Sources */,
 				C703664824753DEB0005886F /* LandingCoordinator.swift in Sources */,
+				C74F3C6324D842A0005BDA4D /* Interface.swift in Sources */,
 				C7887B7D24C6196000EAEB1F /* UIViewController +  ErrorDialog.swift in Sources */,
 				C7036653247540350005886F /* DataStoreProtocol.swift in Sources */,
 				C703664024753DEB0005886F /* CharacterDetailViewController.swift in Sources */,
@@ -1167,14 +1171,14 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		C74F3C6724D864CE005BDA4D /* Rest */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = Rest;
+		};
 		C7B987CA24C9BA0800745406 /* AlamofireImage */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = C787673624C75AAF00D43553 /* XCRemoteSwiftPackageReference "AlamofireImage" */;
 			productName = AlamofireImage;
-		};
-		C7B987CF24C9D10E00745406 /* Rest */ = {
-			isa = XCSwiftPackageProductDependency;
-			productName = Rest;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

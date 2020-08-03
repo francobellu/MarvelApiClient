@@ -9,21 +9,38 @@
 import Foundation
 import Rest
 
-extension RestApiClient: RestApiClientProtocol {}
+//extension RestApiClient: RestApiClientProtocol {}
 
 // TODO: what to do with this protocol?
-//public protocol RestApiClientProtocol {
-//  init(session: URLSessionProtocol)
-//  func send<T: RestAPIRequest>(_ request: T, completion: @escaping URLRequestResultCompletion)
-//  func cancel()
-//}
+public protocol RestApiClientProtocol {
+  init(session: URLSessionProtocol)
+  func send<T: RestAPIRequest>(_ request: T, completion: @escaping URLRequestResultCompletion)
+  func cancel()
+}
 
 protocol RestDependenciesProtocol{
-  var restApiClient: RestApiClientProtocol { get set}
+  var restApiClient: RestApiClient { get set} // This is the dependency on Rest framework
 
-  var apiRequestConfig: RestServiceConfigProtocol { get set}
+  var apiRequestConfig: RestServiceConfigProtocol { get}
 
   var method: RestMethod { get set}
+}
+
+class RestDependencies: RestDependenciesProtocol{
+
+  var restApiClient = RestApiClient()
+
+//  var marvelApiClient: MarvelApiProtocol {
+//    MarvelApiClient(restApiClient: res)
+//  }
+
+  var apiRequestConfig: RestServiceConfigProtocol = MarvelApiRequestConfig()
+
+  var method: RestMethod = .get
+
+  init() {
+  }
+
 }
 
 protocol RestAPIRequestDependenciesProtocol {
@@ -46,30 +63,5 @@ protocol RestAPIRequestDependenciesProtocol {
   ///   - data: The data as returned by the Service
   /// - Returns: A Result encasulating the Response object requested by the request or an Error
   func decode(_ data: Data) -> Result<Response, Error>
-
-}
-
-protocol AppDependenciesProtocol: class {
-
-  var restDependencies: RestDependenciesProtocol { get }
-
-  //  var marvelApiClient: MarvelApiProtocol { get }
-
-  var dataStore: DataStoreProtocol { get }
-
-  var appConfig: AppConfig { get }
-
-  // ViewCobntrollers Factory
-  var factory: Factory { get }
-
-}
-
-class RestDependencies: RestDependenciesProtocol{
-
-  var restApiClient: RestApiClientProtocol = RestApiClient()
-
-  var apiRequestConfig: RestServiceConfigProtocol = MarvelApiRequestConfig()
-
-  var method: RestMethod = .get
 
 }

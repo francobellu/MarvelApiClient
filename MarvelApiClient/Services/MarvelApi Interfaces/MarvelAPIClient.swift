@@ -1,47 +1,57 @@
 import Foundation
-import Rest
+//import Rest
 
 /// Implementation of a generic-based Marvel API client
-//class MarvelApiClient {
-//
-//  // number of items to be fetched each time (i.e., database LIMIT)
-//  private let limit = 50
-//
-//  // Where to start fetching items (database OFFSET). This is to support packets fetch
-//  private var offset = 0
-//
-//  // a flag for when all database items have already been loaded
-//  private var reachedEndOfItems = false
-//
-//  private let restApiClient: RestApiClientProtocol! // swiftlint:disable:this implicitly_unwrapped_optional
-//
-//  init(restApiClient: RestApiClient) {
-//    self.restApiClient = restApiClient
-//  }
-//
-//  // Todo: not used
-//  private func executeRequestLogic(count: Int){
-//    // Reset the offset for the next data query
-//    self.offset += self.limit
-//    // Check if this was the last of the data
-//    if count < self.limit {
-//      self.reachedEndOfItems = true
-//      print("reached end of data. Batch count: \(count)")
-//    }
-//  }
-//}
+class MarvelApiClient: MarvelApiProtocol {
 
-//
-//  func getCharactersList(completion: @escaping (Result<GetCharacters.Response, Error>) -> Void) {
-//    // Get the first <limit> characters
-//    let request = GetCharacters(limit: limit, offset: 0)
-//    restApiClient.send(request ) { result in
+  // number of items to be fetched each time (i.e., database LIMIT)
+  private let limit = 50
+
+  // Where to start fetching items (database OFFSET). This is to support packets fetch
+  private var offset = 0
+
+  // a flag for when all database items have already been loaded
+  private var reachedEndOfItems = false
+
+  private let restDependencies: RestDependenciesProtocol! // swiftlint:disable:this implicitly_unwrapped_optional
+
+  init(restDependencies: RestDependenciesProtocol) {
+    self.restDependencies = restDependencies
+  }
+
+  // Todo: not used
+  private func executeRequestLogic(count: Int){
+    // Reset the offset for the next data query
+    self.offset += self.limit
+    // Check if this was the last of the data
+    if count < self.limit {
+      self.reachedEndOfItems = true
+      print("reached end of data. Batch count: \(count)")
+    }
+  }
+
+  func getCharactersList(completion: @escaping (Result<GetCharacters.Response, Error>) -> Void) {
+    // Get the first <limit> characters
+    let request = GetCharacters( restDependencies: restDependencies, limit: limit, offset: 0)
+    restDependencies.restApiClient.send(request) { (result) in
+      print("\nGetCharacters list finished, limit: \(self.limit), offset: \(self.offset)")
+      var completionResult: Result<GetCharacters.Response, Error>
+      
+      switch result {
+      case .success((_, let data)):
+        completionResult = request.decode(data)
+      case .failure(let error):
+        completionResult = .failure(error)
+      }
+      completion(completionResult)
+    }
+//    restDependencies.marvel.send(request ) { result in
 //      print("\nGetCharacters list finished, limit: \(self.limit), offset: \(self.offset)")
-//
-//      var completionValue: Result<GetCharacters.Response, Error>
+
+
 //      switch result {
 //      case .success((_, let data)):
-//        let dataContaineResult = decodeResponseDataToMarvelResponse(data: data, request: request)
+////        let dataContaineResult = decodeResponseDataToMarvelResponse(data: data, request: request)
 //        switch dataContaineResult{
 //        case .success(let dataContainer):
 //          completionValue = .success(dataContainer.results)
@@ -54,23 +64,23 @@ import Rest
 //      }
 //      completion(completionValue)
 //    }
-//  }
-//
-//  func getCharacter(with id: Int, completion: @escaping (Result<GetCharacter.Response, Error>) -> Void) {
-//
-//    let request = GetCharacter(restApiClient: dependencies.restApiClient, id: id)
-//    restApiClient.send(request ) { result in
-//      print("\nGetCharacter \(id) finished")
-//      var completionResult: Result<GetCharacters.Response, Error>
-//      switch result {
-//      case .success((_, let data)):
-//        completionResult = self.handleSuccessResultsGetCharacter(data, request: request)
-//      case .failure(let error):
-//        completionResult = .failure(error)
-//      }
-//      completion(completionResult)
-//    }
-//  }
+  }
+
+  func getCharacter(with id: Int, completion: @escaping (Result<GetCharacter.Response, Error>) -> Void) {
+
+    let request = GetCharacter(restDependencies: restDependencies, id: id)
+    restDependencies.restApiClient.send(request)  { (result) in
+     print("\nGetCharacter \(id) finished")
+     var completionResult: Result<GetCharacters.Response, Error>
+      switch result {
+      case .success((_, let data)):
+        completionResult = request.decode(data)
+      case .failure(let error):
+        completionResult = .failure(error)
+      }
+      completion(completionResult)
+    }
+  }
 //
 //   private func handleSuccessResultsGetCharacter(_ data: Data, request: GetCharacter) -> Result<[CharacterResult], Error> {
 //      let returnValue: Result<[CharacterResult], Error>
@@ -85,7 +95,6 @@ import Rest
 //      }
 //      return returnValue
 //    }
-//  }
 //
 //  // Handle decoding errors and situation where the response object MarvelResponse dones't have a .data field
 //  private func decodeResponseDataToMarvelResponse<T: RestAPIRequest> (data: Data, request: T) -> Result<DataContainer<T.Response>, Error> {
@@ -102,7 +111,7 @@ import Rest
 //      result = .failure(MarvelError.server(message: "Error code: \(String(describing: marvelError?.code)), message: \(String(describing: marvelError?.message))"))
 //    }
 //    return result
-//  }
+}
 
 
 

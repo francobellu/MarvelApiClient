@@ -10,11 +10,14 @@ import XCTest
 import Rest
 
 @testable import MarvelApiClient
-
 class RestDependenciesMock: RestDependenciesProtocol{
 
   // MARK: - RestDependenciesProtocol
-  var restApiClient: RestApiClientProtocol
+  var restApiClient: RestApiClient
+
+  var marvelApiClient: MarvelApiProtocol{
+    MarvelApiClient(restDependencies: self)
+  }
 
   var apiRequestConfig: RestServiceConfigProtocol = MarvelApiRequestConfig()
 
@@ -25,29 +28,27 @@ class RestDependenciesMock: RestDependenciesProtocol{
     session.nextData = sessionNextData
 
     restApiClient = RestApiClient(session:session)
+    
   }
 }
 
 class MarvelApiClientCharactersTestMock: XCTestCase {
 
-//  var sut: MarvelApiClient! // swiftlint:disable:this implicitly_unwrapped_optional
+  var sut: MarvelApiClient! // swiftlint:disable:this implicitly_unwrapped_optional
 
   func testGetCharactersList() throws {
 
-    let nextData = mockResponseData(for: "MockedResponseGetCharacters")
+    let testNextData = mockResponseData(for: "MockedResponseGetCharacters")
 
-    let restDependenciesMock = RestDependenciesMock(sessionNextData: nextData)
+    sut = MarvelApiClient(restDependencies: RestDependenciesMock(sessionNextData: testNextData))
 
     let testResult: [CharacterResult]  = getObjects(from: "MockedResponseGetCharacters")
 
-    let sut = GetCharacters(restDependencies: restDependenciesMock)
+    sut.getCharactersList { response in
+      print("FB: response: \(response)")
 
-
-    sut.execute{ ( result: Result<[CharacterResult], Error>) in
-      print("FB: response: \(result)")
-
-      XCTAssertNotNil(result)
-      switch result {
+      XCTAssertNotNil(response)
+      switch response {
       case .success(let characters):
 
         XCTAssert(characters.count == testResult.count)
@@ -62,22 +63,18 @@ class MarvelApiClientCharactersTestMock: XCTestCase {
 
   func testGetCharacter() throws {
 
+    let testNextData = mockResponseData(for: "MockedResponseCharacterResultId1011334")
+    sut = MarvelApiClient(restDependencies: RestDependenciesMock(sessionNextData: testNextData))
+
     let testResults: [CharacterResult] = getObjects(from: "MockedResponseGetCharacters")
     let testResult = testResults.first!
 
-
-    let nextData = mockResponseData(for: "MockedResponseCharacterResultId1011334")
-
-    let restDependenciesMock = RestDependenciesMock(sessionNextData: nextData)
-
-    let sut = GetCharacter(restDependencies: restDependenciesMock, id: testResult.id!)
-
-    sut.execute{ ( result: Result<[CharacterResult], Error>) in
+    sut.getCharacter(with: testResult.id!) { result in
       XCTAssertNotNil(result)
       switch result {
       case .success(let characters):
-//        XCTAssert(characters.count == 1)
-        XCTAssert(characters.first!.id == testResult.id)
+        XCTAssert(characters.count == 1)
+         XCTAssert(characters.first!.id == testResult.id)
       case .failure(_):
         XCTAssert(false)
       }

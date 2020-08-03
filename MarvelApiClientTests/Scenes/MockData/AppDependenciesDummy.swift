@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import Rest
 @testable import MarvelApiClient
 
 class DataStoreDummy: DataStoreProtocol{
@@ -34,41 +35,43 @@ class DataStoreDummy: DataStoreProtocol{
   }
 }
 
-class AppDependenciesDummy: AppDependenciesProtocol {
-  func makeCharacterDetailView(character: CharacterResult) -> CharacterDetailViewController {
-    <#code#>
-  }
-
-  func makeCharacterDetailView(with characterId: String) -> CharacterDetailViewController {
-    <#code#>
-  }
-
-  func makeCharactersView(coordinatorDelegate: CharactersListCoordinatorDelegate) -> CharactersListViewController {
-    <#code#>
-  }
-
-  // MARK: - All the app dependencies
-
-  let mockData: String = ""
-
-
-  lazy var  restDependencies: RestDependenciesProtocol = {
-    return RestDependencies()
-  }()
-
-  lazy var restApiClient: RestApiClient = {
-    return RestApiClient(session: MockURLSession())
-  }()
-
-  lazy var marvelApiClient: MarvelApiProtocol = {
-    return MockApiClient()
-  }()
-
-  lazy var dataStore: DataStoreProtocol = {
-    UserDefaultsDataStore()
-  }()
-
-  lazy var appConfig: AppConfig = {
-    AppConfig(dataStore: DataStoreDummy())
-  }()
+class AppDependenciesDummy: AppDependencies{
+//  lazy var factory: Factory = Factory(dependencies: self)
+//
+//  func makeCharacterDetailView(character: CharacterResult) -> CharacterDetailViewController {
+//
+//  }
+//
+//  func makeCharacterDetailView(with characterId: String) -> CharacterDetailViewController {
+//
+//  }
+//
+//  func makeCharactersView(coordinatorDelegate: CharactersListCoordinatorDelegate) -> CharactersListViewController {
+//    
+//  }
+//
+//  // MARK: - All the app dependencies
+//
+//  let mockData: String = ""
+//
+//
+//  lazy var  restDependencies: RestDependenciesProtocol = {
+//    return RestDependencies()
+//  }()
+//
+//  lazy var restApiClient: RestApiClient = {
+//    return RestApiClient(session: MockURLSession())
+//  }()
+//
+//  lazy var marvelApiClient: MarvelApiProtocol = {
+//    return MockApiClient()
+//  }()
+//
+//  lazy var dataStore: DataStoreProtocol = {
+//    UserDefaultsDataStore()
+//  }()
+//
+//  lazy var appConfig: AppConfig = {
+//    AppConfig(dataStore: DataStoreDummy())
+//  }()
 }

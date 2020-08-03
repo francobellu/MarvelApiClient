@@ -26,9 +26,9 @@ private protocol GetCharactersListInteractorProtocol: class{
 class GetCharactersListInteractor{
   private var dependencies: AppDependenciesProtocol! // swiftlint:disable:this implicitly_unwrapped_optional
 
-//  private var apiClient: MarvelApiProtocol{
-//    dependencies.marvelApiClient
-//  }
+  private var apiClient: MarvelApiProtocol{
+    dependencies.marvelApiClient
+  }
 
   weak var outputPort: GetCharactersListInteractorOutputPort?
 
@@ -48,10 +48,17 @@ extension GetCharactersListInteractor: GetCharactersListInteractorInputPort{
 // MARK: - PRIVATE functions
 private extension GetCharactersListInteractor{
   private func getCharactersList() {
-    let request = GetCharacters(restDependencies: dependencies.restDependencies, limit: 20, offset: 0)
-    request.execute { result in
-      self.handle(results: result)
+//    let request = GetCharacters(restDependencies: dependencies.restDependencies, limit: 20, offset: 0)
+    apiClient.getCharactersList { (result) in
+       self.handle(results: result)
     }
+//    dependencies.restDependencies.restApiClient.send(<#T##request: RestAPIRequest##RestAPIRequest#>) { (<#Result<(URLResponse, Data), Error>#>) in
+//      <#code#>
+//    }
+//
+//    request.execute { result in
+//
+//    }
   }
 
   private func handle(results: Result<GetCharacters.Response, Error>){

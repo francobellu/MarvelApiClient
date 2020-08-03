@@ -34,9 +34,9 @@ class GetCharactersListInteractorInputPortTest: XCTestCase {
   // For that a charactersWorkerSpy is needed
   func testInteractorCallsWorkerToFetch(){
     // Given
-    let appDependenciesDummy = AppDependenciesDummy()
+    let appDependenciesDummy = AppDependenciesDummy(restDependencies: RestDependencies())
     let charactersWorkerSpy = CharacterWorkerTestDouble()
-//    appDependenciesDummy.marvelApiClient = charactersWorkerSpy
+    appDependenciesDummy.marvelApiClient = charactersWorkerSpy
     let sut = GetCharactersListInteractor(dependencies: appDependenciesDummy)
 
     // When
@@ -56,12 +56,13 @@ class GetCharactersListInteractorInputPortTest: XCTestCase {
   // Also we need a workerFake that returns a resultDummy ( it is needed to compile but it is not actually used by the test)
   func testDomainData(){
     // Given
-    let appDependenciesDummy = AppDependenciesDummy()
+    let appDependenciesDummy = AppDependenciesDummy(restDependencies: RestDependencies())
     let charactersWorkerSpy = CharacterWorkerTestDouble()
-//    appDependenciesDummy.marvelApiClient = charactersWorkerSpy
+    appDependenciesDummy.marvelApiClient = charactersWorkerSpy
+
     let presenterSpy = PresenterTestDouble()
     let sut = GetCharactersListInteractor(dependencies: appDependenciesDummy)
-    sut.outputPort = presenterSpy // TODO: tghis should be a fdummy
+    sut.outputPort = presenterSpy // TODO: this should be a dummy
 
     // When
     sut.execute()
@@ -76,7 +77,7 @@ class GetCharactersListInteractorInputPortTest: XCTestCase {
   //
   func testDomainData_SuccessResult(){
     // Given
-    let appDependenciesDummy = AppDependenciesDummy()
+    let appDependenciesDummy = AppDependenciesDummy(restDependencies: RestDependencies())
     let charactersWorkerSpy = CharacterWorkerTestDouble()
 
     // prepare the result that we want to use
@@ -110,7 +111,7 @@ class GetCharactersListInteractorInputPortTest: XCTestCase {
   //
   func testDomainData_FailureResult_NoData(){
     // Given
-    let appDependenciesDummy = AppDependenciesDummy()
+    let appDependenciesDummy = AppDependenciesDummy(restDependencies: RestDependencies())
 
     // Initialize a worker Stub with a test  result
     let testResult = Result<GetCharacters.Response, Error>.failure(MarvelError.noData)
@@ -118,7 +119,7 @@ class GetCharactersListInteractorInputPortTest: XCTestCase {
 
     charactersWorkerStub.stubbedResult = testResult
 
-//    appDependenciesDummy.marvelApiClient = charactersWorkerStub
+    appDependenciesDummy.marvelApiClient = charactersWorkerStub
     let presenterSpy = PresenterTestDouble()
     let sut = GetCharactersListInteractor(dependencies: appDependenciesDummy)
     sut.outputPort = presenterSpy // TODO: tghis should be a fdummy

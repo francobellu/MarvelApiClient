@@ -39,7 +39,7 @@ import XCTest
 /// Test the 4 bindings
 class CharactersListPresenterTest: XCTestCase {
   var sut: CharactersListPresenter! // swiftlint:disable:this implicitly_unwrapped_optional
-  var appDependenciesDummy = AppDependenciesDummy()
+  var appDependenciesDummy = AppDependenciesDummy(restDependencies: RestDependencies())
   var coordinatorSpy:  CharactersListCoordinatorDelegateSpy!
 
 //  var mockView: CharactersListPresenterToViewMock!

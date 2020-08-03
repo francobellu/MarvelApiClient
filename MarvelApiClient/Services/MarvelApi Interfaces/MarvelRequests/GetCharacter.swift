@@ -20,7 +20,7 @@ struct GetCharacter: MarvelApiRequest {
   //var decode: (Data) throws -> Response
 
   // Note that nil parameters will not be used
-  init(restDependencies: RestDependenciesProtocol, id: Int) {
+  init( restDependencies: RestDependenciesProtocol, id: Int) {
 
     self.restDependencies = restDependencies
 

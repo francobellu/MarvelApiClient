@@ -2,12 +2,19 @@ import Foundation
 import Rest
 
 struct GetCharacters: MarvelApiRequest {
-
-  typealias Response = [CharacterResult]
+  var apiRequestConfig: RestServiceConfigProtocol
 
   var restDependencies: RestDependenciesProtocol
 
-  var apiRequestConfig: RestServiceConfigProtocol
+
+//  var apiRequestConfig: RestServiceConfigProtocol{
+//     restDependencies.apiRequestConfig
+//  }
+
+
+  typealias Response = [CharacterResult]
+
+//  var apiRequestConfig: RestServiceConfigProtocol
 
   var method: RestMethod = .get
 
@@ -20,15 +27,14 @@ struct GetCharacters: MarvelApiRequest {
   //var decode: (Data) throws -> Response
 
   // Note that nil parameters will not be used
-  init(restDependencies: RestDependenciesProtocol,
-       name: String? = nil,
+  init( restDependencies: RestDependenciesProtocol,
+        name: String? = nil,
        nameStartsWith: String? = nil,
        limit: Int? = nil,
        offset: Int? = nil) {
 
     self.restDependencies = restDependencies
-
-    self.apiRequestConfig = restDependencies.apiRequestConfig
+    apiRequestConfig = restDependencies.apiRequestConfig
 
     var params = [String: String]()
     if let name = name {params["name"] = name}

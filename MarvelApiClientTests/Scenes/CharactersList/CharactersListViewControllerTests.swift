@@ -178,7 +178,7 @@ final class CharactersListViewControllerTests: XCTestCase {
   }
 
   func testTableViewHasCells() {
-      let cell = sut.tableView.dequeueReusableCell(withIdentifier: R.reuseIdentifier.characterCellId.identifier)
+      let cell = sut.tableView.dequeueReusableCell(withIdentifier: "characterCellId")
 
       XCTAssertNotNil(cell, "TableView should be able to dequeue cell with identifier: 'Cell'")
   }
@@ -234,7 +234,7 @@ final class CharacterListViewController_DataSourceTests: XCTestCase {
     sut = vc
 
     tableViewMock = UITableView()
-    tableViewMock.register(CharacterCell.self, forCellReuseIdentifier: R.reuseIdentifier.characterCellId.identifier)
+    tableViewMock.register(CharacterCell.self, forCellReuseIdentifier: "characterCellId")
     tableViewMock.estimatedRowHeight = 44
   }
 
@@ -318,7 +318,7 @@ final class CharacterListViewController_TableViewDelegateTests: XCTestCase {
     sut = vc
 
     tableViewMock = UITableView()
-    tableViewMock.register(CharacterCell.self, forCellReuseIdentifier: R.reuseIdentifier.characterCellId.identifier)
+    tableViewMock.register(CharacterCell.self, forCellReuseIdentifier: "characterCellId")
     tableViewMock.estimatedRowHeight = 44
   }
 
