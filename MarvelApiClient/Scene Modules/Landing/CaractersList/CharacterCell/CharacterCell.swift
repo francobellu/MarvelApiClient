@@ -14,7 +14,7 @@ class CharacterCell: UITableViewCell {
   @IBOutlet var imgView: UIImageView!
   @IBOutlet var title: UILabel!
 
-  static let id = R.reuseIdentifier.characterCellId
+  static let id = "characterCellId"
 //  override func awakeFromNib() {
 //    super.awakeFromNib()
 //    // Initialization code

@@ -43,7 +43,7 @@ class CharactersListViewController: UIViewController, StoryboardInstantiable, Da
     didSet {
       tableView.delegate = self
       tableView.dataSource = self
-      tableView.register(UINib(nibName: R.nib.characterCell.name, bundle: nil), forCellReuseIdentifier: R.reuseIdentifier.characterCellId.identifier)
+      tableView.register(UINib(nibName: "CharacterCell", bundle: nil), forCellReuseIdentifier: "characterCellId")
     }
   }
 
@@ -132,7 +132,7 @@ extension CharactersListViewController: UITableViewDataSource {
 
   func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
 
-    let cell = tableView.dequeueReusableCell(withIdentifier: R.reuseIdentifier.characterCellId.identifier, for: indexPath)
+    let cell = tableView.dequeueReusableCell(withIdentifier:"characterCellId", for: indexPath)
 
     let rowViewModel = presenter.presentationModel.value[indexPath.row]
 
