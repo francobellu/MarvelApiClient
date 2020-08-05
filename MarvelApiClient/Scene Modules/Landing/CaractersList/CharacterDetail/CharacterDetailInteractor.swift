@@ -20,7 +20,7 @@ class CharacterDetailInteractor: CharacterDetailInteractorProtocol{
   private var dependencies: AppDependenciesProtocol! // swiftlint:disable:this implicitly_unwrapped_optional
 
   private var apiClient: MarvelApiProtocol{
-    MarvelApiClient(restDependencies: dependencies.restDependencies)
+    dependencies.marvelApiClient
   }
 
   required init(dependencies: AppDependenciesProtocol) {

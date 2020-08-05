@@ -12,11 +12,11 @@ import Rest
 //extension RestApiClient: RestApiClientProtocol {}
 
 // TODO: what to do with this protocol?
-public protocol RestApiClientProtocol {
-  init(session: URLSessionProtocol)
-  func send<T: RestAPIRequest>(_ request: T, completion: @escaping URLRequestResultCompletion)
-  func cancel()
-}
+//public protocol RestApiClientProtocol {
+//  init(session: URLSessionProtocol)
+//  func send<T: RestAPIRequest>(_ request: T, completion: @escaping URLRequestResultCompletion)
+//  func cancel()
+//}
 
 protocol RestDependenciesProtocol{
   var restApiClient: RestApiClient { get set} // This is the dependency on Rest framework

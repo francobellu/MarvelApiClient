@@ -372,8 +372,8 @@
 			isa = PBXGroup;
 			children = (
 				28998EC6217F636A0037039B /* MarvelRequests */,
-				C7483D3324C99EAA00651D49 /* MarvelAPIClient.swift */,
 				C7483D3124C99EAA00651D49 /* MarvelApiConfig.swift */,
+				C7483D3324C99EAA00651D49 /* MarvelAPIClient.swift */,
 				C7483D3224C99EAA00651D49 /* MarvelApiProtocol.swift */,
 			);
 			path = "MarvelApi Interfaces";

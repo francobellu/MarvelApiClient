@@ -25,7 +25,7 @@ struct MarvelApiRequestConfig: RestServiceConfigProtocol {
   // 1) baseUrl = baseEndpointUrl +  request.resourceName
   // 2) commonQueryItems ( marvel-specific params)
   // 3) customQueryItems ( request-specific params)
-  func buildEndpointUrl(for resourceName: String, and parameters: [String: String]? = nil) -> URL? {
+  func buildEndpointUrlFor(resourceName: String, parameters: [String: String]? = nil) -> URL? {
     // Build baseUrl = baseEndpointUrl +  request.resourceName
     guard let baseUrl = URL(string: resourceName, relativeTo: URL(string: baseEndpointString) ) else {
       return URL(string: baseEndpointString)

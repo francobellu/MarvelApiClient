@@ -11,7 +11,7 @@ import UIKit
 
 protocol AppDependenciesProtocol: class {
 
-  var restDependencies: RestDependenciesProtocol { get }
+//  var restDependencies: RestDependenciesProtocol { get }
 
   var marvelApiClient: MarvelApiProtocol { get }
 
@@ -32,7 +32,7 @@ class AppDependencies: AppDependenciesProtocol {
 
   var marvelApiClient: MarvelApiProtocol
 
-  var restDependencies: RestDependenciesProtocol
+//  var restDependencies: RestDependenciesProtocol
 
   var dataStore: DataStoreProtocol
 
@@ -41,7 +41,7 @@ class AppDependencies: AppDependenciesProtocol {
   lazy var factory: Factory = Factory(dependencies: self)
 
   init(restDependencies: RestDependenciesProtocol, dataStore: DataStoreProtocol = UserDefaultsDataStore()) {
-    self.restDependencies = restDependencies
+//    self.restDependencies = restDependencies
     self.dataStore = dataStore
     self.marvelApiClient = MarvelApiClient(restDependencies: restDependencies)
   }

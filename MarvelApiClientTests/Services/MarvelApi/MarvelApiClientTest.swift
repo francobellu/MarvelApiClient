@@ -24,11 +24,8 @@ class RestDependenciesMock: RestDependenciesProtocol{
   var method: RestMethod = .get
 
   init(sessionNextData: Data) {
-    let session = MockURLSession()
-    session.nextData = sessionNextData
-
-    restApiClient = RestApiClient(session:session)
-    
+    let sessionManager = NetworkSessionManagerMock(response: HTTPURLResponse(), data: sessionNextData, error: nil)
+    restApiClient = RestApiClient(sessionManager: sessionManager, logger: NetworkErrorLoggerMock())
   }
 }
 
@@ -38,8 +35,7 @@ class MarvelApiClientCharactersTestMock: XCTestCase {
 
   func testGetCharactersList() throws {
 
-    let testNextData = mockResponseData(for: "MockedResponseGetCharacters")
-
+    let testNextData: Data = mockResponseData(for: "MockedResponseGetCharacters")
     sut = MarvelApiClient(restDependencies: RestDependenciesMock(sessionNextData: testNextData))
 
     let testResult: [CharacterResult]  = getObjects(from: "MockedResponseGetCharacters")
@@ -74,7 +70,7 @@ class MarvelApiClientCharactersTestMock: XCTestCase {
       switch result {
       case .success(let characters):
         XCTAssert(characters.count == 1)
-         XCTAssert(characters.first!.id == testResult.id)
+        XCTAssert(characters.first!.id == testResult.id)
       case .failure(_):
         XCTAssert(false)
       }
@@ -82,4 +78,23 @@ class MarvelApiClientCharactersTestMock: XCTestCase {
   }
 }
 
+struct NetworkSessionManagerMock: NetworkSessionManager {
+  let response: HTTPURLResponse?
+  let data: Data?
+  let error: Error?
 
+  func request(_ request: URLRequest,
+               completion: @escaping CompletionHandler) -> NetworkCancellable {
+    completion(data, response, error)
+    return URLSessionDataTask()
+    //    URLSession.shared.dataTask(with: request)
+    //    return URLSession.shared.dataTask(with: request)
+  }
+}
+
+class NetworkErrorLoggerMock: NetworkErrorLogger {
+    var loggedErrors: [Error] = []
+    func log(request: URLRequest) { }
+    func log(responseData data: Data?, response: URLResponse?) { }
+    func log(error: Error) { loggedErrors.append(error) }
+}

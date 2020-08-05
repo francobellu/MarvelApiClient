@@ -1,5 +1,4 @@
 import Foundation
-//import Rest
 
 /// Implementation of a generic-based Marvel API client
 class MarvelApiClient: MarvelApiProtocol {
@@ -33,10 +32,13 @@ class MarvelApiClient: MarvelApiProtocol {
   func getCharactersList(completion: @escaping (Result<GetCharacters.Response, Error>) -> Void) {
     // Get the first <limit> characters
     let request = GetCharacters( restDependencies: restDependencies, limit: limit, offset: 0)
-    restDependencies.restApiClient.send(request) { (result) in
+    guard let url = request.apiRequestConfig.buildEndpointUrlFor(resourceName: request.resourceName, parameters: request.parameters) else {return }
+    let urlRequest = URLRequest(url: url)
+
+    restDependencies.restApiClient.send(urlRequest ) { (result) in
       print("\nGetCharacters list finished, limit: \(self.limit), offset: \(self.offset)")
       var completionResult: Result<GetCharacters.Response, Error>
-      
+
       switch result {
       case .success((_, let data)):
         completionResult = request.decode(data)
@@ -69,7 +71,10 @@ class MarvelApiClient: MarvelApiProtocol {
   func getCharacter(with id: Int, completion: @escaping (Result<GetCharacter.Response, Error>) -> Void) {
 
     let request = GetCharacter(restDependencies: restDependencies, id: id)
-    restDependencies.restApiClient.send(request)  { (result) in
+    guard let url = request.apiRequestConfig.buildEndpointUrlFor(resourceName: request.resourceName, parameters: request.parameters) else {return }
+    let urlRequest = URLRequest(url: url)
+
+    restDependencies.restApiClient.send(urlRequest)  { (result) in
      print("\nGetCharacter \(id) finished")
      var completionResult: Result<GetCharacters.Response, Error>
       switch result {

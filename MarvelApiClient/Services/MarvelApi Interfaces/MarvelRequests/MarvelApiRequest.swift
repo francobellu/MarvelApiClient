@@ -19,20 +19,9 @@ protocol MarvelApiRequest: RestAPIRequest{
   //
   //  // a flag for when all database items have already been loaded
   //  var reachedEndOfItems: Bool {get set}
-
-  var restDependencies: RestDependenciesProtocol { get set }
-
-//  func execute(completion: @escaping (Result<Response, Error>) -> Void)
 }
 
 extension MarvelApiRequest{
-  /// Send the request with a completion handler
-//  func execute(completion: @escaping (Result<Response, Error>) -> Void) {
-//    restDependencies.restApiClient.send(self) { (result: Result<(URLResponse, Data), Error>) in
-//      let responseResult = self.handleResult(result)
-//      completion(responseResult)
-//    }
-//  }
 
   ///  Decodes the  response data  stripping all the wrappers.  In the process  all the possible errors are handled
   /// - Parameters:

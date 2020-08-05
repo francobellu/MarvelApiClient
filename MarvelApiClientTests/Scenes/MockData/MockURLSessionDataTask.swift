@@ -6,20 +6,20 @@
 //  Copyright © 2020 BELLU Franco. All rights reserved.
 //
 
-import UIKit
-import XCTest
-import Rest
-
-@testable import MarvelApiClient
-
-class MockURLSessionDataTask: URLSessionDataTaskProtocol {
-  func cancel() {
-    fatalError()
-  }
-
-  private (set) var resumeWasCalled = false
-
-  func resume() {
-    resumeWasCalled = true
-  }
-}
+//import UIKit
+//import XCTest
+//import Rest
+//
+//@testable import MarvelApiClient
+//
+//class MockURLSessionDataTask: URLSessionDataTaskProtocol {
+//  func cancel() {
+//    fatalError()
+//  }
+//
+//  private (set) var resumeWasCalled = false
+//
+//  func resume() {
+//    resumeWasCalled = true
+//  }
+//}
