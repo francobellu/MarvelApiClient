@@ -1,5 +1,4 @@
 import Foundation
-import Rest
 
 struct GetCharacters: MarvelApiRequest {
   var apiRequestConfig: RestServiceConfigProtocol
@@ -29,9 +28,9 @@ struct GetCharacters: MarvelApiRequest {
   // Note that nil parameters will not be used
   init( restDependencies: RestDependenciesProtocol,
         name: String? = nil,
-       nameStartsWith: String? = nil,
-       limit: Int? = nil,
-       offset: Int? = nil) {
+        nameStartsWith: String? = nil,
+        limit: Int? = nil,
+        offset: Int? = nil) {
 
     self.restDependencies = restDependencies
     apiRequestConfig = restDependencies.apiRequestConfig

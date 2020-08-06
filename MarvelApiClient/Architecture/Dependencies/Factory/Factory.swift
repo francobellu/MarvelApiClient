@@ -96,4 +96,3 @@ extension Factory: PresenterFactory{
     return CharacterDetailPresenter(dependencies: dependencies, character: character)
   }
 }
-

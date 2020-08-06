@@ -8,7 +8,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
   var window: UIWindow?
 
   let restDep = RestDependencies()
-  var dependencies: AppDependencies { AppDependencies(restDependencies: restDep)} 
+  var dependencies: AppDependencies { AppDependencies(restDependencies: restDep)}
   private var appCoordinator: AppCoordinator?
 
   func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {

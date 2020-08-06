@@ -9,21 +9,18 @@
 import Foundation
 import Rest
 
-//extension RestApiClient: RestApiClientProtocol {}
-
-// TODO: what to do with this protocol?
-//public protocol RestApiClientProtocol {
-//  init(session: URLSessionProtocol)
-//  func send<T: RestAPIRequest>(_ request: T, completion: @escaping URLRequestResultCompletion)
-//  func cancel()
-//}
-
+// External dependency abstraction
 protocol RestDependenciesProtocol{
-  var restApiClient: RestApiClient { get set} // This is the dependency on Rest framework
+  // This is the dependency on the external Rest framework
+  var restApiClient: RestApiClient { get set}
 
   var apiRequestConfig: RestServiceConfigProtocol { get}
 
-  var method: RestMethod { get set}
+//  var method: RestMethod { get set}
+}
+
+public enum RestMethod {
+  case get, post, put, patch, delete
 }
 
 class RestDependencies: RestDependenciesProtocol{
@@ -36,32 +33,8 @@ class RestDependencies: RestDependenciesProtocol{
 
   var apiRequestConfig: RestServiceConfigProtocol = MarvelApiRequestConfig()
 
-  var method: RestMethod = .get
+//  var method: RestMethod = .get
 
   init() {
   }
-
-}
-
-protocol RestAPIRequestDependenciesProtocol {
-
-  /// Response (will be wrapped with a DataContainer)
-  associatedtype Response: Decodable
-
-  /// Service data needed to construct the endpoint url
-  var apiRequestConfig: RestServiceConfigProtocol { get set}
-
-  /// Resource name needed to construct the endpoint url
-  var resourceName: String { get }
-
-  var method: RestMethod { get }
-
-  var parameters: [String: String]? { get }
-
-  ///  Decodes the  response data  stripping all the wrappers.  In the process  all the possible errors are handled
-  /// - Parameters:
-  ///   - data: The data as returned by the Service
-  /// - Returns: A Result encasulating the Response object requested by the request or an Error
-  func decode(_ data: Data) -> Result<Response, Error>
-
 }
