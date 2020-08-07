@@ -28,8 +28,8 @@ public protocol RestAPIRequest{
 // Encapsulate the Service configuration
 public protocol RestServiceConfigProtocol{
   var baseEndpointString: String { get }
-  var publicKey: String? { get }
-  var privateKey: String? { get }
+  var publicKey: String { get }
+  var privateKey: String { get }
 
   // The way the url is build is API specific
   func buildEndpointUrlFor(resourceName: String, parameters: [String: String]? ) -> URL?

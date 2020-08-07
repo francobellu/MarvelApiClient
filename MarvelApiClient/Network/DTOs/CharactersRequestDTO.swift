@@ -6,8 +6,8 @@
 //
 
 import Foundation
-
-struct CharactersRequestDTO: Encodable {
-    let query: String
-    let page: Int
-}
+//
+//struct CharactersRequestDTO: Encodable {
+////    let query: CharactersQuery
+//    let page: Int
+//}

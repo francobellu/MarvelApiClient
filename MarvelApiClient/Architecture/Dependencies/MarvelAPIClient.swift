@@ -31,7 +31,8 @@ class MarvelApiClient: MarvelApiProtocol {
 
   func getCharactersList(completion: @escaping (Result<GetCharacters.Response, Error>) -> Void) {
     // Get the first <limit> characters
-    let request = GetCharacters( restDependencies: restDependencies, limit: limit, offset: 0)
+    let query = CharactersQuery(name: nil, nameStartsWith: nil, limit: 50, offset: 0)
+    let request = GetCharacters(restDependencies: restDependencies, query: query)
     guard let url = request.apiRequestConfig.buildEndpointUrlFor(resourceName: request.resourceName, parameters: request.parameters) else {return }
     let urlRequest = URLRequest(url: url)
 
@@ -47,25 +48,6 @@ class MarvelApiClient: MarvelApiProtocol {
       }
       completion(completionResult)
     }
-//    restDependencies.marvel.send(request ) { result in
-//      print("\nGetCharacters list finished, limit: \(self.limit), offset: \(self.offset)")
-
-
-//      switch result {
-//      case .success((_, let data)):
-////        let dataContaineResult = decodeResponseDataToMarvelResponse(data: data, request: request)
-//        switch dataContaineResult{
-//        case .success(let dataContainer):
-//          completionValue = .success(dataContainer.results)
-//        case .failure(let error):
-//          completionValue = .failure(error)
-//        }
-//
-//      case .failure(let error):
-//        completionValue = .failure(error)
-//      }
-//      completion(completionValue)
-//    }
   }
 
   func getCharacter(with id: Int, completion: @escaping (Result<GetCharacter.Response, Error>) -> Void) {
@@ -86,36 +68,6 @@ class MarvelApiClient: MarvelApiProtocol {
       completion(completionResult)
     }
   }
-//
-//   private func handleSuccessResultsGetCharacter(_ data: Data, request: GetCharacter) -> Result<[CharacterResult], Error> {
-//      let returnValue: Result<[CharacterResult], Error>
-//
-//      let dataContaineResult = decodeResponseDataToMarvelResponse(data: data, request: request)
-//      switch dataContaineResult{
-//      case .success(let dataContainer):
-//        let characters = dataContainer.results
-//        returnValue = .success(characters)
-//      case .failure(let error):
-//        returnValue = .failure(error)
-//      }
-//      return returnValue
-//    }
-//
-//  // Handle decoding errors and situation where the response object MarvelResponse dones't have a .data field
-//  private func decodeResponseDataToMarvelResponse<T: RestAPIRequest> (data: Data, request: T) -> Result<DataContainer<T.Response>, Error> {
-//    var result: Result<DataContainer<T.Response>, Error>
-//    do {
-//      let marvelResponse = try JSONDecoder().decode(MarvelResponse<T.Response>.self, from: data)
-//      if let dataContainer = marvelResponse.data {
-//        result = .success(dataContainer)
-//      } else {
-//        result = .failure(MarvelError.noData)
-//      }
-//    } catch {
-//      let marvelError = try? JSONDecoder().decode(ErrorResponse.self, from: data)
-//      result = .failure(MarvelError.server(message: "Error code: \(String(describing: marvelError?.code)), message: \(String(describing: marvelError?.message))"))
-//    }
-//    return result
 }
 
 

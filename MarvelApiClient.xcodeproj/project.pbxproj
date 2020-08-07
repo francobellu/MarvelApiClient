@@ -35,9 +35,11 @@
 		C703665A24754D010005886F /* CharactersListPresenterTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = C703665924754D010005886F /* CharactersListPresenterTest.swift */; };
 		C703665D24754D4B0005886F /* CharacterDetailPresenterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C703665B24754D4B0005886F /* CharacterDetailPresenterTests.swift */; };
 		C703665E24754D4B0005886F /* CharacterDetailInteractorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C703665C24754D4B0005886F /* CharacterDetailInteractorTests.swift */; };
-		C707B8AC24DC44D5006069A1 /* DefaultCharactersRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = C707B8AB24DC44D5006069A1 /* DefaultCharactersRepository.swift */; };
-		C707B8AE24DC4507006069A1 /* CharactersRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = C707B8AD24DC4507006069A1 /* CharactersRepository.swift */; };
+		C707B8AC24DC44D5006069A1 /* CharactersRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = C707B8AB24DC44D5006069A1 /* CharactersRepository.swift */; };
+		C707B8AE24DC4507006069A1 /* DefaultCharactersRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = C707B8AD24DC4507006069A1 /* DefaultCharactersRepository.swift */; };
 		C707B8B224DC468C006069A1 /* CharactersRequestDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = C707B8B124DC468C006069A1 /* CharactersRequestDTO.swift */; };
+		C707B8B524DC57A9006069A1 /* Character.swift in Sources */ = {isa = PBXBuildFile; fileRef = C707B8B424DC57A9006069A1 /* Character.swift */; };
+		C707B8B724DC58A5006069A1 /* CharactersQuery.swift in Sources */ = {isa = PBXBuildFile; fileRef = C707B8B624DC58A5006069A1 /* CharactersQuery.swift */; };
 		C7096D722448E6C000DEE7D3 /* DeepLink.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7096D712448E6C000DEE7D3 /* DeepLink.swift */; };
 		C7096D772449C7C500DEE7D3 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7096D762449C7C500DEE7D3 /* SceneDelegate.swift */; };
 		C715DC2024CF16F700DAC74A /* MarvelApiRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = C715DC1F24CF16F700DAC74A /* MarvelApiRequest.swift */; };
@@ -130,9 +132,11 @@
 		C703665924754D010005886F /* CharactersListPresenterTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharactersListPresenterTest.swift; sourceTree = "<group>"; };
 		C703665B24754D4B0005886F /* CharacterDetailPresenterTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CharacterDetailPresenterTests.swift; sourceTree = "<group>"; };
 		C703665C24754D4B0005886F /* CharacterDetailInteractorTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CharacterDetailInteractorTests.swift; sourceTree = "<group>"; };
-		C707B8AB24DC44D5006069A1 /* DefaultCharactersRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultCharactersRepository.swift; sourceTree = "<group>"; };
-		C707B8AD24DC4507006069A1 /* CharactersRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharactersRepository.swift; sourceTree = "<group>"; };
+		C707B8AB24DC44D5006069A1 /* CharactersRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharactersRepository.swift; sourceTree = "<group>"; };
+		C707B8AD24DC4507006069A1 /* DefaultCharactersRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultCharactersRepository.swift; sourceTree = "<group>"; };
 		C707B8B124DC468C006069A1 /* CharactersRequestDTO.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CharactersRequestDTO.swift; sourceTree = "<group>"; };
+		C707B8B424DC57A9006069A1 /* Character.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Character.swift; sourceTree = "<group>"; };
+		C707B8B624DC58A5006069A1 /* CharactersQuery.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharactersQuery.swift; sourceTree = "<group>"; };
 		C70873D32471F55500184DE0 /* superheros.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = superheros.png; sourceTree = "<group>"; };
 		C7096D712448E6C000DEE7D3 /* DeepLink.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeepLink.swift; sourceTree = "<group>"; };
 		C7096D762449C7C500DEE7D3 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -433,7 +437,7 @@
 		C707B8A724DC4302006069A1 /* Repositories */ = {
 			isa = PBXGroup;
 			children = (
-				C707B8AD24DC4507006069A1 /* CharactersRepository.swift */,
+				C707B8AD24DC4507006069A1 /* DefaultCharactersRepository.swift */,
 			);
 			path = Repositories;
 			sourceTree = "<group>";
@@ -441,6 +445,7 @@
 		C707B8A824DC445D006069A1 /* Domain */ = {
 			isa = PBXGroup;
 			children = (
+				C707B8B324DC5762006069A1 /* Entities */,
 				C707B8A924DC4480006069A1 /* Interfaces */,
 			);
 			path = Domain;
@@ -457,7 +462,7 @@
 		C707B8AA24DC44A0006069A1 /* Repositories */ = {
 			isa = PBXGroup;
 			children = (
-				C707B8AB24DC44D5006069A1 /* DefaultCharactersRepository.swift */,
+				C707B8AB24DC44D5006069A1 /* CharactersRepository.swift */,
 			);
 			path = Repositories;
 			sourceTree = "<group>";
@@ -476,6 +481,15 @@
 				C707B8B124DC468C006069A1 /* CharactersRequestDTO.swift */,
 			);
 			path = DTOs;
+			sourceTree = "<group>";
+		};
+		C707B8B324DC5762006069A1 /* Entities */ = {
+			isa = PBXGroup;
+			children = (
+				C707B8B424DC57A9006069A1 /* Character.swift */,
+				C707B8B624DC58A5006069A1 /* CharactersQuery.swift */,
+			);
+			path = Entities;
 			sourceTree = "<group>";
 		};
 		C70873D22471F54800184DE0 /* Resources */ = {
@@ -907,6 +921,7 @@
 				C7096D722448E6C000DEE7D3 /* DeepLink.swift in Sources */,
 				C7169240244F0385005BF4AB /* MarvelError.swift in Sources */,
 				C703663924753DEB0005886F /* LandingViewController.swift in Sources */,
+				C707B8B524DC57A9006069A1 /* Character.swift in Sources */,
 				287C9A0A217F39CB00D63092 /* AppDelegate.swift in Sources */,
 				C703664124753DEB0005886F /* CharacterDetailInteractor.swift in Sources */,
 				C776993B24B31394003BE9BD /* CharacterCellPresentationModel.swift in Sources */,
@@ -915,7 +930,7 @@
 				C7EC670D24435E3C00F88FDE /* UserDefaultsDataStore.swift in Sources */,
 				C703663B24753DEB0005886F /* CharacterCell.swift in Sources */,
 				C728C2AB246C375300F60806 /* AppDependencies.swift in Sources */,
-				C707B8AC24DC44D5006069A1 /* DefaultCharactersRepository.swift in Sources */,
+				C707B8AC24DC44D5006069A1 /* CharactersRepository.swift in Sources */,
 				C715DC2024CF16F700DAC74A /* MarvelApiRequest.swift in Sources */,
 				C715DC3224D30C5D00DAC74A /* Factory.swift in Sources */,
 				C703664924753DEB0005886F /* LandingPresenter.swift in Sources */,
@@ -924,7 +939,8 @@
 				C703664A24753DEB0005886F /* OnboardingPresenter.swift in Sources */,
 				C7483D3524C99EAB00651D49 /* MarvelApiProtocol.swift in Sources */,
 				C703663C24753DEB0005886F /* CharactersListViewController.swift in Sources */,
-				C707B8AE24DC4507006069A1 /* CharactersRepository.swift in Sources */,
+				C707B8B724DC58A5006069A1 /* CharactersQuery.swift in Sources */,
+				C707B8AE24DC4507006069A1 /* DefaultCharactersRepository.swift in Sources */,
 				28998ECC217F636A0037039B /* Result.swift in Sources */,
 				C7D3F040243B770F004E4C0E /* Coordinator.swift in Sources */,
 				C715DC3024D30BD200DAC74A /* RestDependencies.swift in Sources */,

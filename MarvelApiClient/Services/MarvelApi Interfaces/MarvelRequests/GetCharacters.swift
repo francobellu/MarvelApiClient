@@ -42,6 +42,20 @@ struct GetCharacters: MarvelApiRequest {
     if let offset = offset { params["offset"] = String(offset)}
     self.parameters = params
   }
+
+  init( restDependencies: RestDependenciesProtocol,
+        name: String? = nil, query: CharactersQuery ) {
+
+    self.restDependencies = restDependencies
+    apiRequestConfig = restDependencies.apiRequestConfig
+
+    var params = [String: String]()
+    if let name = name {params["name"] = name}
+    if let nameStartsWith = query.nameStartsWith {params["nameStartsWith"] = nameStartsWith}
+    if let limit = query.limit { params["limit"] = String(limit) }
+    if let offset = query.offset { params["offset"] = String(offset)}
+    self.parameters = params
+  }
 //
 //  func getCharactersList(completion: @escaping (Result<Response, Error>) -> Void) {
 //    // Get the first <limit> characters
