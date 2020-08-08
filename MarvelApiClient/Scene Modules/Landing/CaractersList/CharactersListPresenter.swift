@@ -48,7 +48,7 @@ class CharactersListPresenter: CharactersListPresenterProtocol {
   }
 
   /// Arrange the sections/row view model and caregorize by date
-  private func buildPresentationModel(from characters: [CharacterResult]) {
+  private func buildPresentationModel(from characters: [Character]) {
     var cellPresentationModels = [CharacterCellPresentationModel]()
     for character in characters {
       let characterCellViewModel: CharacterCellPresentationModel = CharacterCellPresentationModel(character: character)
@@ -60,7 +60,7 @@ class CharactersListPresenter: CharactersListPresenterProtocol {
 
 // MARK: - GetCharactersListInteractorOutputPort
 extension CharactersListPresenter: GetCharactersListInteractorOutputPort{
-  func domainData(result: Result<GetCharacters.Response, Error>) {
+  func domainData(result: Result<[Character], Error>) {
     switch result {
     case .success(let characters):
       self.isLoading.value = false
@@ -73,7 +73,7 @@ extension CharactersListPresenter: GetCharactersListInteractorOutputPort{
   }
 }
 
-func buildPresentationModels(from characters: [CharacterResult]) -> [CharacterCellPresentationModel] {
+func buildPresentationModels(from characters: [Character]) -> [CharacterCellPresentationModel] {
   var cellPresentationModels = [CharacterCellPresentationModel]()
   for character in characters {
     let characterCellViewModel: CharacterCellPresentationModel = CharacterCellPresentationModel(character: character)

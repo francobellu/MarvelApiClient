@@ -11,3 +11,5 @@ import Foundation
 ////    let query: CharactersQuery
 //    let page: Int
 //}
+
+

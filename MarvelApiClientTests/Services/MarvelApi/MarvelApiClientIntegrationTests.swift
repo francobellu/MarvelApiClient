@@ -1,5 +1,5 @@
 //
-//  MarvelApiClientTests.swift
+//  MarvelApiClientIntegrationTests.swift
 //  MarvelApiClientTests
 //
 //  Created by BELLU Franco on 14/05/2020.
@@ -11,12 +11,11 @@ import Rest
 
 @testable import MarvelApiClient
 
-class MarvelApiClientTests: XCTestCase {
+class MarvelApiClientIntegrationTests: XCTestCase {
 
   var sut: MarvelApiClient! // swiftlint:disable:this implicitly_unwrapped_optional
 
   override func setUpWithError() throws {
-    let session = URLSession(configuration: .default)
     let restDependencies = RestDependencies()
     sut = MarvelApiClient(restDependencies: restDependencies)
   }
@@ -30,6 +29,9 @@ class MarvelApiClientTests: XCTestCase {
 
     sut.getCharactersList { response  in
       XCTAssertNotNil(response)
+      if case .failure = response{
+        XCTAssertTrue(false)
+      }
       promise.fulfill()
     }
     wait(for: [promise], timeout: 100)

@@ -23,39 +23,7 @@ struct DataContainer<Results: Decodable>: Decodable {
   public let results: Results
 }
 
-// MARK: - Result
-struct CharacterResult: Codable, Equatable {
-  static func == (lhs: CharacterResult, rhs: CharacterResult) -> Bool {
-    lhs.id == rhs.id
-  }
 
-  let id: Int?
-  let name: String?
-  let description: String?
-  let modified: String?
-  let resourceURI: String?
-  let urls: [URLElement]?
-  let thumbnail: Thumbnail?
-  let comics: Comics?
-  let stories: Stories?
-  let events: Comics?
-  let series: Comics?
-
-  init(name: String, imageUrl: URL?) {
-    self.name = name
-    self.thumbnail = Thumbnail(from: imageUrl )
-    id = nil
-
-    description = nil
-    modified = nil
-    resourceURI = nil
-    urls = nil
-    comics = nil
-    stories = nil
-    events = nil
-    series = nil
-  }
-}
 
 // Comics.swift
 

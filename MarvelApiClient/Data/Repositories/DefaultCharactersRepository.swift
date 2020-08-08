@@ -19,14 +19,16 @@ final class DefaultCharactersRepository {
 }
 
 extension DefaultCharactersRepository: CharactersRepository {
-  func getCharactersList(completion: @escaping (Result<GetCharacters.Response, Error>) -> Void) {
+  func getCharactersList(completion: @escaping (Result<[Character], Error>) -> Void) {
 
 //    let requestDTO = CharactersRequestDTO(query: query)
     let endpoint = apiClient.getCharactersList { result in
       switch result {
       case .success(let responseDTO):
 //        self.cache.save(response: responseDTO, for: requestDTO)
-        completion(.success(responseDTO)) // responseDTO.toDomain()
+        let characterResults = (responseDTO as [CharacterResult] )
+        let charactersEntities = characterResults.map{ $0.toDomain()}
+        completion(.success(charactersEntities)) // responseDTO.toDomain()
       case .failure(let error):
         completion(.failure(error))
       }

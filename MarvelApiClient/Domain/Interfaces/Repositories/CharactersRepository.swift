@@ -12,6 +12,6 @@ protocol CharactersRepository {
 //    @discardableResult
     func getCharactersList( //query: MovieQuery, page: Int,
 //                         cached: @escaping (MoviesPage) -> Void,
-      completion: @escaping (Result<GetCharacters.Response, Error>) -> Void)// -> Cancellable?
+      completion: @escaping (Result<[Character], Error>) -> Void)// -> Cancellable?
 }
 

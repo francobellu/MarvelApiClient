@@ -9,35 +9,52 @@
 import Foundation
 
 //// MARK: - Result
-//struct Character: Codable, Equatable {
-//  static func == (lhs: Character, rhs: Character) -> Bool {
-//    lhs.id == rhs.id
-//  }
-//
-//  let id: Int?
-//  let name: String?
-//  let description: String?
+struct Character {
+  static func == (lhs: Character, rhs: Character) -> Bool {
+    lhs.id == rhs.id
+  }
+
+  let id: Int?
+  let name: String?
+  let description: String?
 //  let modified: String?
-//  let resourceURI: String?
+  let resourceURI: String?
 //  let urls: [URLElement]?
-//  let thumbnail: Thumbnail?
-//  let comics: Comics?
-//  let stories: Stories?
-//  let events: Comics?
-//  let series: Comics?
-//
-//  init(name: String, imageUrl: URL?) {
-//    self.name = name
-//    self.thumbnail = Thumbnail(from: imageUrl )
-//    id = nil
-//
-//    description = nil
-//    modified = nil
-//    resourceURI = nil
-//    urls = nil
-//    comics = nil
-//    stories = nil
-//    events = nil
-//    series = nil
-//  }
-//}
+  let thumbnail: Thumbnail?
+  let comics: Int
+  let stories: Int
+  let events: Int
+  let series: Int
+
+  init(id: Int?,
+       name: String?,
+       description: String?,
+       resourceURI: String?,
+       thumbnail: Thumbnail?,
+       comics: Int,
+       stories: Int,
+       events: Int,
+       series: Int){
+    self.id = id
+    self.name = name
+    self.description = description
+    self.resourceURI = resourceURI
+    self.thumbnail = thumbnail
+    self.comics = comics
+    self.stories = stories
+    self.events = events
+    self.series = series
+  }
+
+  init(name: String, imageUrl: URL?) {
+    self.name = name
+    thumbnail = Thumbnail(from: imageUrl )
+    id = nil
+    description = nil
+    resourceURI = nil
+    comics = 0
+    stories = 0
+    events = 0
+    series = 0
+  }
+}
