@@ -8,7 +8,7 @@
 
 import Foundation
 
-// Presenter --> View
+// ViewController <-- Presenter
 protocol DataBinding: class{
   var viewDidLoadChanged: ((Bool) -> Void)? { get set }
   var titleChanged: ((String) -> Void)? { get set }
@@ -27,15 +27,10 @@ protocol CharactersListPresenterProtocol: class {
   var isLoading: Observable<Bool> {get set }
   var isError: Observable<Error?> {get set }
 
+  // ViewController --> Presenter
   func didSelectCharacter(at: Int)
-
   func didGoBack()
+
+  //  Presenter --> Interactor
   func getNextCharactersList()
 }
-
-//// Presenter --> Interactor
-//protocol GetCharactersListInteractorProtocol {
-//  init(dependencies: AppDependenciesProtocol)
-//  func execute(completion: @escaping ([CharacterResult]) -> Void)
-//}
-

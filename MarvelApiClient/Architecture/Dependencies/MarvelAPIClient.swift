@@ -58,7 +58,7 @@ class MarvelApiClient: MarvelApiProtocol {
 
     restDependencies.restApiClient.send(urlRequest)  { (result) in
      print("\nGetCharacter \(id) finished")
-     var completionResult: Result<GetCharacters.Response, Error>
+     var completionResult: Result<GetCharacter.Response, Error>
       switch result {
       case .success((_, let data)):
         completionResult = request.decode(data)

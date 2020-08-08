@@ -47,20 +47,21 @@ extension GetCharactersListInteractor: GetCharactersListInteractorInputPort{
 // MARK: - PRIVATE functions
 private extension GetCharactersListInteractor{
   private func getCharactersList() {
-//    let request = GetCharacters(restDependencies: dependencies.restDependencies, limit: 20, offset: 0)
+    //    let request = GetCharacters(restDependencies: dependencies.restDependencies, limit: 20, offset: 0)
     charactersRepository.getCharactersList { (result) in
-       self.handle(results: result)
+      self.handle(result: result)
     }
   }
 
-private func handle(results: Result<[Character], Error>){
-    switch results {
-    case .success:
-      // completion is the interactor output port
-      self.outputPort?.domainData(result: results)
-    case .failure(let error):
-      print(error)
-      self.outputPort?.domainData(result: results)
-    }
+  private func handle(result: Result<[Character], Error>){
+//    switch results {
+//    case .success:
+//      // completion is the interactor output port
+//      self.outputPort?.domainData(result: results)
+//    case .failure(let error):
+//      print(error)
+//
+//    }
+    self.outputPort?.domainData(result: result)
   }
 }

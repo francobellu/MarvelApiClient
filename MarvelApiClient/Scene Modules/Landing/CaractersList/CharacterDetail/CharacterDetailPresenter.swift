@@ -9,21 +9,21 @@
 import Foundation
 
 class CharacterDetailPresenter {
-  private var character = Observable<CharacterResult?>(value: nil)
+  private var character = Observable<Character?>(value: nil)
 
   private var dependencies: AppDependenciesProtocol! // swiftlint:disable:this implicitly_unwrapped_optional
 
-  private var interactor: CharacterDetailInteractorProtocol?
+  private var interactor: GetCharacterInteractorInputPort?
 
-  init(dependencies: AppDependenciesProtocol, character: CharacterResult) {
+  init(dependencies: AppDependenciesProtocol, character: Character) {
     self.character.value = character
     self.dependencies = dependencies
   }
   /// Initializer used for deep linking
-  init(dependencies: AppDependenciesProtocol, characterId: Int, interactor: CharacterDetailInteractorProtocol) {
+  init(dependencies: AppDependenciesProtocol, id: Int, interactor: GetCharacterInteractorInputPort) {
     self.dependencies = dependencies
     self.interactor = interactor
-    self.getCharacter(with: characterId){
+    self.getCharacter(with: id){
     }
   }
 
@@ -44,32 +44,40 @@ class CharacterDetailPresenter {
   }
 
   func getComicsCount() -> String {
-    guard let comicsCount = character.value?.comics?.items?.count,
+    guard let comicsCount = character.value?.comics,
               comicsCount != 0 else { return "" }
     return "Comics available: \(comicsCount)"
   }
 
   func getSeriesCount() -> String {
-    guard let comicsCount = character.value?.series?.items?.count else { return "" }
+    guard let comicsCount = character.value?.series else { return "" }
     return "Series available: \(comicsCount)"
   }
 
   func getStoriesCount() -> String {
-    guard let comicsCount = character.value?.stories?.items?.count else { return "" }
+    guard let comicsCount = character.value?.stories else { return "" }
     return "Stories available: \(comicsCount)"
   }
 
-  // MARK: - Business logic
-  func getCharacter(with characterId: Int, completion: @escaping () -> Void) {
+  // MARK: - Domain Layer calls
+  func getCharacter(with id: Int, completion: @escaping () -> Void) {
     guard let interactor = interactor else { return }
-    interactor.getCharacter(with: characterId) { result in
-      switch result {
-      case .success(let character):
-        self.character.value = character
-      case .failure: break
-      }
-      print("FB: character: \(String(describing: self.character))")
-      completion()
+    interactor.execute(with: id)
+  }
+}
+
+// MARK: - GetCharactersListInteractorOutputPort
+extension CharacterDetailPresenter: GetCharacterInteractorOutputPort{
+  func domainData(result: Result<Character, Error>) {
+    switch result {
+    case .success(let character):
+      self.character.value = character
+//      self.isLoading.value = false
+//      self.buildPresentationModel(from: characters)
+    case .failure(let error):
+      print(error)
+//      self.isError.value = error
+      // Hanlde Errors
     }
   }
 }

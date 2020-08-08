@@ -30,7 +30,7 @@ class CharactersListPresenter: CharactersListPresenterProtocol {
     self.interactor = interactor
   }
 
-  // MARK: - API FUNCTIONS
+  // MARK: - Domain Layer calls
   func getNextCharactersList() {
     isLoading.value = true
     interactor.execute()
@@ -39,7 +39,7 @@ class CharactersListPresenter: CharactersListPresenterProtocol {
   // MARK: - FLOW CharactersListCoordinatorDelegate
   func didSelectCharacter(at index: Int) {
     let cellPresentationModel = presentationModel.value[index]
-    let character = CharacterResult(name: cellPresentationModel.title, imageUrl: cellPresentationModel.imgViewUrl)
+    let character = Character(name: cellPresentationModel.title, imageUrl: cellPresentationModel.imgViewUrl)
     coordinatorDelegate.didSelect(character: character)
   }
 

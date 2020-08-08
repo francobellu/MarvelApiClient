@@ -22,16 +22,33 @@ extension DefaultCharactersRepository: CharactersRepository {
   func getCharactersList(completion: @escaping (Result<[Character], Error>) -> Void) {
 
 //    let requestDTO = CharactersRequestDTO(query: query)
-    let endpoint = apiClient.getCharactersList { result in
+    let endpoint = apiClient.getCharactersList { result in // TODO: not returning an Endpoint
       switch result {
       case .success(let responseDTO):
 //        self.cache.save(response: responseDTO, for: requestDTO)
         let characterResults = (responseDTO as [CharacterResult] )
         let charactersEntities = characterResults.map{ $0.toDomain()}
-        completion(.success(charactersEntities)) // responseDTO.toDomain()
+        completion(.success(charactersEntities))
       case .failure(let error):
         completion(.failure(error))
       }
     }
   }
+
+  func getCharacter(with id: Int, completion: @escaping (Result<Character, Error>) -> Void) {
+
+    //    let requestDTO = CharactersRequestDTO(query: query)
+    let endpoint = apiClient.getCharacter(with: id) { result in // TODO: not returning an Endpoint
+      switch result {
+      case .success(let responseDTO):
+        //        self.cache.save(response: responseDTO, for: requestDTO)
+        let characterResults = (responseDTO as [CharacterResult] )
+        guard let characterDto = characterResults.first else{ return }
+        let character = characterDto.toDomain()
+        completion(.success(character))
+      case .failure(let error):
+        completion(.failure(error))
+      }
+    }
+    }
 }

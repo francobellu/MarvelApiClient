@@ -15,7 +15,7 @@ protocol ViewControllerFactory {
 
   // CharacterDetail
   func makeCharacterDetailPresenter(with characterId: String) -> CharacterDetailPresenter
-  func makeCharacterDetailPresenter(with character: CharacterResult) -> CharacterDetailPresenter
+  func makeCharacterDetailPresenter(with character: Character) -> CharacterDetailPresenter
 }
 
 protocol PresenterFactory {
@@ -23,7 +23,7 @@ protocol PresenterFactory {
   func makeCharactersListPresenter(with characterId: String, coordinatorDelegate: CharactersListCoordinatorDelegate  ) -> CharactersListPresenter
 
   // CharacterDetail
-  func makeCharacterDetailView(character: CharacterResult) -> CharacterDetailViewController
+  func makeCharacterDetailView(character: Character) -> CharacterDetailViewController
   func makeCharacterDetailView(with characterId: String ) -> CharacterDetailViewController
 }
 
@@ -53,7 +53,9 @@ extension Factory: ViewControllerFactory{
 
     return view
   }
-  func makeCharacterDetailView(character: CharacterResult) -> CharacterDetailViewController{
+
+  // make from a specific character already present ( when selected from list view)
+  func makeCharacterDetailView(character: Character) -> CharacterDetailViewController{
     let viewPresenter = CharacterDetailPresenter(dependencies: dependencies, character: character)
     let view  = CharacterDetailViewController.instantiateViewController()
     view.presenter = viewPresenter
@@ -61,9 +63,9 @@ extension Factory: ViewControllerFactory{
   }
 
   func makeCharacterDetailView(with characterId: String ) -> CharacterDetailViewController{
-    let interactor = CharacterDetailInteractor(dependencies: dependencies)
+    let interactor = GetCharacterInteractor(dependencies: dependencies)
 
-    let presenter = CharacterDetailPresenter(dependencies: dependencies, characterId: Int(characterId)!, interactor: interactor)
+    let presenter = CharacterDetailPresenter(dependencies: dependencies, id: Int(characterId)!, interactor: interactor)
 
     let view = CharacterDetailViewController.instantiateViewController()
 
@@ -84,14 +86,15 @@ extension Factory: PresenterFactory{
 
   func makeCharacterDetailPresenter(with characterId: String) -> CharacterDetailPresenter{
 
-    let interactor = CharacterDetailInteractor(dependencies: dependencies)
+    let interactor = GetCharacterInteractor(dependencies: dependencies)
 
-    return CharacterDetailPresenter(dependencies: dependencies, characterId: Int(characterId)!, interactor: interactor)
+    return CharacterDetailPresenter(dependencies: dependencies, id: Int(characterId)!, interactor: interactor)
   }
 
-  func makeCharacterDetailPresenter(with character: CharacterResult) -> CharacterDetailPresenter{
+  func makeCharacterDetailPresenter(with character: Character) -> CharacterDetailPresenter{
 
-    let interactor = CharacterDetailInteractor(dependencies: dependencies)
+    // No interactor in this case
+//    let interactor = GetCharacterInteractor(dependencies: dependencies)
 
     return CharacterDetailPresenter(dependencies: dependencies, character: character)
   }

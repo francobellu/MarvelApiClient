@@ -10,7 +10,7 @@ import UIKit
 
 protocol CharactersListCoordinatorDelegate: class {
   func didGoBack()
-  func didSelect(character: CharacterResult)
+  func didSelect(character: Character)
 }
 
 class CharactersListCoordinator: NSObject {
@@ -57,7 +57,7 @@ extension CharactersListCoordinator: CharactersListCoordinatorDelegate {
     popView()
   }
 
-  func didSelect(character: CharacterResult) {
+  func didSelect(character: Character) {
     // Destination doesn't need coordination, just present the VC
     presentCharacterDetailViewController(with: character)
   }
@@ -75,7 +75,7 @@ private extension CharactersListCoordinator {
      (self.coordinatorPresenter as? UINavigationController)?.pushViewController(view, animated: true)
    }
 
-  private func presentCharacterDetailViewController(with character: CharacterResult ) {
+  private func presentCharacterDetailViewController(with character: Character ) {
     let viewController = dependencies.factory.makeCharacterDetailView(character: character)
     (coordinatorPresenter as? UINavigationController)?.pushViewController(viewController, animated: true)
   }

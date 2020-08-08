@@ -9,7 +9,8 @@
 import UIKit
 
 class CharactersListViewController: UIViewController, StoryboardInstantiable, DataBinding {
-  // MARK: - CharactersListPresenterToViewProtocol
+
+  // MARK: - DataBinding
   lazy var viewDidLoadChanged: ((Bool) -> Void)? = {  [weak self] (viewDidLoad) in
     self?.prepareView()
     self?.presenter.getNextCharactersList()
@@ -32,10 +33,6 @@ class CharactersListViewController: UIViewController, StoryboardInstantiable, Da
     self?.showErrorAlert(error: error)
   }
 
-  // MARK: -
-  func prepareView(){
-    setBackBtnInterceptMechanism()
-  }
 
   var presenter: CharactersListPresenterProtocol! // swiftlint:disable:this implicitly_unwrapped_optional
 
@@ -62,18 +59,9 @@ class CharactersListViewController: UIViewController, StoryboardInstantiable, Da
 
     presenter.viewDidLoad.value = true
   }
+}
 
-  // Then handle the button selection
-  @objc func goBack() {
-    // Here we just remove the back button, you could also disabled it or better yet show an activityIndicator
-    self.navigationItem.leftBarButtonItem = nil
-    let allowGoBack = true
-    if allowGoBack {
-      // Don't forget to re-enable the interactive gesture
-      self.navigationController?.interactivePopGestureRecognizer?.isEnabled = true
-      presenter.didGoBack()
-    }
-  }
+private extension CharactersListViewController {
 
   private func initBinding() {
     // viewDidLoad
@@ -90,6 +78,10 @@ class CharactersListViewController: UIViewController, StoryboardInstantiable, Da
 
     // Error Dialog
     presenter.isError.valueChanged = isErrorChanged
+  }
+
+  private func prepareView(){
+    setBackBtnInterceptMechanism()
   }
 
   private func updateLoadingStatus(){
@@ -122,7 +114,20 @@ class CharactersListViewController: UIViewController, StoryboardInstantiable, Da
                                      action: #selector(goBack))
     navigationItem.leftBarButtonItem = backButton
   }
+
+  // Then handle the button selection
+  @objc private func goBack() {
+    // Here we just remove the back button, you could also disabled it or better yet show an activityIndicator
+    self.navigationItem.leftBarButtonItem = nil
+    let allowGoBack = true
+    if allowGoBack {
+      // Don't forget to re-enable the interactive gesture
+      self.navigationController?.interactivePopGestureRecognizer?.isEnabled = true
+      presenter.didGoBack()
+    }
+  }
 }
+
 
 // MARK: - UITableViewDataSource
 extension CharactersListViewController: UITableViewDataSource {
