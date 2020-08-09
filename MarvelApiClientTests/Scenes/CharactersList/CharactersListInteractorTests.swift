@@ -77,14 +77,10 @@ class GetCharactersListInteractorInputPortTest: XCTestCase {
   //
   func testDomainData_SuccessResult(){
     // Given
-    let appDependenciesDummy = AppDependenciesDummy(restDependencies: RestDependencies())
-    let charactersWorkerSpy = CharacterWorkerTestDouble()
 
-    // prepare the result that we want to use
-    let testResult = Result<GetCharacters.Response, Error>.success(getResponse(from: "MockedResponseGetCharacters").data!.results)
-    charactersWorkerSpy.stubbedResult = testResult
-
-//    appDependenciesDummy.marvelApiClient = charactersWorkerSpy
+    let testData = mockResponseData(for: "MockedResponseGetCharacters")
+    let testResult = Result<[Character], Error>.success(getCharactersEntitities(from: "MockedResponseGetCharacters")!)
+    let appDependenciesDummy = AppDependenciesDummy(restDependencies: RestDependenciesMock(sessionNextData: testData))
     let presenterSpy = PresenterTestDouble()
     let sut = GetCharactersListInteractor(dependencies: appDependenciesDummy)
     sut.outputPort = presenterSpy
@@ -180,9 +176,14 @@ class PresenterTestDouble: GetCharactersListInteractorOutputPort {
   
   var domainDataCalled = false
 
-  var result = Result<[CharacterResult], Error>.success( getResponse(from: "MockedResponseGetCharacters").data!.results)
+  var result =  Result<[Character], Error>.failure(MarvelError.noData)
+//  {
+//    let dtos: [CharacterResult] =  getResponse(from: "MockedResponseGetCharacters").data!.results
+//    let characters = dtos.map{$0.toDomain()}
+//    return .success( characters )
+//  }
 
-  func domainData(result: Result<[CharacterResult], Error>) {
+  func domainData(result: Result<[Character], Error>) {
     domainDataCalled = true
     self.result = result
   }

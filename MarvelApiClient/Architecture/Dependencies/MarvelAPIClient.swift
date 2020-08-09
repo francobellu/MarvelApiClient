@@ -36,12 +36,12 @@ class MarvelApiClient: MarvelApiProtocol {
     guard let url = request.apiRequestConfig.buildEndpointUrlFor(resourceName: request.resourceName, parameters: request.parameters) else {return }
     let urlRequest = URLRequest(url: url)
 
-    restDependencies.restApiClient.send(urlRequest ) { (result) in
+    restDependencies.restApiClient.request(urlRequest ) { (result) in
       print("\nGetCharacters list finished, limit: \(self.limit), offset: \(self.offset)")
       var completionResult: Result<GetCharacters.Response, Error>
 
       switch result {
-      case .success((_, let data)):
+      case .success(let data):
         completionResult = request.decode(data)
       case .failure(let error):
         completionResult = .failure(error)
@@ -56,11 +56,11 @@ class MarvelApiClient: MarvelApiProtocol {
     guard let url = request.apiRequestConfig.buildEndpointUrlFor(resourceName: request.resourceName, parameters: request.parameters) else {return }
     let urlRequest = URLRequest(url: url)
 
-    restDependencies.restApiClient.send(urlRequest)  { (result) in
+    restDependencies.restApiClient.request(urlRequest)  { (result) in
      print("\nGetCharacter \(id) finished")
      var completionResult: Result<GetCharacter.Response, Error>
       switch result {
-      case .success((_, let data)):
+      case .success(let data):
         completionResult = request.decode(data)
       case .failure(let error):
         completionResult = .failure(error)

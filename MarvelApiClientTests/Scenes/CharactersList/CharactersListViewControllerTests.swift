@@ -12,7 +12,7 @@ import XCTest
 final class CharactersListViewControllerTests: XCTestCase {
 
   var testCharacters: [CharacterResult] {
-    getObjects(from: "MockedResponseGetCharacters")
+    getDtos(from: "MockedResponseGetCharacters")
   }
 
   var sut: CharactersListViewController!
@@ -169,7 +169,7 @@ final class CharactersListViewControllerTests: XCTestCase {
     }
 
     // When
-    presenterMock.presentationModel.value = testCharacters.map{ CharacterCellPresentationModel(character: $0) }
+    presenterMock.presentationModel.value = testCharacters.map{ CharacterCellPresentationModel(character: $0.toDomain()) }
 
     // Then
     wait(for: [isLoadingExp], timeout: 5)
@@ -202,7 +202,7 @@ final class CharactersListViewControllerTests: XCTestCase {
     let tableViewMock = UITableView()
 
     // prepare the test data
-    presenterMock.testCharacterCellViewModel = testCharacters.map{ CharacterCellPresentationModel(character: $0) }
+    presenterMock.testCharacterCellViewModel = testCharacters.map{ CharacterCellPresentationModel(character: $0.toDomain()) }
 
     // When
     presenterMock.getNextCharactersList()
@@ -224,8 +224,8 @@ final class CharacterListViewController_DataSourceTests: XCTestCase {
 
     // The DataSource is the SUT
     presenterMock = CharacterListPresenterMock()
-    let testCharacters: [CharacterResult] = getObjects(from: "MockedResponseGetCharacters")
-    testCellsViewModel = testCharacters.map{ CharacterCellPresentationModel(character: $0) }
+    let testCharacters: [CharacterResult] = getDtos(from: "MockedResponseGetCharacters")
+    testCellsViewModel = testCharacters.map{ CharacterCellPresentationModel(character: $0.toDomain()) }
 
     vc = CharactersListViewController.instantiateViewController()
     vc.presenter = presenterMock
@@ -308,8 +308,8 @@ final class CharacterListViewController_TableViewDelegateTests: XCTestCase {
   override func setUpWithError() throws {
     // The DataSource is the SUT
     presenterMock = CharacterListPresenterMock()
-    let testCharacters: [CharacterResult] = getObjects(from: "MockedResponseGetCharacters")
-    testCellsViewModel = testCharacters.map{ CharacterCellPresentationModel(character: $0) }
+    let testCharacters: [CharacterResult] = getDtos(from: "MockedResponseGetCharacters")
+    testCellsViewModel = testCharacters.map{ CharacterCellPresentationModel(character: $0.toDomain()) }
 
     vc = CharactersListViewController.instantiateViewController()
     vc.presenter = presenterMock

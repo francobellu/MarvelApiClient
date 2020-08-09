@@ -45,7 +45,7 @@ class CharactersListPresenterTest: XCTestCase {
 //  var mockView: CharactersListPresenterToViewMock!
 
 //  let mockCharactersListView =
-  lazy var interactorStub = CharactersListInteractorTestDouble(dependencies: appDependenciesDummy)
+  lazy var interactorStub = CharactersListInteractorTestDouble()
 
   var testResults: [CharacterResult]! = nil
 
@@ -158,7 +158,7 @@ class CharactersListPresenterTest: XCTestCase {
     // Given
     var presentationModelSpy = [CharacterCellPresentationModel]()
     XCTAssertFalse(sut.isLoading.value)
-    let characters: [CharacterResult] = getObjects(from: "MockedResponseGetCharacters")
+    let characters: [Character] = ( getDtos(from: "MockedResponseGetCharacters") as [CharacterResult] ).map{$0.toDomain()}
     let presentationModel = buildPresentationModels(from: characters)
     let testValue = presentationModel
 
@@ -215,8 +215,9 @@ class CharactersListPresenterTest: XCTestCase {
 
     // Given
     XCTAssert(sut.presentationModel.value.isEmpty)
+    let testCharacters = getCharactersEntitities(from: "MockedResponseGetCharacters")
 
-    let testSuccessCharacters = Result<GetCharacters.Response, Error>.success(getResponse(from: "MockedResponseGetCharacters").data!.results)
+    let testSuccessCharacters = Result<[Character], Error>.success(testCharacters!)
     guard case let .success(characters) = testSuccessCharacters else{
       XCTAssertTrue(false, "result should have a valid dataContainer value")
       return
@@ -237,7 +238,7 @@ class CharactersListPresenterTest: XCTestCase {
     // Given
     XCTAssert(sut.presentationModel.value.isEmpty)
 
-    let testResultFailureNoData = Result<GetCharacters.Response, Error>.failure(MarvelError.noData)
+    let testResultFailureNoData = Result<[Character], Error>.failure(MarvelError.noData)
 
     // When
     sut.domainData(result: testResultFailureNoData)
@@ -275,7 +276,7 @@ class CharactersListPresenterTest: XCTestCase {
     // Given
     XCTAssert(sut.presentationModel.value.isEmpty )
 
-    let characters: [CharacterResult] = getObjects(from: "MockedResponseGetCharacters")
+    let characters: [Character]! = getCharactersEntitities(from: "MockedResponseGetCharacters")
     let presentationModel = buildPresentationModels(from: characters)
     let testValue = presentationModel
 
@@ -288,7 +289,7 @@ class CharactersListPresenterTest: XCTestCase {
     // Then
     XCTAssert(sut.presentationModel.value.count == 20 )
     let viewModel = sut.presentationModel.value[0]
-    let character = CharacterResult(name: viewModel.title, imageUrl: viewModel.imgViewUrl)
+    let character = Character(name: viewModel.title, imageUrl: viewModel.imgViewUrl)
 
     XCTAssert(coordinatorSpy.coordinatorState ==  .didSelect(character: character))
   }
@@ -313,11 +314,8 @@ class CharactersListInteractorTestDouble: GetCharactersListInteractorInputPort{
 
   var executeCalled = false
 
-  var stubbedResult = Result<GetCharacters.Response, Error>.failure(MarvelError.noData)
+  var stubbedResult = Result<[Character], Error>.failure(MarvelError.noData)
   var asyncOpExpectation: XCTestExpectation?
-
-  required init(dependencies: AppDependenciesProtocol) {
-  }
 
   func execute() {
     executeCalled = true
@@ -346,7 +344,7 @@ class CharactersListCoordinatorDelegateSpy:  CharactersListCoordinatorDelegate{
 
     case none
     case didGoBack
-    case didSelect(character: CharacterResult)
+    case didSelect(character: Character)
   }
   var coordinatorState: CoordinatorState = .none
 
@@ -354,7 +352,7 @@ class CharactersListCoordinatorDelegateSpy:  CharactersListCoordinatorDelegate{
     coordinatorState  = .didGoBack
   }
 
-  func didSelect(character: CharacterResult) {
+  func didSelect(character: Character) {
     coordinatorState  = .didSelect(character: character)
   }
 }
@@ -364,7 +362,8 @@ class GetCharactersListInteractorOutputPortSpy: GetCharactersListInteractorOutpu
   init(domainDataCalledSpy: Bool = false) {
     self.domainDataCalledSpy = domainDataCalledSpy
   }
-  func domainData(result: Result<GetCharacters.Response, Error>) {
+
+  func domainData(result: Result<[Character], Error>) {
     domainDataCalledSpy = true
   }
 }

@@ -9,7 +9,7 @@
 import Foundation
 
 //// MARK: - Result
-struct Character {
+struct Character: Equatable {
   static func == (lhs: Character, rhs: Character) -> Bool {
     lhs.id == rhs.id
   }

@@ -58,7 +58,7 @@ extension AppCoordinator: Coordinator {
       runFlowfor(state: nextState)
     }
 
-    func start(with option: DeepLinkOption?) { // swiftlint:disable:this function_body_length
+    func start(with option: DeepLinkOption?) {
        print("FB:AppCoordinator:start(with: \(String(describing: option))")
         //start with deepLink
         if let option = option {

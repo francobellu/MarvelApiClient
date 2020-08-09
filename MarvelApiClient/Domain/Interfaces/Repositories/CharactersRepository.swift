@@ -14,6 +14,5 @@ protocol CharactersRepository {
 //                         cached: @escaping (MoviesPage) -> Void,
       completion: @escaping (Result<[Character], Error>) -> Void)// -> Cancellable?
 
-  func getCharacter(with id: Int,  completion: @escaping (Result<Character, Error>) -> Void) 
+  func getCharacter(with id: Int, completion: @escaping (Result<Character, Error>) -> Void)
 }
-

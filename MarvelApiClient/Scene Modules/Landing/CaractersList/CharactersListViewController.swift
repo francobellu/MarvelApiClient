@@ -59,6 +59,22 @@ class CharactersListViewController: UIViewController, StoryboardInstantiable, Da
 
     presenter.viewDidLoad.value = true
   }
+
+  func prepareView(){
+    setBackBtnInterceptMechanism()
+  }
+
+  // Then handle the button selection
+  @objc func goBack() {
+    // Here we just remove the back button, you could also disabled it or better yet show an activityIndicator
+    self.navigationItem.leftBarButtonItem = nil
+    let allowGoBack = true
+    if allowGoBack {
+      // Don't forget to re-enable the interactive gesture
+      self.navigationController?.interactivePopGestureRecognizer?.isEnabled = true
+      presenter.didGoBack()
+    }
+  }
 }
 
 private extension CharactersListViewController {
@@ -78,10 +94,6 @@ private extension CharactersListViewController {
 
     // Error Dialog
     presenter.isError.valueChanged = isErrorChanged
-  }
-
-  private func prepareView(){
-    setBackBtnInterceptMechanism()
   }
 
   private func updateLoadingStatus(){
@@ -113,18 +125,6 @@ private extension CharactersListViewController {
                                      target: self,
                                      action: #selector(goBack))
     navigationItem.leftBarButtonItem = backButton
-  }
-
-  // Then handle the button selection
-  @objc private func goBack() {
-    // Here we just remove the back button, you could also disabled it or better yet show an activityIndicator
-    self.navigationItem.leftBarButtonItem = nil
-    let allowGoBack = true
-    if allowGoBack {
-      // Don't forget to re-enable the interactive gesture
-      self.navigationController?.interactivePopGestureRecognizer?.isEnabled = true
-      presenter.didGoBack()
-    }
   }
 }
 

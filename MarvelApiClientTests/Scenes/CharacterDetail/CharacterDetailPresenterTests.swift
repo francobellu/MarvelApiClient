@@ -17,7 +17,7 @@ class CharacterDetailPresenterTest: XCTestCase {
   var mockIterator: MockCharacterDetailInteractor!
 
   override func setUpWithError() throws {
-    mockIterator = MockCharacterDetailInteractor(dependencies: appDependenciesDummy)
+    mockIterator = MockCharacterDetailInteractor()
   }
 
   /// TEST  sut creation using  init(dependencies: AppDependenciesProtocol, characterId: String)
@@ -26,35 +26,47 @@ class CharacterDetailPresenterTest: XCTestCase {
     // Given
     
     // CONFIGURE THE MOCK DATA
-    let testResults: [CharacterResult] = getObjects(from: "MockedResponseGetCharacters")
+    let testResults: [Character]! = getCharactersEntitities(from: "MockedResponseGetCharacters")
     let testResult = testResults.first!
     mockIterator.mockCharacterDetailInteractorData.mockCharacterDetailResult = .success(testResult)
     sut = CharacterDetailPresenter(dependencies: appDependenciesDummy,
-                                   characterId: Int(testResult.id!),
-                                   interactor: mockIterator)
+                                   character: testResult)
     XCTAssert(self.sut.getName() == testResult.name )
     XCTAssert(self.sut.getName() == testResult.name )
     XCTAssert(self.sut.getDescription() == "No Description Available")
     XCTAssert(self.sut.getThumbnailUrl() == URL(string: "http://i.annihil.us/u/prod/marvel/i/mg/c/e0/535fecbbb9784.jpg") )
-    XCTAssert(self.sut.getComicsCount() == "Comics available: \(testResult.comics!.items!.count)" )
-    XCTAssert(self.sut.getSeriesCount() == "Series available: \(testResult.series!.items!.count)" )
-    XCTAssert(self.sut.getStoriesCount() == "Stories available: \(testResult.stories!.items!.count)")
+    XCTAssert(self.sut.getComicsCount() == "Comics available: \(testResult.comics)" )
+    XCTAssert(self.sut.getSeriesCount() == "Series available: \(testResult.series)" )
+    XCTAssert(self.sut.getStoriesCount() == "Stories available: \(testResult.stories)")
   }
 }
 
 
 struct MockCharacterDetailInteractorData {
-  var mockCharacterDetailResult: Result<CharacterResult, Error>?
+  var mockCharacterDetailResult: Result<Character, Error>?
 }
 
-class MockCharacterDetailInteractor: CharacterDetailInteractorProtocol{
+class MockCharacterDetailInteractor: GetCharacterInteractorInputPort{
+
+  weak var output: GetCharactersListInteractorOutputPort?
+
+  var executeCalled = false
+
+  var stubbedResult = Result<[Character], Error>.failure(MarvelError.noData)
+  var asyncOpExpectation: XCTestExpectation?
 
   var mockCharacterDetailInteractorData = MockCharacterDetailInteractorData(mockCharacterDetailResult: nil)
 
-  func getCharacter(with characterId: Int, completion: @escaping (Result<CharacterResult, Error>) -> Void) {
-    completion(mockCharacterDetailInteractorData.mockCharacterDetailResult!)
+  func execute(with id: Int) {
+    executeCalled = true
+    DispatchQueue.global().async {
+      self.output?.domainData(result: self.stubbedResult )
+      self.asyncOpExpectation?.fulfill()
+    }
   }
 
-  required init(dependencies: AppDependenciesProtocol) {
-  }
+//
+//  func getCharacter(with characterId: Int, completion: @escaping (Result<CharacterResult, Error>) -> Void) {
+//    completion(mockCharacterDetailInteractorData.mockCharacterDetailResult!)
+//  }
 }
