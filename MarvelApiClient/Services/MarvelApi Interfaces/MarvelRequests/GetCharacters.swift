@@ -61,7 +61,7 @@ struct GetCharacters: MarvelApiRequest {
 //  func getCharactersList(completion: @escaping (Result<Response, Error>) -> Void) {
 //    // Get the first <limit> characters
 ////    let request = GetCharacters(limit: limit, offset: 0)
-//    restApiClient.send(self ) { result in
+//    httpService.send(self ) { result in
 ////      print("\nGetCharacters list finished, limit: \(self.limit), offset: \(self.offset)")
 //
 //      var completionValue: Result<Response, Error>

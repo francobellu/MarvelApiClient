@@ -16,13 +16,13 @@ public enum RestMethod: String {
 // External dependency abstraction
 protocol RestDependenciesProtocol{
   // This is the dependency on the external Rest framework
-  var restApiClient: RestApiClient { get}
+  var httpService: DefaultHttpService { get}
 
   var apiConfig: NetworkConfigurable {get}
 }
 
 class RestDependencies: RestDependenciesProtocol{
-  let restApiClient: RestApiClient
+  let httpService: DefaultHttpService
 
   let apiConfig: NetworkConfigurable
 
@@ -37,7 +37,7 @@ class RestDependencies: RestDependenciesProtocol{
                                           headerParamaters: nil,
                                           urlParameters: params)
 
-      self.restApiClient = RestApiClient()
+      self.httpService = DefaultHttpService()
     } catch  {
       print("Error creating MD5 hash\(error)")
       fatalError()

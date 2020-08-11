@@ -47,7 +47,7 @@ class MarvelApiClient: MarvelApiProtocol {
     var urlRequest: URLRequest
     do {
       try urlRequest =  request.urlRequest(with: restDependencies.apiConfig)
-      restDependencies.restApiClient.request(urlRequest ) { (result) in
+      restDependencies.httpService.request(urlRequest ) { (result) in
         print("\nGetCharacters list finished, limit: \(self.limit), offset: \(self.offset)")
         var completionResult: Result<GetCharacters.Response, Error>
         switch result {
@@ -68,7 +68,7 @@ class MarvelApiClient: MarvelApiProtocol {
 
     do {
       try urlRequest =  request.urlRequest(with: restDependencies.apiConfig)
-      restDependencies.restApiClient.request(urlRequest)  { (result) in
+      restDependencies.httpService.request(urlRequest)  { (result) in
         print("\nGetCharacter \(id) finished")
         var completionResult: Result<GetCharacter.Response, Error>
         switch result {
@@ -102,7 +102,7 @@ class MarvelApiClient: MarvelApiProtocol {
 
 //  func getComic(with id: Int, completion: @escaping (ComicResult) -> Void) {
 //    // Yet another request with a mandatory parameter
-//    restApiClient.send(GetComic(comicId: id)) { response in
+//    httpService.send(GetComic(comicId: id)) { response in
 //      print("\nGetComic \(id) finished:")
 //
 //      switch response {
@@ -126,7 +126,7 @@ class MarvelApiClient: MarvelApiProtocol {
 //      return
 //    }
 //
-//    restApiClient.send(GetComics(format: .digital) ) { response in
+//    httpService.send(GetComics(format: .digital) ) { response in
 //      print("\nGetComics finished:")
 //      switch response {
 //      case .success(let dataContainer):
@@ -149,7 +149,7 @@ class MarvelApiClient: MarvelApiProtocol {
 //
 //  func getComicsAvengers(completion: @escaping ([ComicResult]) -> Void) {
 //    // Another request filling interesting optional parameters, a string and an enum
-//    restApiClient.send(GetComics(titleStartsWith: "Avengers", format: .digital) ) { response in
+//    httpService.send(GetComics(titleStartsWith: "Avengers", format: .digital) ) { response in
 //      print("\nGetComics starting with  \"Avengers\" finished:")
 //
 //      switch response {

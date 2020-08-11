@@ -32,7 +32,7 @@ To test the deep link functionality use the Notes app to edit one of the support
 
 - DataServiceLayer:
   - A generic component that persists data on disk. The concrete method is UserDefaults but this is an implementation detail
-- Networking Layer: RestApiClient, ApiRequest etc
+- Networking Layer: DefaultHttpService, ApiRequest etc
   - Encapsulates REST related operations in a structured way allowing a good scalability of the solution
 - Tests:
 
@@ -131,7 +131,7 @@ So we take the flow control out of the viewcontroller making in fact the viewcon
 - Improve the UI design
 - Test edge cases and complete tests also for extra requirements. Test the data layer
 - Improve the deep linking mechanism. Now it allows to reach a particular screen in &quot;isolation&quot; that means that it is not possible for the user to navigate back from that screen.
-- Create a separate RestApiClient and DataLayer components in as a Swift Package Manager package
+- Create a separate DefaultHttpService and DataLayer components in as a Swift Package Manager package
 - Be able to select a character comic from the character detail screen and vice versa
 - Implement Error screens
 - Search comics and characters by name or other parameters.

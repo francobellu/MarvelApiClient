@@ -14,7 +14,7 @@ import Rest
 class RestDependenciesMock: RestDependenciesProtocol{
 
   // MARK: - RestDependenciesProtocol
-  var restApiClient: RestApiClient
+  var httpService: DefaultHttpService
 
   var apiConfig: NetworkConfigurable
 
@@ -22,7 +22,7 @@ class RestDependenciesMock: RestDependenciesProtocol{
 
   init(sessionNextData: Data) {
     let sessionManager = NetworkSessionManagerMock(response: HTTPURLResponse(), data: sessionNextData, error: nil)
-    restApiClient = RestApiClient(sessionManager: sessionManager, logger: NetworkErrorLoggerMock())
+    httpService = DefaultHttpService(sessionManager: sessionManager, logger: NetworkErrorLoggerMock())
     apiConfig = ApiNetworkConfigurationMock()
   }
 }

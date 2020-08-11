@@ -59,8 +59,8 @@ class AppDependenciesDummy: AppDependencies{
 //    return RestDependencies()
 //  }()
 //
-//  lazy var restApiClient: RestApiClient = {
-//    return RestApiClient(session: MockURLSession())
+//  lazy var defaultttpService: DefaultHttpService = {
+//    return DefaultHttpService(session: MockURLSession())
 //  }()
 //
 //  lazy var marvelApiClient: MarvelApiProtocol = {
