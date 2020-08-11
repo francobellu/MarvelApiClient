@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import Rest
 
 protocol MarvelApiRequest: RestAPIRequest{
 
@@ -21,28 +22,14 @@ protocol MarvelApiRequest: RestAPIRequest{
 }
 
 extension MarvelApiRequest{
-
-  ///  Decodes the  response data  stripping all the wrappers.  In the process  all the possible errors are handled
-  /// - Parameters:
-  ///   - data: The data as returned by the Service
-  /// - Returns: A Result encasulating the response object for the request or an Error
-  func decode(_ data: Data) -> Result<Response, Error> {
+  // Strips any wrapper around the requested object
+  func extractApiObjectFrom(_ data: Data) -> Result<Self.Response, Error> {
     let dataContaineResult = self.decodeToMarvelResponseWrapper(data)
     return stripDataContainerFrom(dataContaineResult)
   }
 }
 
 private extension MarvelApiRequest{
-  private func handleResult(_ result: Result<(URLResponse, Data), Error>) ->  Result<Response, Error> {
-    var completionValue: Result<Response, Error>
-    switch result {
-    case .success((_, let data)):
-      completionValue = self.decode(data)
-    case .failure(let error):
-      completionValue = .failure(error)
-    }
-    return completionValue
-  }
 
   // Strips the MarvelApiResponse wrapper and returns a DataContainer object if exists
   private func decodeToMarvelResponseWrapper (_ data: Data) -> Result<DataContainer<Response>, Error> {

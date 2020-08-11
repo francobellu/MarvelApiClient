@@ -9,32 +9,38 @@
 import Foundation
 import Rest
 
-// External dependency abstraction
-protocol RestDependenciesProtocol{
-  // This is the dependency on the external Rest framework
-  var restApiClient: RestApiClient { get set}
-
-  var apiRequestConfig: RestServiceConfigProtocol { get}
-
-//  var method: RestMethod { get set}
-}
-
-public enum RestMethod {
+public enum RestMethod: String {
   case get, post, put, patch, delete
 }
 
+// External dependency abstraction
+protocol RestDependenciesProtocol{
+  // This is the dependency on the external Rest framework
+  var restApiClient: RestApiClient { get}
+
+  var apiConfig: NetworkConfigurable {get}
+}
+
 class RestDependencies: RestDependenciesProtocol{
+  let restApiClient: RestApiClient
 
-  var restApiClient = RestApiClient()
+  let apiConfig: NetworkConfigurable
 
-//  var marvelApiClient: MarvelApiProtocol {
-//    MarvelApiClient(restApiClient: res)
-//  }
+//  var apiRequestConfig: RestServiceConfigProtocol = MarvelApiRequestConfig()
 
-  var apiRequestConfig: RestServiceConfigProtocol = MarvelApiRequestConfig()
+  init(marvelApiConfig: MarvelApiRequestConfig = MarvelApiRequestConfig())  {
 
-//  var method: RestMethod = .get
+    let marvelApiConfig = MarvelApiRequestConfig()
+    do {
+      let params =  try marvelApiConfig.apiUrlParams()
+      apiConfig = ApiNetworkConfiguration(baseURL: marvelApiConfig.baseEndpointUrl!,
+                                          headerParamaters: nil,
+                                          urlParameters: params)
 
-  init() {
+      self.restApiClient = RestApiClient()
+    } catch  {
+      print("Error creating MD5 hash\(error)")
+      fatalError()
+    }
   }
 }

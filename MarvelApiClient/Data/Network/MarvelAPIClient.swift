@@ -1,5 +1,16 @@
 import Foundation
 
+protocol MarvelApiProtocol {
+  // Characters
+  func getCharactersList(completion: @escaping (Result<GetCharacters.Response, Error>) -> Void)
+  func getCharacter(with id: Int, completion:  @escaping (Result<GetCharacters.Response, Error>) -> Void)
+
+  // Comics
+//  func getComicsList(completion: @escaping ([ComicResult]) -> Void)
+//  func getComic(with id: Int, completion: @escaping (ComicResult) -> Void)
+}
+
+
 /// Implementation of a generic-based Marvel API client
 class MarvelApiClient: MarvelApiProtocol {
 
@@ -29,45 +40,50 @@ class MarvelApiClient: MarvelApiProtocol {
     }
   }
 
-  func getCharactersList(completion: @escaping (Result<GetCharacters.Response, Error>) -> Void) {
+  func getCharactersList(completion: @escaping (Result<GetCharacters.Response, Error>) -> Void){
     // Get the first <limit> characters
     let query = CharactersQuery(name: nil, nameStartsWith: nil, limit: 50, offset: 0)
     let request = GetCharacters(restDependencies: restDependencies, query: query)
-    guard let url = request.apiRequestConfig.buildEndpointUrlFor(resourceName: request.resourceName, parameters: request.parameters) else {return }
-    let urlRequest = URLRequest(url: url)
-
-    restDependencies.restApiClient.request(urlRequest ) { (result) in
-      print("\nGetCharacters list finished, limit: \(self.limit), offset: \(self.offset)")
-      var completionResult: Result<GetCharacters.Response, Error>
-
-      switch result {
-      case .success(let data):
-        completionResult = request.decode(data)
-      case .failure(let error):
-        completionResult = .failure(error)
+    var urlRequest: URLRequest
+    do {
+      try urlRequest =  request.urlRequest(with: restDependencies.apiConfig)
+      restDependencies.restApiClient.request(urlRequest ) { (result) in
+        print("\nGetCharacters list finished, limit: \(self.limit), offset: \(self.offset)")
+        var completionResult: Result<GetCharacters.Response, Error>
+        switch result {
+        case .success(let data): completionResult = request.decode(data)
+        case .failure(let error): completionResult = .failure(error)
+        }
+        completion(completionResult)
       }
-      completion(completionResult)
+    } catch  {
+      completion(.failure(RequestGenerationError.components))
     }
   }
 
   func getCharacter(with id: Int, completion: @escaping (Result<GetCharacter.Response, Error>) -> Void) {
 
     let request = GetCharacter(restDependencies: restDependencies, id: id)
-    guard let url = request.apiRequestConfig.buildEndpointUrlFor(resourceName: request.resourceName, parameters: request.parameters) else {return }
-    let urlRequest = URLRequest(url: url)
+    var urlRequest: URLRequest
 
-    restDependencies.restApiClient.request(urlRequest)  { (result) in
-     print("\nGetCharacter \(id) finished")
-     var completionResult: Result<GetCharacter.Response, Error>
-      switch result {
-      case .success(let data):
-        completionResult = request.decode(data)
-      case .failure(let error):
-        completionResult = .failure(error)
+    do {
+      try urlRequest =  request.urlRequest(with: restDependencies.apiConfig)
+      restDependencies.restApiClient.request(urlRequest)  { (result) in
+        print("\nGetCharacter \(id) finished")
+        var completionResult: Result<GetCharacter.Response, Error>
+        switch result {
+        case .success(let data):
+          completionResult = request.decode(data)
+        case .failure(let error):
+          completionResult = .failure(error)
+        }
+        completion(completionResult)
       }
-      completion(completionResult)
+    } catch  {
+      completion(.failure(RequestGenerationError.components))
     }
   }
+
 }
 
 

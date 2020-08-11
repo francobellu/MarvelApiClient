@@ -40,10 +40,13 @@ class MarvelApiClientIntegrationTests: XCTestCase {
   func testGetCharacter() throws {
     let promise = expectation(description: "Character")
     let characterId = 1011334
-    sut.getCharacter(with: characterId) { character in
-      print("FB: character: \(character)")
+    sut.getCharacter(with: characterId) { response in
+      print("FB: character: \(response)")
       promise.fulfill()
-      XCTAssertNotNil(character)
+      XCTAssertNotNil(response)
+      if case .failure = response{
+        XCTAssertTrue(false)
+      }
     }
     wait(for: [promise], timeout: 30)
   }

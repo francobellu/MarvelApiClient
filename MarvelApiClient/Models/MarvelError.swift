@@ -8,4 +8,5 @@ public enum MarvelError: Error {
 	case decoding
   case noData
 	case server(message: String)
+  case insecureMD5Hash
 }

@@ -1,23 +1,24 @@
 import Foundation
 
 struct GetCharacters: MarvelApiRequest {
-  var apiRequestConfig: RestServiceConfigProtocol
-
-  var restDependencies: RestDependenciesProtocol
-
-
-//  var apiRequestConfig: RestServiceConfigProtocol{
-//     restDependencies.apiRequestConfig
-//  }
-
 
   typealias Response = [CharacterResult]
 
-//  var apiRequestConfig: RestServiceConfigProtocol
+  var restDependencies: RestDependenciesProtocol
 
   var method: RestMethod = .get
 
-  var parameters: [String: String]?
+  var urlParameters: [String: String]?
+
+  var encodableUrlParameters: Encodable? = nil
+
+  var headerParamaters: [String: String]?
+
+  var bodyParameters: [String: String]? = nil
+
+  var encodableBodyParamaters: Encodable? = nil
+
+  var bodyEncoding: BodyEncoding? = nil
 
   var resourceName: String {
     return "characters"
@@ -33,28 +34,28 @@ struct GetCharacters: MarvelApiRequest {
         offset: Int? = nil) {
 
     self.restDependencies = restDependencies
-    apiRequestConfig = restDependencies.apiRequestConfig
 
-    var params = [String: String]()
-    if let name = name {params["name"] = name}
-    if let nameStartsWith = nameStartsWith {params["nameStartsWith"] = nameStartsWith}
-    if let limit = limit { params["limit"] = String(limit) }
-    if let offset = offset { params["offset"] = String(offset)}
-    self.parameters = params
+    urlParameters = restDependencies.apiConfig.urlParameters
+
+    if let name = name {urlParameters?["name"] = name}
+    if let nameStartsWith = nameStartsWith {urlParameters?["nameStartsWith"] = nameStartsWith}
+    if let limit = limit { urlParameters?["limit"] = String(limit) }
+    if let offset = offset { urlParameters?["offset"] = String(offset)}
+
   }
 
   init( restDependencies: RestDependenciesProtocol,
         name: String? = nil, query: CharactersQuery ) {
 
     self.restDependencies = restDependencies
-    apiRequestConfig = restDependencies.apiRequestConfig
+//    apiRequestConfig = restDependencies.apiRequestConfig
 
     var params = [String: String]()
     if let name = name {params["name"] = name}
     if let nameStartsWith = query.nameStartsWith {params["nameStartsWith"] = nameStartsWith}
     if let limit = query.limit { params["limit"] = String(limit) }
     if let offset = query.offset { params["offset"] = String(offset)}
-    self.parameters = params
+    self.urlParameters = params
   }
 //
 //  func getCharactersList(completion: @escaping (Result<Response, Error>) -> Void) {

@@ -40,6 +40,8 @@
 		C707B8B524DC57A9006069A1 /* Character.swift in Sources */ = {isa = PBXBuildFile; fileRef = C707B8B424DC57A9006069A1 /* Character.swift */; };
 		C707B8B724DC58A5006069A1 /* CharactersQuery.swift in Sources */ = {isa = PBXBuildFile; fileRef = C707B8B624DC58A5006069A1 /* CharactersQuery.swift */; };
 		C707B8B924DDAC97006069A1 /* CharacterResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = C707B8B824DDAC97006069A1 /* CharacterResult.swift */; };
+		C707B8C224E153F4006069A1 /* RestAPIRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = C707B8C124E153F4006069A1 /* RestAPIRequest.swift */; };
+		C707B8C424E159BF006069A1 /* NetworkConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = C707B8C324E159BF006069A1 /* NetworkConfig.swift */; };
 		C7096D722448E6C000DEE7D3 /* DeepLink.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7096D712448E6C000DEE7D3 /* DeepLink.swift */; };
 		C7096D772449C7C500DEE7D3 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7096D762449C7C500DEE7D3 /* SceneDelegate.swift */; };
 		C715DC2024CF16F700DAC74A /* MarvelApiRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = C715DC1F24CF16F700DAC74A /* MarvelApiRequest.swift */; };
@@ -65,14 +67,12 @@
 		C72CF3682471F1B40048B0A2 /* sitrep in Resources */ = {isa = PBXBuildFile; fileRef = C72CF3672471F1B40048B0A2 /* sitrep */; };
 		C72CF36A2471F2170048B0A2 /* swiftlint in Resources */ = {isa = PBXBuildFile; fileRef = C72CF3692471F2160048B0A2 /* swiftlint */; };
 		C7483D3424C99EAB00651D49 /* MarvelApiConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7483D3124C99EAA00651D49 /* MarvelApiConfig.swift */; };
-		C7483D3524C99EAB00651D49 /* MarvelApiProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7483D3224C99EAA00651D49 /* MarvelApiProtocol.swift */; };
 		C7483D3624C99EAB00651D49 /* MarvelAPIClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7483D3324C99EAA00651D49 /* MarvelAPIClient.swift */; };
 		C74963A12472DD53001B9A5E /* MockedResponseGetCharacters.json in Resources */ = {isa = PBXBuildFile; fileRef = C74963A02472DD53001B9A5E /* MockedResponseGetCharacters.json */; };
 		C74963A32472F731001B9A5E /* TestUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = C74963A22472F731001B9A5E /* TestUtils.swift */; };
 		C74963A92473C886001B9A5E /* CharactersListInteractorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C74963A82473C886001B9A5E /* CharactersListInteractorTests.swift */; };
 		C74963AB2473C89A001B9A5E /* DataLayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = C74963AA2473C89A001B9A5E /* DataLayer.swift */; };
 		C74963B324740277001B9A5E /* MockedResponseCharacterResultId1011334.json in Resources */ = {isa = PBXBuildFile; fileRef = C74963B224740277001B9A5E /* MockedResponseCharacterResultId1011334.json */; };
-		C74F3C6324D842A0005BDA4D /* RestAPIRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = C74F3C6224D842A0005BDA4D /* RestAPIRequest.swift */; };
 		C74F3C6824D864CE005BDA4D /* Rest in Frameworks */ = {isa = PBXBuildFile; productRef = C74F3C6724D864CE005BDA4D /* Rest */; };
 		C76B29A6243A5F1B00793179 /* MarvelApiClientIntegrationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C76B29A5243A5F1B00793179 /* MarvelApiClientIntegrationTests.swift */; };
 		C776993B24B31394003BE9BD /* CharacterCellPresentationModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C776993A24B31394003BE9BD /* CharacterCellPresentationModel.swift */; };
@@ -137,6 +137,8 @@
 		C707B8B424DC57A9006069A1 /* Character.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Character.swift; sourceTree = "<group>"; };
 		C707B8B624DC58A5006069A1 /* CharactersQuery.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharactersQuery.swift; sourceTree = "<group>"; };
 		C707B8B824DDAC97006069A1 /* CharacterResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharacterResult.swift; sourceTree = "<group>"; };
+		C707B8C124E153F4006069A1 /* RestAPIRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RestAPIRequest.swift; sourceTree = "<group>"; };
+		C707B8C324E159BF006069A1 /* NetworkConfig.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkConfig.swift; sourceTree = "<group>"; };
 		C70873D32471F55500184DE0 /* superheros.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = superheros.png; sourceTree = "<group>"; };
 		C7096D712448E6C000DEE7D3 /* DeepLink.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeepLink.swift; sourceTree = "<group>"; };
 		C7096D762449C7C500DEE7D3 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -162,14 +164,12 @@
 		C72CF3672471F1B40048B0A2 /* sitrep */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.executable"; path = sitrep; sourceTree = "<group>"; };
 		C72CF3692471F2160048B0A2 /* swiftlint */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.executable"; path = swiftlint; sourceTree = "<group>"; };
 		C7483D3124C99EAA00651D49 /* MarvelApiConfig.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MarvelApiConfig.swift; sourceTree = "<group>"; };
-		C7483D3224C99EAA00651D49 /* MarvelApiProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MarvelApiProtocol.swift; sourceTree = "<group>"; };
 		C7483D3324C99EAA00651D49 /* MarvelAPIClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MarvelAPIClient.swift; sourceTree = "<group>"; };
 		C74963A02472DD53001B9A5E /* MockedResponseGetCharacters.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = MockedResponseGetCharacters.json; sourceTree = "<group>"; };
 		C74963A22472F731001B9A5E /* TestUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestUtils.swift; sourceTree = "<group>"; };
 		C74963A82473C886001B9A5E /* CharactersListInteractorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharactersListInteractorTests.swift; sourceTree = "<group>"; };
 		C74963AA2473C89A001B9A5E /* DataLayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataLayer.swift; sourceTree = "<group>"; };
 		C74963B224740277001B9A5E /* MockedResponseCharacterResultId1011334.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = MockedResponseCharacterResultId1011334.json; sourceTree = "<group>"; };
-		C74F3C6224D842A0005BDA4D /* RestAPIRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RestAPIRequest.swift; sourceTree = "<group>"; };
 		C76B29A3243A5F1B00793179 /* MarvelApiClientTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MarvelApiClientTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		C76B29A5243A5F1B00793179 /* MarvelApiClientIntegrationTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MarvelApiClientIntegrationTests.swift; sourceTree = "<group>"; };
 		C76B29A7243A5F1B00793179 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -381,7 +381,6 @@
 			isa = PBXGroup;
 			children = (
 				28998EC6217F636A0037039B /* MarvelRequests */,
-				C715DC1F24CF16F700DAC74A /* MarvelApiRequest.swift */,
 			);
 			path = "MarvelApi Interfaces";
 			sourceTree = "<group>";
@@ -468,6 +467,7 @@
 		C707B8AF24DC466F006069A1 /* Network */ = {
 			isa = PBXGroup;
 			children = (
+				C7483D3324C99EAA00651D49 /* MarvelAPIClient.swift */,
 				C707B8B024DC4677006069A1 /* DTOs */,
 			);
 			path = Network;
@@ -506,8 +506,6 @@
 		C715DC2B24D30AF500DAC74A /* Dependencies */ = {
 			isa = PBXGroup;
 			children = (
-				C7483D3324C99EAA00651D49 /* MarvelAPIClient.swift */,
-				C7483D3224C99EAA00651D49 /* MarvelApiProtocol.swift */,
 				C7483D3124C99EAA00651D49 /* MarvelApiConfig.swift */,
 				C728C2AA246C375200F60806 /* AppDependencies.swift */,
 				C715DC2E24D30BC500DAC74A /* RestDependencies */,
@@ -536,8 +534,10 @@
 		C715DC2E24D30BC500DAC74A /* RestDependencies */ = {
 			isa = PBXGroup;
 			children = (
+				C707B8C324E159BF006069A1 /* NetworkConfig.swift */,
+				C707B8C124E153F4006069A1 /* RestAPIRequest.swift */,
+				C715DC1F24CF16F700DAC74A /* MarvelApiRequest.swift */,
 				C715DC2F24D30BD200DAC74A /* RestDependencies.swift */,
-				C74F3C6224D842A0005BDA4D /* RestAPIRequest.swift */,
 			);
 			path = RestDependencies;
 			sourceTree = "<group>";
@@ -924,24 +924,24 @@
 				C728C2AB246C375300F60806 /* AppDependencies.swift in Sources */,
 				C707B8AC24DC44D5006069A1 /* CharactersRepository.swift in Sources */,
 				C715DC2024CF16F700DAC74A /* MarvelApiRequest.swift in Sources */,
+				C707B8C224E153F4006069A1 /* RestAPIRequest.swift in Sources */,
 				C715DC3224D30C5D00DAC74A /* Factory.swift in Sources */,
 				C703664924753DEB0005886F /* LandingPresenter.swift in Sources */,
 				C707B8B924DDAC97006069A1 /* CharacterResult.swift in Sources */,
 				C7169232244DE062005BF4AB /* MarvelDTOs.swift in Sources */,
 				28998ED7217F636A0037039B /* GetCharacters.swift in Sources */,
 				C703664A24753DEB0005886F /* OnboardingPresenter.swift in Sources */,
-				C7483D3524C99EAB00651D49 /* MarvelApiProtocol.swift in Sources */,
 				C703663C24753DEB0005886F /* CharactersListViewController.swift in Sources */,
 				C707B8B724DC58A5006069A1 /* CharactersQuery.swift in Sources */,
 				C707B8AE24DC4507006069A1 /* DefaultCharactersRepository.swift in Sources */,
 				C7D3F040243B770F004E4C0E /* Coordinator.swift in Sources */,
+				C707B8C424E159BF006069A1 /* NetworkConfig.swift in Sources */,
 				C715DC3024D30BD200DAC74A /* RestDependencies.swift in Sources */,
 				285122812181E3E5009D4AB0 /* Extensions.swift in Sources */,
 				C7096D772449C7C500DEE7D3 /* SceneDelegate.swift in Sources */,
 				C7483D3424C99EAB00651D49 /* MarvelApiConfig.swift in Sources */,
 				C703664224753DEB0005886F /* CharactersListPresenter.swift in Sources */,
 				C703664824753DEB0005886F /* LandingCoordinator.swift in Sources */,
-				C74F3C6324D842A0005BDA4D /* RestAPIRequest.swift in Sources */,
 				C7887B7D24C6196000EAEB1F /* UIViewController +  ErrorDialog.swift in Sources */,
 				C7036653247540350005886F /* DataStoreProtocol.swift in Sources */,
 				C703664024753DEB0005886F /* CharacterDetailViewController.swift in Sources */,

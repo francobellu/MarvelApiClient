@@ -6,11 +6,19 @@ struct GetCharacter: MarvelApiRequest {
 
   var restDependencies: RestDependenciesProtocol
 
-  var apiRequestConfig: RestServiceConfigProtocol
-
   var method: RestMethod = .get
 
-  var parameters: [String: String]?
+  var urlParameters: [String: String]? = nil
+
+  var encodableUrlParameters: Encodable? = nil
+
+  var headerParamaters: [String: String]? = nil
+
+  var bodyParameters: [String: String]? = nil
+
+  var encodableBodyParamaters: Encodable? = nil
+
+  var bodyEncoding: BodyEncoding? = nil
 
   var resourceName: String {
     return "characters"
@@ -23,10 +31,7 @@ struct GetCharacter: MarvelApiRequest {
 
     self.restDependencies = restDependencies
 
-    self.apiRequestConfig = restDependencies.apiRequestConfig
-
-    var params = [String: String]()
-    params["id"] = String(id)
-    self.parameters = params
+    urlParameters = [:]
+    urlParameters?["id"] = String(id)
   }
 }

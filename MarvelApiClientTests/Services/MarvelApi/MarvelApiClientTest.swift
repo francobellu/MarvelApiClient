@@ -10,22 +10,20 @@ import XCTest
 import Rest
 
 @testable import MarvelApiClient
+
 class RestDependenciesMock: RestDependenciesProtocol{
 
   // MARK: - RestDependenciesProtocol
   var restApiClient: RestApiClient
 
-  var marvelApiClient: MarvelApiProtocol{
-    MarvelApiClient(restDependencies: self)
-  }
-
-  var apiRequestConfig: RestServiceConfigProtocol = MarvelApiRequestConfig()
+  var apiConfig: NetworkConfigurable
 
   var method: RestMethod = .get
 
   init(sessionNextData: Data) {
     let sessionManager = NetworkSessionManagerMock(response: HTTPURLResponse(), data: sessionNextData, error: nil)
     restApiClient = RestApiClient(sessionManager: sessionManager, logger: NetworkErrorLoggerMock())
+    apiConfig = ApiNetworkConfigurationMock()
   }
 }
 
@@ -97,4 +95,15 @@ class NetworkErrorLoggerMock: NetworkErrorLogger {
     func log(request: URLRequest) { }
     func log(responseData data: Data?, response: URLResponse?) { }
     func log(error: Error) { loggedErrors.append(error) }
+}
+
+
+struct ApiNetworkConfigurationMock:  NetworkConfigurable{
+
+  var baseURL = URL(string: "www.mock.com")!
+  var urlParameters: [String : String]? = nil
+  var encodableUrlParameters: Encodable? = nil
+  var headerParamaters: [String : String]? = nil
+  var bodyParameters: [String : String]? = nil
+  var encodableBodyParamaters: Encodable? = nil
 }

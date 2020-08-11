@@ -8,7 +8,7 @@
 
 import Foundation
 
-struct MarvelApiRequestConfig: RestServiceConfigProtocol {
+struct MarvelApiRequestConfig {
 
   var publicKey: String = "e7416283f4f02fb5ca8b883e421fa857"
   var privateKey: String = "b687a3d1c855db14f30638c2530e8ceb1dc93b0f"
@@ -31,7 +31,7 @@ struct MarvelApiRequestConfig: RestServiceConfigProtocol {
     }
     guard var components = URLComponents(url: baseUrl, resolvingAgainstBaseURL: true) else { return nil }
 
-    guard let params =  try? apiParams() else{ return nil }
+    guard let params =  try? apiUrlParams() else{ return nil }
     print(params)
     // Build common query items needed for all Marvel requests
     guard let commonQueryItems = try? buildCommonQueryItemsFrom(apiParams: params) else{ return nil }
@@ -45,10 +45,10 @@ struct MarvelApiRequestConfig: RestServiceConfigProtocol {
     return components.url
   }
 
-  private func apiParams() throws -> [String: String]{
+   func apiUrlParams() throws -> [String: String]{
     let timestamp = "\(Date().timeIntervalSince1970)"
     let str = "\(timestamp)\(privateKey)\(publicKey)"
-    guard let digest =  str.insecureMD5Hash() else { throw MarvelError.encoding }
+    guard let digest = str.insecureMD5Hash() else { throw MarvelError.insecureMD5Hash }
 
     let result = [ "ts": timestamp,
                    "hash": digest,
@@ -58,7 +58,7 @@ struct MarvelApiRequestConfig: RestServiceConfigProtocol {
   }
 
   // Build commonQueryItems ( marvel-specific params)
-  private func buildCommonQueryItemsFrom(apiParams: [String : String]) throws-> [URLQueryItem]{
+  private func buildCommonQueryItemsFrom(apiParams: [String: String]) throws-> [URLQueryItem]{
 
     return apiParams.map{ ( key, value)  in
       URLQueryItem(name: key, value: value)
