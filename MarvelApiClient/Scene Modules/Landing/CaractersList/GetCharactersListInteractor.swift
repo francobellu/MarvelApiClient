@@ -19,21 +19,28 @@ protocol GetCharactersListInteractorOutputPort: class{
 }
 
 private protocol GetCharactersListInteractorProtocol: class{
-  init(dependencies: AppDependenciesProtocol)
-  func handle(result: Result<[GetCharacters.Response], Error>)
+  func handle(result: Result<[Character], Error>)
 }
 
-class GetCharactersListInteractor{
-  private var dependencies: AppDependenciesProtocol! // swiftlint:disable:this implicitly_unwrapped_optional
-
+class GetCharactersListInteractor: GetCharactersListInteractorProtocol{
   private let charactersRepository: CharactersRepository
 
   weak var outputPort: GetCharactersListInteractorOutputPort?
 
-  required init(dependencies: AppDependenciesProtocol) {
-    self.dependencies = dependencies
-    self.charactersRepository = dependencies.makeCharactersRepository()
+  required init(charactersRepository: CharactersRepository) {
+    self.charactersRepository = charactersRepository
   }
+
+   private func getCharactersList() {
+      //    let request = GetCharacters(restDependencies: dependencies.restDependencies, limit: 20, offset: 0)
+      charactersRepository.getCharactersList { (result) in
+        self.handle(result: result)
+      }
+    }
+
+  fileprivate func handle(result: Result<[Character], Error>){
+      self.outputPort?.domainData(result: result)
+    }
 }
 
 extension GetCharactersListInteractor: GetCharactersListInteractorInputPort{
@@ -46,22 +53,5 @@ extension GetCharactersListInteractor: GetCharactersListInteractorInputPort{
 
 // MARK: - PRIVATE functions
 private extension GetCharactersListInteractor{
-  private func getCharactersList() {
-    //    let request = GetCharacters(restDependencies: dependencies.restDependencies, limit: 20, offset: 0)
-    charactersRepository.getCharactersList { (result) in
-      self.handle(result: result)
-    }
-  }
 
-  private func handle(result: Result<[Character], Error>){
-//    switch results {
-//    case .success:
-//      // completion is the interactor output port
-//      self.outputPort?.domainData(result: results)
-//    case .failure(let error):
-//      print(error)
-//
-//    }
-    self.outputPort?.domainData(result: result)
-  }
 }

@@ -15,7 +15,7 @@ import XCTest
 //
 // Test Plan. We can test:
 // 1) The right funcions are called as a consequence of calling interactor API execute():
-//  1.1) the right worker API is called -> worker SPY needed
+//  1.1) the Repository API is called -> worker SPY needed
 //  1.2) the outputPort  API (presenter) delegate function domainData() is called  ->  worker SPY needed
 //
 // 2) As a consequence of calling interactor API execute(), the worker returns some data that is passed to the output port.
@@ -24,6 +24,7 @@ import XCTest
 //  2.2) Test failure result case ( MarvelError.noData)
 
 class GetCharactersListInteractorInputPortTest: XCTestCase {
+
 
   // Test 1.1
   //
@@ -34,16 +35,18 @@ class GetCharactersListInteractorInputPortTest: XCTestCase {
   // For that a charactersWorkerSpy is needed
   func testInteractorCallsWorkerToFetch(){
     // Given
-    let appDependenciesDummy = AppDependenciesDummy(restDependencies: RestDependencies())
-    let charactersWorkerSpy = CharacterWorkerTestDouble()
-    appDependenciesDummy.marvelApiClient = charactersWorkerSpy
-    let sut = GetCharactersListInteractor(dependencies: appDependenciesDummy)
+    let testResult = Result<[Character], Error>.success(getCharactersEntitities(from: "MockedResponseGetCharacters")!)
+    let charactersRepositorySpy =  CharactersRepositoryMock(mockResult: testResult)
+
+//    let marvelApiConfig = MarvelApiRequestConfig()
+//    let appDependenciesDummy = AppDependenciesDummy(restDependencies: RestDependencies(marvelApiConfig: marvelApiConfig), charactersRepositoryMock: charactersRepositorySpy)
+    let sut = GetCharactersListInteractor(charactersRepository: charactersRepositorySpy)
 
     // When
     sut.execute()
 
     // Then
-    XCTAssertTrue(charactersWorkerSpy.getCharactersListCalled, "getCharactersList() should be called")
+    XCTAssertTrue(charactersRepositorySpy.getCharactersListCalled, "getCharactersList() should be called")
   }
 
   // Test 1.2
@@ -56,12 +59,16 @@ class GetCharactersListInteractorInputPortTest: XCTestCase {
   // Also we need a workerFake that returns a resultDummy ( it is needed to compile but it is not actually used by the test)
   func testDomainData(){
     // Given
-    let appDependenciesDummy = AppDependenciesDummy(restDependencies: RestDependencies())
-    let charactersWorkerSpy = CharacterWorkerTestDouble()
-    appDependenciesDummy.marvelApiClient = charactersWorkerSpy
+
+    let testResult = Result<[Character], Error>.success(getCharactersEntitities(from: "MockedResponseGetCharacters")!)
+//    let appDependenciesDummy = AppDependenciesDummy(restDependencies: RestDependenciesMock(sessionNextData: Data()), charactersRepositoryMock: CharactersRepositoryMock(mockResult: testResult))
+    let charactersRepositorySpy =  CharactersRepositoryMock(mockResult: testResult)
+    
+//    let charactersWorkerSpy = CharacterWorkerTestDouble()
+//    appDependenciesDummy.marvelApiClient = charactersWorkerSpy
 
     let presenterSpy = PresenterTestDouble()
-    let sut = GetCharactersListInteractor(dependencies: appDependenciesDummy)
+    let sut = GetCharactersListInteractor(charactersRepository: charactersRepositorySpy)
     sut.outputPort = presenterSpy // TODO: this should be a dummy
 
     // When
@@ -80,14 +87,20 @@ class GetCharactersListInteractorInputPortTest: XCTestCase {
 
     let testData = mockResponseData(for: "MockedResponseGetCharacters")
     let testResult = Result<[Character], Error>.success(getCharactersEntitities(from: "MockedResponseGetCharacters")!)
-    let appDependenciesDummy = AppDependenciesDummy(restDependencies: RestDependenciesMock(sessionNextData: testData))
+//    let appDependenciesDummy = AppDependenciesDummy(restDependencies: RestDependenciesMock(sessionNextData: testData), charactersRepositoryMock: CharactersRepositoryMock(mockResult: testResult))
     let presenterSpy = PresenterTestDouble()
-    let sut = GetCharactersListInteractor(dependencies: appDependenciesDummy)
+    let charactersRepositorySpy =  CharactersRepositoryMock(mockResult: testResult)
+    let sut = GetCharactersListInteractor(charactersRepository: charactersRepositorySpy)
+    
     sut.outputPort = presenterSpy
+
+    // Create async exp for the async interactor.getCharacters  operation
+//    let exp = XCTestExpectation(description: "")
 
     // When
     sut.execute()
 
+//    wait(for: [exp], timeout: 5)
     // Then
     guard case let .success(characters) = presenterSpy.result else{
       XCTAssertTrue(false, "result should have a valid dataContainer value")
@@ -107,17 +120,20 @@ class GetCharactersListInteractorInputPortTest: XCTestCase {
   //
   func testDomainData_FailureResult_NoData(){
     // Given
-    let appDependenciesDummy = AppDependenciesDummy(restDependencies: RestDependencies())
 
     // Initialize a worker Stub with a test  result
-    let testResult = Result<GetCharacters.Response, Error>.failure(MarvelError.noData)
-    let charactersWorkerStub = CharacterWorkerTestDouble(stubbedResult: testResult)
+     let testResult = Result<[Character], Error>.failure(MarvelError.noData)
 
-    charactersWorkerStub.stubbedResult = testResult
+    let appDependenciesDummy = AppDependenciesDummy(restDependencies: RestDependenciesMock(sessionNextData: Data()), charactersRepositoryMock: CharactersRepositoryMock())
 
-    appDependenciesDummy.marvelApiClient = charactersWorkerStub
+//    let charactersWorkerStub = CharacterWorkerTestDouble(stubbedResult: testResult)
+
+//    charactersWorkerStub.stubbedResult = testResult
+
+//    appDependenciesDummy.marvelApiClient = charactersWorkerStub
     let presenterSpy = PresenterTestDouble()
-    let sut = GetCharactersListInteractor(dependencies: appDependenciesDummy)
+    let charactersRepositorySpy =  CharactersRepositoryMock(mockResult: testResult)
+    let sut = GetCharactersListInteractor(charactersRepository: charactersRepositorySpy)
     sut.outputPort = presenterSpy // TODO: tghis should be a fdummy
 
     // When
@@ -142,21 +158,21 @@ class GetCharactersListInteractorInputPortTest: XCTestCase {
 class CharacterWorkerTestDouble: MarvelApiProtocol {
 
   var getCharactersListCalled = false
-  var stubbedResult: Result<GetCharacters.Response, Error>?
+  var stubbedResult: Result<[CharacterResult], Error>?
 
-  init(stubbedResult: Result<GetCharacters.Response, Error>? = nil) {
+  init(stubbedResult: Result<[CharacterResult], Error>? = nil) {
     // use a default result
-    self.stubbedResult = Result<GetCharacters.Response, Error>.failure(MarvelError.noData)
+    self.stubbedResult = Result<[CharacterResult], Error>.failure(MarvelError.noData)
   }
 
-  func getCharactersList(completion: @escaping (Result<GetCharacters.Response, Error>) -> Void) {
+  func getCharactersList(completion: @escaping (Result<[CharacterResult], Error>) -> Void) {
     getCharactersListCalled = true
 
     // Need to call campletion to test outputPort
     completion(stubbedResult!)
   }
 
-  func getCharacter(with id: Int, completion: @escaping (Result<GetCharacters.Response, Error>) -> Void) {
+  func getCharacter(with id: Int, completion: @escaping (Result<[CharacterResult], Error>) -> Void) {
     getCharactersListCalled = true
   }
 
@@ -186,5 +202,27 @@ class PresenterTestDouble: GetCharactersListInteractorOutputPort {
   func domainData(result: Result<[Character], Error>) {
     domainDataCalled = true
     self.result = result
+  }
+}
+
+class CharactersRepositoryMock: CharactersRepository {
+  //    @discardableResult
+  let mockResult: Result<[Character], Error>
+  var getCharactersListCalled = false
+
+  init(mockResult: Result<[Character], Error> = .failure(MarvelError.noData) ){
+    self.mockResult = mockResult
+  }
+
+  func getCharactersList( //query: MovieQuery, page: Int,
+    //                         cached: @escaping (MoviesPage) -> Void,
+    completion: @escaping (Result<[Character], Error>) -> Void)// -> Cancellable?
+  {
+    getCharactersListCalled = true
+    completion(mockResult)
+  }
+
+  func getCharacter(with id: Int, completion: @escaping (Result<Character, Error>) -> Void){
+
   }
 }

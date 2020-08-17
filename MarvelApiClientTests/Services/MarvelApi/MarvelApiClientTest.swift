@@ -12,18 +12,19 @@ import Rest
 @testable import MarvelApiClient
 
 class RestDependenciesMock: RestDependenciesProtocol{
+  var restService: RestService
 
   // MARK: - RestDependenciesProtocol
-  var httpService: DefaultHttpService
-
-  var apiConfig: NetworkConfigurable
-
-  var method: RestMethod = .get
+//  var apiConfig: NetworkConfigurable
 
   init(sessionNextData: Data) {
     let sessionManager = NetworkSessionManagerMock(response: HTTPURLResponse(), data: sessionNextData, error: nil)
-    httpService = DefaultHttpService(sessionManager: sessionManager, logger: NetworkErrorLoggerMock())
-    apiConfig = ApiNetworkConfigurationMock()
+
+     let httpService = DefaultRawDataNetworkService(sessionManager: sessionManager, logger: NetworkErrorLoggerMock())
+
+    let apiConfig = ApiNetworkConfigurationMock()
+
+    restService = DefaultRestService(with: httpService, apiNetworkConfig: apiConfig)
   }
 }
 
@@ -99,11 +100,11 @@ class NetworkErrorLoggerMock: NetworkErrorLogger {
 
 
 struct ApiNetworkConfigurationMock:  NetworkConfigurable{
-
   var baseURL = URL(string: "www.mock.com")!
-  var urlParameters: [String : String]? = nil
-  var encodableUrlParameters: Encodable? = nil
-  var headerParamaters: [String : String]? = nil
-  var bodyParameters: [String : String]? = nil
-  var encodableBodyParamaters: Encodable? = nil
+  var urlParameters: [String : String]?
+  var encodableUrlParameters: Encodable?
+  var headerParamaters: [String : String]?
+  var bodyParameters: [String : String]?
+  var encodableBodyParamaters: Encodable?
+  var bodyEncoding: BodyEncoding?
 }

@@ -12,11 +12,11 @@ class LandingPresenter {
 
   private unowned var coordinatorDelegate: LandingCoordinatorDelegate
 
-  private var dependencies: AppDependenciesProtocol! // swiftlint:disable:this implicitly_unwrapped_optional
+  private var dependencies: AppDIContainerProtocol! // swiftlint:disable:this implicitly_unwrapped_optional
 
   private(set) var title = "Marvel Api Client"
 
-  init(dependencies: AppDependenciesProtocol, coordinatorDelegate: LandingCoordinatorDelegate) {
+  init(dependencies: AppDIContainerProtocol, coordinatorDelegate: LandingCoordinatorDelegate) {
     self.dependencies = dependencies
     self.coordinatorDelegate = coordinatorDelegate
   }

@@ -9,8 +9,8 @@
 import Foundation
 
 // MARK: - Result
-struct CharacterResult: Codable, Equatable {
-  static func == (lhs: CharacterResult, rhs: CharacterResult) -> Bool {
+public struct CharacterResult: Codable, Equatable {
+  public static func == (lhs: CharacterResult, rhs: CharacterResult) -> Bool {
     lhs.id == rhs.id
   }
 

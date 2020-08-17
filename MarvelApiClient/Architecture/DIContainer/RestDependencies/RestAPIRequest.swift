@@ -7,18 +7,55 @@
 
 import Foundation
 
-public enum BodyEncoding {
-    case jsonSerializationData
-    case stringEncodingAscii
-}
+//public protocol NetworkCancellable {
+//    func cancel()
+//}
+//
+//public enum NetworkError: Error{
+//  case dataTaskCancelled
+//  case generic(message: String)
+//  case error(_ error: Error)
+//  case notConnected
+//  case authenticationError
+//  case badRequest
+//  case outdated
+//  case unableToDecode
+//}
+//
+//public enum RestServiceError: Error {
+//    case noResponse
+//    case parsing(Error)
+//    case networkFailure(NetworkError)
+//    case resolvedNetworkFailure(Error)
+//}
+//
+//public protocol RestServiceErrorLogger {
+//  func log(error: Error)
+//}
+//
+//public protocol ResponseRequestable {
+////    associatedtype Response
+//
+//  //    var responseDecoder: ResponseDecoder { get }
+//  /// Response (will be wrapped with a DataContainer)
+//  associatedtype Response: Decodable
+//
+//  func decode(_ data: Data) -> Result<Response, Error>
+//}
+
+
+
+
 
 ////// All requests must conform to this protocol
 /// - Discussion: You must conform to Encodable too, so that all stored public parameters
 ///   of types conforming this protocol will be encoded as parameters.
-public protocol RestAPIRequest{
+public protocol RestAPIRequest: ResponseRequestable{
 
-  /// Response (will be wrapped with a DataContainer)
-  associatedtype Response: Decodable
+//  /// Response (will be wrapped with a DataContainer)
+//  associatedtype Response: Decodable
+//
+//  func decode(_ data: Data) -> Result<Response, Error>
 
   var resourceName: String { get }
 
@@ -34,7 +71,7 @@ public protocol RestAPIRequest{
 
   var bodyEncoding: BodyEncoding? { get }
 
-  func decode(_ data: Data) -> Result<Response, Error>
+
 
   func extractApiObjectFrom(_ data: Data) -> Result<Self.Response, Error>
 }

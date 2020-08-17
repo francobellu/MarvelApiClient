@@ -22,7 +22,7 @@ protocol LandingCoordinatorDelegate: class {
 class LandingCoordinator: NSObject {
 
   // MARK: - Internal Dependencies
-  private var dependencies: AppDependenciesProtocol! // swiftlint:disable:this implicitly_unwrapped_optional
+  private var dependencies: AppDIContainerProtocol! // swiftlint:disable:this implicitly_unwrapped_optional
   //private var landingViewController: LandingViewController
 
   var coordinatorPresenter: AnyObject?
@@ -31,7 +31,7 @@ class LandingCoordinator: NSObject {
   internal var coordinators: [Coordinator] = []
   weak var parentCoordinator: AppCoordinator?
 
-  init(parentCoordinator: AppCoordinator, presenter: UINavigationController = UINavigationController(), dependencies: AppDependenciesProtocol ) {
+  init(parentCoordinator: AppCoordinator, presenter: UINavigationController = UINavigationController(), dependencies: AppDIContainerProtocol ) {
     print("FB:LandingCoordinator:init()")
     self.parentCoordinator = parentCoordinator
     self.coordinatorPresenter = presenter

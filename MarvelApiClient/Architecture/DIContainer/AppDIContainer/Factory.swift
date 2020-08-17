@@ -27,21 +27,26 @@ protocol PresenterFactory {
   func makeCharacterDetailView(with characterId: String ) -> CharacterDetailViewController
 }
 
+protocol CharactersRepositoryFactory {
+  // Characters
+   func makeCharactersRepository() -> CharactersRepository
+}
 
 // Factory pattern
 class Factory {
 
-  let dependencies: AppDependenciesProtocol
+  let dependencies: AppDIContainerProtocol
   // Factory functions
 
-  init(dependencies: AppDependenciesProtocol) {
+  init(dependencies: AppDIContainerProtocol) {
     self.dependencies = dependencies
   }
 }
 
 extension Factory: ViewControllerFactory{
   func makeCharactersView(coordinatorDelegate: CharactersListCoordinatorDelegate) -> CharactersListViewController{
-    let interactor = GetCharactersListInteractor(dependencies: dependencies)
+    let repo = dependencies.factory.makeCharactersRepository()
+    let interactor = GetCharactersListInteractor(charactersRepository: repo)
 
     let presenter = CharactersListPresenter(dependencies: dependencies, coordinatorDelegate: coordinatorDelegate, interactor: interactor)
 
@@ -78,8 +83,8 @@ extension Factory: ViewControllerFactory{
 
 extension Factory: PresenterFactory{
   func makeCharactersListPresenter(with characterId: String, coordinatorDelegate: CharactersListCoordinatorDelegate  ) -> CharactersListPresenter{
-
-     let interactor = GetCharactersListInteractor(dependencies: dependencies)
+    let repo = dependencies.factory.makeCharactersRepository()
+    let interactor = GetCharactersListInteractor(charactersRepository: repo)
 
      return  CharactersListPresenter(dependencies: dependencies, coordinatorDelegate: coordinatorDelegate, interactor: interactor)
    }
@@ -97,5 +102,22 @@ extension Factory: PresenterFactory{
 //    let interactor = GetCharacterInteractor(dependencies: dependencies)
 
     return CharacterDetailPresenter(dependencies: dependencies, character: character)
+  }
+}
+
+extension Factory: CharactersRepositoryFactory{
+  func makeCharactersRepository() -> CharactersRepository {
+
+    return DefaultCharactersRepository(apiClient:  dependencies.marvelApiClient)
+  }
+}
+
+protocol MarvelApiClientFactory {
+  func makeMarvelApiClient() -> MarvelApiProtocol
+}
+
+extension Factory: MarvelApiClientFactory{
+  func makeMarvelApiClient() -> MarvelApiProtocol {
+    return MarvelApiClient(restDependencies: dependencies.restDependencies)
   }
 }

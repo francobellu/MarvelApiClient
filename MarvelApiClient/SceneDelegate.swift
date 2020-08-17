@@ -7,10 +7,8 @@ import UIKit
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
   var window: UIWindow?
 
-  var dependencies: AppDependencies {
-    let restDep = RestDependencies(marvelApiConfig: MarvelApiRequestConfig())
-    return AppDependencies(restDependencies: restDep)
-  }
+  private var dependencies = AppDIContainer()
+
   private var appCoordinator: AppCoordinator?
 
   func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {

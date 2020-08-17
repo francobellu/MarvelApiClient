@@ -16,7 +16,8 @@ class MarvelApiClientIntegrationTests: XCTestCase {
   var sut: MarvelApiClient! // swiftlint:disable:this implicitly_unwrapped_optional
 
   override func setUpWithError() throws {
-    let restDependencies = RestDependencies()
+    let marvelApiConfig = MarvelApiRequestConfig()
+    let restDependencies = RestDependencies(marvelApiConfig: marvelApiConfig)
     sut = MarvelApiClient(restDependencies: restDependencies)
   }
 

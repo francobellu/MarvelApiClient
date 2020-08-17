@@ -6,7 +6,7 @@ target 'MarvelApiClient' do
   use_frameworks!
 
   # Pods for MarvelApiClient
-  pod 'R.swift'
+  #pod 'R.swift'
 
   target 'MarvelApiClientTests' do
     inherit! :search_paths

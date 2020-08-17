@@ -9,10 +9,10 @@
 import Foundation
 
 protocol CharactersRepository {
-//    @discardableResult
-    func getCharactersList( //query: MovieQuery, page: Int,
-//                         cached: @escaping (MoviesPage) -> Void,
-      completion: @escaping (Result<[Character], Error>) -> Void)// -> Cancellable?
+  //    @discardableResult
+  func getCharactersList( //query: MovieQuery, page: Int,
+    //                         cached: @escaping (MoviesPage) -> Void,
+    completion: @escaping (Result<[Character], Error>) -> Void)// -> Cancellable?
 
   func getCharacter(with id: Int, completion: @escaping (Result<Character, Error>) -> Void)
 }

@@ -12,11 +12,11 @@ class OnboardingPresenter {
 
   private(set) var title = "Character Detail"
 
-  private var dependencies: AppDependenciesProtocol! // swiftlint:disable:this implicitly_unwrapped_optional
+  private var dependencies: AppDIContainerProtocol! // swiftlint:disable:this implicitly_unwrapped_optional
 
   private weak var coordinatorDelegate: OnboardingCoordinatorDelegate! // swiftlint:disable:this implicitly_unwrapped_optional
 
-  init(dependencies: AppDependenciesProtocol, coordinatorDelegate: OnboardingCoordinatorDelegate){
+  init(dependencies: AppDIContainerProtocol, coordinatorDelegate: OnboardingCoordinatorDelegate){
     print("FB:OnboardingPresenter:init()")
     self.dependencies = dependencies
     self.coordinatorDelegate = coordinatorDelegate
@@ -24,21 +24,21 @@ class OnboardingPresenter {
 
   /// - Returns: The image name corresponding to the new State
   func didPressDontShowAgain() -> String{
-    let value = dependencies.appConfig.dontShowOnboardingValue
+    let value = dependencies.appSettings.dontShowOnboardingValue
     let newValue = !value
-    dependencies.appConfig.dontShowOnboardingValue = newValue
+    dependencies.appSettings.dontShowOnboardingValue = newValue
     return newValue == false ? "rectangle" : "checkmark.rectangle.fill"
   }
 
   func getImageStrDontShowAgainBtnToogle() -> String{
-    let value = dependencies.appConfig.dontShowOnboardingValue
+    let value = dependencies.appSettings.dontShowOnboardingValue
     let newValue = !value
-    dependencies.appConfig.dontShowOnboardingValue = newValue
+    dependencies.appSettings.dontShowOnboardingValue = newValue
     return newValue == false ? "rectangle" : "checkmark.rectangle.fill"
   }
 
   func getImageStrDontShowAgainBtn() -> String{
-    let value = dependencies.appConfig.dontShowOnboardingValue
+    let value = dependencies.appSettings.dontShowOnboardingValue
     return value == false ? "rectangle" : "checkmark.rectangle.fill"
   }
 

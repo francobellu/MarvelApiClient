@@ -39,7 +39,11 @@ import XCTest
 /// Test the 4 bindings
 class CharactersListPresenterTest: XCTestCase {
   var sut: CharactersListPresenter! // swiftlint:disable:this implicitly_unwrapped_optional
-  var appDependenciesDummy = AppDependenciesDummy(restDependencies: RestDependencies())
+
+  let marvelApiConfig = MarvelApiRequestConfig()
+  lazy var appDependenciesDummy = {
+    AppDependenciesDummy(restDependencies: RestDependencies(marvelApiConfig: marvelApiConfig), charactersRepositoryMock: ( CharactersRepositoryMock()))
+  }()
   var coordinatorSpy:  CharactersListCoordinatorDelegateSpy!
 
 //  var mockView: CharactersListPresenterToViewMock!

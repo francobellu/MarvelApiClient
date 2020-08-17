@@ -8,7 +8,7 @@
 
 import Foundation
 
-struct CharactersQuery: Equatable {
+struct CharactersQuery: Encodable {
   let name: String?
   let nameStartsWith: String?
   let limit: Int?

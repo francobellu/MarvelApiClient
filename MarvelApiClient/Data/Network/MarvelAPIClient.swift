@@ -1,15 +1,11 @@
 import Foundation
+import Rest
 
 protocol MarvelApiProtocol {
   // Characters
-  func getCharactersList(completion: @escaping (Result<GetCharacters.Response, Error>) -> Void)
-  func getCharacter(with id: Int, completion:  @escaping (Result<GetCharacters.Response, Error>) -> Void)
-
-  // Comics
-//  func getComicsList(completion: @escaping ([ComicResult]) -> Void)
-//  func getComic(with id: Int, completion: @escaping (ComicResult) -> Void)
+  func getCharactersList(completion: @escaping (Result<[CharacterResult], Error>) -> Void)
+  func getCharacter(with id: Int, completion:  @escaping (Result<[CharacterResult], Error>) -> Void)
 }
-
 
 /// Implementation of a generic-based Marvel API client
 class MarvelApiClient: MarvelApiProtocol {
@@ -40,50 +36,89 @@ class MarvelApiClient: MarvelApiProtocol {
     }
   }
 
-  func getCharactersList(completion: @escaping (Result<GetCharacters.Response, Error>) -> Void){
+  func getCharactersList(completion: @escaping (Result<[CharacterResult], Error>) -> Void){
     // Get the first <limit> characters
-    let query = CharactersQuery(name: nil, nameStartsWith: nil, limit: 50, offset: 0)
-    let request = GetCharacters(restDependencies: restDependencies, query: query)
-    var urlRequest: URLRequest
+    let request = APIRequests.getCharactersList()
     do {
-      try urlRequest =  request.urlRequest(with: restDependencies.apiConfig)
-      restDependencies.httpService.request(urlRequest ) { (result) in
+      // TODO: handle error
+       try restDependencies.restService.request(with: request ) { (result) in
         print("\nGetCharacters list finished, limit: \(self.limit), offset: \(self.offset)")
-        var completionResult: Result<GetCharacters.Response, Error>
+        var completionResult: Result<[CharacterResult], Error>
+
         switch result {
-        case .success(let data): completionResult = request.decode(data)
+        case .success(let data):
+//          let dataXX = data as [CharacterResult]
+          completionResult =  .success(data) //request.decode(dataXX)
         case .failure(let error): completionResult = .failure(error)
         }
-        completion(completionResult)
+        completion(result)
       }
     } catch  {
       completion(.failure(RequestGenerationError.components))
     }
   }
 
-  func getCharacter(with id: Int, completion: @escaping (Result<GetCharacter.Response, Error>) -> Void) {
+  func getCharacter(with id: Int, completion:  @escaping (Result<[CharacterResult], Error>) -> Void){
 
-    let request = GetCharacter(restDependencies: restDependencies, id: id)
-    var urlRequest: URLRequest
+//    let request = GetCharacter(restDependencies: restDependencies, id: id)
+//    var urlRequest: URLRequest
 
+    let request = APIRequests.getCharactersList()
     do {
-      try urlRequest =  request.urlRequest(with: restDependencies.apiConfig)
-      restDependencies.httpService.request(urlRequest)  { (result) in
+       try restDependencies.restService.request(with: request)  { (result) in
         print("\nGetCharacter \(id) finished")
-        var completionResult: Result<GetCharacter.Response, Error>
+        var completionResult: Result<[CharacterResult], Error>
         switch result {
         case .success(let data):
-          completionResult = request.decode(data)
+          completionResult = .success(data) //request.decode(data)
         case .failure(let error):
           completionResult = .failure(error)
         }
-        completion(completionResult)
+        completion(result)
       }
     } catch  {
       completion(.failure(RequestGenerationError.components))
     }
   }
 
+
+
+  // Strips any wrapper around the requested object
+//  public func extractApiObjectFrom(_ data: Data) -> Result<Response, Error> {
+//    let dataContaineResult = self.decodeToMarvelResponseWrapper(data)
+//    return stripDataContainerFrom(dataContaineResult)
+//  }
+//
+////   Strips the MarvelApiResponse wrapper and returns a DataContainer object if exists
+//    private func decodeToMarvelResponseWrapper (_ data: Data) -> Result<DataContainer<Response>, Error> {
+//      var result: Result<DataContainer<Response>, Error>
+//      do {
+//        let marvelResponse = try JSONDecoder().decode(MarvelResponse<Response>.self, from: data)
+//        if let dataContainer = marvelResponse.data {
+//          result = .success(dataContainer)
+//        } else {
+//          result = .failure(MarvelError.noData)
+//        }
+//      } catch {
+//        // decode the ErrorResponse
+//        _ = try? JSONDecoder().decode(ErrorResponse.self, from: data)
+//        result = .failure(MarvelError.decoding)
+//      }
+//      return result
+//    }
+//
+//    //  Strips the DataContainer wrapper and returns a Response object if exists
+//    private func stripDataContainerFrom(_ dataContaineResult: Result<DataContainer<Response>, Error>) -> Result<Response, Error> {
+//      let returnValue: Result<Response, Error>
+//      switch dataContaineResult{
+//      case .success(let dataContainer):
+//        let resultObject = dataContainer.results
+//        returnValue = .success(resultObject)
+//      case .failure(let error):
+//        returnValue = .failure(error)
+//      }
+//      return returnValue
+//    }
 }
 
 

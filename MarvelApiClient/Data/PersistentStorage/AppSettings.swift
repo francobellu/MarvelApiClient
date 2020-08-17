@@ -1,5 +1,5 @@
 //
-//  AppConfig.swift
+//  AppSettings.swift
 //  MarvelApiClient
 //
 //  Created by franco bellu on 17/05/2020.
@@ -13,7 +13,7 @@ public enum MarvelPreferenceKeys: String {
 }
 
 // todo: use store
-class AppConfig {
+class AppSettings {
   let store: DataStoreProtocol
   var dontShowOnboardingValue: Bool  {
     get {

@@ -10,7 +10,7 @@ import Foundation
 
 
 final class DefaultCharactersRepository {
-
+  
   private let apiClient: MarvelApiProtocol
 
   init(apiClient: MarvelApiProtocol) {
@@ -22,7 +22,7 @@ extension DefaultCharactersRepository: CharactersRepository {
   func getCharactersList(completion: @escaping (Result<[Character], Error>) -> Void) {
 
 //    let requestDTO = CharactersRequestDTO(query: query)
-    let endpoint = apiClient.getCharactersList { result in // TODO: not returning an Endpoint
+      apiClient.getCharactersList{ result in // TODO: not returning an Endpoint
       switch result {
       case .success(let responseDTO):
 //        self.cache.save(response: responseDTO, for: requestDTO)
@@ -38,7 +38,7 @@ extension DefaultCharactersRepository: CharactersRepository {
   func getCharacter(with id: Int, completion: @escaping (Result<Character, Error>) -> Void) {
 
     //    let requestDTO = CharactersRequestDTO(query: query)
-    let endpoint = apiClient.getCharacter(with: id) { result in // TODO: not returning an Endpoint
+    apiClient.getCharacter(with: id) { result in // TODO: not returning an Endpoint
       switch result {
       case .success(let responseDTO):
         //        self.cache.save(response: responseDTO, for: requestDTO)

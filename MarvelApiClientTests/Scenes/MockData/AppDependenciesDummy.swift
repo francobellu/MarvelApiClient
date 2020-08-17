@@ -35,7 +35,14 @@ class DataStoreDummy: DataStoreProtocol{
   }
 }
 
-class AppDependenciesDummy: AppDependencies{
+class AppDependenciesDummy: AppDIContainer{
+  let charactersRepositoryMock: CharactersRepositoryMock
+  init(restDependencies: RestDependenciesProtocol, charactersRepositoryMock: CharactersRepositoryMock) {
+    self.charactersRepositoryMock = charactersRepositoryMock
+    super.init()
+  }
+}
+
 //  lazy var factory: Factory = Factory(dependencies: self)
 //
 //  func makeCharacterDetailView(character: CharacterResult) -> CharacterDetailViewController {
@@ -71,7 +78,7 @@ class AppDependenciesDummy: AppDependencies{
 //    UserDefaultsDataStore()
 //  }()
 //
-//  lazy var appConfig: AppConfig = {
-//    AppConfig(dataStore: DataStoreDummy())
+//  lazy var appSettings: AppSettings = {
+//    AppSettings(dataStore: DataStoreDummy())
 //  }()
-}
+//}

@@ -20,21 +20,21 @@ protocol GetCharacterInteractorOutputPort: class{
 }
 
 private protocol GetCharacterInteractorProtocol: class{
-  init(dependencies: AppDependenciesProtocol)
-  func handle(result: Result<[GetCharacters.Response], Error>)
+  init(dependencies: AppDIContainerProtocol)
+  func handle(result: Result<[CharacterResult], Error>)
 }
 
 class GetCharacterInteractor{
 
-  private var dependencies: AppDependenciesProtocol! // swiftlint:disable:this implicitly_unwrapped_optional
+  private var dependencies: AppDIContainerProtocol! // swiftlint:disable:this implicitly_unwrapped_optional
 
   private let charactersRepository: CharactersRepository
 
   weak var outputPort: GetCharacterInteractorOutputPort?
 
-  required init(dependencies: AppDependenciesProtocol) {
+  required init(dependencies: AppDIContainerProtocol) {
     self.dependencies = dependencies
-    self.charactersRepository = dependencies.makeCharactersRepository()
+    self.charactersRepository = dependencies.factory.makeCharactersRepository()
   }
 }
 

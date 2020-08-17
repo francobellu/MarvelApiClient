@@ -13,11 +13,12 @@ import XCTest
 
 class CharacterDetailPresenterTest: XCTestCase {
   var sut: CharacterDetailPresenter! // swiftlint:disable:this implicitly_unwrapped_optional
-  let appDependenciesDummy = AppDependenciesDummy(restDependencies: RestDependencies())
+  var appDependenciesDummy: AppDependenciesDummy!
   var mockIterator: MockCharacterDetailInteractor!
 
   override func setUpWithError() throws {
     mockIterator = MockCharacterDetailInteractor()
+    appDependenciesDummy = AppDependenciesDummy(restDependencies: RestDependenciesMock(sessionNextData: Data()), charactersRepositoryMock: CharactersRepositoryMock())
   }
 
   /// TEST  sut creation using  init(dependencies: AppDependenciesProtocol, characterId: String)

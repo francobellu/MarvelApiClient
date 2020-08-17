@@ -15,7 +15,7 @@ class CharactersListPresenter: CharactersListPresenterProtocol {
 
   private var interactor: GetCharactersListInteractorInputPort
 
-  private var dependencies: AppDependenciesProtocol! // swiftlint:disable:this implicitly_unwrapped_optional
+  private var dependencies: AppDIContainerProtocol! // swiftlint:disable:this implicitly_unwrapped_optional
 
   // Presentation Model Observables
   var viewDidLoad = Observable<Bool>(value: false)
@@ -24,7 +24,7 @@ class CharactersListPresenter: CharactersListPresenterProtocol {
   var isLoading = Observable<Bool>(value: false)
   var isError = Observable<Error?>(value: nil)
 
-  init(dependencies: AppDependenciesProtocol, coordinatorDelegate: CharactersListCoordinatorDelegate, interactor: GetCharactersListInteractorInputPort) {
+  init(dependencies: AppDIContainerProtocol, coordinatorDelegate: CharactersListCoordinatorDelegate, interactor: GetCharactersListInteractorInputPort) {
     self.dependencies = dependencies
     self.coordinatorDelegate = coordinatorDelegate
     self.interactor = interactor

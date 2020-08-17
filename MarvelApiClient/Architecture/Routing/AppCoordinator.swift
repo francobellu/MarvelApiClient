@@ -31,17 +31,17 @@ class AppCoordinator: AppDependencyInjectable {
   var coordinatorPresenter: AnyObject?
 
   var coordinators = [Coordinator]()
-  var dependencies: AppDependenciesProtocol! // swiftlint:disable:this implicitly_unwrapped_optional
+  var dependencies: AppDIContainerProtocol! // swiftlint:disable:this implicitly_unwrapped_optional
 //  private var coordinator: (Coordinator)?
   private var state: AppCoordinatorState
   let navController = UINavigationController()
 
   init(presenter: UIWindow =  UIWindow(frame: UIScreen.main.bounds),
-       dependencies: AppDependenciesProtocol) {
+       dependencies: AppDIContainerProtocol) {
 
     self.coordinatorPresenter = presenter
     self.dependencies = dependencies
-    self.state = AppCoordinatorState.next(dontShowOnboarding: dependencies.appConfig.dontShowOnboardingValue)
+    self.state = AppCoordinatorState.next(dontShowOnboarding: dependencies.appSettings.dontShowOnboardingValue)
   }
 }
 
@@ -53,8 +53,8 @@ extension AppCoordinator: Coordinator {
 
     private func doStart() {
       print("FB:AppCoordinator:doStart()")
-      let appConfig = dependencies.appConfig
-      let nextState = AppCoordinatorState.next(dontShowOnboarding: appConfig.dontShowOnboardingValue)
+      let appSettings = dependencies.appSettings
+      let nextState = AppCoordinatorState.next(dontShowOnboarding: appSettings.dontShowOnboardingValue)
       runFlowfor(state: nextState)
     }
 

@@ -11,16 +11,16 @@ import Foundation
 class CharacterDetailPresenter {
   private var character = Observable<Character?>(value: nil)
 
-  private var dependencies: AppDependenciesProtocol! // swiftlint:disable:this implicitly_unwrapped_optional
+  private var dependencies: AppDIContainerProtocol! // swiftlint:disable:this implicitly_unwrapped_optional
 
   private var interactor: GetCharacterInteractorInputPort?
 
-  init(dependencies: AppDependenciesProtocol, character: Character) {
+  init(dependencies: AppDIContainerProtocol, character: Character) {
     self.character.value = character
     self.dependencies = dependencies
   }
   /// Initializer used for deep linking
-  init(dependencies: AppDependenciesProtocol, id: Int, interactor: GetCharacterInteractorInputPort) {
+  init(dependencies: AppDIContainerProtocol, id: Int, interactor: GetCharacterInteractorInputPort) {
     self.dependencies = dependencies
     self.interactor = interactor
     self.getCharacter(with: id){
