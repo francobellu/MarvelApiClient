@@ -20,7 +20,7 @@ class RestDependenciesMock: RestDependenciesProtocol{
   init(sessionNextData: Data) {
     let sessionManager = NetworkSessionManagerMock(response: HTTPURLResponse(), data: sessionNextData, error: nil)
 
-     let httpService = DefaultRawDataNetworkService(sessionManager: sessionManager, logger: NetworkErrorLoggerMock())
+     let httpService = DefaultNetworkService(sessionManager: sessionManager, logger: NetworkErrorLoggerMock())
 
     let apiConfig = ApiNetworkConfigurationMock()
 
@@ -91,7 +91,7 @@ struct NetworkSessionManagerMock: NetworkSessionManager {
   }
 }
 
-class NetworkErrorLoggerMock: NetworkErrorLogger {
+class NetworkErrorLoggerMock: NetworkLogger {
     var loggedErrors: [Error] = []
     func log(request: URLRequest) { }
     func log(responseData data: Data?, response: URLResponse?) { }
