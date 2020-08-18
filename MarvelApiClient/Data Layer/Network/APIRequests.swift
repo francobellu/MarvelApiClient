@@ -9,10 +9,10 @@
 import Foundation
 
 struct APIRequests {
-  static func getCharactersList() -> MarvelApiRequestImpl<[CharacterResult]>{
+  static func getCharactersList() -> MarvelApiRequest<[CharacterResult]>{
     let query = CharactersQuery(name: nil, nameStartsWith: nil, limit: 50, offset: 0)
     do {
-      return try MarvelApiRequestImpl<[CharacterResult]>( resourceName:"characters",
+      return try MarvelApiRequest<[CharacterResult]>( resourceName:"characters",
                                                           method: .get,
                                                           urlParameters: query.toDictionaryOfString())
     } catch {
@@ -21,10 +21,10 @@ struct APIRequests {
     }
   }
 
-  static func getCharacter(with id: Int) -> MarvelApiRequestImpl <[CharacterResult]>{
+  static func getCharacter(with id: Int) -> MarvelApiRequest <[CharacterResult]>{
 
     do {
-      return try  MarvelApiRequestImpl(resourceName:"characters",
+      return try  MarvelApiRequest(resourceName:"characters",
                                        method: .get,
                                        urlParameters: ["id": String(id)])
     } catch {

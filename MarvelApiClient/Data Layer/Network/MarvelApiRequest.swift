@@ -9,7 +9,7 @@
 import Foundation
 import Rest
 
-public class MarvelApiRequestImpl<T: Decodable>: ResponseRequestable{
+public class MarvelApiRequest<T: Decodable>: ResponseRequestable{
 
   public typealias Response = T
 
@@ -52,7 +52,7 @@ public class MarvelApiRequestImpl<T: Decodable>: ResponseRequestable{
   //  var reachedEndOfItems: Bool {get set}
 }
 //
-extension MarvelApiRequestImpl {
+extension MarvelApiRequest {
 
   ///  Decodes the  response data  stripping all the wrappers.  In the process  all the possible errors are handled
   /// - Parameters:
@@ -61,7 +61,7 @@ extension MarvelApiRequestImpl {
   public func decode(_ data: Data) -> Result<Response, Error>  {
     return extractApiObjectFrom(data)
   }
-  
+
   // Strips any wrapper around the requested object
   public func extractApiObjectFrom(_ data: Data) -> Result<Response, Error> {
     let dataContaineResult = self.decodeToMarvelResponseWrapper(data)
@@ -69,7 +69,7 @@ extension MarvelApiRequestImpl {
   }
 }
 
-private extension MarvelApiRequestImpl{
+private extension MarvelApiRequest{
 
   // Strips the MarvelApiResponse wrapper and returns a DataContainer object if exists
   private func decodeToMarvelResponseWrapper (_ data: Data) -> Result<DataContainer<Response>, Error> {
