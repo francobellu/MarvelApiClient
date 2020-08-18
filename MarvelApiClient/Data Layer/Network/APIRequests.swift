@@ -9,11 +9,7 @@
 import Foundation
 
 struct APIRequests {
-
-//  static func marvelRequest() -> MarvelApiRequestImpl<[MarvelResponse<>]>{
-
   static func getCharactersList() -> MarvelApiRequestImpl<[CharacterResult]>{
-
     let query = CharactersQuery(name: nil, nameStartsWith: nil, limit: 50, offset: 0)
     do {
       return try MarvelApiRequestImpl<[CharacterResult]>( resourceName:"characters",

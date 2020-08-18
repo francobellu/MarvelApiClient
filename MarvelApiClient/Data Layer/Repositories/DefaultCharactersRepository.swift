@@ -10,7 +10,7 @@ import Foundation
 
 
 final class DefaultCharactersRepository {
-  
+
   private let apiClient: MarvelApiProtocol
 
   init(apiClient: MarvelApiProtocol) {

@@ -375,10 +375,10 @@
 		287C9A08217F39CB00D63092 /* MarvelApiClient */ = {
 			isa = PBXGroup;
 			children = (
-				C707B8A824DC445D006069A1 /* Domain */,
-				C707B8A624DC42F8006069A1 /* Data */,
+				C707B8A824DC445D006069A1 /* Domain Layer */,
+				C707B8A624DC42F8006069A1 /* Data Layer */,
 				C70365E4247535C60005886F /* Architecture */,
-				C703660A24753DEA0005886F /* Scene Modules */,
+				C703660A24753DEA0005886F /* Presentation Layer */,
 				28998EB9217F636A0037039B /* Utils */,
 				28998EBE217F636A0037039B /* Models */,
 				C70873D22471F54800184DE0 /* Resources */,
@@ -429,13 +429,13 @@
 			path = Architecture;
 			sourceTree = "<group>";
 		};
-		C703660A24753DEA0005886F /* Scene Modules */ = {
+		C703660A24753DEA0005886F /* Presentation Layer */ = {
 			isa = PBXGroup;
 			children = (
 				C703660B24753DEA0005886F /* Landing */,
 				C703662324753DEA0005886F /* Onboarding */,
 			);
-			path = "Scene Modules";
+			path = "Presentation Layer";
 			sourceTree = "<group>";
 		};
 		C703660B24753DEA0005886F /* Landing */ = {
@@ -529,14 +529,14 @@
 			path = CharactersList;
 			sourceTree = "<group>";
 		};
-		C707B8A624DC42F8006069A1 /* Data */ = {
+		C707B8A624DC42F8006069A1 /* Data Layer */ = {
 			isa = PBXGroup;
 			children = (
 				C7EC670E2443688400F88FDE /* PersistentStorage */,
 				C707B8AF24DC466F006069A1 /* Network */,
 				C707B8A724DC4302006069A1 /* Repositories */,
 			);
-			path = Data;
+			path = "Data Layer";
 			sourceTree = "<group>";
 		};
 		C707B8A724DC4302006069A1 /* Repositories */ = {
@@ -547,13 +547,13 @@
 			path = Repositories;
 			sourceTree = "<group>";
 		};
-		C707B8A824DC445D006069A1 /* Domain */ = {
+		C707B8A824DC445D006069A1 /* Domain Layer */ = {
 			isa = PBXGroup;
 			children = (
 				C707B8B324DC5762006069A1 /* Entities */,
 				C707B8A924DC4480006069A1 /* Interfaces */,
 			);
-			path = Domain;
+			path = "Domain Layer";
 			sourceTree = "<group>";
 		};
 		C707B8A924DC4480006069A1 /* Interfaces */ = {
