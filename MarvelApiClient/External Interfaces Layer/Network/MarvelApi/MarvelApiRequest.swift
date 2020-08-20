@@ -29,19 +29,8 @@ public class MarvelApiRequest<T: Decodable>: ResponseRequestable{
 
   public var encodableBodyParamaters: Encodable?
 
-  //  var restDependencies: RestDependenciesProtocol
-
-  static func makeCharactersListRequest(from query: CharactersQuery) -> MarvelApiRequest{
-    MarvelApiRequest(resourceName: "characters", method: .get, urlParameters: try? query.toDictionaryOfString())
-  }
-
-  static func makeCharacterRequest(from query: CharacterQuery) -> MarvelApiRequest{
-    MarvelApiRequest(resourceName: "characters", method: .get, urlParameters: try? query.toDictionaryOfString())
-  }
-
   init(resourceName: String, method: RestMethod, urlParameters: [String: String]?) {
 
-    //    self.restDependencies = restDependencies
     self.resourceName = resourceName
     self.method = method
     self.urlParameters = urlParameters
@@ -56,7 +45,19 @@ public class MarvelApiRequest<T: Decodable>: ResponseRequestable{
   //  // a flag for when all database items have already been loaded
   //  var reachedEndOfItems: Bool {get set}
 }
-//
+
+extension MarvelApiRequest {
+
+  static func makeCharactersListRequest(from query: CharactersQuery) -> MarvelApiRequest{
+    MarvelApiRequest(resourceName: "characters", method: .get, urlParameters: try? query.toDictionaryOfString())
+  }
+
+  static func makeCharacterRequest(from query: CharacterQuery) -> MarvelApiRequest{
+    MarvelApiRequest(resourceName: "characters", method: .get, urlParameters: try? query.toDictionaryOfString())
+  }
+}
+
+// 
 extension MarvelApiRequest {
 
   ///  Decodes the  response data  stripping all the wrappers.  In the process  all the possible errors are handled

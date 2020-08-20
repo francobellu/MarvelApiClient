@@ -53,6 +53,7 @@
 		C7169240244F0385005BF4AB /* MarvelError.swift in Sources */ = {isa = PBXBuildFile; fileRef = C716923F244F0385005BF4AB /* MarvelError.swift */; };
 		C71B79632476A31D002D5B09 /* superheros.png in Resources */ = {isa = PBXBuildFile; fileRef = C70873D32471F55500184DE0 /* superheros.png */; };
 		C71B79652476AA14002D5B09 /* MarvelApp.docx in Resources */ = {isa = PBXBuildFile; fileRef = C71B79642476AA14002D5B09 /* MarvelApp.docx */; };
+		C71B84C124EEA67200054F2F /* NetworkInterface.swift in Sources */ = {isa = PBXBuildFile; fileRef = C71B84C024EEA67200054F2F /* NetworkInterface.swift */; };
 		C728C2AB246C375300F60806 /* AppDIContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = C728C2AA246C375200F60806 /* AppDIContainer.swift */; };
 		C72CF2B2247163B80048B0A2 /* AppSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = C72CF2B1247163B80048B0A2 /* AppSettings.swift */; };
 		C72CF2B92471ED860048B0A2 /* .swiftlint.yml in Resources */ = {isa = PBXBuildFile; fileRef = C72CF2B42471ED860048B0A2 /* .swiftlint.yml */; };
@@ -146,6 +147,7 @@
 		C7169228244DE062005BF4AB /* MarvelDTOs.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MarvelDTOs.swift; sourceTree = "<group>"; };
 		C716923F244F0385005BF4AB /* MarvelError.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MarvelError.swift; sourceTree = "<group>"; };
 		C71B79642476AA14002D5B09 /* MarvelApp.docx */ = {isa = PBXFileReference; lastKnownFileType = file; path = MarvelApp.docx; sourceTree = "<group>"; };
+		C71B84C024EEA67200054F2F /* NetworkInterface.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkInterface.swift; sourceTree = "<group>"; };
 		C728C2AA246C375200F60806 /* AppDIContainer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDIContainer.swift; sourceTree = "<group>"; };
 		C72CF2B1247163B80048B0A2 /* AppSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppSettings.swift; sourceTree = "<group>"; };
 		C72CF2B42471ED860048B0A2 /* .swiftlint.yml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.yaml; path = .swiftlint.yml; sourceTree = "<group>"; };
@@ -236,7 +238,7 @@
 				C703660A24753DEA0005886F /* Presentation Layer */,
 				C707B8A824DC445D006069A1 /* Domain Layer */,
 				C707B8A624DC42F8006069A1 /* Data Layer */,
-				C71B84BB24EE8C7900054F2F /* External Interface Layer */,
+				C71B84BB24EE8C7900054F2F /* External Interfaces Layer */,
 				C70365E4247535C60005886F /* Application */,
 				28998EB9217F636A0037039B /* Utils */,
 				28998EBE217F636A0037039B /* Models */,
@@ -392,6 +394,7 @@
 			isa = PBXGroup;
 			children = (
 				C707B8A724DC4302006069A1 /* Repositories */,
+				C71B84C224EEA6CF00054F2F /* NetworkLayerInterface */,
 			);
 			path = "Data Layer";
 			sourceTree = "<group>";
@@ -513,13 +516,13 @@
 			path = AppDIContainer;
 			sourceTree = "<group>";
 		};
-		C71B84BB24EE8C7900054F2F /* External Interface Layer */ = {
+		C71B84BB24EE8C7900054F2F /* External Interfaces Layer */ = {
 			isa = PBXGroup;
 			children = (
 				C707B8AF24DC466F006069A1 /* Network */,
 				C7EC670E2443688400F88FDE /* PersistentStorage */,
 			);
-			path = "External Interface Layer";
+			path = "External Interfaces Layer";
 			sourceTree = "<group>";
 		};
 		C71B84BC24EE8D8100054F2F /* UseCases */ = {
@@ -536,6 +539,14 @@
 				C7B5542A24EADD1D00A02AFE /* MarvelApiRequest.swift */,
 			);
 			path = MarvelApi;
+			sourceTree = "<group>";
+		};
+		C71B84C224EEA6CF00054F2F /* NetworkLayerInterface */ = {
+			isa = PBXGroup;
+			children = (
+				C71B84C024EEA67200054F2F /* NetworkInterface.swift */,
+			);
+			path = NetworkLayerInterface;
 			sourceTree = "<group>";
 		};
 		C72CF2B32471ED860048B0A2 /* Scripts */ = {
@@ -884,6 +895,7 @@
 				C7096D722448E6C000DEE7D3 /* DeepLink.swift in Sources */,
 				C7169240244F0385005BF4AB /* MarvelError.swift in Sources */,
 				C703663924753DEB0005886F /* LandingViewController.swift in Sources */,
+				C71B84C124EEA67200054F2F /* NetworkInterface.swift in Sources */,
 				C707B8B524DC57A9006069A1 /* Character.swift in Sources */,
 				287C9A0A217F39CB00D63092 /* AppDelegate.swift in Sources */,
 				C703664124753DEB0005886F /* CharacterDetailInteractor.swift in Sources */,

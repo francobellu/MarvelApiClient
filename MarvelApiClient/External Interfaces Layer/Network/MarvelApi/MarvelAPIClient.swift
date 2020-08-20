@@ -1,12 +1,6 @@
 import Foundation
 import Rest
 
-protocol MarvelApiProtocol {
-  // Characters
-  func getCharactersList(completion: @escaping (Result<[CharacterResult], Error>) -> Void)
-  func getCharacter(with id: Int, completion:  @escaping (Result<[CharacterResult], Error>) -> Void)
-}
-
 /// Implementation of a generic-based Marvel API client
 class MarvelApiClient: MarvelApiProtocol {
 
