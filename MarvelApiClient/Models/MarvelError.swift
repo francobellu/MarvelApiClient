@@ -4,9 +4,9 @@ import Foundation
 /// In a real implementation this should be more exhaustive
 public enum MarvelError: Error {
   case none
-  case encoding
+//  case encoding
 	case decoding
   case noData
-	case server(message: String)
+//	case server(message: String)
   case insecureMD5Hash
 }

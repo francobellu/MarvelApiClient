@@ -14,3 +14,7 @@ struct CharactersQuery: Encodable {
   let limit: Int?
   let offset: Int?
 }
+
+struct CharacterQuery: Encodable {
+  let id: Int?
+}

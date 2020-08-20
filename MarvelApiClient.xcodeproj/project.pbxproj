@@ -76,7 +76,6 @@
 		C7887B7D24C6196000EAEB1F /* UIViewController +  ErrorDialog.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7887B7C24C6196000EAEB1F /* UIViewController +  ErrorDialog.swift */; };
 		C7A4D7D024EAC60A007D1DA6 /* AlamofireImage in Frameworks */ = {isa = PBXBuildFile; productRef = C7A4D7CF24EAC60A007D1DA6 /* AlamofireImage */; };
 		C7B5542B24EADD1D00A02AFE /* MarvelApiRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7B5542A24EADD1D00A02AFE /* MarvelApiRequest.swift */; };
-		C7B5542D24EAF3AB00A02AFE /* APIRequests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7B5542C24EAF3AB00A02AFE /* APIRequests.swift */; };
 		C7BE8B8924AF5F0D00B8A569 /* CharactersListViewControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7BE8B8824AF5F0D00B8A569 /* CharactersListViewControllerTests.swift */; };
 		C7BE8B8B24AF603400B8A569 /* CharactersListProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7BE8B8A24AF603400B8A569 /* CharactersListProtocols.swift */; };
 		C7D3F040243B770F004E4C0E /* Coordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7D3F03F243B770F004E4C0E /* Coordinator.swift */; };
@@ -172,7 +171,6 @@
 		C776993C24B313BE003BE9BD /* Observable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Observable.swift; sourceTree = "<group>"; };
 		C7887B7C24C6196000EAEB1F /* UIViewController +  ErrorDialog.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController +  ErrorDialog.swift"; sourceTree = "<group>"; };
 		C7B5542A24EADD1D00A02AFE /* MarvelApiRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MarvelApiRequest.swift; sourceTree = "<group>"; };
-		C7B5542C24EAF3AB00A02AFE /* APIRequests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIRequests.swift; sourceTree = "<group>"; };
 		C7BE8B8824AF5F0D00B8A569 /* CharactersListViewControllerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharactersListViewControllerTests.swift; sourceTree = "<group>"; };
 		C7BE8B8A24AF603400B8A569 /* CharactersListProtocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharactersListProtocols.swift; sourceTree = "<group>"; };
 		C7D3F03F243B770F004E4C0E /* Coordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Coordinator.swift; sourceTree = "<group>"; };
@@ -239,7 +237,7 @@
 				C707B8A824DC445D006069A1 /* Domain Layer */,
 				C707B8A624DC42F8006069A1 /* Data Layer */,
 				C71B84BB24EE8C7900054F2F /* External Interface Layer */,
-				C70365E4247535C60005886F /* Architecture */,
+				C70365E4247535C60005886F /* Application */,
 				28998EB9217F636A0037039B /* Utils */,
 				28998EBE217F636A0037039B /* Models */,
 				C70873D22471F54800184DE0 /* Resources */,
@@ -279,20 +277,20 @@
 			path = Pods;
 			sourceTree = "<group>";
 		};
-		C70365E4247535C60005886F /* Architecture */ = {
+		C70365E4247535C60005886F /* Application */ = {
 			isa = PBXGroup;
 			children = (
-				C715DC2D24D30B3000DAC74A /* UIDataBinding */,
 				C715DC2C24D30B1A00DAC74A /* Routing */,
 				C715DC2B24D30AF500DAC74A /* DIContainer */,
 				C7096D712448E6C000DEE7D3 /* DeepLink.swift */,
 			);
-			path = Architecture;
+			path = Application;
 			sourceTree = "<group>";
 		};
 		C703660A24753DEA0005886F /* Presentation Layer */ = {
 			isa = PBXGroup;
 			children = (
+				C715DC2D24D30B3000DAC74A /* UIDataBinding */,
 				C703660B24753DEA0005886F /* Landing */,
 				C703662324753DEA0005886F /* Onboarding */,
 			);
@@ -409,6 +407,7 @@
 		C707B8A824DC445D006069A1 /* Domain Layer */ = {
 			isa = PBXGroup;
 			children = (
+				C71B84BC24EE8D8100054F2F /* UseCases */,
 				C707B8B324DC5762006069A1 /* Entities */,
 				C707B8A924DC4480006069A1 /* Interfaces */,
 			);
@@ -434,9 +433,7 @@
 		C707B8AF24DC466F006069A1 /* Network */ = {
 			isa = PBXGroup;
 			children = (
-				C7B5542C24EAF3AB00A02AFE /* APIRequests.swift */,
-				C7483D3324C99EAA00651D49 /* MarvelAPIClient.swift */,
-				C7B5542A24EADD1D00A02AFE /* MarvelApiRequest.swift */,
+				C71B84BF24EE91DB00054F2F /* MarvelApi */,
 				C707B8B024DC4677006069A1 /* DTOs */,
 			);
 			path = Network;
@@ -519,10 +516,26 @@
 		C71B84BB24EE8C7900054F2F /* External Interface Layer */ = {
 			isa = PBXGroup;
 			children = (
-				C7EC670E2443688400F88FDE /* PersistentStorage */,
 				C707B8AF24DC466F006069A1 /* Network */,
+				C7EC670E2443688400F88FDE /* PersistentStorage */,
 			);
 			path = "External Interface Layer";
+			sourceTree = "<group>";
+		};
+		C71B84BC24EE8D8100054F2F /* UseCases */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = UseCases;
+			sourceTree = "<group>";
+		};
+		C71B84BF24EE91DB00054F2F /* MarvelApi */ = {
+			isa = PBXGroup;
+			children = (
+				C7483D3324C99EAA00651D49 /* MarvelAPIClient.swift */,
+				C7B5542A24EADD1D00A02AFE /* MarvelApiRequest.swift */,
+			);
+			path = MarvelApi;
 			sourceTree = "<group>";
 		};
 		C72CF2B32471ED860048B0A2 /* Scripts */ = {
@@ -886,7 +899,6 @@
 				C7169232244DE062005BF4AB /* MarvelDTOs.swift in Sources */,
 				C703664A24753DEB0005886F /* OnboardingPresenter.swift in Sources */,
 				C703663C24753DEB0005886F /* CharactersListViewController.swift in Sources */,
-				C7B5542D24EAF3AB00A02AFE /* APIRequests.swift in Sources */,
 				C707B8B724DC58A5006069A1 /* CharactersQuery.swift in Sources */,
 				C707B8AE24DC4507006069A1 /* DefaultCharactersRepository.swift in Sources */,
 				C7D3F040243B770F004E4C0E /* Coordinator.swift in Sources */,

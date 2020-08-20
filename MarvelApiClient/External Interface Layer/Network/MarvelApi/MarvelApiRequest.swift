@@ -29,14 +29,19 @@ public class MarvelApiRequest<T: Decodable>: ResponseRequestable{
 
   public var encodableBodyParamaters: Encodable?
 
-//  var restDependencies: RestDependenciesProtocol
+  //  var restDependencies: RestDependenciesProtocol
 
-  init(
-//    restDependencies: RestDependenciesProtocol,
-        resourceName: String,
-        method: RestMethod, urlParameters: [String: String]?) {
+  static func makeCharactersListRequest(from query: CharactersQuery) -> MarvelApiRequest{
+    MarvelApiRequest(resourceName: "characters", method: .get, urlParameters: try? query.toDictionaryOfString())
+  }
 
-//    self.restDependencies = restDependencies
+  static func makeCharacterRequest(from query: CharacterQuery) -> MarvelApiRequest{
+    MarvelApiRequest(resourceName: "characters", method: .get, urlParameters: try? query.toDictionaryOfString())
+  }
+
+  init(resourceName: String, method: RestMethod, urlParameters: [String: String]?) {
+
+    //    self.restDependencies = restDependencies
     self.resourceName = resourceName
     self.method = method
     self.urlParameters = urlParameters

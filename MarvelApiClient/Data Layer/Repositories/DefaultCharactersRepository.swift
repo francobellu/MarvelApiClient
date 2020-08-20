@@ -8,7 +8,6 @@
 
 import Foundation
 
-
 final class DefaultCharactersRepository {
 
   private let marvelApiClient: MarvelApiProtocol
