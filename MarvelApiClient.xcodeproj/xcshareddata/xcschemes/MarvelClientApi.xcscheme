@@ -38,6 +38,11 @@
                BlueprintName = "MarvelApiClientTests"
                ReferencedContainer = "container:MarvelApiClient.xcodeproj">
             </BuildableReference>
+            <SkippedTests>
+               <Test
+                  Identifier = "DataLayer/testExample()">
+               </Test>
+            </SkippedTests>
          </TestableReference>
          <TestableReference
             skipped = "NO">

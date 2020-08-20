@@ -142,4 +142,4 @@ So we take the flow control out of the viewcontroller making in fact the viewcon
 
 TODO:
 - Improve error handling: net /decoding errors should propagate back to the View which should handle them. (Initially with a dialog)
-- Interactor is not doing anything more that the ApiClient.
+- Interactor is not doing anything more that the MarvelApiClient.

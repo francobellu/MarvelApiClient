@@ -38,10 +38,12 @@ class MarvelApiClient: MarvelApiProtocol {
 
   func getCharactersList(completion: @escaping (Result<[CharacterResult], Error>) -> Void){
     // Get the first <limit> characters
-    let request = APIRequests.getCharactersList()
+//    let request = APIRequests.getCharactersList()
+    let query = CharactersQuery(name: nil, nameStartsWith: nil, limit: 50, offset: 0)
+    let request = GetCharactersListReq(query: query)
     do {
       // TODO: handle error
-       try restDependencies.restService.request(with: request ) { (result) in
+       restDependencies.restService.request(with: request ) { (result) in
         print("\nGetCharacters list finished, limit: \(self.limit), offset: \(self.offset)")
         var completionResult: Result<[CharacterResult], Error>
 
@@ -49,9 +51,10 @@ class MarvelApiClient: MarvelApiProtocol {
         case .success(let data):
 //          let dataXX = data as [CharacterResult]
           completionResult =  .success(data) //request.decode(dataXX)
-        case .failure(let error): completionResult = .failure(error)
+        case .failure(let error):
+          completionResult = .failure(error)
         }
-        completion(result)
+        completion(completionResult)
       }
     } catch  {
       completion(.failure(RequestGenerationError.components))

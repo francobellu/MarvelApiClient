@@ -7,7 +7,7 @@
 //
 
 import Foundation
-
+import Rest
 struct APIRequests {
   static func getCharactersList() -> MarvelApiRequest<[CharacterResult]>{
     let query = CharactersQuery(name: nil, nameStartsWith: nil, limit: 50, offset: 0)
@@ -30,5 +30,15 @@ struct APIRequests {
     } catch {
       //      completion(.failure(RequestGenerationError.components))
     }
+  }
+}
+
+class GetCharactersListReq: MarvelApiRequest<[CharacterResult]>{
+//  let resourceName: String
+//  let method: RestMethod
+//  let urlParameters: [String: String]?
+
+   init(query: CharactersQuery) {
+    super.init(resourceName: "characters", method: .get, urlParameters: try? query.toDictionaryOfString())
   }
 }

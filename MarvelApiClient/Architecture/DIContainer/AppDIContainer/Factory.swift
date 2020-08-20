@@ -108,7 +108,7 @@ extension Factory: PresenterFactory{
 extension Factory: CharactersRepositoryFactory{
   func makeCharactersRepository() -> CharactersRepository {
 
-    return DefaultCharactersRepository(apiClient:  dependencies.marvelApiClient)
+    return DefaultCharactersRepository(marvelApiClient:  dependencies.marvelApiClient)
   }
 }
 

@@ -17,9 +17,7 @@ struct Character: Equatable {
   let id: Int?
   let name: String?
   let description: String?
-//  let modified: String?
   let resourceURI: String?
-//  let urls: [URLElement]?
   let thumbnail: Thumbnail?
   let comics: Int
   let stories: Int
