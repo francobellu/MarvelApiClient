@@ -30,14 +30,14 @@ class MarvelApiClient: MarvelApiProtocol {
     }
   }
 
-  func getCharactersList(completion: @escaping (Result<[CharacterResult], Error>) -> Void){
+  func getCharactersList(completion: @escaping (Result<[CharacterResult], RestServiceError>) -> Void){
     let query = CharactersQuery(name: nil, nameStartsWith: nil, limit: 50, offset: 0)
     let request = MarvelApiRequest<[CharacterResult]>.makeCharactersListRequest(from: query) // GetCharactersListReq(query: query)
     do {
       // TODO: handle error
        restDependencies.restService.request(with: request ) { (result) in
         print("\nGetCharacters list finished, limit: \(self.limit), offset: \(self.offset)")
-        var completionResult: Result<[CharacterResult], Error>
+        var completionResult: Result<[CharacterResult], RestServiceError>
 
         switch result {
         case .success(let data):
@@ -47,19 +47,20 @@ class MarvelApiClient: MarvelApiProtocol {
         }
         completion(completionResult)
       }
-    } catch  {
-      completion(.failure(RequestGenerationError.components))
     }
+//    catch  {
+//      completion(.failure(RestApiRequestError.malformedUrl))
+//    }
   }
 
-  func getCharacter(with id: Int, completion:  @escaping (Result<[CharacterResult], Error>) -> Void){
+  func getCharacter(with id: Int, completion:  @escaping (Result<[CharacterResult], RestServiceError>) -> Void){
 
     let query = CharacterQuery(id: id)
     let request = MarvelApiRequest<[CharacterResult]>.makeCharacterRequest(from: query)
     do {
-       try restDependencies.restService.request(with: request)  { (result) in
+       restDependencies.restService.request(with: request)  { (result) in
         print("\nGetCharacter \(id) finished")
-        var completionResult: Result<[CharacterResult], Error>
+        var completionResult: Result<[CharacterResult], RestServiceError>
         switch result {
         case .success(let data):
           completionResult = .success(data) //request.decode(data)
@@ -68,8 +69,9 @@ class MarvelApiClient: MarvelApiProtocol {
         }
         completion(result)
       }
-    } catch  {
-      completion(.failure(RequestGenerationError.components))
     }
+//    catch  {
+//      completion(.failure(RestServiceError.))
+//    }
   }
 }

@@ -18,7 +18,7 @@ class CharacterDetailPresenterTest: XCTestCase {
 
   override func setUpWithError() throws {
     mockIterator = MockCharacterDetailInteractor()
-    appDependenciesDummy = AppDependenciesDummy(restDependencies: RestDependenciesMock(sessionNextData: Data()), charactersRepositoryMock: CharactersRepositoryMock())
+    appDependenciesDummy = AppDependenciesDummy(restDependencies: RestDependenciesMock(), charactersRepositoryMock: CharactersRepositoryMock())
   }
 
   /// TEST  sut creation using  init(dependencies: AppDependenciesProtocol, characterId: String)

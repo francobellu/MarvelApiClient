@@ -124,7 +124,7 @@ class GetCharactersListInteractorInputPortTest: XCTestCase {
     // Initialize a Repository Stub with a test  result
      let testResult = Result<[Character], Error>.failure(MarvelError.noData)
 
-    let appDependenciesDummy = AppDependenciesDummy(restDependencies: RestDependenciesMock(sessionNextData: Data()), charactersRepositoryMock: CharactersRepositoryMock())
+    let appDependenciesDummy = AppDependenciesDummy(restDependencies: RestDependenciesMock(), charactersRepositoryMock: CharactersRepositoryMock())
 
 //    let charactersRepositoryStub = CharacterRepositoryTestDouble(stubbedResult: testResult)
 

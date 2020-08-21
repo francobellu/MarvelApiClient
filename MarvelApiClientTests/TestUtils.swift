@@ -40,13 +40,11 @@ func getResponse<T: Decodable>(from file: String) -> MarvelResponse<T> {
 }
 
 // Get the T Objects ( [CharacterResult] or [ComicResult])  from a json file. The file needs to be a valid representation of  the T data struct
-func getDtos<T: Decodable>(from file: String, completion: ( (T,_ errorMessage: String?)->())? = nil  ) -> T {
+func getDtos<T: Decodable>(from file: String ) -> T {
   var returnValue: T
   let testBundle = Bundle(for:  GetCharactersListInteractorInputPortTest.self)
   guard let path = testBundle.path(forResource: file, ofType: "json") else{
     fatalError()
-    //      completion?(nil, "There is a problem in fetching the data")
-    //      return nil
   }
   do {
     let data = try Data(contentsOf: URL(fileURLWithPath: path) )
@@ -54,15 +52,12 @@ func getDtos<T: Decodable>(from file: String, completion: ( (T,_ errorMessage: S
     dump(marvelResponse)
     if let dataContainer = marvelResponse.data {
       returnValue = dataContainer.results
-      completion?(returnValue, nil)
       //self.offset +=  self.limit
     } else {
       fatalError()
-      //        completion?(nil, "There is a problem in fetching the data")
     }
   } catch{
     fatalError()
-    //        completion?(nil, "There is a problem in fetching the data")
   }
   return returnValue
 }
