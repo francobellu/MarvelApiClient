@@ -9,7 +9,7 @@
 import UIKit
 import XCTest
 @testable import MarvelApiClient
-@testable import Rest
+
 
 class MockApiClient: MarvelApiProtocol{
   /// Used to configure the test case
@@ -18,7 +18,7 @@ class MockApiClient: MarvelApiProtocol{
                                             mockComicsData: nil,
                                             mockComicData: nil)
 
-  func getCharactersList(completion: @escaping (Result<[CharacterResult], RestServiceError>) -> Void) {
+  func getCharactersList(completion: @escaping (Result<[CharacterResult], MarvelError>) -> Void) {
     if let results = mockApiClientData.mockCharactersResults{
       completion(.success(results ))
     } else{
@@ -26,7 +26,7 @@ class MockApiClient: MarvelApiProtocol{
     }
   }
 
-  func getCharacter(with id: Int, completion: @escaping (Result<[CharacterResult], RestServiceError>) -> Void) {
+  func getCharacter(with id: Int, completion: @escaping (Result<[CharacterResult], MarvelError>) -> Void) {
     if let result = mockApiClientData.mockCharacterResults{
       completion(.success(result))
     } else{

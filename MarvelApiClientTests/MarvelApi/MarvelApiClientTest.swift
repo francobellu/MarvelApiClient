@@ -36,7 +36,7 @@ class RestServiceMock: RestService{
     return NetworkCancellableMock()
   }
 
-  func requestData<Req: ResponseRequestable>(with endpoint: Req, completion: @escaping CompletionHandler<Data>) throws -> NetworkCancellable? {
+  func requestData<Req: ResponseRequestable>(with endpoint: Req, completion: @escaping CompletionHandler<Data>) -> NetworkCancellable? {
     return NetworkCancellableMock()
   }
 }
@@ -54,9 +54,9 @@ class MarvelApiClientCharactersTest: XCTestCase {
 
     // Given
     let exp = XCTestExpectation(description: "async request")
-    var testResult: Result<[CharacterResult], RestServiceError> = .failure(.noResponse) // This value will be overwritten during the test execution
+    var testResult: Result<[CharacterResult], MarvelError> = .failure(.none) // This value will be overwritten during the test execution
     let expectedCharacters: [CharacterResult] = getDtos(from: "MockedResponseGetCharacters")
-    var expectedResult: Result<[CharacterResult], RestServiceError>  = .success(expectedCharacters)
+    var expectedResult: Result<[CharacterResult], MarvelError>  = .success(expectedCharacters)
     sut = MarvelApiClient(restDependencies: RestDependenciesMock())
 
     // When
