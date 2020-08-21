@@ -9,4 +9,5 @@ public enum MarvelError: Error {
   case noData
 //	case server(message: String)
   case insecureMD5Hash
+  case rest
 }

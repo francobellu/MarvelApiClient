@@ -56,8 +56,12 @@ extension MarvelApiRequest {
     let marvelResult = stripDataContainerFrom(dataContaineResult)
     var returnValue: Result<Response, RestApiRequestError> = .failure(.none)
 
-    if case .failure(.decoding) = marvelResult  { returnValue = .failure(.extractingApiObject)}
-
+    switch marvelResult {
+    case .success(let responseValue):
+      returnValue = .success(responseValue)
+    case .failure:
+      returnValue = .failure(.api)
+    }
     return returnValue
   }
 }

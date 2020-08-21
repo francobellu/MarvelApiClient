@@ -54,6 +54,7 @@
 		C71B79632476A31D002D5B09 /* superheros.png in Resources */ = {isa = PBXBuildFile; fileRef = C70873D32471F55500184DE0 /* superheros.png */; };
 		C71B79652476AA14002D5B09 /* MarvelApp.docx in Resources */ = {isa = PBXBuildFile; fileRef = C71B79642476AA14002D5B09 /* MarvelApp.docx */; };
 		C71B84C124EEA67200054F2F /* MarvelNetworkInterface.swift in Sources */ = {isa = PBXBuildFile; fileRef = C71B84C024EEA67200054F2F /* MarvelNetworkInterface.swift */; };
+		C71B84C424EFE50600054F2F /* RestInterface.swift in Sources */ = {isa = PBXBuildFile; fileRef = C71B84C324EFE50600054F2F /* RestInterface.swift */; };
 		C728C2AB246C375300F60806 /* AppDIContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = C728C2AA246C375200F60806 /* AppDIContainer.swift */; };
 		C72CF2B2247163B80048B0A2 /* AppSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = C72CF2B1247163B80048B0A2 /* AppSettings.swift */; };
 		C72CF2B92471ED860048B0A2 /* .swiftlint.yml in Resources */ = {isa = PBXBuildFile; fileRef = C72CF2B42471ED860048B0A2 /* .swiftlint.yml */; };
@@ -148,6 +149,7 @@
 		C716923F244F0385005BF4AB /* MarvelError.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MarvelError.swift; sourceTree = "<group>"; };
 		C71B79642476AA14002D5B09 /* MarvelApp.docx */ = {isa = PBXFileReference; lastKnownFileType = file; path = MarvelApp.docx; sourceTree = "<group>"; };
 		C71B84C024EEA67200054F2F /* MarvelNetworkInterface.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MarvelNetworkInterface.swift; sourceTree = "<group>"; };
+		C71B84C324EFE50600054F2F /* RestInterface.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestInterface.swift; sourceTree = "<group>"; };
 		C728C2AA246C375200F60806 /* AppDIContainer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDIContainer.swift; sourceTree = "<group>"; };
 		C72CF2B1247163B80048B0A2 /* AppSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppSettings.swift; sourceTree = "<group>"; };
 		C72CF2B42471ED860048B0A2 /* .swiftlint.yml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.yaml; path = .swiftlint.yml; sourceTree = "<group>"; };
@@ -536,6 +538,7 @@
 			children = (
 				C7483D3324C99EAA00651D49 /* MarvelAPIClient.swift */,
 				C7B5542A24EADD1D00A02AFE /* MarvelApiRequest.swift */,
+				C71B84C324EFE50600054F2F /* RestInterface.swift */,
 			);
 			path = MarvelApi;
 			sourceTree = "<group>";
@@ -923,6 +926,7 @@
 				C7887B7D24C6196000EAEB1F /* UIViewController +  ErrorDialog.swift in Sources */,
 				C7036653247540350005886F /* DataStoreProtocol.swift in Sources */,
 				C703664024753DEB0005886F /* CharacterDetailViewController.swift in Sources */,
+				C71B84C424EFE50600054F2F /* RestInterface.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

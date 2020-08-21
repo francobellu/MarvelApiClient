@@ -11,6 +11,6 @@ import Rest
 
 protocol MarvelApiProtocol {
   // Characters
-  func getCharactersList(completion: @escaping (Result<[CharacterResult], RestServiceError>) -> Void)
-  func getCharacter(with id: Int, completion:  @escaping (Result<[CharacterResult], RestServiceError>) -> Void)
+  func getCharactersList(completion: @escaping (Result<[CharacterResult], MarvelError>) -> Void)
+  func getCharacter(with id: Int, completion:  @escaping (Result<[CharacterResult], MarvelError>) -> Void)
 }

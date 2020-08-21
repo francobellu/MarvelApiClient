@@ -30,48 +30,53 @@ class MarvelApiClient: MarvelApiProtocol {
     }
   }
 
-  func getCharactersList(completion: @escaping (Result<[CharacterResult], RestServiceError>) -> Void){
+  func getCharactersList(completion: @escaping (Result<[CharacterResult], MarvelError>) -> Void){
     let query = CharactersQuery(name: nil, nameStartsWith: nil, limit: 50, offset: 0)
     let request = MarvelApiRequest<[CharacterResult]>.makeCharactersListRequest(from: query) // GetCharactersListReq(query: query)
     do {
       // TODO: handle error
        restDependencies.restService.request(with: request ) { (result) in
         print("\nGetCharacters list finished, limit: \(self.limit), offset: \(self.offset)")
-        var completionResult: Result<[CharacterResult], RestServiceError>
+        var completionResult: Result<[CharacterResult], MarvelError> = .failure(.none)
 
         switch result {
         case .success(let data):
           completionResult = .success(data)
         case .failure(let error):
-          completionResult = .failure(error)
+          if case RestServiceError.decoding = error { completionResult = .failure(.rest)}
+          if case RestServiceError.networkFailure = error { completionResult = .failure(.rest) }
+          if case RestServiceError.noResponse = error { completionResult = .failure(.rest)}
+          if case RestServiceError.parsing = error { completionResult = .failure(.rest)}
+          if case RestServiceError.resolvedNetworkFailure = error { completionResult = .failure(.rest)}
+          if case RestServiceError.restApiRequest = error { completionResult = .failure(.rest)}
         }
         completion(completionResult)
       }
     }
-//    catch  {
-//      completion(.failure(RestApiRequestError.malformedUrl))
-//    }
+    //    catch  {
+    //      completion(.failure(RestApiRequestError.malformedUrl))
+    //    }
   }
 
-  func getCharacter(with id: Int, completion:  @escaping (Result<[CharacterResult], RestServiceError>) -> Void){
+  func getCharacter(with id: Int, completion:  @escaping (Result<[CharacterResult], MarvelError>) -> Void){
 
     let query = CharacterQuery(id: id)
     let request = MarvelApiRequest<[CharacterResult]>.makeCharacterRequest(from: query)
     do {
-       restDependencies.restService.request(with: request)  { (result) in
+      restDependencies.restService.request(with: request)  { (result) in
         print("\nGetCharacter \(id) finished")
-        var completionResult: Result<[CharacterResult], RestServiceError>
+        var completionResult: Result<[CharacterResult], MarvelError> = .failure(.none)
         switch result {
         case .success(let data):
           completionResult = .success(data) //request.decode(data)
-        case .failure(let error):
-          completionResult = .failure(error)
+        case .failure:
+         completionResult = .failure(.rest)
         }
-        completion(result)
+        completion(completionResult)
       }
     }
-//    catch  {
-//      completion(.failure(RestServiceError.))
-//    }
+    //    catch  {
+    //      completion(.failure(RestServiceError.))
+    //    }
   }
 }
