@@ -25,7 +25,7 @@ class CharacterDetailPresenterTest: XCTestCase {
   func testInitWithIterator() throws {
 
     // Given
-    
+
     // CONFIGURE THE MOCK DATA
     let testResults: [Character]! = getCharactersEntitities(from: "MockedResponseGetCharacters")
     let testResult = testResults.first!
@@ -42,18 +42,17 @@ class CharacterDetailPresenterTest: XCTestCase {
   }
 }
 
-
 struct MockCharacterDetailInteractorData {
   var mockCharacterDetailResult: Result<Character, Error>?
 }
 
-class MockCharacterDetailInteractor: GetCharacterInteractorInputPort{
+class MockCharacterDetailInteractor: GetCharacterInteractorInputPort {
 
   weak var output: GetCharactersListInteractorOutputPort?
 
   var executeCalled = false
 
-  var stubbedResult = Result<[Character], Error>.failure(MarvelError.noData)
+  var stubbedResult = Result<[Character], Error>.failure(MarvelError.noMarvelData)
   var asyncOpExpectation: XCTestExpectation?
 
   var mockCharacterDetailInteractorData = MockCharacterDetailInteractorData(mockCharacterDetailResult: nil)

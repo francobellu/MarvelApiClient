@@ -38,7 +38,6 @@ enum DeepLinkOption {
   }
 }
 
-
 class DeeplinkParser {
    static let shared = DeeplinkParser()
    private init() { }

@@ -57,12 +57,12 @@ class ComicsListPresenter {
   }
 }
 
-extension ComicsListPresenter{
-  func didGoBack(){
+extension ComicsListPresenter {
+  func didGoBack() {
     coordinatorDelegate.didGoBack()
   }
 
-  func didSelect(comic: ComicResult){
+  func didSelect(comic: ComicResult) {
     coordinatorDelegate.didSelect(comic: comic)
   }
 }

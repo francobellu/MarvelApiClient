@@ -17,7 +17,7 @@ struct MarvelApiRequestConfig {
     guard let url = URL(string: baseEndpointString) else {return nil}
     return url
   }
-   func apiUrlParams() throws -> [String: String]{
+   func apiUrlParams() throws -> [String: String] {
     let timestamp = "\(Date().timeIntervalSince1970)"
     let str = "\(timestamp)\(privateKey)\(publicKey)"
     guard let digest = str.insecureMD5Hash() else { throw MarvelError.insecureMD5Hash }

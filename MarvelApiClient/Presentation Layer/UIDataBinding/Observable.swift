@@ -8,7 +8,6 @@
 
 import Foundation
 
-
 class Observable<T> {
   var value: T {
     didSet {

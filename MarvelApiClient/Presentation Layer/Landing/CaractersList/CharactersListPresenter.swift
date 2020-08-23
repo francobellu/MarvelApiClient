@@ -59,7 +59,7 @@ class CharactersListPresenter: CharactersListPresenterProtocol {
 }
 
 // MARK: - GetCharactersListInteractorOutputPort
-extension CharactersListPresenter: GetCharactersListInteractorOutputPort{
+extension CharactersListPresenter: GetCharactersListInteractorOutputPort {
   func domainData(result: Result<[Character], Error>) {
     switch result {
     case .success(let characters):

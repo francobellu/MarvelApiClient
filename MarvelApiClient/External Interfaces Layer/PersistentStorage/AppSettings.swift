@@ -15,11 +15,11 @@ public enum MarvelPreferenceKeys: String {
 // todo: use store
 class AppSettings {
   let store: DataStoreProtocol
-  var dontShowOnboardingValue: Bool  {
+  var dontShowOnboardingValue: Bool {
     get {
       store.getBool(MarvelPreferenceKeys.dontShowOnboarding.rawValue, defaultValue: false)
     }
-    set (newValue){
+    set (newValue) {
       store.setBool(key: MarvelPreferenceKeys.dontShowOnboarding.rawValue, value: newValue)
     }
   }

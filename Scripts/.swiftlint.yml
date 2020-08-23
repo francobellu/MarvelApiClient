@@ -55,7 +55,7 @@ type_name:
 
 excluded: # paths to ignore during linting. overridden by `included`.
     - Carthage
-    - Tests
+    - ./UITests
     - ./R.generated.swift
     - Pods
     - MarvelApiClientTests

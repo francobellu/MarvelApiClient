@@ -10,8 +10,7 @@ import UIKit
 import XCTest
 @testable import MarvelApiClient
 
-
-class MockApiClient: MarvelApiProtocol{
+class MockApiClient: MarvelApiProtocol {
   /// Used to configure the test case
   var mockApiClientData = MockApiCLientData(mockCharactersResults: nil,
                                             mockCharacterResults: nil,
@@ -19,18 +18,18 @@ class MockApiClient: MarvelApiProtocol{
                                             mockComicData: nil)
 
   func getCharactersList(completion: @escaping (Result<[CharacterResult], MarvelError>) -> Void) {
-    if let results = mockApiClientData.mockCharactersResults{
+    if let results = mockApiClientData.mockCharactersResults {
       completion(.success(results ))
-    } else{
-      completion(.failure(MarvelError.noData))
+    } else {
+      completion(.failure(MarvelError.noMarvelData))
     }
   }
 
   func getCharacter(with id: Int, completion: @escaping (Result<[CharacterResult], MarvelError>) -> Void) {
-    if let result = mockApiClientData.mockCharacterResults{
+    if let result = mockApiClientData.mockCharacterResults {
       completion(.success(result))
-    } else{
-      completion(.failure(MarvelError.noData))
+    } else {
+      completion(.failure(MarvelError.noMarvelData))
     }
   }
 
@@ -42,6 +41,3 @@ class MockApiClient: MarvelApiProtocol{
     completion( mockApiClientData.mockComicData!)
   }
 }
-
-
-

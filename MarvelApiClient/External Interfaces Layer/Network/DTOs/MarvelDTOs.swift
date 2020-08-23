@@ -23,8 +23,6 @@ struct DataContainer<Results: Decodable>: Decodable {
   public let results: Results
 }
 
-
-
 // Comics.swift
 
 // MARK: - Comics
@@ -65,7 +63,7 @@ struct StoriesItem: Codable {
 // Thumbnail.swift
 
 // MARK: - Thumbnail
-struct Thumbnail: Codable{
+struct Thumbnail: Codable {
   let url: URL
   enum ImageKeys: String, CodingKey {
     case path = "path"
@@ -90,7 +88,7 @@ struct Thumbnail: Codable{
   }
 
   public init(from imageUrl: URL?) {
-    guard let defaultImageUrl = Bundle.main.url(forResource: "amour-1", withExtension: "jpg") else{
+    guard let defaultImageUrl = Bundle.main.url(forResource: "amour-1", withExtension: "jpg") else {
       fatalError()
     }
 
@@ -109,7 +107,6 @@ struct URLElement: Codable {
   let type: String?
   let url: String?
 }
-
 
 // MARK: - Result
 struct ComicResult: Codable {

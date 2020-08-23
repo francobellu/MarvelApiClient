@@ -29,10 +29,9 @@ class CharactersListViewController: UIViewController, StoryboardInstantiable, Da
   }
 
   lazy var isErrorChanged: ((Error?) -> Void)? = { [weak self] (error: Error?) in
-    guard let error = error else{ fatalError()}
+    guard let error = error else { fatalError()}
     self?.showErrorAlert(error: error)
   }
-
 
   var presenter: CharactersListPresenterProtocol! // swiftlint:disable:this implicitly_unwrapped_optional
 
@@ -60,7 +59,7 @@ class CharactersListViewController: UIViewController, StoryboardInstantiable, Da
     presenter.viewDidLoad.value = true
   }
 
-  func prepareView(){
+  func prepareView() {
     setBackBtnInterceptMechanism()
   }
 
@@ -96,7 +95,7 @@ private extension CharactersListViewController {
     presenter.isError.valueChanged = isErrorChanged
   }
 
-  private func updateLoadingStatus(){
+  private func updateLoadingStatus() {
     let isLoading = self.presenter.isLoading
     var alpha: CGFloat = -1
     if isLoading.value {
@@ -128,7 +127,6 @@ private extension CharactersListViewController {
   }
 }
 
-
 // MARK: - UITableViewDataSource
 extension CharactersListViewController: UITableViewDataSource {
   func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -137,11 +135,11 @@ extension CharactersListViewController: UITableViewDataSource {
 
   func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
 
-    let cell = tableView.dequeueReusableCell(withIdentifier:"characterCellId", for: indexPath)
+    let cell = tableView.dequeueReusableCell(withIdentifier: "characterCellId", for: indexPath)
 
     let rowViewModel = presenter.presentationModel.value[indexPath.row]
 
-    guard let myCell = cell as? CharacterCell else{ fatalError()}
+    guard let myCell = cell as? CharacterCell else { fatalError()}
     _ = myCell.contentView
     myCell.config(with: rowViewModel)
 

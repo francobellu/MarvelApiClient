@@ -9,20 +9,20 @@
 import Foundation
 
 //  PRESENTER INPUT
-protocol GetCharactersListInteractorInputPort: class{
+protocol GetCharactersListInteractorInputPort: class {
   func execute()
 }
 
 //  PRESENTER OUTPUT
-protocol GetCharactersListInteractorOutputPort: class{
+protocol GetCharactersListInteractorOutputPort: class {
   func domainData(result: Result<[Character], Error>)
 }
 
-private protocol GetCharactersListInteractorProtocol: class{
+private protocol GetCharactersListInteractorProtocol: class {
   func handle(result: Result<[Character], Error>)
 }
 
-class GetCharactersListInteractor: GetCharactersListInteractorProtocol{
+class GetCharactersListInteractor: GetCharactersListInteractorProtocol {
   private let charactersRepository: CharactersRepository
 
   weak var outputPort: GetCharactersListInteractorOutputPort?
@@ -38,12 +38,12 @@ class GetCharactersListInteractor: GetCharactersListInteractorProtocol{
       }
     }
 
-  fileprivate func handle(result: Result<[Character], Error>){
+  fileprivate func handle(result: Result<[Character], Error>) {
       self.outputPort?.domainData(result: result)
     }
 }
 
-extension GetCharactersListInteractor: GetCharactersListInteractorInputPort{
+extension GetCharactersListInteractor: GetCharactersListInteractorInputPort {
 
   // MARK: - Business logic
   func execute() {
@@ -52,6 +52,6 @@ extension GetCharactersListInteractor: GetCharactersListInteractorInputPort{
 }
 
 // MARK: - PRIVATE functions
-private extension GetCharactersListInteractor{
+private extension GetCharactersListInteractor {
 
 }

@@ -49,7 +49,7 @@ final class CharactersListViewControllerTests: XCTestCase {
 
   // MARK: - Title
   func testTitleIsSet() {
-    
+
     // Given
     let titleExp = XCTestExpectation(description: "TitleIsSet")
 
@@ -122,7 +122,7 @@ final class CharactersListViewControllerTests: XCTestCase {
       XCTAssert(false, "sut should have a NavigationBar")
       return
     }
-    
+
     guard let leftBtn = sut.navigationItem.leftBarButtonItem else {
       XCTAssert(false, "leftBtn should exist")
       return
@@ -169,7 +169,7 @@ final class CharactersListViewControllerTests: XCTestCase {
     }
 
     // When
-    presenterMock.presentationModel.value = testCharacters.map{ CharacterCellPresentationModel(character: $0.toDomain()) }
+    presenterMock.presentationModel.value = testCharacters.map { CharacterCellPresentationModel(character: $0.toDomain()) }
 
     // Then
     wait(for: [isLoadingExp], timeout: 5)
@@ -189,7 +189,7 @@ final class CharactersListViewControllerTests: XCTestCase {
     XCTAssertTrue( 1 == presenterMock.charactersCountCalled, line: #line)
   }
 
-  //  MARK: User Interaction
+  // MARK: User Interaction
   func testDidGoBack() {
     sut.goBack()
     XCTAssertTrue( 1 == presenterMock.viewDidGoBackCalled, line: #line)
@@ -202,7 +202,7 @@ final class CharactersListViewControllerTests: XCTestCase {
     let tableViewMock = UITableView()
 
     // prepare the test data
-    presenterMock.testCharacterCellViewModel = testCharacters.map{ CharacterCellPresentationModel(character: $0.toDomain()) }
+    presenterMock.testCharacterCellViewModel = testCharacters.map { CharacterCellPresentationModel(character: $0.toDomain()) }
 
     // When
     presenterMock.getNextCharactersList()
@@ -225,7 +225,7 @@ final class CharacterListViewController_DataSourceTests: XCTestCase {
     // The DataSource is the SUT
     presenterMock = CharacterListPresenterMock()
     let testCharacters: [CharacterResult] = getDtos(from: "MockedResponseGetCharacters")
-    testCellsViewModel = testCharacters.map{ CharacterCellPresentationModel(character: $0.toDomain()) }
+    testCellsViewModel = testCharacters.map { CharacterCellPresentationModel(character: $0.toDomain()) }
 
     vc = CharactersListViewController.instantiateViewController()
     vc.presenter = presenterMock
@@ -309,7 +309,7 @@ final class CharacterListViewController_TableViewDelegateTests: XCTestCase {
     // The DataSource is the SUT
     presenterMock = CharacterListPresenterMock()
     let testCharacters: [CharacterResult] = getDtos(from: "MockedResponseGetCharacters")
-    testCellsViewModel = testCharacters.map{ CharacterCellPresentationModel(character: $0.toDomain()) }
+    testCellsViewModel = testCharacters.map { CharacterCellPresentationModel(character: $0.toDomain()) }
 
     vc = CharactersListViewController.instantiateViewController()
     vc.presenter = presenterMock
@@ -338,14 +338,14 @@ final class CharacterListViewController_TableViewDelegateTests: XCTestCase {
 // MARK: Mocks
 
 class CharacterListPresenterMock: CharactersListPresenterProtocol {
-  var viewDidLoad: Observable<Bool> = Observable(value:false)
+  var viewDidLoad: Observable<Bool> = Observable(value: false)
 
-  var presentationModel: Observable<[CharacterCellPresentationModel]>  = Observable(value:[])
-  
-  var title: Observable<String> = Observable.init(value:  "")
-  
+  var presentationModel: Observable<[CharacterCellPresentationModel]>  = Observable(value: [])
+
+  var title: Observable<String> = Observable.init(value: "")
+
   var isLoading: Observable<Bool> = Observable.init(value: false)
-  
+
   var isError: Observable<Error?> = Observable(value: nil)
 
   var numberOfSections: Int = 1
@@ -383,9 +383,7 @@ class CharacterListPresenterMock: CharactersListPresenterProtocol {
   var didSelectCalled = 0
   //    var charsCount = 0
 
-  func didSelectCharacter(at: Int){
+  func didSelectCharacter(at: Int) {
     didSelectCalled += 1
   }
 }
-
-

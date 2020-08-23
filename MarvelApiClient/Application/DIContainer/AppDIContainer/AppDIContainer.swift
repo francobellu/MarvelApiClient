@@ -8,7 +8,6 @@
 
 import UIKit
 
-
 // This protocol can be used to derive a test container to use mock services
 protocol AppDIContainerProtocol: class {
 

@@ -10,7 +10,7 @@ import Foundation
 import Rest
 @testable import MarvelApiClient
 
-class DataStoreDummy: DataStoreProtocol{
+class DataStoreDummy: DataStoreProtocol {
   func getAny(_ key: String) -> Any? {
     nil
   }
@@ -35,7 +35,7 @@ class DataStoreDummy: DataStoreProtocol{
   }
 }
 
-class AppDependenciesDummy: AppDIContainer{
+class AppDependenciesDummy: AppDIContainer {
   let charactersRepositoryMock: CharactersRepositoryMock
   init(restDependencies: RestDependenciesProtocol, charactersRepositoryMock: CharactersRepositoryMock) {
     self.charactersRepositoryMock = charactersRepositoryMock

@@ -75,7 +75,7 @@ extension ComicsListViewController: UITableViewDataSource {
     cell.config(with: newComic)
     // Check if the last row number is the same as the last current data element
     if indexPath.row == presenter.comicsCount() - 1 {
-      presenter.getNextComicsList  {
+      presenter.getNextComicsList {
         DispatchQueue.main.async {
           tableView.reloadData()
         }

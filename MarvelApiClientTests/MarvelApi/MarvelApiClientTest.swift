@@ -11,14 +11,13 @@ import Rest
 
 @testable import MarvelApiClient
 
-
-class NetworkCancellableMock: NetworkCancellable{
+class NetworkCancellableMock: NetworkCancellable {
   func cancel() {
 
   }
 }
 
-class RestServiceMock: RestService{
+class RestServiceMock: RestService {
 
   private let request1Characters: [CharacterResult]
   private let request2Characters: [CharacterResult]
@@ -41,8 +40,7 @@ class RestServiceMock: RestService{
   }
 }
 
-
-class RestDependenciesMock: RestDependenciesProtocol{
+class RestDependenciesMock: RestDependenciesProtocol {
   var restService: RestService = RestServiceMock()
 }
 
@@ -77,7 +75,7 @@ class MarvelApiClientCharactersTest: XCTestCase {
       for index  in characters.indices {
         XCTAssert(characters[index].id == expectedCharacters[index].id)
       }
-    case .failure(_):
+    case .failure:
       XCTAssert(false)
     }
 
@@ -129,13 +127,12 @@ class NetworkErrorLoggerMock: NetworkLogger {
     func log(error: Error) { loggedErrors.append(error) }
 }
 
-
-struct ApiNetworkConfigurationMock:  NetworkConfigurable{
+struct ApiNetworkConfigurationMock: NetworkConfigurable {
   var baseURL = URL(string: "www.mock.com")!
-  var urlParameters: [String : String]?
+  var urlParameters: [String: String]?
   var encodableUrlParameters: Encodable?
-  var headerParamaters: [String : String]?
-  var bodyParameters: [String : String]?
+  var headerParamaters: [String: String]?
+  var bodyParameters: [String: String]?
   var encodableBodyParamaters: Encodable?
   var bodyEncoding: BodyEncoding?
 }

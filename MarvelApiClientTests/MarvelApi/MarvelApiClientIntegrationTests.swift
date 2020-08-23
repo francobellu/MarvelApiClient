@@ -30,7 +30,7 @@ class MarvelApiClientIntegrationTests: XCTestCase {
 
     sut.getCharactersList { response  in
       XCTAssertNotNil(response)
-      if case .failure = response{
+      if case .failure = response {
         XCTAssertTrue(false)
       }
       promise.fulfill()
@@ -45,7 +45,7 @@ class MarvelApiClientIntegrationTests: XCTestCase {
       print("FB: character: \(response)")
       promise.fulfill()
       XCTAssertNotNil(response)
-      if case .failure = response{
+      if case .failure = response {
         XCTAssertTrue(false)
       }
     }

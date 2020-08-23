@@ -8,23 +8,22 @@
 
 import Foundation
 
-
 //  PRESENTER INPUT
-protocol GetCharacterInteractorInputPort: class{
+protocol GetCharacterInteractorInputPort: class {
   func execute(with id: Int)
 }
 
 //  PRESENTER OUTPUT
-protocol GetCharacterInteractorOutputPort: class{
+protocol GetCharacterInteractorOutputPort: class {
   func domainData(result: Result<Character, Error>)
 }
 
-private protocol GetCharacterInteractorProtocol: class{
+private protocol GetCharacterInteractorProtocol: class {
   init(dependencies: AppDIContainerProtocol)
   func handle(result: Result<[CharacterResult], Error>)
 }
 
-class GetCharacterInteractor{
+class GetCharacterInteractor {
 
   private var dependencies: AppDIContainerProtocol! // swiftlint:disable:this implicitly_unwrapped_optional
 
@@ -38,7 +37,7 @@ class GetCharacterInteractor{
   }
 }
 
-extension GetCharacterInteractor: GetCharacterInteractorInputPort{
+extension GetCharacterInteractor: GetCharacterInteractorInputPort {
 
   // MARK: - Business logic
   func execute(with id: Int) {
@@ -47,7 +46,7 @@ extension GetCharacterInteractor: GetCharacterInteractorInputPort{
 }
 
 // MARK: - PRIVATE functions
-private extension GetCharacterInteractor{
+private extension GetCharacterInteractor {
   private func getCharacter(with id: Int) {
     //    let request = GetCharacters(restDependencies: dependencies.restDependencies, limit: 20, offset: 0)
     charactersRepository.getCharacter(with: id) { (result) in
@@ -55,7 +54,7 @@ private extension GetCharacterInteractor{
     }
   }
 
-  private func handle(result: Result<Character, Error>){
+  private func handle(result: Result<Character, Error>) {
     //    var result: Result<Character, Error>
     //    switch results {
     //    case .success(let character):

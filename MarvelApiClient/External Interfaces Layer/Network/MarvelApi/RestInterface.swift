@@ -8,19 +8,19 @@
 
 import Foundation
 
-public struct NetworkCancellableAbstraction{
+public struct NetworkCancellableAbstraction {
 
 }
 
-public enum RestServiceErrorAbstraction: Error{
+public enum RestServiceErrorAbstraction: Error {
 
 }
 
-public enum RestApiRequestErrorAbstraction: Error{
+public enum RestApiRequestErrorAbstraction: Error {
 
 }
 
-public protocol ResponseRequestableAbstraction{
+public protocol ResponseRequestableAbstraction {
   associatedtype Response: Decodable
   func extractApiObjectFrom(_ data: Data) -> Result<Response, RestApiRequestErrorAbstraction>
 }

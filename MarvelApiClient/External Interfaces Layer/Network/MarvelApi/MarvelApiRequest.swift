@@ -9,7 +9,7 @@
 import Foundation
 import Rest
 
-public class MarvelApiRequest<T: Decodable>: ResponseRequestable{
+public class MarvelApiRequest<T: Decodable>: ResponseRequestable {
 
   public typealias Response = T
 
@@ -39,11 +39,11 @@ public class MarvelApiRequest<T: Decodable>: ResponseRequestable{
 
 extension MarvelApiRequest {
 
-  static func makeCharactersListRequest(from query: CharactersQuery) -> MarvelApiRequest{
+  static func makeCharactersListRequest(from query: CharactersQuery) -> MarvelApiRequest {
     MarvelApiRequest(resourceName: "characters", method: .get, urlParameters: try? query.toDictionaryOfString())
   }
 
-  static func makeCharacterRequest(from query: CharacterQuery) -> MarvelApiRequest{
+  static func makeCharacterRequest(from query: CharacterQuery) -> MarvelApiRequest {
     MarvelApiRequest(resourceName: "characters", method: .get, urlParameters: try? query.toDictionaryOfString())
   }
 }
@@ -66,7 +66,7 @@ extension MarvelApiRequest {
   }
 }
 
-private extension MarvelApiRequest{
+private extension MarvelApiRequest {
 
   // Strips the MarvelApiResponse wrapper and returns a DataContainer object if exists
   private func decodeToMarvelResponseWrapper (_ data: Data) -> Result<DataContainer<Response>, MarvelError> {
@@ -76,7 +76,7 @@ private extension MarvelApiRequest{
       if let dataContainer = marvelResponse.data {
         result = .success(dataContainer)
       } else {
-        result = .failure(MarvelError.noData)
+        result = .failure(MarvelError.noMarvelData)
       }
     } catch {
       // decode the ErrorResponse
@@ -89,7 +89,7 @@ private extension MarvelApiRequest{
   //  Strips the DataContainer wrapper and returns a Response object if exists
   private func stripDataContainerFrom(_ dataContaineResult: Result<DataContainer<Response>, MarvelError>) -> Result<Response, MarvelError> {
     let returnValue: Result<Response, MarvelError>
-    switch dataContaineResult{
+    switch dataContaineResult {
     case .success(let dataContainer):
       let resultObject = dataContainer.results
       returnValue = .success(resultObject)

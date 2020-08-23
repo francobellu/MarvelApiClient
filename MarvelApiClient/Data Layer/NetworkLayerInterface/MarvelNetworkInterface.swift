@@ -7,7 +7,6 @@
 //
 
 import Foundation
-import Rest
 
 protocol MarvelApiProtocol {
   // Characters

@@ -11,12 +11,12 @@ public protocol NetworkConfigurable {
   var baseURL: URL { get }
 
   var urlParameters: [String: String]? { get }
-  var encodableUrlParameters: Encodable?  { get }
+  var encodableUrlParameters: Encodable? { get }
 
   var headerParamaters: [String: String]? { get }
 
   var bodyParameters: [String: String]? { get }
-  var encodableBodyParamaters: Encodable?  { get }
+  var encodableBodyParamaters: Encodable? { get }
 
 }
 
@@ -32,7 +32,6 @@ public struct ApiNetworkConfiguration: NetworkConfigurable {
   public var encodableBodyParamaters: Encodable?
 
   public var bodyEncoding: BodyEncoding?
-
 
   public init(baseURL: URL,
               headerParamaters: [String: String]?,

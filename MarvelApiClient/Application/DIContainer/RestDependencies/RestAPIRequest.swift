@@ -43,14 +43,10 @@ import Foundation
 //  func decode(_ data: Data) -> Result<Response, Error>
 //}
 
-
-
-
-
 ////// All requests must conform to this protocol
 /// - Discussion: You must conform to Encodable too, so that all stored public parameters
 ///   of types conforming this protocol will be encoded as parameters.
-public protocol RestAPIRequest: ResponseRequestable{
+public protocol RestAPIRequest: ResponseRequestable {
 
 //  /// Response (will be wrapped with a DataContainer)
 //  associatedtype Response: Decodable
@@ -62,16 +58,14 @@ public protocol RestAPIRequest: ResponseRequestable{
   var method: RestMethod { get }
 
   var urlParameters: [String: String]? { get }
-  var encodableUrlParameters: Encodable?  { get }
+  var encodableUrlParameters: Encodable? { get }
 
   var headerParamaters: [String: String]? { get }
 
   var bodyParameters: [String: String]? { get }
-  var encodableBodyParamaters: Encodable?  { get }
+  var encodableBodyParamaters: Encodable? { get }
 
   var bodyEncoding: BodyEncoding? { get }
-
-
 
   func extractApiObjectFrom(_ data: Data) -> Result<Self.Response, Error>
 }
@@ -80,7 +74,7 @@ enum RequestGenerationError: Error {
     case components
 }
 
-extension RestAPIRequest{
+extension RestAPIRequest {
 
   ///  Decodes the  response data  stripping all the wrappers.  In the process  all the possible errors are handled
   /// - Parameters:
@@ -106,8 +100,8 @@ extension RestAPIRequest{
     guard var urlComponents = URLComponents(url: completeUrl2, resolvingAgainstBaseURL: true) else { throw RequestGenerationError.components }
 
     // Build common query items needed for all Marvel requests
-    var commonApiItems: [URLQueryItem]? = nil
-    if let apiUrlParams = config.urlParameters{
+    var commonApiItems: [URLQueryItem]?
+    if let apiUrlParams = config.urlParameters {
       commonApiItems = buildApiQueryItems(apiParams: apiUrlParams)
       print(apiUrlParams)
     }
@@ -117,7 +111,7 @@ extension RestAPIRequest{
 
     urlComponents.queryItems = commonApiItems
 
-    if let customQueryItems = customQueryItems{
+    if let customQueryItems = customQueryItems {
       urlComponents.queryItems?.append(contentsOf: customQueryItems)
     }
 
@@ -132,10 +126,10 @@ extension RestAPIRequest{
     var urlRequest = URLRequest(url: url)
 
     // headerParamaters can override apiConfig.headers
-    var allHeaders: [String: String]? = nil
-    if let apiHeaders = config.headerParamaters{
+    var allHeaders: [String: String]?
+    if let apiHeaders = config.headerParamaters {
       allHeaders = apiHeaders // get a mutable copy
-      if let reqHeaders = headerParamaters  {
+      if let reqHeaders = headerParamaters {
         reqHeaders.forEach { allHeaders!.updateValue($1, forKey: $0) }
       }
     }
@@ -172,18 +166,17 @@ extension RestAPIRequest{
         }
     }
 
-
   // Build commonQueryItems ( marvel-specific params)
-  private func buildApiQueryItems(apiParams: [String: String]) -> [URLQueryItem]?{
+  private func buildApiQueryItems(apiParams: [String: String]) -> [URLQueryItem]? {
 
-    return apiParams.map{ ( key, value)  in
+    return apiParams.map { ( key, value)  in
       URLQueryItem(name: key, value: value)
     }
   }
 
   // Build customQueryItems ( request-specific params)
-  private func buildCustomQueryItems(_ parameters: [String: String]?) -> [URLQueryItem]?{
-    var result: [URLQueryItem]? = nil
+  private func buildCustomQueryItems(_ parameters: [String: String]?) -> [URLQueryItem]? {
+    var result: [URLQueryItem]?
     if let params = parameters, !params.isEmpty {
       result = params.map { item, value in
         URLQueryItem(name: item, value: value)
@@ -202,7 +195,6 @@ extension RestAPIRequest{
 //  // The way the url is build is API specific
 //  func buildEndpointUrlFor(resourceName: String, parameters: [String: String]? ) -> URL?
 //}
-
 
 private extension Dictionary {
     var queryString: String {

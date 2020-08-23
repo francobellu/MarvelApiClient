@@ -10,12 +10,12 @@ import Foundation
 import Rest
 
 // External dependency abstraction
-protocol RestDependenciesProtocol{
+protocol RestDependenciesProtocol {
   // This is the dependency on the external Rest framework
   var restService: RestService { get}
 }
 
-class RestDependencies: RestDependenciesProtocol{
+class RestDependencies: RestDependenciesProtocol {
 
   let restService: RestService
 
@@ -27,7 +27,7 @@ class RestDependencies: RestDependenciesProtocol{
                                                 headerParamaters: nil,
                                                 urlParameters: params)
         return apiConfig
-      } catch  {
+      } catch {
         print("Error creating MD5 hash\(error)")
         fatalError()
       }

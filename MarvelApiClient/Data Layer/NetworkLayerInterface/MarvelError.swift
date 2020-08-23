@@ -6,7 +6,7 @@ public enum MarvelError: Error {
   case none
 //  case encoding
 	case decoding
-  case noData
+  case noMarvelData
 //	case server(message: String)
   case insecureMD5Hash
   case rest

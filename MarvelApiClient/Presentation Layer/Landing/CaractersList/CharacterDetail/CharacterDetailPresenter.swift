@@ -23,7 +23,7 @@ class CharacterDetailPresenter {
   init(dependencies: AppDIContainerProtocol, id: Int, interactor: GetCharacterInteractorInputPort) {
     self.dependencies = dependencies
     self.interactor = interactor
-    self.getCharacter(with: id){
+    self.getCharacter(with: id) {
     }
   }
 
@@ -67,7 +67,7 @@ class CharacterDetailPresenter {
 }
 
 // MARK: - GetCharactersListInteractorOutputPort
-extension CharacterDetailPresenter: GetCharacterInteractorOutputPort{
+extension CharacterDetailPresenter: GetCharacterInteractorOutputPort {
   func domainData(result: Result<Character, Error>) {
     switch result {
     case .success(let character):

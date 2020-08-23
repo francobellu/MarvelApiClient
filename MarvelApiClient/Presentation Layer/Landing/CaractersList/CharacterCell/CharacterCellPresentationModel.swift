@@ -17,7 +17,7 @@ class CharacterCellPresentationModel: Equatable {
   var imgViewUrl: URL
   init(character: Character) {
     title = character.name ?? ""
-    guard let defaultImageUrl = Bundle.main.url(forResource: "amour-1", withExtension: "jpg") else{
+    guard let defaultImageUrl = Bundle.main.url(forResource: "amour-1", withExtension: "jpg") else {
       fatalError()
     }
 

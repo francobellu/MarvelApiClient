@@ -35,7 +35,6 @@ import XCTest
 //  Also test that the presentationModel passed to the C is correct
 // 8) Calling didGoBack(), the C's didGoBack() is called. -> need a Coordinator SPY
 
-
 /// Test the 4 bindings
 class CharactersListPresenterTest: XCTestCase {
   var sut: CharactersListPresenter! // swiftlint:disable:this implicitly_unwrapped_optional
@@ -44,7 +43,7 @@ class CharactersListPresenterTest: XCTestCase {
   lazy var appDependenciesDummy = {
     AppDependenciesDummy(restDependencies: RestDependencies(marvelApiConfig: marvelApiConfig), charactersRepositoryMock: ( CharactersRepositoryMock()))
   }()
-  var coordinatorSpy:  CharactersListCoordinatorDelegateSpy!
+  var coordinatorSpy: CharactersListCoordinatorDelegateSpy!
 
 //  var mockView: CharactersListPresenterToViewMock!
 
@@ -53,10 +52,9 @@ class CharactersListPresenterTest: XCTestCase {
 
   var testResults: [CharacterResult]! = nil
 
-  override func setUpWithError() throws{
+  override func setUpWithError() throws {
     // Given
     coordinatorSpy = CharactersListCoordinatorDelegateSpy()
-
 
 //    interactorSpy.mockCharactersListInteractorData = getObjects(from: "MockedResponseGetCharacters")
 
@@ -162,7 +160,7 @@ class CharactersListPresenterTest: XCTestCase {
     // Given
     var presentationModelSpy = [CharacterCellPresentationModel]()
     XCTAssertFalse(sut.isLoading.value)
-    let characters: [Character] = ( getDtos(from: "MockedResponseGetCharacters") as [CharacterResult] ).map{$0.toDomain()}
+    let characters: [Character] = ( getDtos(from: "MockedResponseGetCharacters") as [CharacterResult] ).map {$0.toDomain()}
     let presentationModel = buildPresentationModels(from: characters)
     let testValue = presentationModel
 
@@ -188,7 +186,7 @@ class CharactersListPresenterTest: XCTestCase {
     // Given
     var errorSpy =  MarvelError.none
     XCTAssertFalse(sut.isLoading.value)
-    let testValue = MarvelError.noData
+    let testValue = MarvelError.noMarvelData
 
     // Create async exp for the async interactor.getCharacters  operation
     let presentationModelExp = XCTestExpectation(description: "Wait for Async binding callback for isLoading")
@@ -207,7 +205,7 @@ class CharactersListPresenterTest: XCTestCase {
     wait(for: [presentationModelExp], timeout: 5)  // wait for the  async MockCharactersListInteractor.execute()
 
     // Assert the error is MarvelError.noData
-    guard case MarvelError.noData = errorSpy else{
+    guard case MarvelError.noMarvelData = errorSpy else {
       XCTAssertTrue( false, "result should be MarvelError.noData")
       return
     }
@@ -222,7 +220,7 @@ class CharactersListPresenterTest: XCTestCase {
     let testCharacters = getCharactersEntitities(from: "MockedResponseGetCharacters")
 
     let testSuccessCharacters = Result<[Character], Error>.success(testCharacters!)
-    guard case let .success(characters) = testSuccessCharacters else{
+    guard case let .success(characters) = testSuccessCharacters else {
       XCTAssertTrue(false, "result should have a valid dataContainer value")
       return
     }
@@ -242,7 +240,7 @@ class CharactersListPresenterTest: XCTestCase {
     // Given
     XCTAssert(sut.presentationModel.value.isEmpty)
 
-    let testResultFailureNoData = Result<[Character], Error>.failure(MarvelError.noData)
+    let testResultFailureNoData = Result<[Character], Error>.failure(MarvelError.noMarvelData)
 
     // When
     sut.domainData(result: testResultFailureNoData)
@@ -250,7 +248,6 @@ class CharactersListPresenterTest: XCTestCase {
     // Then
     XCTAssert(sut.presentationModel.value.isEmpty)
   }
-
 
   // Test 6
   // Calling getNextCharactersList(), then I's getNextCharactersList is called, which will call the OutputPort.domaninData(result:) function
@@ -276,7 +273,7 @@ class CharactersListPresenterTest: XCTestCase {
   // Test 7
   //  Calling didSelectCharacter(at index: Int), the presentationModel passed to the C is correct
   //  Also test that the C's didSelect() is called. -> need a Coordinator SPY
-  func testDidSelect() throws{
+  func testDidSelect() throws {
     // Given
     XCTAssert(sut.presentationModel.value.isEmpty )
 
@@ -311,14 +308,14 @@ class CharactersListPresenterTest: XCTestCase {
   }
 }
 
-// MARK: ------------------------ Test Doubles ------------------------
+// MARK: - ----------------------- Test Doubles ------------------------
 
-class CharactersListInteractorTestDouble: GetCharactersListInteractorInputPort{
+class CharactersListInteractorTestDouble: GetCharactersListInteractorInputPort {
   weak var output: GetCharactersListInteractorOutputPort?
 
   var executeCalled = false
 
-  var stubbedResult = Result<[Character], Error>.failure(MarvelError.noData)
+  var stubbedResult = Result<[Character], Error>.failure(MarvelError.noMarvelData)
   var asyncOpExpectation: XCTestExpectation?
 
   func execute() {
@@ -330,8 +327,8 @@ class CharactersListInteractorTestDouble: GetCharactersListInteractorInputPort{
   }
 }
 
-class CharactersListCoordinatorDelegateSpy:  CharactersListCoordinatorDelegate{
-  enum CoordinatorState: Equatable{
+class CharactersListCoordinatorDelegateSpy: CharactersListCoordinatorDelegate {
+  enum CoordinatorState: Equatable {
     static func == (lhs: CoordinatorState, rhs: CoordinatorState) -> Bool {
 
       switch (lhs, rhs) {
@@ -339,7 +336,7 @@ class CharactersListCoordinatorDelegateSpy:  CharactersListCoordinatorDelegate{
         return true
       case (.didGoBack, .didGoBack):
         return true
-      case (.didSelect(_), .didSelect(_)):
+      case (.didSelect, .didSelect):
         return true
       default:
         return false
@@ -361,7 +358,7 @@ class CharactersListCoordinatorDelegateSpy:  CharactersListCoordinatorDelegate{
   }
 }
 
-class GetCharactersListInteractorOutputPortSpy: GetCharactersListInteractorOutputPort{
+class GetCharactersListInteractorOutputPortSpy: GetCharactersListInteractorOutputPort {
   var domainDataCalledSpy = false
   init(domainDataCalledSpy: Bool = false) {
     self.domainDataCalledSpy = domainDataCalledSpy

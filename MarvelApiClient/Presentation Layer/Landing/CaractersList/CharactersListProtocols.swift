@@ -9,7 +9,7 @@
 import Foundation
 
 // ViewController <-- Presenter
-protocol DataBinding: class{
+protocol DataBinding: class {
   var viewDidLoadChanged: ((Bool) -> Void)? { get set }
   var titleChanged: ((String) -> Void)? { get set }
   var presentationModelChanged: (([CharacterCellPresentationModel]) -> Void)? { get set }
@@ -21,8 +21,8 @@ protocol DataBinding: class{
 protocol CharactersListPresenterProtocol: class {
 
   // ViewController <--> Presenter
-  var viewDidLoad: Observable<Bool>  { get set}
-  var presentationModel: Observable<[CharacterCellPresentationModel]>  { get set}
+  var viewDidLoad: Observable<Bool> { get set}
+  var presentationModel: Observable<[CharacterCellPresentationModel]> { get set}
   var title: Observable<String> { get set}
   var isLoading: Observable<Bool> {get set }
   var isError: Observable<Error?> {get set }

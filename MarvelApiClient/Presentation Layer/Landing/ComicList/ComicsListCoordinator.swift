@@ -61,13 +61,13 @@ extension ComicsListCoordinator: Coordinator {
 
   private func presentComicDetailViewController(with comicId: String ) {
     let presenter = ComicDetailPresenter(dependencies: self.dependencies, comicId: comicId)
-    DispatchQueue.global(qos: .background).async{
+    DispatchQueue.global(qos: .background).async {
       guard let id = Int(comicId)  else {
         print("Invalid deepLink url")
         return
       }
-      presenter.getComic(with: id){
-        DispatchQueue.main.sync{
+      presenter.getComic(with: id) {
+        DispatchQueue.main.sync {
           let viewController = ComicDetailViewController.instantiateViewController()
           viewController.presenter = presenter
           (self.coordinatorPresenter as? UINavigationController)?.pushViewController(viewController, animated: true)
@@ -83,7 +83,7 @@ extension ComicsListCoordinator: ComicsListCoordinatorDelegate {
     print("FB: ComicsListCoordinator:goBack()")
     print("FB:  popVC")
     guard let navigationController = coordinatorPresenter as? UINavigationController else { return }
-    if navigationController.viewControllers.count > 1{
+    if navigationController.viewControllers.count > 1 {
       navigationController.popViewController(animated: true)
       parentCoordinator?.disposeChild(coordinator: self)
     }

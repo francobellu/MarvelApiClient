@@ -82,7 +82,7 @@ private extension CharactersListCoordinator {
 
   private func popView() {
     guard let navigationController = coordinatorPresenter as? UINavigationController else { return }
-    if navigationController.viewControllers.count > 1{
+    if navigationController.viewControllers.count > 1 {
       navigationController.popViewController(animated: true)
       parentCoordinator?.disposeChild(coordinator: self)
     }

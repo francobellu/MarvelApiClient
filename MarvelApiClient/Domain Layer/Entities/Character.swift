@@ -32,7 +32,7 @@ struct Character: Equatable {
        comics: Int,
        stories: Int,
        events: Int,
-       series: Int){
+       series: Int) {
     self.id = id
     self.name = name
     self.description = description
