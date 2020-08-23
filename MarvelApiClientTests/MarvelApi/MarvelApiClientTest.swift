@@ -52,9 +52,9 @@ class MarvelApiClientCharactersTest: XCTestCase {
 
     // Given
     let exp = XCTestExpectation(description: "async request")
-    var testResult: Result<[CharacterResult], MarvelError>!
+    var testResult: Result<[CharacterResult], MarvelApiError>!
     let expectedCharacters: [CharacterResult] = getDtos(from: "MockedResponseGetCharacters")
-    let expectedResult: Result<[CharacterResult], MarvelError>  = .success(expectedCharacters)
+    let expectedResult: Result<[CharacterResult], MarvelApiError>  = .success(expectedCharacters)
     sut = MarvelApiClient(restDependencies: RestDependenciesMock())
 
     // When

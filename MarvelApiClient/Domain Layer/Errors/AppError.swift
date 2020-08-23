@@ -25,9 +25,9 @@ import Foundation
 //  case networkError_otherError(_ error: Error)
 //}
 
-public let moduleNameErrorDomain = "com.MarvelApiClient.App"
+public let appErrorDomain = "com.MarvelApiClient.App"
 
-public enum AppErrorCode: ErrorCode {
+public enum AppErrorCode: Error {
   // APP module
   case marvelError_decoding
   case marvelError_noMarvelData
@@ -42,4 +42,15 @@ public enum AppErrorCode: ErrorCode {
   case networkError_notConnected
 //  case networkError_statusCode(_: Int, data: Data? = nil)
 //  case networkError_otherError(_ error: Error)
+
+  public static func error(underlyingError: NSError?, domain: String = appErrorDomain, code: Int = 0, userInfo: [String: Any]? = nil) -> NSError {
+      var localUserInfo = userInfo ?? [String: Any]()
+
+      if underlyingError != nil {
+          localUserInfo[NSUnderlyingErrorKey] = underlyingError
+      }
+      return NSError(domain: domain, code: code, userInfo: localUserInfo)
+  }
 }
+
+

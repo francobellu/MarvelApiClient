@@ -121,7 +121,7 @@ class GetCharactersListInteractorInputPortTest: XCTestCase {
     // Given
 
     // Initialize a Repository Stub with a test  result
-     let testResult = Result<[Character], Error>.failure(MarvelError.noMarvelData)
+     let testResult = Result<[Character], Error>.failure(MarvelApiError.noMarvelData)
 
     let appDependenciesDummy = AppDependenciesDummy(restDependencies: RestDependenciesMock(), charactersRepositoryMock: CharactersRepositoryMock())
 
@@ -145,7 +145,7 @@ class GetCharactersListInteractorInputPortTest: XCTestCase {
     }
 
     // Assert the error is MarvelError.noData
-    guard case MarvelError.noMarvelData = error else {
+    guard case MarvelApiError.noMarvelData = error else {
       XCTAssertTrue( false, "result should be MarvelError.noData")
       return
     }
@@ -156,21 +156,21 @@ class GetCharactersListInteractorInputPortTest: XCTestCase {
 
 class CharacterRepositoryTestDouble: MarvelApiProtocol {
   var getCharactersListCalled = false
-  var stubbedResult: Result<[CharacterResult], MarvelError>?
+  var stubbedResult: Result<[CharacterResult], MarvelApiError>?
 
-  init(stubbedResult: Result<[CharacterResult], MarvelError>? = nil) {
+  init(stubbedResult: Result<[CharacterResult], MarvelApiError>? = nil) {
     // use a default result
-    self.stubbedResult = .failure(MarvelError.noMarvelData)
+    self.stubbedResult = .failure(MarvelApiError.noMarvelData)
   }
 
-  func getCharactersList(completion: @escaping (Result<[CharacterResult], MarvelError>) -> Void) {
+  func getCharactersList(completion: @escaping (Result<[CharacterResult], MarvelApiError>) -> Void) {
     getCharactersListCalled = true
 
     // Need to call campletion to test outputPort
     completion(stubbedResult!)
   }
 
-  func getCharacter(with id: Int, completion: @escaping (Result<[CharacterResult], MarvelError>) -> Void) {
+  func getCharacter(with id: Int, completion: @escaping (Result<[CharacterResult], MarvelApiError>) -> Void) {
     getCharactersListCalled = true
   }
 
@@ -190,7 +190,7 @@ class PresenterTestDouble: GetCharactersListInteractorOutputPort {
 
   var domainDataCalled = false
 
-  var result =  Result<[Character], Error>.failure(MarvelError.noMarvelData)
+  var result =  Result<[Character], Error>.failure(MarvelApiError.noMarvelData)
 //  {
 //    let dtos: [CharacterResult] =  getResponse(from: "MockedResponseGetCharacters").data!.results
 //    let characters = dtos.map{$0.toDomain()}
@@ -208,7 +208,7 @@ class CharactersRepositoryMock: CharactersRepository {
   let mockResult: Result<[Character], Error>
   var getCharactersListCalled = false
 
-  init(mockResult: Result<[Character], Error> = .failure(MarvelError.noMarvelData) ) {
+  init(mockResult: Result<[Character], Error> = .failure(MarvelApiError.noMarvelData) ) {
     self.mockResult = mockResult
   }
 

@@ -184,9 +184,9 @@ class CharactersListPresenterTest: XCTestCase {
   func testIsErrorBinding() throws {
 
     // Given
-    var errorSpy: MarvelError?
+    var errorSpy: MarvelApiError?
     XCTAssertFalse(sut.isLoading.value)
-    let testValue = MarvelError.noMarvelData
+    let testValue = MarvelApiError.noMarvelData
 
     // Create async exp for the async interactor.getCharacters  operation
     let presentationModelExp = XCTestExpectation(description: "Wait for Async binding callback for isLoading")
@@ -194,7 +194,7 @@ class CharactersListPresenterTest: XCTestCase {
     // Bind isLoading value change to a mock closure
     sut.isError.valueChanged = { error in
       guard let error = error else { fatalError()}
-      errorSpy = error as? MarvelError
+      errorSpy = error as? MarvelApiError
       presentationModelExp.fulfill()
     }
 
@@ -206,7 +206,7 @@ class CharactersListPresenterTest: XCTestCase {
 
     // Assert the error is MarvelError.noData
 
-    guard case MarvelError.noMarvelData = errorSpy! else {
+    guard case MarvelApiError.noMarvelData = errorSpy! else {
       XCTAssertTrue( false, "result should be MarvelError.noData")
       return
     }
@@ -241,7 +241,7 @@ class CharactersListPresenterTest: XCTestCase {
     // Given
     XCTAssert(sut.presentationModel.value.isEmpty)
 
-    let testResultFailureNoData = Result<[Character], Error>.failure(MarvelError.noMarvelData)
+    let testResultFailureNoData = Result<[Character], Error>.failure(MarvelApiError.noMarvelData)
 
     // When
     sut.domainData(result: testResultFailureNoData)
@@ -316,7 +316,7 @@ class CharactersListInteractorTestDouble: GetCharactersListInteractorInputPort {
 
   var executeCalled = false
 
-  var stubbedResult = Result<[Character], Error>.failure(MarvelError.noMarvelData)
+  var stubbedResult = Result<[Character], Error>.failure(MarvelApiError.noMarvelData)
   var asyncOpExpectation: XCTestExpectation?
 
   func execute() {

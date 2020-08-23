@@ -30,14 +30,14 @@ class MarvelApiClient: MarvelApiProtocol {
     }
   }
 
-  func getCharactersList(completion: @escaping (Result<[CharacterResult], MarvelError>) -> Void) {
+  func getCharactersList(completion: @escaping (Result<[CharacterResult], MarvelApiError>) -> Void) {
     let query = CharactersQuery(name: nil, nameStartsWith: nil, limit: 50, offset: 0)
     let request = MarvelApiRequest<[CharacterResult]>.makeCharactersListRequest(from: query) // GetCharactersListReq(query: query)
     do {
       // TODO: handle error
        restDependencies.restService.request(with: request ) { (result) in
         print("\nGetCharacters list finished, limit: \(self.limit), offset: \(self.offset)")
-        var completionResult: Result<[CharacterResult], MarvelError>?
+        var completionResult: Result<[CharacterResult], MarvelApiError>?
 
         switch result {
         case .success(let data):
@@ -54,14 +54,14 @@ class MarvelApiClient: MarvelApiProtocol {
     //    }
   }
 
-  func getCharacter(with id: Int, completion:  @escaping (Result<[CharacterResult], MarvelError>) -> Void) {
+  func getCharacter(with id: Int, completion:  @escaping (Result<[CharacterResult], MarvelApiError>) -> Void) {
 
     let query = CharacterQuery(id: id)
     let request = MarvelApiRequest<[CharacterResult]>.makeCharacterRequest(from: query)
     do {
       restDependencies.restService.request(with: request) { (result) in
         print("\nGetCharacter \(id) finished")
-        var completionResult: Result<[CharacterResult], MarvelError>?
+        var completionResult: Result<[CharacterResult], MarvelApiError>?
         switch result {
         case .success(let data):
           completionResult = .success(data) //request.decode(data)

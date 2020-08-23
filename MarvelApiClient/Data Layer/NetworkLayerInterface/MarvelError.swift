@@ -1,13 +1,20 @@
 import Foundation
 
-/// Dumb error to model simple errors
-/// In a real implementation this should be more exhaustive
-public enum MarvelError: Error {
-  case none
-//  case encoding
+
+public let marveApilErrorErrorDomain = "com.MarvelApiClient.NetworkLayer"
+
+public enum MarvelApiError: Error {
 	case decoding
   case noMarvelData
-//	case server(message: String)
   case insecureMD5Hash
   case rest
+
+  public static func error(underlyingError: NSError?, domain: String = marveApilErrorErrorDomain, code: Int, userInfo: [String: Any]? = nil) -> NSError {
+      var localUserInfo = userInfo ?? [String: Any]()
+
+      if underlyingError != nil {
+          localUserInfo[NSUnderlyingErrorKey] = underlyingError
+      }
+      return NSError(domain: domain, code: code, userInfo: localUserInfo)
+  }
 }

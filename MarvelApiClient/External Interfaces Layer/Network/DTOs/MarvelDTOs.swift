@@ -79,11 +79,11 @@ struct Thumbnail: Codable {
       let urlStr = "\(path).\(thumbnailExtension)"
       guard let url = URL(string: urlStr) else {
         print("Errror")
-        throw MarvelError.decoding
+        throw MarvelApiError.decoding
       }
       self.url = url
     } catch {
-     throw MarvelError.decoding
+     throw MarvelApiError.decoding
     }
   }
 

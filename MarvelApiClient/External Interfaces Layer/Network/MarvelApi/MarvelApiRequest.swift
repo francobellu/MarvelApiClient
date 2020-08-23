@@ -69,26 +69,26 @@ extension MarvelApiRequest {
 private extension MarvelApiRequest {
 
   // Strips the MarvelApiResponse wrapper and returns a DataContainer object if exists
-  private func decodeToMarvelResponseWrapper (_ data: Data) -> Result<DataContainer<Response>, MarvelError> {
-    var result: Result<DataContainer<Response>, MarvelError>
+  private func decodeToMarvelResponseWrapper (_ data: Data) -> Result<DataContainer<Response>, MarvelApiError> {
+    var result: Result<DataContainer<Response>, MarvelApiError>
     do {
       let marvelResponse = try JSONDecoder().decode(MarvelResponse<Response>.self, from: data)
       if let dataContainer = marvelResponse.data {
         result = .success(dataContainer)
       } else {
-        result = .failure(MarvelError.noMarvelData)
+        result = .failure(MarvelApiError.noMarvelData)
       }
     } catch {
       // decode the ErrorResponse
       _ = try? JSONDecoder().decode(ErrorResponse.self, from: data)
-      result = .failure(MarvelError.decoding)
+      result = .failure(MarvelApiError.decoding)
     }
     return result
   }
 
   //  Strips the DataContainer wrapper and returns a Response object if exists
-  private func stripDataContainerFrom(_ dataContaineResult: Result<DataContainer<Response>, MarvelError>) -> Result<Response, MarvelError> {
-    let returnValue: Result<Response, MarvelError>
+  private func stripDataContainerFrom(_ dataContaineResult: Result<DataContainer<Response>, MarvelApiError>) -> Result<Response, MarvelApiError> {
+    let returnValue: Result<Response, MarvelApiError>
     switch dataContaineResult {
     case .success(let dataContainer):
       let resultObject = dataContainer.results

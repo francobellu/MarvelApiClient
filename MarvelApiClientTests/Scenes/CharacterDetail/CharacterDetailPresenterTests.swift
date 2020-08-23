@@ -52,7 +52,7 @@ class MockCharacterDetailInteractor: GetCharacterInteractorInputPort {
 
   var executeCalled = false
 
-  var stubbedResult = Result<[Character], Error>.failure(MarvelError.noMarvelData)
+  var stubbedResult = Result<[Character], Error>.failure(MarvelApiError.noMarvelData)
   var asyncOpExpectation: XCTestExpectation?
 
   var mockCharacterDetailInteractorData = MockCharacterDetailInteractorData(mockCharacterDetailResult: nil)
