@@ -32,26 +32,18 @@ class MarvelApiClient: MarvelApiProtocol {
 
   func getCharactersList(completion: @escaping (Result<[CharacterResult], MarvelApiError>) -> Void) {
     let query = CharactersQuery(name: nil, nameStartsWith: nil, limit: 50, offset: 0)
-    let request = MarvelApiRequest<[CharacterResult]>.makeCharactersListRequest(from: query) // GetCharactersListReq(query: query)
-    do {
-      // TODO: handle error
-       restDependencies.restService.request(with: request ) { (result) in
-        print("\nGetCharacters list finished, limit: \(self.limit), offset: \(self.offset)")
-        var completionResult: Result<[CharacterResult], MarvelApiError>?
-
-        switch result {
-        case .success(let data):
-          completionResult = .success(data)
-        case .failure:
-//          if case RestServiceError.decoding = error { completionResult = .failure(.rest)}
-          completionResult = .failure(.rest)
-        }
-        completion(completionResult!)
+    let request = MarvelApiRequest<[CharacterResult]>.makeCharactersListRequest(from: query) 
+    // TODO: handle error
+    restDependencies.restService.request(with: request ) { result in
+      print("\nGetCharacters list finished, limit: \(self.limit), offset: \(self.offset)")
+      do {
+        let characters: [CharacterResult] = try result.get()
+        completion(.success( characters) )
+      } catch let restServiceError  { // as! MarvelApiError
+        let marvelApiError = MarvelApiError.error(underlyingError: restServiceError as NSError)
+        completion(.failure(.restService(marvelApiError)))
       }
     }
-    //    catch  {
-    //      completion(.failure(RestApiRequestError.malformedUrl))
-    //    }
   }
 
   func getCharacter(with id: Int, completion:  @escaping (Result<[CharacterResult], MarvelApiError>) -> Void) {
@@ -61,18 +53,14 @@ class MarvelApiClient: MarvelApiProtocol {
     do {
       restDependencies.restService.request(with: request) { (result) in
         print("\nGetCharacter \(id) finished")
-        var completionResult: Result<[CharacterResult], MarvelApiError>?
-        switch result {
-        case .success(let data):
-          completionResult = .success(data) //request.decode(data)
-        case .failure:
-         completionResult = .failure(.rest)
+
+        do {
+          completion(.success( try result.get()))
+        } catch let restServiceError {
+          let marvelApiError = MarvelApiError.error(underlyingError: restServiceError as NSError)
+          completion(.failure(.restService(marvelApiError)))
         }
-        completion(completionResult!)
       }
     }
-    //    catch  {
-    //      completion(.failure(RestServiceError.))
-    //    }
   }
 }

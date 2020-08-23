@@ -30,12 +30,14 @@ class RestServiceMock: RestService {
     self.request3Characters = getDtos(from: "MockedResponseGetCharacters")
   }
 
-  func request<Req: ResponseRequestable>(with request: Req, completion: @escaping CompletionHandler<Req.Response>) -> NetworkCancellable? {
+  func request< Req: ResponseRequestable>(with request: Req,
+  completion: @escaping (Result<Req.Response, RestServiceError>) -> Void) -> NetworkCancellable? {
     completion(.success(self.request1Characters as! Req.Response))
     return NetworkCancellableMock()
   }
 
-  func requestData<Req: ResponseRequestable>(with endpoint: Req, completion: @escaping CompletionHandler<Data>) -> NetworkCancellable? {
+  func requestData<Req: ResponseRequestable>(with endpoint: Req,
+  completion: @escaping (Result<Data, RestServiceError>) -> Void) -> NetworkCancellable? {
     return NetworkCancellableMock()
   }
 }
@@ -72,7 +74,6 @@ class MarvelApiClientCharactersTest: XCTestCase {
     for index in characters!.indices {
       XCTAssert(characters?[index].id == expectedCharacters[index].id)
     }
-
 
 //    switch testResult {
 //    case .success(let characters):

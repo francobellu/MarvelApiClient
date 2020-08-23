@@ -39,11 +39,11 @@ public class MarvelApiRequest<T: Decodable>: ResponseRequestable {
 
 extension MarvelApiRequest {
 
-  static func makeCharactersListRequest(from query: CharactersQuery) -> MarvelApiRequest {
+  static func makeCharactersListRequest(from query: Encodable) -> MarvelApiRequest {
     MarvelApiRequest(resourceName: "characters", method: .get, urlParameters: try? query.toDictionaryOfString())
   }
 
-  static func makeCharacterRequest(from query: CharacterQuery) -> MarvelApiRequest {
+  static func makeCharacterRequest(from query: Encodable) -> MarvelApiRequest {
     MarvelApiRequest(resourceName: "characters", method: .get, urlParameters: try? query.toDictionaryOfString())
   }
 }

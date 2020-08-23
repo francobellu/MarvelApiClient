@@ -15,6 +15,3 @@ struct CharactersQuery: Encodable {
   let offset: Int?
 }
 
-struct CharacterQuery: Encodable {
-  let id: Int?
-}

@@ -52,5 +52,3 @@ public enum AppErrorCode: Error {
       return NSError(domain: domain, code: code, userInfo: localUserInfo)
   }
 }
-
-
