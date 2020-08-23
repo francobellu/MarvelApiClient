@@ -52,9 +52,9 @@ class MarvelApiClientCharactersTest: XCTestCase {
 
     // Given
     let exp = XCTestExpectation(description: "async request")
-    var testResult: Result<[CharacterResult], MarvelError> = .failure(.none) // This value will be overwritten during the test execution
+    var testResult: Result<[CharacterResult], MarvelError>!
     let expectedCharacters: [CharacterResult] = getDtos(from: "MockedResponseGetCharacters")
-    var expectedResult: Result<[CharacterResult], MarvelError>  = .success(expectedCharacters)
+    let expectedResult: Result<[CharacterResult], MarvelError>  = .success(expectedCharacters)
     sut = MarvelApiClient(restDependencies: RestDependenciesMock())
 
     // When
@@ -62,22 +62,28 @@ class MarvelApiClientCharactersTest: XCTestCase {
       testResult = response
       exp.fulfill()
     }
-
     wait(for: [exp], timeout: 5)
 
+    // Then
     XCTAssertEqual(testResult, expectedResult)
 
-    XCTAssertNotNil(testResult)
-    switch testResult {
-    case .success(let characters):
-
-      XCTAssert(characters.count == expectedCharacters.count)
-      for index  in characters.indices {
-        XCTAssert(characters[index].id == expectedCharacters[index].id)
-      }
-    case .failure:
-      XCTAssert(false)
+    let characters = try testResult?.get()
+    XCTAssert(characters?.count == expectedCharacters.count)
+    for index in characters!.indices {
+      XCTAssert(characters?[index].id == expectedCharacters[index].id)
     }
+
+
+//    switch testResult {
+//    case .success(let characters):
+//
+//      XCTAssert(characters.count == expectedCharacters.count)
+//      for index  in characters.indices {
+//        XCTAssert(characters[index].id == expectedCharacters[index].id)
+//      }
+//    case .failure:
+//      XCTAssert(false)
+//    }
 
 //    // TODO: test testResult directly!
 //    guard case .success(let characters) = testResult else{ XCTFail()}

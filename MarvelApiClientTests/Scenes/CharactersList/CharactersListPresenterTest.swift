@@ -184,7 +184,7 @@ class CharactersListPresenterTest: XCTestCase {
   func testIsErrorBinding() throws {
 
     // Given
-    var errorSpy =  MarvelError.none
+    var errorSpy: MarvelError?
     XCTAssertFalse(sut.isLoading.value)
     let testValue = MarvelError.noMarvelData
 
@@ -194,7 +194,7 @@ class CharactersListPresenterTest: XCTestCase {
     // Bind isLoading value change to a mock closure
     sut.isError.valueChanged = { error in
       guard let error = error else { fatalError()}
-      errorSpy = error as! MarvelError
+      errorSpy = error as? MarvelError
       presentationModelExp.fulfill()
     }
 
@@ -205,7 +205,8 @@ class CharactersListPresenterTest: XCTestCase {
     wait(for: [presentationModelExp], timeout: 5)  // wait for the  async MockCharactersListInteractor.execute()
 
     // Assert the error is MarvelError.noData
-    guard case MarvelError.noMarvelData = errorSpy else {
+
+    guard case MarvelError.noMarvelData = errorSpy! else {
       XCTAssertTrue( false, "result should be MarvelError.noData")
       return
     }

@@ -37,7 +37,7 @@ class MarvelApiClient: MarvelApiProtocol {
       // TODO: handle error
        restDependencies.restService.request(with: request ) { (result) in
         print("\nGetCharacters list finished, limit: \(self.limit), offset: \(self.offset)")
-        var completionResult: Result<[CharacterResult], MarvelError> = .failure(.none)
+        var completionResult: Result<[CharacterResult], MarvelError>?
 
         switch result {
         case .success(let data):
@@ -46,7 +46,7 @@ class MarvelApiClient: MarvelApiProtocol {
 //          if case RestServiceError.decoding = error { completionResult = .failure(.rest)}
           completionResult = .failure(.rest)
         }
-        completion(completionResult)
+        completion(completionResult!)
       }
     }
     //    catch  {
@@ -61,14 +61,14 @@ class MarvelApiClient: MarvelApiProtocol {
     do {
       restDependencies.restService.request(with: request) { (result) in
         print("\nGetCharacter \(id) finished")
-        var completionResult: Result<[CharacterResult], MarvelError> = .failure(.none)
+        var completionResult: Result<[CharacterResult], MarvelError>?
         switch result {
         case .success(let data):
           completionResult = .success(data) //request.decode(data)
         case .failure:
          completionResult = .failure(.rest)
         }
-        completion(completionResult)
+        completion(completionResult!)
       }
     }
     //    catch  {

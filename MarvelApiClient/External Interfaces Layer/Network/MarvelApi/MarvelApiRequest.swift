@@ -54,7 +54,7 @@ extension MarvelApiRequest {
   public func extractApiObjectFrom(_ data: Data) -> Result<Response, RestApiRequestError> {
     let dataContaineResult = self.decodeToMarvelResponseWrapper(data)
     let marvelResult = stripDataContainerFrom(dataContaineResult)
-    var returnValue: Result<Response, RestApiRequestError> = .failure(.none)
+    var returnValue: Result<Response, RestApiRequestError>?
 
     switch marvelResult {
     case .success(let responseValue):
@@ -62,7 +62,7 @@ extension MarvelApiRequest {
     case .failure:
       returnValue = .failure(.api)
     }
-    return returnValue
+    return returnValue!
   }
 }
 
