@@ -27,7 +27,7 @@ import Foundation
 
 public let appErrorDomain = "com.MarvelApiClient.App"
 
-public enum AppErrorCode: Error {
+public enum AppError: Error {
   // APP module
   case marvelError_decoding
   case marvelError_noMarvelData

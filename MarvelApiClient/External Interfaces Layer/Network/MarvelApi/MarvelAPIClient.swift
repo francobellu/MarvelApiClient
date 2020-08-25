@@ -32,7 +32,7 @@ class MarvelApiClient: MarvelApiProtocol {
 
   func getCharactersList(completion: @escaping (Result<[CharacterResult], MarvelApiError>) -> Void) {
     let query = CharactersQuery(name: nil, nameStartsWith: nil, limit: 50, offset: 0)
-    let request = MarvelApiRequest<[CharacterResult]>.makeCharactersListRequest(from: query) 
+    let request = MarvelApiRequest<[CharacterResult]>.makeCharactersListRequest(from: query)
     // TODO: handle error
     restDependencies.restService.request(with: request ) { result in
       print("\nGetCharacters list finished, limit: \(self.limit), offset: \(self.offset)")
@@ -40,7 +40,7 @@ class MarvelApiClient: MarvelApiProtocol {
         let characters: [CharacterResult] = try result.get()
         completion(.success( characters) )
       } catch let restServiceError  { // as! MarvelApiError
-        let marvelApiError = MarvelApiError.error(underlyingError: restServiceError as NSError)
+        let marvelApiError = MarvelApiErrorBuilder.newError(error: MarvelApiError.restService(restServiceError as NSError), underlyingError: restServiceError as NSError)
         completion(.failure(.restService(marvelApiError)))
       }
     }
@@ -57,7 +57,7 @@ class MarvelApiClient: MarvelApiProtocol {
         do {
           completion(.success( try result.get()))
         } catch let restServiceError {
-          let marvelApiError = MarvelApiError.error(underlyingError: restServiceError as NSError)
+          let marvelApiError = MarvelApiErrorBuilder.newError(error: MarvelApiError.restService(restServiceError as NSError), underlyingError: restServiceError as NSError)
           completion(.failure(.restService(marvelApiError)))
         }
       }

@@ -56,6 +56,16 @@ class CharactersListPresenter: CharactersListPresenterProtocol {
     }
     self.presentationModel.value += cellPresentationModels
   }
+
+  private func handle(error: Error) {
+//    switch error {
+//    case AppError.networkError_notConnected:
+//      let appError = AppError.error(underlyingError: <#T##NSError?#>)
+//      self.isError.value = NSLocalizedString("No internet connection", comment: "")
+//    default:
+//      self.isError.value = NSLocalizedString("Generic error", comment: "")
+//    }
+  }
 }
 
 // MARK: - GetCharactersListInteractorOutputPort
@@ -68,7 +78,8 @@ extension CharactersListPresenter: GetCharactersListInteractorOutputPort {
     case .failure(let error):
       print(error)
       self.isError.value = error
-      // Hanlde Errors
+      self.handle(error: error)
+      // TODO:  Hanlde Errors
     }
   }
 }
