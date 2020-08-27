@@ -63,13 +63,13 @@ extension CharactersListPresenter: GetCharactersListInteractorOutputPort {
   func domainData(result: Result<[Character], Error>) {
     switch result {
     case .success(let characters):
-      self.isLoading.value = false
       self.buildPresentationModel(from: characters)
     case .failure(let error):
-      print(error)
       let uiError = MarvelApiClientUiErrorBuilder.uiErrorFrom(error: error as NSError)
       self.isError.value = uiError
+      didGoBack()
     }
+    self.isLoading.value = false
   }
 }
 

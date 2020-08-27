@@ -31,13 +31,13 @@ class RestServiceMock: RestService {
   }
 
   func request< Req: ResponseRequestable>(with request: Req,
-  completion: @escaping (Result<Req.Response, RestServiceError>) -> Void) -> NetworkCancellable? {
+  completion: @escaping (Result<Req.Response, Error>) -> Void) -> NetworkCancellable? {
     completion(.success(self.request1Characters as! Req.Response))
     return NetworkCancellableMock()
   }
 
   func requestData<Req: ResponseRequestable>(with endpoint: Req,
-  completion: @escaping (Result<Data, RestServiceError>) -> Void) -> NetworkCancellable? {
+  completion: @escaping (Result<Data, Error>) -> Void) -> NetworkCancellable? {
     return NetworkCancellableMock()
   }
 }
@@ -54,9 +54,9 @@ class MarvelApiClientCharactersTest: XCTestCase {
 
     // Given
     let exp = XCTestExpectation(description: "async request")
-    var testResult: Result<[CharacterResult], MarvelApiError>!
+    var testResult: Result<[CharacterResult], Error>!
     let expectedCharacters: [CharacterResult] = getDtos(from: "MockedResponseGetCharacters")
-    let expectedResult: Result<[CharacterResult], MarvelApiError>  = .success(expectedCharacters)
+//    let expectedResult: Result<[CharacterResult], Error>  = .success(expectedCharacters)
     sut = MarvelApiClient(restDependencies: RestDependenciesMock())
 
     // When
@@ -67,29 +67,13 @@ class MarvelApiClientCharactersTest: XCTestCase {
     wait(for: [exp], timeout: 5)
 
     // Then
-    XCTAssertEqual(testResult, expectedResult)
+//    XCTAssertEqual(testResult, expectedResult)
 
     let characters = try testResult?.get()
     XCTAssert(characters?.count == expectedCharacters.count)
     for index in characters!.indices {
       XCTAssert(characters?[index].id == expectedCharacters[index].id)
     }
-
-//    switch testResult {
-//    case .success(let characters):
-//
-//      XCTAssert(characters.count == expectedCharacters.count)
-//      for index  in characters.indices {
-//        XCTAssert(characters[index].id == expectedCharacters[index].id)
-//      }
-//    case .failure:
-//      XCTAssert(false)
-//    }
-
-//    // TODO: test testResult directly!
-//    guard case .success(let characters) = testResult else{ XCTFail()}
-//    XCTAssert(testResult == expectedResult)
-
   }
 
 //  func testGetCharacter() throws {

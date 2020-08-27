@@ -17,7 +17,7 @@ class MockApiClient: MarvelApiProtocol {
                                             mockComicsData: nil,
                                             mockComicData: nil)
 
-  func getCharactersList(completion: @escaping (Result<[CharacterResult], MarvelApiError>) -> Void) {
+  func getCharactersList(completion: @escaping (Result<[CharacterResult], Error>) -> Void) {
     if let results = mockApiClientData.mockCharactersResults {
       completion(.success(results ))
     } else {
@@ -25,7 +25,7 @@ class MockApiClient: MarvelApiProtocol {
     }
   }
 
-  func getCharacter(with id: Int, completion: @escaping (Result<[CharacterResult], MarvelApiError>) -> Void) {
+  func getCharacter(with id: Int, completion: @escaping (Result<[CharacterResult], Error>) -> Void) {
     if let result = mockApiClientData.mockCharacterResults {
       completion(.success(result))
     } else {

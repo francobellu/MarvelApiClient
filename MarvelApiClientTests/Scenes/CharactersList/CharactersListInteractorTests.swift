@@ -156,21 +156,21 @@ class GetCharactersListInteractorInputPortTest: XCTestCase {
 
 class CharacterRepositoryTestDouble: MarvelApiProtocol {
   var getCharactersListCalled = false
-  var stubbedResult: Result<[CharacterResult], MarvelApiError>?
+  var stubbedResult: Result<[CharacterResult], Error>?
 
-  init(stubbedResult: Result<[CharacterResult], MarvelApiError>? = nil) {
+  init(stubbedResult: Result<[CharacterResult], Error>? = nil) {
     // use a default result
     self.stubbedResult = .failure(MarvelApiError.noMarvelData)
   }
 
-  func getCharactersList(completion: @escaping (Result<[CharacterResult], MarvelApiError>) -> Void) {
+  func getCharactersList(completion: @escaping (Result<[CharacterResult], Error>) -> Void) {
     getCharactersListCalled = true
 
     // Need to call campletion to test outputPort
     completion(stubbedResult!)
   }
 
-  func getCharacter(with id: Int, completion: @escaping (Result<[CharacterResult], MarvelApiError>) -> Void) {
+  func getCharacter(with id: Int, completion: @escaping (Result<[CharacterResult], Error>) -> Void) {
     getCharactersListCalled = true
   }
 

@@ -18,9 +18,8 @@ enum MarvelApiClientUiError: Error/*, Equatable */{
   //    default: return false
   //    }
   //  }
-
-  case noInternet
   case unhandled
+  case noInternet
   case marvelError_decoding
   case marvelError_noMarvelData
   case marvelError_insecureMD5Hash
@@ -64,13 +63,12 @@ class MarvelApiClientUiErrorBuilder {
 
   private static func localizedDescriptionForError(error: MarvelApiClientUiError) -> String { // swiftlint:disable:this function_body_length
     let returnString: String
+
     switch error {
     case .noInternet:
       returnString = NSLocalizedString("No Internet!!", comment: errorDomain)
     case .unhandled:
-      #if DEBUG
-      returnString = NSLocalizedString("Error domain: \( (error as NSError).domain)\nCode: \( (error as NSError).code)", comment: errorDomain)
-      #endif
+      returnString = NSLocalizedString("Unundled Error.", comment: errorDomain)
     case .marvelError_decoding:
       returnString = NSLocalizedString("The data was not properly decoded", comment: errorDomain)
     case .marvelError_noMarvelData:
@@ -88,9 +86,6 @@ class MarvelApiClientUiErrorBuilder {
     case .networkError_otherError:
       returnString = NSLocalizedString("Unclassified network error", comment: errorDomain)
     }
-    #if DEBUG
-      print("Error domain: \( (error as NSError).domain)\nCode: \( (error as NSError).code)")
-    #endif
     return returnString
   }
 
@@ -104,6 +99,9 @@ class MarvelApiClientUiErrorBuilder {
   }
 
   static func uiErrorFrom(error: NSError) -> NSError{ //swiftlint:disable:this function_body_length
+
+    print("Underling Error: \( String(describing: error))")
+
     switch error.domain {
     case "com.rest.networkService":
       switch error.code {
