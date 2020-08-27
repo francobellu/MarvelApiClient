@@ -66,7 +66,7 @@
 		C72CF2BD2471ED860048B0A2 /* sitrep.sh in Resources */ = {isa = PBXBuildFile; fileRef = C72CF2B82471ED860048B0A2 /* sitrep.sh */; };
 		C72CF3682471F1B40048B0A2 /* sitrep in Resources */ = {isa = PBXBuildFile; fileRef = C72CF3672471F1B40048B0A2 /* sitrep */; };
 		C72CF36A2471F2170048B0A2 /* swiftlint in Resources */ = {isa = PBXBuildFile; fileRef = C72CF3692471F2160048B0A2 /* swiftlint */; };
-		C7338AEF24F15607005AE004 /* AppError.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7338AEE24F15607005AE004 /* AppError.swift */; };
+		C7338AEF24F15607005AE004 /* MarvelApiClientUiError.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7338AEE24F15607005AE004 /* MarvelApiClientUiError.swift */; };
 		C7338AF524F1615C005AE004 /* ErrorBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7338AF124F1615C005AE004 /* ErrorBuilder.swift */; };
 		C7338AF624F1615C005AE004 /* NSError+Readability.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7338AF224F1615C005AE004 /* NSError+Readability.swift */; };
 		C7338AF724F1615C005AE004 /* NSError+HTTP.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7338AF324F1615C005AE004 /* NSError+HTTP.swift */; };
@@ -177,7 +177,7 @@
 		C72CF2B82471ED860048B0A2 /* sitrep.sh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.sh; path = sitrep.sh; sourceTree = "<group>"; };
 		C72CF3672471F1B40048B0A2 /* sitrep */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.executable"; path = sitrep; sourceTree = "<group>"; };
 		C72CF3692471F2160048B0A2 /* swiftlint */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.executable"; path = swiftlint; sourceTree = "<group>"; };
-		C7338AEE24F15607005AE004 /* AppError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppError.swift; sourceTree = "<group>"; };
+		C7338AEE24F15607005AE004 /* MarvelApiClientUiError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MarvelApiClientUiError.swift; sourceTree = "<group>"; };
 		C7338AF124F1615C005AE004 /* ErrorBuilder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ErrorBuilder.swift; sourceTree = "<group>"; };
 		C7338AF224F1615C005AE004 /* NSError+Readability.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSError+Readability.swift"; sourceTree = "<group>"; };
 		C7338AF324F1615C005AE004 /* NSError+HTTP.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSError+HTTP.swift"; sourceTree = "<group>"; };
@@ -330,6 +330,7 @@
 		C703660A24753DEA0005886F /* Presentation Layer */ = {
 			isa = PBXGroup;
 			children = (
+				C7338AFF24F531D6005AE004 /* Ui Error handling */,
 				C715DC2D24D30B3000DAC74A /* UIDataBinding */,
 				C703660B24753DEA0005886F /* Landing */,
 				C703662324753DEA0005886F /* Onboarding */,
@@ -633,7 +634,6 @@
 		C7338AF924F29B3F005AE004 /* Errors */ = {
 			isa = PBXGroup;
 			children = (
-				C7338AEE24F15607005AE004 /* AppError.swift */,
 				C7338AFA24F29F13005AE004 /* AppErrorBuilder.swift */,
 			);
 			path = Errors;
@@ -646,6 +646,14 @@
 				C7338AFC24F2F1D7005AE004 /* CharacterQuery.swift */,
 			);
 			path = QueryDTOs;
+			sourceTree = "<group>";
+		};
+		C7338AFF24F531D6005AE004 /* Ui Error handling */ = {
+			isa = PBXGroup;
+			children = (
+				C7338AEE24F15607005AE004 /* MarvelApiClientUiError.swift */,
+			);
+			path = "Ui Error handling";
 			sourceTree = "<group>";
 		};
 		C74963A72473C82E001B9A5E /* Data Layer */ = {
@@ -1020,7 +1028,7 @@
 				287C9A0A217F39CB00D63092 /* AppDelegate.swift in Sources */,
 				C703664124753DEB0005886F /* CharacterDetailInteractor.swift in Sources */,
 				C776993B24B31394003BE9BD /* CharacterCellPresentationModel.swift in Sources */,
-				C7338AEF24F15607005AE004 /* AppError.swift in Sources */,
+				C7338AEF24F15607005AE004 /* MarvelApiClientUiError.swift in Sources */,
 				C703663F24753DEB0005886F /* CharacterDetailPresenter.swift in Sources */,
 				C7EC670D24435E3C00F88FDE /* UserDefaultsDataStore.swift in Sources */,
 				C703663B24753DEB0005886F /* CharacterCell.swift in Sources */,
