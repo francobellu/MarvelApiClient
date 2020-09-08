@@ -36,7 +36,7 @@ class RestServiceMock: RestService {
     return NetworkCancellableMock()
   }
 
-  func requestData<Req: ResponseRequestable>(with endpoint: Req,
+  func requestData<Req: ResponseRequestable>(with request: Req,
   completion: @escaping (Result<Data, Error>) -> Void) -> NetworkCancellable? {
     return NetworkCancellableMock()
   }
@@ -53,26 +53,45 @@ class MarvelApiClientCharactersTest: XCTestCase {
   func testGetCharactersList() throws {
 
     // Given
-    let exp = XCTestExpectation(description: "async request")
-    var testResult: Result<[CharacterResult], Error>!
-    let expectedCharacters: [CharacterResult] = getDtos(from: "MockedResponseGetCharacters")
+    let exp1 = XCTestExpectation(description: "async request")
+    let exp2 = XCTestExpectation(description: "async request")
+    let exp3 = XCTestExpectation(description: "async request")
+    var testCharacters = [CharacterResult] ()
+
+    let expectedCharacters1: [CharacterResult] = getDtos(from: "MockedResponseGetCharacters")
+    let expectedCharacters2: [CharacterResult] = getDtos(from: "MockedResponseGetCharacters")
+    let expectedCharacters3: [CharacterResult] = getDtos(from: "MockedResponseGetCharacters")
+
+    let expectedCharacters: [CharacterResult] = expectedCharacters1 + expectedCharacters2 + expectedCharacters3
 //    let expectedResult: Result<[CharacterResult], Error>  = .success(expectedCharacters)
     sut = MarvelApiClient(restDependencies: RestDependenciesMock())
 
     // When
+
+    // fetch a first batchof 50 elements
     sut.getCharactersList { response in
-      testResult = response
-      exp.fulfill()
+      testCharacters +=  try! response.get()
+      exp1.fulfill()
     }
-    wait(for: [exp], timeout: 5)
+    wait(for: [exp1], timeout: 5)
+
+    sut.getCharactersList { response in
+      testCharacters +=  try! response.get()
+      exp2.fulfill()
+    }
+    wait(for: [exp2], timeout: 5)
+
+    sut.getCharactersList { response in
+      testCharacters +=  try! response.get()
+      exp3.fulfill()
+    }
+    wait(for: [exp3], timeout: 5)
 
     // Then
-//    XCTAssertEqual(testResult, expectedResult)
 
-    let characters = try testResult?.get()
-    XCTAssert(characters?.count == expectedCharacters.count)
-    for index in characters!.indices {
-      XCTAssert(characters?[index].id == expectedCharacters[index].id)
+    XCTAssert(testCharacters.count == expectedCharacters.count)
+    for index in testCharacters.indices {
+      XCTAssert(testCharacters[index].id == expectedCharacters[index].id)
     }
   }
 

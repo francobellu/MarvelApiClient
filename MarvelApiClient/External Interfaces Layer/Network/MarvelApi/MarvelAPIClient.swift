@@ -5,7 +5,7 @@ import Rest
 class MarvelApiClient: MarvelApiProtocol {
 
   // number of items to be fetched each time (i.e., database LIMIT)
-  private let limit = 50
+  private let limit = 20
 
   // Where to start fetching items (database OFFSET). This is to support packets fetch
   private var offset = 0
@@ -20,26 +20,27 @@ class MarvelApiClient: MarvelApiProtocol {
   }
 
   // Todo: not used
-  private func executeRequestLogic(count: Int) {
+  private func executeRequestLogic(_ charactersCount: Int) {
     // Reset the offset for the next data query
     self.offset += self.limit
     // Check if this was the last of the data
-    if count < self.limit {
+    if charactersCount < self.limit {
       self.reachedEndOfItems = true
-      print("reached end of data. Batch count: \(count)")
+      print("reached end of data. Batch count: \(charactersCount)")
     }
   }
 
   func getCharactersList(completion: @escaping (Result<[CharacterResult], Error>) -> Void) {
-    let query = CharactersQuery(name: nil, nameStartsWith: nil, limit: 50, offset: 0)
+    let query = CharactersQuery(name: nil, nameStartsWith: nil, limit: limit, offset: offset)
     let request = MarvelApiRequest<[CharacterResult]>.makeCharactersListRequest(from: query)
     // TODO: handle error
     restDependencies.restService.request(with: request ) { result in
       print("\nGetCharacters list finished, limit: \(self.limit), offset: \(self.offset)")
       do {
         let characters: [CharacterResult] = try result.get()
+        self.executeRequestLogic(characters.count)
         completion(.success( characters) )
-      } catch let restServiceError  { // as! MarvelApiError
+      } catch let restServiceError  {
         completion(.failure(restServiceError))
       }
     }

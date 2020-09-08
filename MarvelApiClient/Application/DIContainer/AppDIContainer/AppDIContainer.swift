@@ -14,8 +14,6 @@ protocol AppDIContainerProtocol: class {
   // External module dependency
   var restDependencies: RestDependenciesProtocol { get }
 
-  var marvelApiClient: MarvelApiProtocol { get }
-
   // Used by the AppSettings and other services
   var dataStore: DataStoreProtocol { get }
 
@@ -32,8 +30,6 @@ class AppDIContainer: AppDIContainerProtocol {
 
   // MARK: - All the app dependencies
   lazy var restDependencies: RestDependenciesProtocol = RestDependencies(marvelApiConfig: marvelApiConfig)
-
-  lazy var marvelApiClient: MarvelApiProtocol = MarvelApiClient(restDependencies: restDependencies)
 
   var dataStore: DataStoreProtocol
 
