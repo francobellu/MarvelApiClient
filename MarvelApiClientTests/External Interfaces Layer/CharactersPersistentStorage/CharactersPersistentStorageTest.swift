@@ -18,7 +18,7 @@ class CharactersPersistentStorageTest: XCTestCase {
 
   var sut: CharactersPersistentStorage!
 
-  var testResult: [CharacterResult]!
+  var testResult: [Character]!
 
   override func setUpWithError() throws {
   }
@@ -30,10 +30,11 @@ class CharactersPersistentStorageTest: XCTestCase {
 
   func testGetCharacters() throws {
     // Given
-    dataStoreMock = DataStoreMock(characters: testCharacters)
-    sut = CharactersPersistentStorage(dataStore: dataStoreMock)
 
-    var testResult: [CharacterResult]!
+    let testEntities = testCharacters.map{$0.toDomain()}
+    let testEntitiesData = try testEntities.toData()
+    dataStoreMock = DataStoreMock(charactersData: testEntitiesData)
+    sut = CharactersPersistentStorage(dataStore: dataStoreMock)
 
     // When
     sut.getCharacters() { characters in
@@ -41,38 +42,40 @@ class CharactersPersistentStorageTest: XCTestCase {
     }
 
     // Then
-    XCTAssertEqual(testResult, testCharacters)
+    XCTAssertEqual(testResult, testEntities)
   }
 
   func testSaveCharacters() throws {
     // Given
-    let dataStoreMock = DataStoreMock(characters: [CharacterResult]())
+    let dataStoreMock = DataStoreMock(charactersData: Data())
     sut = CharactersPersistentStorage(dataStore: dataStoreMock)
 
     // When
-    sut.save(characters: testCharacters)
+    let entities = testCharacters.map{$0.toDomain()}
+    try sut.save(characters: entities)
 
     sut.getCharacters() { characters in
       testResult = characters
     }
 
     // Then
-    XCTAssertEqual(testResult, testCharacters)
+    let testEntities = testCharacters.map{$0.toDomain()}
+    XCTAssertEqual(testResult, testEntities)
   }
 }
 
 class DataStoreMock: DataStoreProtocol{
-  private var characters: [CharacterResult]
+  private var charactersData: Data
 
-  init(characters: [CharacterResult]) {
-    self.characters = characters
+  init(charactersData: Data) {
+    self.charactersData = charactersData
   }
-  func getAny(_ key: String) -> Any? {
-    characters
+  func getData(_ key: String) -> Data? {
+    charactersData
   }
 
-  func setAny(key: String, value: Any) {
-    characters = value as! [CharacterResult]
+  func setData(key: String, data: Data) {
+    charactersData = data
   }
 
   func getString(_ key: String, defaultValue: String) -> String {

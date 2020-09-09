@@ -8,16 +8,11 @@
 
 import Foundation
 
-// TODO: move to UserDefaultsDataStore
-struct UserDefaultKeys{
-  static let characters = "Characters"
-}
-
 protocol CharactersPersistentStorageProtocol{
 
-  func getCharacters( completion: ([CharacterResult]) -> Void )
+  func getCharacters( completion: ([Character]) -> Void )
 
-  func save( characters: [CharacterResult])
+  func save( characters: [Character]) throws
 }
 
 // Gets cached characters from a dataStoreProtocol implementatiopn
@@ -28,18 +23,22 @@ class CharactersPersistentStorage: CharactersPersistentStorageProtocol{
   init(dataStore: DataStoreProtocol = UserDefaultsDataStore()) {
     self.dataStore = dataStore
   }
-  func getCharacters( completion: ([CharacterResult]) -> Void ){
+  func getCharacters( completion: ([Character]) -> Void ){
     // get the data
-    var result = [CharacterResult]()
-    let characters = dataStore.getAny(UserDefaultKeys.characters) as? [CharacterResult]
-    if let non_nil_characters = characters {
-      result = non_nil_characters
+    var result = [Character]()
+    let charactersData = dataStore.getData(UserDefaultKeys.characters)
+    if let non_nil_charactersData = charactersData {
+      let decoder = JSONDecoder()
+      if let characters = try? decoder.decode([Character].self, from: non_nil_charactersData) {
+        print(characters)
+        result = characters
+      }
     }
     completion(result)
   }
 
-  func save( characters: [CharacterResult]){
-    // set the data
-    dataStore.setAny(key: UserDefaultKeys.characters, value: characters)
+  func save( characters: [Character]) throws{
+    let charactersData = try characters.toData()
+    dataStore.setData(key: UserDefaultKeys.characters, data: charactersData)
   }
 }

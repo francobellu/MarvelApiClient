@@ -68,12 +68,13 @@ public struct CharacterResult: Codable, Equatable {
 }
 
 extension CharacterResult {
+
   func toDomain() -> Character {
     return Character(id: id,
                      name: name,
                      description: description,
                      resourceURI: resourceURI,
-                     thumbnail: thumbnail,
+                     imageUrl: thumbnail?.url,
                      comics: comics?.items?.count ?? 0,
                      stories: stories?.items?.count ?? 0,
                      events: events?.items?.count ?? 0,

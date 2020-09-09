@@ -8,6 +8,10 @@
 
 import Foundation
 
+struct UserDefaultKeys{
+  static let characters = "Characters"
+}
+
 /// set functions are private because only the T4F_API should modify the settings
 class UserDefaultsDataStore: DataStoreProtocol {
 
@@ -23,6 +27,11 @@ class UserDefaultsDataStore: DataStoreProtocol {
   }
 
   // MARK: Setters
+  func setData(key: String, data: Data) {
+    userDef.set(data, forKey: key)
+    userDef.synchronize()
+  }
+
   func setAny(key: String, value: Any) {
     userDef.set(value, forKey: key)
     userDef.synchronize()
@@ -39,6 +48,10 @@ class UserDefaultsDataStore: DataStoreProtocol {
   }
 
   // MARK: Getters
+
+  func getData(_ key: String) -> Data? {
+    return self.userDef.data(forKey: key)
+  }
 
   func getAny(_ key: String)-> Any? {
     return self.userDef.value(forKey: key)

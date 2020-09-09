@@ -21,22 +21,28 @@ final class DefaultCharactersRepository {
 }
 
 extension DefaultCharactersRepository: CharactersRepository {
-  func getCharactersList(completion: @escaping (Result<[Character], Error>) -> Void) {
+  private func cache(_ charactersEntities: [Character], completion: @escaping (Result<[Character], Error>) -> Void) {
+    do {
+      try self.cache.save(characters: charactersEntities)
+    } catch  {
+      completion(.success(charactersEntities))
+      // TODO, handle error
+      // throw error
+    }
+  }
 
-    var characters: [Character]!
-    cache.getCharacters { (result) in
-      characters = result.map{ $0.toDomain()}
+  func getCharactersList(completion: @escaping (Result<[Character], Error>) -> Void) {
+    cache.getCharacters { (characters) in
       if !characters.isEmpty{
         completion(.success(characters))
       } else{
         //    let requestDTO =  marvelApiClientMock(query: query)
         marvelApiClient.getCharactersList { result in // TODO: not returning an Endpoint
-
           switch result {
           case .success(let responseDTO):
-            //        self.cache.save(response: responseDTO, for: requestDTO)
             let characterResults = (responseDTO as [CharacterResult] )
             let charactersEntities = characterResults.map { $0.toDomain()}
+            self.cache(charactersEntities, completion: completion)
             completion(.success(charactersEntities))
           case .failure(let error):
             completion(.failure(error))
@@ -61,5 +67,5 @@ extension DefaultCharactersRepository: CharactersRepository {
         completion(.failure(error))
       }
     }
-    }
+  }
 }

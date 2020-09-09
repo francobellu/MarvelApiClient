@@ -35,22 +35,30 @@ private extension Dictionary {
 }
 
 extension Encodable {
-  func toDictionary() throws -> [String: Any]? {
+  func toDictionary() throws -> [String: Any] {
     let data = try JSONEncoder().encode(self)
-    let josnData = try JSONSerialization.jsonObject(with: data)
-    return josnData as? [String: Any]
+    let josnData = try JSONSerialization.jsonObject(with: data, options: .fragmentsAllowed )
+    let error = NSError(domain: "com.marvelApiClient.Utils", code: 1, userInfo: nil)
+    guard let dict = josnData as? [String: Any] else { throw error}
+    return dict
   }
 
-  func toDictionaryOfString() throws -> [String: String]? {
+  func toDictionaryOfString() throws -> [String: String] {
     let data = try JSONEncoder().encode(self)
     let josnData = try JSONSerialization.jsonObject(with: data)
 
-    let queryError = NSError(domain: "com.marvelApiClient.Utils", code: 1, userInfo: nil)
+    let queryError = NSError(domain: "com.marvelApiClient.Utils", code: 2, userInfo: nil)
     guard let dict = josnData as? [String: Any]  else {throw queryError} // returns nil
     let newDict: [String: String]  = dict.mapValues{ value in
       "\(value)"
     }
     return newDict
+  }
+
+  func toData() throws -> Data{
+    let encoder = JSONEncoder()
+    let jsonData = try encoder.encode(self)
+    return jsonData
   }
 }
 

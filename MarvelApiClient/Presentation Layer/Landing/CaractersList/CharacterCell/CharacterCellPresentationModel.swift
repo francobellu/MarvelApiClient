@@ -21,7 +21,7 @@ class CharacterCellPresentationModel: Equatable {
       fatalError()
     }
 
-    if let thumbnailUrl = character.thumbnail?.url {
+    if let thumbnailUrl = character.imageUrl {
       imgViewUrl = thumbnailUrl
     } else {
       imgViewUrl = defaultImageUrl

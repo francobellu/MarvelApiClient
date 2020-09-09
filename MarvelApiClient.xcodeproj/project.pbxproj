@@ -85,6 +85,8 @@
 		C7887B7D24C6196000EAEB1F /* UIViewController +  ErrorDialog.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7887B7C24C6196000EAEB1F /* UIViewController +  ErrorDialog.swift */; };
 		C796C0BC25077AE100EB2768 /* CharactersPersistentStorageTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = C796C0BB25077AE100EB2768 /* CharactersPersistentStorageTest.swift */; };
 		C796C0BE2507819400EB2768 /* CharactersPersistentStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = C796C0BD2507819400EB2768 /* CharactersPersistentStorage.swift */; };
+		C796C0C62509137100EB2768 /* Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = C796C0C52509137100EB2768 /* Utils.swift */; };
+		C796C0C8250923C900EB2768 /* UserDefaultsDataStoreTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = C796C0C7250923C900EB2768 /* UserDefaultsDataStoreTest.swift */; };
 		C7A4D7D024EAC60A007D1DA6 /* AlamofireImage in Frameworks */ = {isa = PBXBuildFile; productRef = C7A4D7CF24EAC60A007D1DA6 /* AlamofireImage */; };
 		C7B5542B24EADD1D00A02AFE /* MarvelApiRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7B5542A24EADD1D00A02AFE /* MarvelApiRequest.swift */; };
 		C7BE8B8924AF5F0D00B8A569 /* CharactersListViewControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7BE8B8824AF5F0D00B8A569 /* CharactersListViewControllerTests.swift */; };
@@ -201,6 +203,8 @@
 		C7887B7C24C6196000EAEB1F /* UIViewController +  ErrorDialog.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController +  ErrorDialog.swift"; sourceTree = "<group>"; };
 		C796C0BB25077AE100EB2768 /* CharactersPersistentStorageTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharactersPersistentStorageTest.swift; sourceTree = "<group>"; };
 		C796C0BD2507819400EB2768 /* CharactersPersistentStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharactersPersistentStorage.swift; sourceTree = "<group>"; };
+		C796C0C52509137100EB2768 /* Utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utils.swift; sourceTree = "<group>"; };
+		C796C0C7250923C900EB2768 /* UserDefaultsDataStoreTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = UserDefaultsDataStoreTest.swift; path = MarvelApiClientTests/Scenes/CharacterDetail/UserDefaultsDataStoreTest.swift; sourceTree = SOURCE_ROOT; };
 		C7B5542A24EADD1D00A02AFE /* MarvelApiRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MarvelApiRequest.swift; sourceTree = "<group>"; };
 		C7BE8B8824AF5F0D00B8A569 /* CharactersListViewControllerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharactersListViewControllerTests.swift; sourceTree = "<group>"; };
 		C7BE8B8A24AF603400B8A569 /* CharactersListProtocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharactersListProtocols.swift; sourceTree = "<group>"; };
@@ -392,12 +396,12 @@
 			path = Onboarding;
 			sourceTree = "<group>";
 		};
-		C7036651247540110005886F /* Interfaces */ = {
+		C7036651247540110005886F /* DataStoreProtocol */ = {
 			isa = PBXGroup;
 			children = (
 				C7036652247540350005886F /* DataStoreProtocol.swift */,
 			);
-			path = Interfaces;
+			path = DataStoreProtocol;
 			sourceTree = "<group>";
 		};
 		C703665624754ACF0005886F /* Scenes */ = {
@@ -690,6 +694,7 @@
 		C76B29A4243A5F1B00793179 /* MarvelApiClientTests */ = {
 			isa = PBXGroup;
 			children = (
+				C796C0C42509134600EB2768 /* Utils */,
 				C71B84C524F0135F00054F2F /* Deep Linking */,
 				C7887B7B24C617F700EAEB1F /* Integration */,
 				C703665624754ACF0005886F /* Scenes */,
@@ -719,6 +724,7 @@
 		C796C0B925077A7400EB2768 /* CharactersPersistentStorage */ = {
 			isa = PBXGroup;
 			children = (
+				C796C0C7250923C900EB2768 /* UserDefaultsDataStoreTest.swift */,
 				C796C0BB25077AE100EB2768 /* CharactersPersistentStorageTest.swift */,
 			);
 			path = CharactersPersistentStorage;
@@ -733,11 +739,19 @@
 			path = "External Interfaces Layer";
 			sourceTree = "<group>";
 		};
+		C796C0C42509134600EB2768 /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+				C796C0C52509137100EB2768 /* Utils.swift */,
+			);
+			path = Utils;
+			sourceTree = "<group>";
+		};
 		C7EC670E2443688400F88FDE /* PersistentStorage */ = {
 			isa = PBXGroup;
 			children = (
 				C796C0B825077A4000EB2768 /* CharactersPersistentStorage */,
-				C7036651247540110005886F /* Interfaces */,
+				C7036651247540110005886F /* DataStoreProtocol */,
 				C7EC670C24435E3C00F88FDE /* UserDefaultsDataStore.swift */,
 				C72CF2B1247163B80048B0A2 /* AppSettings.swift */,
 			);
@@ -1105,8 +1119,10 @@
 				C74963AB2473C89A001B9A5E /* CharactersRepositoryTests.swift in Sources */,
 				C74963A32472F731001B9A5E /* TestUtils.swift in Sources */,
 				C7169219244C99A5005BF4AB /* MockObjects.swift in Sources */,
+				C796C0C62509137100EB2768 /* Utils.swift in Sources */,
 				C74963A92473C886001B9A5E /* CharactersListInteractorTests.swift in Sources */,
 				C796C0BC25077AE100EB2768 /* CharactersPersistentStorageTest.swift in Sources */,
+				C796C0C8250923C900EB2768 /* UserDefaultsDataStoreTest.swift in Sources */,
 				C76B29A6243A5F1B00793179 /* MarvelApiClientIntegrationTests.swift in Sources */,
 				C703665A24754D010005886F /* CharactersListPresenterTest.swift in Sources */,
 				C715DC2824D2DEB600DAC74A /* MockApiClient.swift in Sources */,

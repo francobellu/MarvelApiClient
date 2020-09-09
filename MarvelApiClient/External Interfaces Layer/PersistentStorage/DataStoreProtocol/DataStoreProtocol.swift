@@ -9,11 +9,11 @@
 import Foundation
 
 protocol DataStoreProtocol {
-  func getAny(_ key: String)-> Any?
+  func getData(_ key: String)-> Data?
   func getString(_ key: String, defaultValue: String) -> String
   func getBool(_ key: String, defaultValue: Bool) -> Bool
 
-  func setAny(key: String, value: Any)
+  func setData(key: String, data: Data)
   func setString(key: String, value: String)
   func setBool(key: String, value: Bool)
 }

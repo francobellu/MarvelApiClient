@@ -9,7 +9,7 @@
 import Foundation
 
 //// MARK: - Result
-struct Character: Equatable {
+struct Character: Equatable, Codable {
   static func == (lhs: Character, rhs: Character) -> Bool {
     lhs.id == rhs.id
   }
@@ -18,7 +18,7 @@ struct Character: Equatable {
   let name: String?
   let description: String?
   let resourceURI: String?
-  let thumbnail: Thumbnail?
+  let imageUrl: URL?
   let comics: Int
   let stories: Int
   let events: Int
@@ -28,7 +28,7 @@ struct Character: Equatable {
        name: String?,
        description: String? = nil,
        resourceURI: String? = nil,
-       thumbnail: Thumbnail?,
+       imageUrl: URL?,
        comics: Int = 0,
        stories: Int = 0,
        events: Int = 0,
@@ -37,22 +37,40 @@ struct Character: Equatable {
     self.name = name
     self.description = description
     self.resourceURI = resourceURI
-    self.thumbnail = thumbnail
+    self.imageUrl = imageUrl
     self.comics = comics
     self.stories = stories
     self.events = events
     self.series = series
   }
 
+  enum CharacterCodingKey: String, CodingKey {
+      case id, name, description, resourceURI, imageUrl, comics, stories, events, series
+  }
+
   init(name: String, imageUrl: URL?, id: Int? = nil) {
     self.name = name
-    thumbnail = Thumbnail(from: imageUrl )
     self.id = id
     description = nil
     resourceURI = nil
+    self.imageUrl = imageUrl
     comics = 0
     stories = 0
     events = 0
     series = 0
+  }
+
+  init(from decoder: Decoder) throws {
+    let container = try decoder.container(keyedBy: CharacterCodingKey.self)
+    name = try container.decode(String.self, forKey: .name)
+    id = try container.decodeIfPresent(Int.self, forKey: .id)
+    description = try container.decodeIfPresent(String.self, forKey: .description)
+    resourceURI = try container.decodeIfPresent(String.self, forKey: .resourceURI)
+    imageUrl = try container.decodeIfPresent(URL.self, forKey: .imageUrl)
+
+    comics = try container.decode(Int.self, forKey: .comics)
+    stories = try container.decode(Int.self, forKey: .stories)
+    events = try container.decode(Int.self, forKey: .events)
+    series = try container.decode(Int.self, forKey: .series)
   }
 }

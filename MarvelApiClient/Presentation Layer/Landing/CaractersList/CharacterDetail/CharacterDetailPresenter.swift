@@ -28,7 +28,7 @@ class CharacterDetailPresenter {
   }
 
   func getThumbnailUrl() -> URL? {
-    return character.value?.thumbnail?.url
+    return character.value?.imageUrl
   }
 
   func getName() -> String {

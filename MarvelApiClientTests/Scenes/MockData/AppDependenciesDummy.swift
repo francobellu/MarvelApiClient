@@ -11,7 +11,7 @@ import Rest
 @testable import MarvelApiClient
 
 class DataStoreDummy: DataStoreProtocol {
-  func getAny(_ key: String) -> Any? {
+  func getData(_ key: String) -> Data? {
     nil
   }
 
@@ -23,7 +23,7 @@ class DataStoreDummy: DataStoreProtocol {
     false
   }
 
-  func setAny(key: String, value: Any) {
+  func setData(key: String, data: Data) {
   }
 
   func setString(key: String, value: String) {

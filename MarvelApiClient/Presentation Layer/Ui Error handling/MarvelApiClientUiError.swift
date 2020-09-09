@@ -68,7 +68,7 @@ class MarvelApiClientUiErrorBuilder {
     case .noInternet:
       returnString = NSLocalizedString("No Internet!!", comment: errorDomain)
     case .unhandled:
-      returnString = NSLocalizedString("Unundled Error.", comment: errorDomain)
+      returnString = NSLocalizedString("Unhandled Error.", comment: errorDomain)
     case .marvelError_decoding:
       returnString = NSLocalizedString("The data was not properly decoded", comment: errorDomain)
     case .marvelError_noMarvelData:
