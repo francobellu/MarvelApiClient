@@ -26,13 +26,13 @@ struct Character: Equatable {
 
   init(id: Int?,
        name: String?,
-       description: String?,
-       resourceURI: String?,
+       description: String? = nil,
+       resourceURI: String? = nil,
        thumbnail: Thumbnail?,
-       comics: Int,
-       stories: Int,
-       events: Int,
-       series: Int) {
+       comics: Int = 0,
+       stories: Int = 0,
+       events: Int = 0,
+       series: Int = 0) {
     self.id = id
     self.name = name
     self.description = description
@@ -44,10 +44,10 @@ struct Character: Equatable {
     self.series = series
   }
 
-  init(name: String, imageUrl: URL?) {
+  init(name: String, imageUrl: URL?, id: Int? = nil) {
     self.name = name
     thumbnail = Thumbnail(from: imageUrl )
-    id = nil
+    self.id = id
     description = nil
     resourceURI = nil
     comics = 0

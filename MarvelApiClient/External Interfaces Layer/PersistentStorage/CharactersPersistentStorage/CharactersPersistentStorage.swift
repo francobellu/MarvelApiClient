@@ -13,8 +13,15 @@ struct UserDefaultKeys{
   static let characters = "Characters"
 }
 
+protocol CharactersPersistentStorageProtocol{
+
+  func getCharacters( completion: ([CharacterResult]) -> Void )
+
+  func save( characters: [CharacterResult])
+}
+
 // Gets cached characters from a dataStoreProtocol implementatiopn
-class CharactersPersistentStorage{
+class CharactersPersistentStorage: CharactersPersistentStorageProtocol{
 
   let dataStore: DataStoreProtocol
 

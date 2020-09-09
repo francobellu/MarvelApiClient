@@ -26,19 +26,44 @@ public struct CharacterResult: Codable, Equatable {
   let events: Comics?
   let series: Comics?
 
-  init(name: String, imageUrl: URL?) {
-    self.name = name
-    self.thumbnail = Thumbnail(from: imageUrl )
-    id = nil
+  init(name: String,
+       id: Int? = nil,
+       description: String? = nil,
+       modified: String? = nil,
+       resourceURI: String? = nil,
+       urls: [URLElement]? = nil,
+       thumbnail: Thumbnail? = nil,
+       comics: Comics? = nil,
+       stories: Stories? = nil,
+       events: Comics? = nil,
+       series: Comics? = nil) {
 
-    description = nil
-    modified = nil
-    resourceURI = nil
-    urls = nil
-    comics = nil
-    stories = nil
-    events = nil
-    series = nil
+    self.name = name
+    self.id = id
+    self.thumbnail = thumbnail
+    self.description = description
+    self.modified = modified
+    self.resourceURI = resourceURI
+    self.urls = urls
+    self.comics = comics
+    self.stories = stories
+    self.events = events
+    self.series = series
+  }
+
+  init(name: String, imageUrl: URL?) {
+    let thumbnail = Thumbnail(from: imageUrl )
+    self.init(name: name, thumbnail: thumbnail)
+//    id = nil
+//
+//    description = nil
+//    modified = nil
+//    resourceURI = nil
+//    urls = nil
+//    comics = nil
+//    stories = nil
+//    events = nil
+//    series = nil
   }
 }
 

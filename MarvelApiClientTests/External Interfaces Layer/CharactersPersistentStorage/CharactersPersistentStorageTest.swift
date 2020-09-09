@@ -18,6 +18,8 @@ class CharactersPersistentStorageTest: XCTestCase {
 
   var sut: CharactersPersistentStorage!
 
+  var testResult: [CharacterResult]!
+
   override func setUpWithError() throws {
   }
 
@@ -28,7 +30,7 @@ class CharactersPersistentStorageTest: XCTestCase {
 
   func testGetCharacters() throws {
     // Given
-    dataStoreMock = DataStoreMock(charactersMock: testCharacters)
+    dataStoreMock = DataStoreMock(characters: testCharacters)
     sut = CharactersPersistentStorage(dataStore: dataStoreMock)
 
     var testResult: [CharacterResult]!
@@ -44,7 +46,7 @@ class CharactersPersistentStorageTest: XCTestCase {
 
   func testSaveCharacters() throws {
     // Given
-    let dataStoreMock = DataStoreMock(charactersMock: [CharacterResult]())
+    let dataStoreMock = DataStoreMock(characters: [CharacterResult]())
     sut = CharactersPersistentStorage(dataStore: dataStoreMock)
 
     // When
@@ -62,8 +64,8 @@ class CharactersPersistentStorageTest: XCTestCase {
 class DataStoreMock: DataStoreProtocol{
   private var characters: [CharacterResult]
 
-  init(charactersMock: [CharacterResult]) {
-    characters = charactersMock
+  init(characters: [CharacterResult]) {
+    self.characters = characters
   }
   func getAny(_ key: String) -> Any? {
     characters
