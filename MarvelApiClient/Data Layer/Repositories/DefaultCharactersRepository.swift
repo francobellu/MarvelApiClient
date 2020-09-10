@@ -32,22 +32,27 @@ extension DefaultCharactersRepository: CharactersRepository {
   }
 
   func getCharactersList(completion: @escaping (Result<[Character], Error>) -> Void) {
+// TODO: The Presenter should receive 2 closures: 1 for the cached results and 1 for the fresh results. Thei the presenter should first present the cached and then clear the list and present the fresh as soon as they are available.
+
+    // 1) First load the cached characters
     cache.getCharacters { (characters) in
       if !characters.isEmpty{
         completion(.success(characters))
-      } else{
-        //    let requestDTO =  marvelApiClientMock(query: query)
-        marvelApiClient.getCharactersList { result in // TODO: not returning an Endpoint
-          switch result {
-          case .success(let responseDTO):
-            let characterResults = (responseDTO as [CharacterResult] )
-            let charactersEntities = characterResults.map { $0.toDomain()}
-            self.cache(charactersEntities, completion: completion)
-            completion(.success(charactersEntities))
-          case .failure(let error):
-            completion(.failure(error))
-          }
-        }
+      }
+    }
+
+    // 2) At the same time load fetch the characters from the API
+    marvelApiClient.getCharactersList { result in // TODO: not returning an Endpoint
+      switch result {
+      case .success(let responseDTO):
+        let characterResults = (responseDTO as [CharacterResult] )
+        let charactersEntities = characterResults.map { $0.toDomain()}
+
+        // Save new cache
+        self.cache(charactersEntities, completion: completion)
+        completion(.success(charactersEntities))
+      case .failure(let error):
+        completion(.failure(error))
       }
     }
   }

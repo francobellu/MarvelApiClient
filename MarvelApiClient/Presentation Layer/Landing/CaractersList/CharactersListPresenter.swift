@@ -17,6 +17,7 @@ class CharactersListPresenter: CharactersListPresenterProtocol {
 
   private var dependencies: AppDIContainerProtocol! // swiftlint:disable:this implicitly_unwrapped_optional
 
+  private var characters = [Character]()
   // Presentation Model Observables
   var viewDidLoad = Observable<Bool>(value: false)
   var title = Observable<String>(value: "Marvel Characters")
@@ -38,9 +39,7 @@ class CharactersListPresenter: CharactersListPresenterProtocol {
 
   // MARK: - FLOW CharactersListCoordinatorDelegate
   func didSelectCharacter(at index: Int) {
-    let cellPresentationModel = presentationModel.value[index]
-    let character = Character(name: cellPresentationModel.title, imageUrl: cellPresentationModel.imgViewUrl)
-    coordinatorDelegate.didSelect(character: character)
+    coordinatorDelegate.didSelect(character: characters[index])
   }
 
   func didGoBack() {
@@ -48,13 +47,13 @@ class CharactersListPresenter: CharactersListPresenterProtocol {
   }
 
   /// Arrange the sections/row view model and caregorize by date
-  private func buildPresentationModel(from characters: [Character]) {
+  private func presentationModel(from characters: [Character]) -> [CharacterCellPresentationModel] {
     var cellPresentationModels = [CharacterCellPresentationModel]()
     for character in characters {
       let characterCellViewModel: CharacterCellPresentationModel = CharacterCellPresentationModel(character: character)
       cellPresentationModels.append(characterCellViewModel)
     }
-    self.presentationModel.value += cellPresentationModels
+    return cellPresentationModels
   }
 }
 
@@ -63,21 +62,13 @@ extension CharactersListPresenter: GetCharactersListInteractorOutputPort {
   func domainData(result: Result<[Character], Error>) {
     switch result {
     case .success(let characters):
-      self.buildPresentationModel(from: characters)
+      self.characters = characters
+      let newCellPresentationModels = self.presentationModel(from: characters)
+      self.presentationModel.value += newCellPresentationModels
     case .failure(let error):
       let uiError = MarvelApiClientUiErrorBuilder.uiErrorFrom(error: error as NSError)
       self.isError.value = uiError
-      didGoBack()
     }
     self.isLoading.value = false
   }
-}
-
-func buildPresentationModels(from characters: [Character]) -> [CharacterCellPresentationModel] {
-  var cellPresentationModels = [CharacterCellPresentationModel]()
-  for character in characters {
-    let characterCellViewModel: CharacterCellPresentationModel = CharacterCellPresentationModel(character: character)
-    cellPresentationModels.append(characterCellViewModel)
-  }
-  return cellPresentationModels
 }

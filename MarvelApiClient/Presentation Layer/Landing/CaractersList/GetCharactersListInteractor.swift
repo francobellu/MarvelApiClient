@@ -18,11 +18,7 @@ protocol GetCharactersListInteractorOutputPort: class {
   func domainData(result: Result<[Character], Error>)
 }
 
-private protocol GetCharactersListInteractorProtocol: class {
-  func handle(result: Result<[Character], Error>)
-}
-
-class GetCharactersListInteractor: GetCharactersListInteractorProtocol {
+class GetCharactersListInteractor {
   private let charactersRepository: CharactersRepository
 
   weak var outputPort: GetCharactersListInteractorOutputPort?
@@ -31,16 +27,16 @@ class GetCharactersListInteractor: GetCharactersListInteractorProtocol {
     self.charactersRepository = charactersRepository
   }
 
-   private func getCharactersList() {
-      //    let request = GetCharacters(restDependencies: dependencies.restDependencies, limit: 20, offset: 0)
-      charactersRepository.getCharactersList { (result) in
-        self.handle(result: result)
-      }
+  private func getCharactersList() {
+    //    let request = GetCharacters(restDependencies: dependencies.restDependencies, limit: 20, offset: 0)
+    charactersRepository.getCharactersList { (result) in
+      self.handle(result: result)
     }
+  }
 
   fileprivate func handle(result: Result<[Character], Error>) {
-      self.outputPort?.domainData(result: result)
-    }
+    self.outputPort?.domainData(result: result)
+  }
 }
 
 extension GetCharactersListInteractor: GetCharactersListInteractorInputPort {
