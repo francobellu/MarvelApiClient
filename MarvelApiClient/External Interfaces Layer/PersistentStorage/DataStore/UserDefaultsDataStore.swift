@@ -13,7 +13,7 @@ struct UserDefaultKeys{
 }
 
 /// set functions are private because only the T4F_API should modify the settings
-class UserDefaultsDataStore: DataStoreProtocol {
+class UserDefaultsDataStore: DataStore {
 
   private let userDef = UserDefaults.standard
 

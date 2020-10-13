@@ -16,7 +16,7 @@ class CharactersPersistentStorageTest: XCTestCase {
 
   var dataStoreMock: DataStoreMock!
 
-  var sut: CharactersPersistentStorage!
+  var sut: CharactersCache!
 
   var testResult: [Character]!
 
@@ -34,7 +34,7 @@ class CharactersPersistentStorageTest: XCTestCase {
     let testEntities = testCharacters.map{$0.toDomain()}
     let testEntitiesData = try testEntities.toData()
     dataStoreMock = DataStoreMock(charactersData: testEntitiesData)
-    sut = CharactersPersistentStorage(dataStore: dataStoreMock)
+    sut = DefaultCharactersCache(dataStore: dataStoreMock)
 
     // When
     sut.getCharacters() { characters in
@@ -48,7 +48,7 @@ class CharactersPersistentStorageTest: XCTestCase {
   func testSaveCharacters() throws {
     // Given
     let dataStoreMock = DataStoreMock(charactersData: Data())
-    sut = CharactersPersistentStorage(dataStore: dataStoreMock)
+    sut = DefaultCharactersCache(dataStore: dataStoreMock)
 
     // When
     let entities = testCharacters.map{$0.toDomain()}
@@ -64,7 +64,7 @@ class CharactersPersistentStorageTest: XCTestCase {
   }
 }
 
-class DataStoreMock: DataStoreProtocol{
+class DataStoreMock: DataStore{
   private var charactersData: Data
 
   init(charactersData: Data) {

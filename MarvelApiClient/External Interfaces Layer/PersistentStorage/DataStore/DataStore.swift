@@ -8,7 +8,7 @@
 
 import Foundation
 
-protocol DataStoreProtocol {
+protocol DataStore {
   func getData(_ key: String)-> Data?
   func getString(_ key: String, defaultValue: String) -> String
   func getBool(_ key: String, defaultValue: Bool) -> Bool

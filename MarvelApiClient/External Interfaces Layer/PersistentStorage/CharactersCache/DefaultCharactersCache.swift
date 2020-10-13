@@ -1,5 +1,5 @@
 //
-//  CharactersPersistentStorage.swift
+//  CharactersCache.swift
 //  MarvelApiClient
 //
 //  Created by franco bellu on 08/09/2020.
@@ -8,21 +8,15 @@
 
 import Foundation
 
-protocol CharactersPersistentStorageProtocol{
-
-  func getCharacters( completion: ([Character]) -> Void )
-
-  func save( characters: [Character]) throws
-}
-
 // Gets cached characters from a dataStoreProtocol implementatiopn
-class CharactersPersistentStorage: CharactersPersistentStorageProtocol{
+final class DefaultCharactersCache: CharactersCache{
 
-  let dataStore: DataStoreProtocol
+  let dataStore: DataStore
 
-  init(dataStore: DataStoreProtocol = UserDefaultsDataStore()) {
+  init(dataStore: DataStore = UserDefaultsDataStore()) {
     self.dataStore = dataStore
   }
+
   func getCharacters( completion: ([Character]) -> Void ){
     // get the data
     var result = [Character]()

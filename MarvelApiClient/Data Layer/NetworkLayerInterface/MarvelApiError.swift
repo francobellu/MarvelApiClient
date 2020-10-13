@@ -1,6 +1,5 @@
 import Foundation
 
-
 public enum MarvelApiError: Error, Equatable {
   public static func == (lhs: MarvelApiError, rhs: MarvelApiError) -> Bool {
     switch (lhs, rhs) {
@@ -19,7 +18,6 @@ public enum MarvelApiError: Error, Equatable {
   case noMarvelData
   case insecureMD5Hash
 }
-
 
 public class MarvelApiErrorBuilder {
   private static let errorDomain = "com.MarvelApiClient.MarvelApi"

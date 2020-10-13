@@ -109,7 +109,7 @@ extension Factory: CharactersRepositoryFactory {
   func makeCharactersRepository() -> CharactersRepository {
 
     let marvelApiClient = makeMarvelApiClient()
-    let charactersPersistentStorage = CharactersPersistentStorage(dataStore: UserDefaultsDataStore())
+    let charactersPersistentStorage = DefaultCharactersCache(dataStore: UserDefaultsDataStore())
     return DefaultCharactersRepository(cache: charactersPersistentStorage, marvelApiClient: marvelApiClient)
   }
 }

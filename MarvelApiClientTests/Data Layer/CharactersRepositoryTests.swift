@@ -98,7 +98,8 @@ class MarvelApiClientMock: MarvelApiProtocol {
   }
 }
 
-class CharactersPersistentStorageMock: CharactersPersistentStorageProtocol {
+class CharactersPersistentStorageMock: CharactersCache {
+  
   private var characters: [Character]
 
   init(characters: [Character]) {

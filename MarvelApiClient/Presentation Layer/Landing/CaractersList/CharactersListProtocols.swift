@@ -20,7 +20,7 @@ protocol DataBinding: class {
 // Presenter
 protocol CharactersListPresenterProtocol: class {
 
-  // ViewController <--> Presenter
+  // ViewController <-- Presenter When these data change a correspondent data binding funcion is called
   var viewDidLoad: Observable<Bool> { get set}
   var presentationModel: Observable<[CharacterCellPresentationModel]> { get set}
   var title: Observable<String> { get set}

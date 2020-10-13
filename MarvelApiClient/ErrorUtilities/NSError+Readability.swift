@@ -1,11 +1,3 @@
-//
-//  NSError+Readability.swift
-//  ErrorUtilities
-//
-//  Created by Alberto De Bortoli on 28/08/2017.
-//  Copyright © 2018 Just Eat Holding Ltd.
-//
-
 import Foundation
 
 extension NSError {
@@ -21,7 +13,7 @@ extension NSError {
 
         for (key, value) in userInfo {
 
-            switch (value) {
+            switch value {
             case let string as String:
                 flattenedUserInfo[key] = string
             case let data as Data:

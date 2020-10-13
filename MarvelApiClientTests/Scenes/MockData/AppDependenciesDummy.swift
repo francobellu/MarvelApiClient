@@ -10,7 +10,7 @@ import Foundation
 import Rest
 @testable import MarvelApiClient
 
-class DataStoreDummy: DataStoreProtocol {
+class DataStoreDummy: DataStore {
   func getData(_ key: String) -> Data? {
     nil
   }

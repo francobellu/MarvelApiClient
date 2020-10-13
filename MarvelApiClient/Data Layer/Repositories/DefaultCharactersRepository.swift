@@ -11,9 +11,9 @@ import Foundation
 final class DefaultCharactersRepository {
 
   private let marvelApiClient: MarvelApiProtocol
-  private let cache: CharactersPersistentStorageProtocol
+  private let cache: CharactersCache
 
-  init(cache: CharactersPersistentStorageProtocol,
+  init(cache: CharactersCache,
        marvelApiClient: MarvelApiProtocol ) {
     self.marvelApiClient = marvelApiClient
     self.cache = cache

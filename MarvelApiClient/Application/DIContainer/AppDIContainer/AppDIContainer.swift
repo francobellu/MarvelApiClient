@@ -15,7 +15,7 @@ protocol AppDIContainerProtocol: class {
   var restDependencies: RestDependenciesProtocol { get }
 
   // Used by the AppSettings and other services
-  var dataStore: DataStoreProtocol { get }
+  var dataStore: DataStore { get }
 
   // Used to store Settings
   var appSettings: AppSettings { get }
@@ -31,7 +31,7 @@ class AppDIContainer: AppDIContainerProtocol {
   // MARK: - All the app dependencies
   lazy var restDependencies: RestDependenciesProtocol = RestDependencies(marvelApiConfig: marvelApiConfig)
 
-  var dataStore: DataStoreProtocol
+  var dataStore: DataStore
 
   lazy var appSettings: AppSettings = AppSettings(dataStore: self.dataStore)
 
@@ -39,7 +39,7 @@ class AppDIContainer: AppDIContainerProtocol {
 
   let marvelApiConfig = MarvelApiRequestConfig()
 
-  init(dataStore: DataStoreProtocol = UserDefaultsDataStore()) {
+  init(dataStore: DataStore = UserDefaultsDataStore()) {
     self.dataStore = dataStore
   }
 

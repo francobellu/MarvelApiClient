@@ -161,7 +161,7 @@ class CharactersListPresenterTest: XCTestCase {
     var presentationModelSpy = [CharacterCellPresentationModel]()
     XCTAssertFalse(sut.isLoading.value)
     let characters: [Character] = ( getDtos(from: "MockedResponseGetCharacters") as [CharacterResult] ).map {$0.toDomain()}
-    let presentationModel = buildPresentationModels(from: characters)
+    let presentationModel = CharactersListPresenter.presentationModel(from: characters)
     let testValue = presentationModel
 
     // Create async exp for the async interactor.getCharacters  operation
@@ -225,7 +225,7 @@ class CharactersListPresenterTest: XCTestCase {
       XCTAssertTrue(false, "result should have a valid dataContainer value")
       return
     }
-    let resultPresentationModel = buildPresentationModels(from: characters)
+    let resultPresentationModel = CharactersListPresenter.presentationModel(from: characters)
 
     // When
     sut.domainData(result: testSuccessCharacters)
@@ -279,7 +279,7 @@ class CharactersListPresenterTest: XCTestCase {
     XCTAssert(sut.presentationModel.value.isEmpty )
 
     let characters: [Character]! = getCharactersEntitities(from: "MockedResponseGetCharacters")
-    let presentationModel = buildPresentationModels(from: characters)
+    let presentationModel = CharactersListPresenter.presentationModel(from: characters)
     let testValue = presentationModel
 
     sut.presentationModel.value = testValue

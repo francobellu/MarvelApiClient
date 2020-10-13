@@ -29,7 +29,7 @@
 		C703664924753DEB0005886F /* LandingPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = C703662224753DEA0005886F /* LandingPresenter.swift */; };
 		C703664A24753DEB0005886F /* OnboardingPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = C703662424753DEA0005886F /* OnboardingPresenter.swift */; };
 		C703664B24753DEB0005886F /* OnboardingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C703662524753DEA0005886F /* OnboardingViewController.swift */; };
-		C7036653247540350005886F /* DataStoreProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7036652247540350005886F /* DataStoreProtocol.swift */; };
+		C7036653247540350005886F /* DataStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7036652247540350005886F /* DataStore.swift */; };
 		C703665A24754D010005886F /* CharactersListPresenterTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = C703665924754D010005886F /* CharactersListPresenterTest.swift */; };
 		C703665D24754D4B0005886F /* CharacterDetailPresenterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C703665B24754D4B0005886F /* CharacterDetailPresenterTests.swift */; };
 		C703665E24754D4B0005886F /* CharacterDetailInteractorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C703665C24754D4B0005886F /* CharacterDetailInteractorTests.swift */; };
@@ -84,10 +84,10 @@
 		C776993D24B313BE003BE9BD /* Observable.swift in Sources */ = {isa = PBXBuildFile; fileRef = C776993C24B313BE003BE9BD /* Observable.swift */; };
 		C7887B7D24C6196000EAEB1F /* UIViewController +  ErrorDialog.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7887B7C24C6196000EAEB1F /* UIViewController +  ErrorDialog.swift */; };
 		C796C0BC25077AE100EB2768 /* CharactersPersistentStorageTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = C796C0BB25077AE100EB2768 /* CharactersPersistentStorageTest.swift */; };
-		C796C0BE2507819400EB2768 /* CharactersPersistentStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = C796C0BD2507819400EB2768 /* CharactersPersistentStorage.swift */; };
+		C796C0BE2507819400EB2768 /* DefaultCharactersCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = C796C0BD2507819400EB2768 /* DefaultCharactersCache.swift */; };
 		C796C0C62509137100EB2768 /* Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = C796C0C52509137100EB2768 /* Utils.swift */; };
 		C796C0C8250923C900EB2768 /* UserDefaultsDataStoreTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = C796C0C7250923C900EB2768 /* UserDefaultsDataStoreTest.swift */; };
-		C796C0CA250A079400EB2768 /* CharacterDetailPresentationModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C796C0C9250A079400EB2768 /* CharacterDetailPresentationModel.swift */; };
+		C796C0CD250A14DF00EB2768 /* CharactersCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = C796C0CC250A14DF00EB2768 /* CharactersCache.swift */; };
 		C7A4D7D024EAC60A007D1DA6 /* AlamofireImage in Frameworks */ = {isa = PBXBuildFile; productRef = C7A4D7CF24EAC60A007D1DA6 /* AlamofireImage */; };
 		C7B5542B24EADD1D00A02AFE /* MarvelApiRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7B5542A24EADD1D00A02AFE /* MarvelApiRequest.swift */; };
 		C7BE8B8924AF5F0D00B8A569 /* CharactersListViewControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7BE8B8824AF5F0D00B8A569 /* CharactersListViewControllerTests.swift */; };
@@ -143,7 +143,7 @@
 		C703662224753DEA0005886F /* LandingPresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LandingPresenter.swift; sourceTree = "<group>"; };
 		C703662424753DEA0005886F /* OnboardingPresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OnboardingPresenter.swift; sourceTree = "<group>"; };
 		C703662524753DEA0005886F /* OnboardingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OnboardingViewController.swift; sourceTree = "<group>"; };
-		C7036652247540350005886F /* DataStoreProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataStoreProtocol.swift; sourceTree = "<group>"; };
+		C7036652247540350005886F /* DataStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataStore.swift; sourceTree = "<group>"; };
 		C703665924754D010005886F /* CharactersListPresenterTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharactersListPresenterTest.swift; sourceTree = "<group>"; };
 		C703665B24754D4B0005886F /* CharacterDetailPresenterTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CharacterDetailPresenterTests.swift; sourceTree = "<group>"; };
 		C703665C24754D4B0005886F /* CharacterDetailInteractorTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CharacterDetailInteractorTests.swift; sourceTree = "<group>"; };
@@ -203,10 +203,11 @@
 		C776993C24B313BE003BE9BD /* Observable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Observable.swift; sourceTree = "<group>"; };
 		C7887B7C24C6196000EAEB1F /* UIViewController +  ErrorDialog.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController +  ErrorDialog.swift"; sourceTree = "<group>"; };
 		C796C0BB25077AE100EB2768 /* CharactersPersistentStorageTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharactersPersistentStorageTest.swift; sourceTree = "<group>"; };
-		C796C0BD2507819400EB2768 /* CharactersPersistentStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharactersPersistentStorage.swift; sourceTree = "<group>"; };
+		C796C0BD2507819400EB2768 /* DefaultCharactersCache.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultCharactersCache.swift; sourceTree = "<group>"; };
 		C796C0C52509137100EB2768 /* Utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utils.swift; sourceTree = "<group>"; };
 		C796C0C7250923C900EB2768 /* UserDefaultsDataStoreTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = UserDefaultsDataStoreTest.swift; path = MarvelApiClientTests/Scenes/CharacterDetail/UserDefaultsDataStoreTest.swift; sourceTree = SOURCE_ROOT; };
-		C796C0C9250A079400EB2768 /* CharacterDetailPresentationModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = CharacterDetailPresentationModel.swift; path = "MarvelApiClient/Presentation Layer/Landing/CaractersList/CharacterCell/CharacterDetailPresentationModel.swift"; sourceTree = SOURCE_ROOT; };
+		C796C0CC250A14DF00EB2768 /* CharactersCache.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharactersCache.swift; sourceTree = "<group>"; };
+		C799370325365563004967EA /* codemagic.yaml */ = {isa = PBXFileReference; lastKnownFileType = text.yaml; path = codemagic.yaml; sourceTree = "<group>"; };
 		C7B5542A24EADD1D00A02AFE /* MarvelApiRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MarvelApiRequest.swift; sourceTree = "<group>"; };
 		C7BE8B8824AF5F0D00B8A569 /* CharactersListViewControllerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharactersListViewControllerTests.swift; sourceTree = "<group>"; };
 		C7BE8B8A24AF603400B8A569 /* CharactersListProtocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharactersListProtocols.swift; sourceTree = "<group>"; };
@@ -250,6 +251,7 @@
 		287C99FD217F39CB00D63092 = {
 			isa = PBXGroup;
 			children = (
+				C799370325365563004967EA /* codemagic.yaml */,
 				C7411A3924EAD441003D2B64 /* Rest */,
 				C71B79642476AA14002D5B09 /* MarvelApp.docx */,
 				2851229221832BB9009D4AB0 /* Readme.md */,
@@ -382,7 +384,6 @@
 		C703661424753DEA0005886F /* CharacterDetail */ = {
 			isa = PBXGroup;
 			children = (
-				C796C0C9250A079400EB2768 /* CharacterDetailPresentationModel.swift */,
 				C703661524753DEA0005886F /* CharacterDetailPresenter.swift */,
 				C703661624753DEA0005886F /* CharacterDetailViewController.swift */,
 				C703661724753DEA0005886F /* CharacterDetailInteractor.swift */,
@@ -399,12 +400,13 @@
 			path = Onboarding;
 			sourceTree = "<group>";
 		};
-		C7036651247540110005886F /* DataStoreProtocol */ = {
+		C7036651247540110005886F /* DataStore */ = {
 			isa = PBXGroup;
 			children = (
-				C7036652247540350005886F /* DataStoreProtocol.swift */,
+				C7EC670C24435E3C00F88FDE /* UserDefaultsDataStore.swift */,
+				C7036652247540350005886F /* DataStore.swift */,
 			);
-			path = DataStoreProtocol;
+			path = DataStore;
 			sourceTree = "<group>";
 		};
 		C703665624754ACF0005886F /* Scenes */ = {
@@ -441,6 +443,7 @@
 			children = (
 				C707B8A724DC4302006069A1 /* Repositories */,
 				C71B84C224EEA6CF00054F2F /* NetworkLayerInterface */,
+				C796C0CB250A14B500EB2768 /* PersistentStorageInterfaces */,
 			);
 			path = "Data Layer";
 			sourceTree = "<group>";
@@ -716,12 +719,12 @@
 			path = Integration;
 			sourceTree = "<group>";
 		};
-		C796C0B825077A4000EB2768 /* CharactersPersistentStorage */ = {
+		C796C0B825077A4000EB2768 /* CharactersCache */ = {
 			isa = PBXGroup;
 			children = (
-				C796C0BD2507819400EB2768 /* CharactersPersistentStorage.swift */,
+				C796C0BD2507819400EB2768 /* DefaultCharactersCache.swift */,
 			);
-			path = CharactersPersistentStorage;
+			path = CharactersCache;
 			sourceTree = "<group>";
 		};
 		C796C0B925077A7400EB2768 /* CharactersPersistentStorage */ = {
@@ -750,12 +753,19 @@
 			path = Utils;
 			sourceTree = "<group>";
 		};
+		C796C0CB250A14B500EB2768 /* PersistentStorageInterfaces */ = {
+			isa = PBXGroup;
+			children = (
+				C796C0CC250A14DF00EB2768 /* CharactersCache.swift */,
+			);
+			path = PersistentStorageInterfaces;
+			sourceTree = "<group>";
+		};
 		C7EC670E2443688400F88FDE /* PersistentStorage */ = {
 			isa = PBXGroup;
 			children = (
-				C796C0B825077A4000EB2768 /* CharactersPersistentStorage */,
-				C7036651247540110005886F /* DataStoreProtocol */,
-				C7EC670C24435E3C00F88FDE /* UserDefaultsDataStore.swift */,
+				C796C0B825077A4000EB2768 /* CharactersCache */,
+				C7036651247540110005886F /* DataStore */,
 				C72CF2B1247163B80048B0A2 /* AppSettings.swift */,
 			);
 			path = PersistentStorage;
@@ -1055,7 +1065,6 @@
 				C7E02812243FD4DB00888249 /* AppCoordinator.swift in Sources */,
 				C7B5542B24EADD1D00A02AFE /* MarvelApiRequest.swift in Sources */,
 				C72CF2B2247163B80048B0A2 /* AppSettings.swift in Sources */,
-				C796C0CA250A079400EB2768 /* CharacterDetailPresentationModel.swift in Sources */,
 				C703663D24753DEB0005886F /* GetCharactersListInteractor.swift in Sources */,
 				C703663E24753DEB0005886F /* CharactersListCoordinator.swift in Sources */,
 				C7BE8B8B24AF603400B8A569 /* CharactersListProtocols.swift in Sources */,
@@ -1080,6 +1089,7 @@
 				C707B8B924DDAC97006069A1 /* CharacterResult.swift in Sources */,
 				C7169232244DE062005BF4AB /* MarvelDTOs.swift in Sources */,
 				C703664A24753DEB0005886F /* OnboardingPresenter.swift in Sources */,
+				C796C0CD250A14DF00EB2768 /* CharactersCache.swift in Sources */,
 				C703663C24753DEB0005886F /* CharactersListViewController.swift in Sources */,
 				C7338AF524F1615C005AE004 /* ErrorBuilder.swift in Sources */,
 				C7338AF724F1615C005AE004 /* NSError+HTTP.swift in Sources */,
@@ -1091,12 +1101,12 @@
 				285122812181E3E5009D4AB0 /* Extensions.swift in Sources */,
 				C7338AF624F1615C005AE004 /* NSError+Readability.swift in Sources */,
 				C7096D772449C7C500DEE7D3 /* SceneDelegate.swift in Sources */,
-				C796C0BE2507819400EB2768 /* CharactersPersistentStorage.swift in Sources */,
+				C796C0BE2507819400EB2768 /* DefaultCharactersCache.swift in Sources */,
 				C7483D3424C99EAB00651D49 /* MarvelApiConfig.swift in Sources */,
 				C703664224753DEB0005886F /* CharactersListPresenter.swift in Sources */,
 				C703664824753DEB0005886F /* LandingCoordinator.swift in Sources */,
 				C7887B7D24C6196000EAEB1F /* UIViewController +  ErrorDialog.swift in Sources */,
-				C7036653247540350005886F /* DataStoreProtocol.swift in Sources */,
+				C7036653247540350005886F /* DataStore.swift in Sources */,
 				C703664024753DEB0005886F /* CharacterDetailViewController.swift in Sources */,
 				C71B84C424EFE50600054F2F /* RestInterface.swift in Sources */,
 				C7338AFB24F29F13005AE004 /* AppErrorBuilder.swift in Sources */,

@@ -14,7 +14,7 @@ public enum MarvelPreferenceKeys: String {
 
 // todo: use store
 class AppSettings {
-  let store: DataStoreProtocol
+  let store: DataStore
   var dontShowOnboardingValue: Bool {
     get {
       store.getBool(MarvelPreferenceKeys.dontShowOnboarding.rawValue, defaultValue: false)
@@ -23,7 +23,7 @@ class AppSettings {
       store.setBool(key: MarvelPreferenceKeys.dontShowOnboarding.rawValue, value: newValue)
     }
   }
-  init(dataStore: DataStoreProtocol) {
+  init(dataStore: DataStore) {
     self.store = dataStore
   }
 }

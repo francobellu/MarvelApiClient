@@ -21,7 +21,7 @@ class CharactersListPresenter: CharactersListPresenterProtocol {
   // Presentation Model Observables
   var viewDidLoad = Observable<Bool>(value: false)
   var title = Observable<String>(value: "Marvel Characters")
-  var presentationModel =  Observable<[CharacterCellPresentationModel]>(value: [])
+  var presentationModel = Observable<[CharacterCellPresentationModel]>(value: [])
   var isLoading = Observable<Bool>(value: false)
   var isError = Observable<Error?>(value: nil)
 
@@ -46,8 +46,17 @@ class CharactersListPresenter: CharactersListPresenterProtocol {
     coordinatorDelegate.didGoBack()
   }
 
-  /// Arrange the sections/row view model and caregorize by date
-  private func presentationModel(from characters: [Character]) -> [CharacterCellPresentationModel] {
+//
+//  private func presentationModel(from characters: [Character]) -> [CharacterCellPresentationModel] {
+//    var cellPresentationModels = [CharacterCellPresentationModel]()
+//    for character in characters {
+//      let characterCellViewModel: CharacterCellPresentationModel = CharacterCellPresentationModel(character: character)
+//      cellPresentationModels.append(characterCellViewModel)
+//    }
+//    return cellPresentationModels
+//  }
+
+  static func presentationModel(from characters: [Character]) -> [CharacterCellPresentationModel] {
     var cellPresentationModels = [CharacterCellPresentationModel]()
     for character in characters {
       let characterCellViewModel: CharacterCellPresentationModel = CharacterCellPresentationModel(character: character)
@@ -63,7 +72,7 @@ extension CharactersListPresenter: GetCharactersListInteractorOutputPort {
     switch result {
     case .success(let characters):
       self.characters = characters
-      let newCellPresentationModels = self.presentationModel(from: characters)
+      let newCellPresentationModels = CharactersListPresenter.presentationModel(from: characters)
       self.presentationModel.value += newCellPresentationModels
     case .failure(let error):
       let uiError = MarvelApiClientUiErrorBuilder.uiErrorFrom(error: error as NSError)
